@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <groupId>org.jboss.spring-int</groupId>
+    <artifactId>jboss-spring-int-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.jboss.spring-int</groupId>
+  <artifactId>jboss-spring-int-vfs</artifactId>
+  <packaging>jar</packaging>
+  <name>JBoss Spring Integration - VFS</name>
+  <url>http://www.jboss.org/jbossmc</url>
+  <description>JBoss Spring Integration - VFS</description>
+
+  <dependencies>
+    <!-- Compile (global dependencies) -->
+    <dependency>
+      <groupId>org.jboss</groupId>
+      <artifactId>jboss-vfs</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss</groupId>
+      <artifactId>jboss-common-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.logging</groupId>
+      <artifactId>jboss-logging-spi</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+    </dependency>
+  </dependencies>
+  
+</project>
