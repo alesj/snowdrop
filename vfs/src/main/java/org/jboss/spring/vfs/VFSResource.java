@@ -119,6 +119,9 @@ public class VFSResource implements Resource
 
    public File getFile() throws IOException
    {
+      if (VFSUtils.isNestedFile(file))
+         throw new IOException("This resource is a nested resource: " + file);
+
       try
       {
          return new File(VFSUtils.getCompatibleURI(file));
