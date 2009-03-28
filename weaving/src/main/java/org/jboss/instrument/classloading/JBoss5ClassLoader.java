@@ -58,20 +58,20 @@ public class JBoss5ClassLoader
 
       try
       {
-         Method getPolicy = BaseClassLoader.class.getDeclaredMethod("getPolicy");
+         Method getPolicy = getMethod(BaseClassLoader.class, "getPolicy");
          policy = (ClassLoaderPolicy)getPolicy.invoke(classLoader);
          try
          {
             // let's check if we have a patched policy, with translator per policy
-            setTranslator = BaseClassLoaderPolicy.class.getDeclaredMethod("setTranslator");
+            setTranslator = getMethod(BaseClassLoaderPolicy.class, "setTranslator");
          }
          catch (Exception ignored)
          {
             log.info("Policy doesn't have setTranslator, falling back to ClassLoaderSystem.");
 
-            Method getClassLoaderDomain = BaseClassLoaderPolicy.class.getDeclaredMethod("getClassLoaderDomain");
+            Method getClassLoaderDomain = getMethod(BaseClassLoaderPolicy.class, "getClassLoaderDomain");
             BaseClassLoaderDomain domain = (BaseClassLoaderDomain)getClassLoaderDomain.invoke(policy);
-            Method getClassLoaderSystem = BaseClassLoaderDomain.class.getDeclaredMethod("getClassLoaderSystem");
+            Method getClassLoaderSystem = getMethod(BaseClassLoaderDomain.class, "getClassLoaderSystem");
             BaseClassLoaderSystem system = (BaseClassLoaderSystem)getClassLoaderSystem.invoke(domain);
             if (system instanceof ClassLoaderSystem)
             {
@@ -87,6 +87,21 @@ public class JBoss5ClassLoader
       {
          throw new IllegalStateException("Could not initialize JBoss ClassLoader because JBoss5 API classes are not available", e);
       }
+   }
+
+   /**
+    * Get method from class.
+    *
+    * @param clazz the owner class
+    * @param name the method name
+    * @return declared method
+    * @throws Exception for any error
+    */
+   private Method getMethod(Class<?> clazz, String name) throws Exception
+   {
+      Method method = clazz.getDeclaredMethod(name);
+      method.setAccessible(true);
+      return method;
    }
 
    public void addTransformer(ClassFileTransformer transformer)
