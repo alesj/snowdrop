@@ -59,7 +59,7 @@ public class JBoss5ClassLoader
       try
       {
          Method getPolicy = getMethod(BaseClassLoader.class, "getPolicy");
-         policy = (ClassLoaderPolicy)getPolicy.invoke(classLoader);
+         policy = invokeMethod(getPolicy, classLoader, ClassLoaderPolicy.class);
          try
          {
             // let's check if we have a patched policy, with translator per policy
@@ -70,9 +70,9 @@ public class JBoss5ClassLoader
             log.info("Policy doesn't have setTranslator, falling back to ClassLoaderSystem.");
 
             Method getClassLoaderDomain = getMethod(BaseClassLoaderPolicy.class, "getClassLoaderDomain");
-            BaseClassLoaderDomain domain = (BaseClassLoaderDomain)getClassLoaderDomain.invoke(policy);
+            BaseClassLoaderDomain domain = invokeMethod(getClassLoaderDomain, policy, BaseClassLoaderDomain.class);
             Method getClassLoaderSystem = getMethod(BaseClassLoaderDomain.class, "getClassLoaderSystem");
-            BaseClassLoaderSystem system = (BaseClassLoaderSystem)getClassLoaderSystem.invoke(domain);
+            BaseClassLoaderSystem system = invokeMethod(getClassLoaderSystem, domain, BaseClassLoaderSystem.class);
             if (system instanceof ClassLoaderSystem)
             {
                this.system = ClassLoaderSystem.class.cast(system);
@@ -97,11 +97,30 @@ public class JBoss5ClassLoader
     * @return declared method
     * @throws Exception for any error
     */
-   private Method getMethod(Class<?> clazz, String name) throws Exception
+   private static Method getMethod(Class<?> clazz, String name) throws Exception
    {
       Method method = clazz.getDeclaredMethod(name);
       method.setAccessible(true);
       return method;
+   }
+
+   /**
+    * Invoke method and check the result.
+    *
+    * @param method the method
+    * @param target the target
+    * @param expectedType the expected type
+    * @param <T> the exact type
+    * @return invocation's result
+    * @throws Exception for any error
+    */
+   private static <T> T invokeMethod(Method method, Object target, Class<T> expectedType) throws Exception
+   {
+      Object result = method.invoke(target);
+      if (expectedType.isInstance(result) == false)
+         throw new IllegalArgumentException("Returned result must be instance of [" + expectedType.getName() + "]");
+
+      return expectedType.cast(result);
    }
 
    public void addTransformer(ClassFileTransformer transformer)
