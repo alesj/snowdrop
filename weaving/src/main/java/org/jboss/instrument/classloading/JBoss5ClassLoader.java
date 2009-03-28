@@ -97,7 +97,7 @@ public class JBoss5ClassLoader
          BaseClassLoaderSystem system = invokeMethod(getClassLoaderSystem, domain, BaseClassLoaderSystem.class);
          if (system instanceof ClassLoaderSystem)
          {
-            JBoss5ClassLoader.this.system = ClassLoaderSystem.class.cast(system);
+            this.system = ClassLoaderSystem.class.cast(system);
          }
          else
          {
