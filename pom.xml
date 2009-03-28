@@ -23,6 +23,7 @@
     <module>deployers</module>
     <module>facade</module>
     <module>vfs</module>
+    <module>weaving</module>
     <module>build</module>
   </modules>
   
