@@ -23,6 +23,8 @@ package org.jboss.instrument.classloading;
 
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.reflect.Method;
+import java.security.AccessController;
+import java.security.PrivilegedExceptionAction;
 
 import org.jboss.classloader.spi.ClassLoaderPolicy;
 import org.jboss.classloader.spi.ClassLoaderSystem;
@@ -46,11 +48,12 @@ public class JBoss5ClassLoader
    private static Logger log = Logger.getLogger(JBoss5ClassLoader.class);
 
    private final BaseClassLoader classLoader;
-   private final ClassLoaderPolicy policy;
+
+   private ClassLoaderPolicy policy;
+   private Method setTranslator;
    private ClassLoaderSystem system;
 
-   private Method setTranslator;
-
+   @SuppressWarnings("unchecked")
    public JBoss5ClassLoader(BaseClassLoader classLoader)
    {
       Assert.notNull(classLoader, "ClassLoader must not be null");
@@ -58,34 +61,48 @@ public class JBoss5ClassLoader
 
       try
       {
-         Method getPolicy = getMethod(BaseClassLoader.class, "getPolicy");
-         policy = invokeMethod(getPolicy, classLoader, ClassLoaderPolicy.class);
-         try
-         {
-            // let's check if we have a patched policy, with translator per policy
-            setTranslator = getMethod(BaseClassLoaderPolicy.class, "setTranslator");
-         }
-         catch (Exception ignored)
-         {
-            log.info("Policy doesn't have setTranslator, falling back to ClassLoaderSystem.");
-
-            Method getClassLoaderDomain = getMethod(BaseClassLoaderPolicy.class, "getClassLoaderDomain");
-            BaseClassLoaderDomain domain = invokeMethod(getClassLoaderDomain, policy, BaseClassLoaderDomain.class);
-            Method getClassLoaderSystem = getMethod(BaseClassLoaderDomain.class, "getClassLoaderSystem");
-            BaseClassLoaderSystem system = invokeMethod(getClassLoaderSystem, domain, BaseClassLoaderSystem.class);
-            if (system instanceof ClassLoaderSystem)
-            {
-               this.system = ClassLoaderSystem.class.cast(system);
-            }
-            else
-            {
-               throw new IllegalArgumentException("ClassLoaderSyatem must be instance of [" + ClassLoaderSystem.class.getName() + "]");
-            }
-         }
+         SecurityManager sm = System.getSecurityManager();
+         if (sm != null)
+            AccessController.doPrivileged(new InstantiationAction());
+         else
+            doInstantiate();
       }
       catch (Exception e)
       {
          throw new IllegalStateException("Could not initialize JBoss ClassLoader because JBoss5 API classes are not available", e);
+      }
+   }
+
+   /**
+    * Do instantiate method, variables.
+    *
+    * @throws Exception for any error
+    */
+   private void doInstantiate() throws Exception
+   {
+      Method getPolicy = getMethod(BaseClassLoader.class, "getPolicy");
+      policy = invokeMethod(getPolicy, classLoader, ClassLoaderPolicy.class);
+      try
+      {
+         // let's check if we have a patched policy, with translator per policy
+         setTranslator = getMethod(BaseClassLoaderPolicy.class, "setTranslator");
+      }
+      catch (Exception ignored)
+      {
+         log.info("Policy doesn't have setTranslator, falling back to ClassLoaderSystem.");
+
+         Method getClassLoaderDomain = getMethod(BaseClassLoaderPolicy.class, "getClassLoaderDomain");
+         BaseClassLoaderDomain domain = invokeMethod(getClassLoaderDomain, policy, BaseClassLoaderDomain.class);
+         Method getClassLoaderSystem = getMethod(BaseClassLoaderDomain.class, "getClassLoaderSystem");
+         BaseClassLoaderSystem system = invokeMethod(getClassLoaderSystem, domain, BaseClassLoaderSystem.class);
+         if (system instanceof ClassLoaderSystem)
+         {
+            JBoss5ClassLoader.this.system = ClassLoaderSystem.class.cast(system);
+         }
+         else
+         {
+            throw new IllegalArgumentException("ClassLoaderSyatem must be instance of [" + ClassLoaderSystem.class.getName() + "]");
+         }
       }
    }
 
@@ -152,5 +169,17 @@ public class JBoss5ClassLoader
    public ClassLoader getThrowawayClassLoader()
    {
       return new BaseClassLoader(policy);
+   }
+
+   /**
+    * Instantiation action.
+    */
+   private class InstantiationAction implements PrivilegedExceptionAction
+   {
+      public Object run() throws Exception
+      {
+         doInstantiate();
+         return null;
+      }
    }
 }
