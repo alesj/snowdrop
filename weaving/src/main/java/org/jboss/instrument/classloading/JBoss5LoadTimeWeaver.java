@@ -19,12 +19,11 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jboss.classloader.spi.base;
+package org.jboss.instrument.classloading;
 
 import java.lang.instrument.ClassFileTransformer;
 
-import org.jboss.classloader.spi.ClassLoaderSystem;
-import org.jboss.logging.Logger;
+import org.jboss.classloader.spi.base.BaseClassLoader;
 import org.springframework.instrument.classloading.LoadTimeWeaver;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
@@ -36,8 +35,7 @@ import org.springframework.util.ClassUtils;
  */
 public class JBoss5LoadTimeWeaver implements LoadTimeWeaver
 {
-   private static Logger log = Logger.getLogger(JBoss5LoadTimeWeaver.class);
-   private BaseClassLoader classLoader;
+   private JBoss5ClassLoader classLoader;
 
    public JBoss5LoadTimeWeaver()
    {
@@ -53,9 +51,15 @@ public class JBoss5LoadTimeWeaver implements LoadTimeWeaver
          throw new IllegalArgumentException(classLoader + " and its parents are not suitable ClassLoaders: " +
                "An [" + BaseClassLoader.class.getName() + "] implementation is required.");
       }
-      this.classLoader = bcl;
+      this.classLoader = new JBoss5ClassLoader(bcl);
    }
 
+   /**
+    * Find first BaseClassLoader implementation.
+    *
+    * @param classLoader the classloader
+    * @return BaseClassLoader instance or null if not found
+    */
    private BaseClassLoader determineClassLoader(ClassLoader classLoader)
    {
       for (ClassLoader cl = classLoader; cl != null; cl = cl.getParent())
@@ -70,28 +74,16 @@ public class JBoss5LoadTimeWeaver implements LoadTimeWeaver
 
    public void addTransformer(ClassFileTransformer transformer)
    {
-      BaseClassLoader bcl = classLoader;
-      BaseClassLoaderPolicy policy = bcl.getPolicy();
-      BaseClassLoaderDomain domain = policy.getClassLoaderDomain();
-      BaseClassLoaderSystem system = domain.getClassLoaderSystem();
-      if (system instanceof ClassLoaderSystem)
-      {
-         ClassLoaderSystem cls = (ClassLoaderSystem)system;
-         cls.setTranslator(new ClassFileTransformer2Translator(transformer));
-      }
-      else
-      {
-         log.warn("Cannot add ");
-      }
+      classLoader.addTransformer(transformer);
    }
 
    public ClassLoader getInstrumentableClassLoader()
    {
-      return classLoader;
+      return classLoader.getInternalClassLoader();
    }
 
    public ClassLoader getThrowawayClassLoader()
    {
-      return new BaseClassLoader(classLoader.getPolicy());
+      return classLoader.getThrowawayClassLoader();
    }
 }
