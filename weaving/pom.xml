@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <groupId>org.jboss.spring-int</groupId>
+    <artifactId>jboss-spring-int-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.jboss.spring-int</groupId>
+  <artifactId>jboss-spring-int-weaving</artifactId>
+  <packaging>jar</packaging>
+  <name>JBoss Spring Integration - Weaving</name>
+  <url>http://www.jboss.org/jbossmc</url>
+  <description>JBoss Spring Integration - Weaving</description>
+
+  <dependencies>
+    <!-- Compile (global dependencies) -->
+    <dependency>
+      <groupId>org.jboss.cl</groupId>
+      <artifactId>jboss-classloader</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+    </dependency>
+  </dependencies>
+  
+</project>
