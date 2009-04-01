@@ -50,7 +50,7 @@ public class JBoss5ClassLoader
    private final BaseClassLoader classLoader;
 
    private ClassLoaderPolicy policy;
-   private Method setTranslator;
+   private Method addTranslator;
    private ClassLoaderSystem system;
 
    @SuppressWarnings("unchecked")
@@ -85,7 +85,7 @@ public class JBoss5ClassLoader
       try
       {
          // let's check if we have a patched policy, with translator per policy
-         setTranslator = getMethod(BaseClassLoaderPolicy.class, "setTranslator");
+         addTranslator = getMethod(BaseClassLoaderPolicy.class, "addTranslator");
       }
       catch (Exception ignored)
       {
@@ -144,11 +144,11 @@ public class JBoss5ClassLoader
    {
       Assert.notNull(transformer, "ClassFileTransformer must not be null");
       Translator translator = new ClassFileTransformer2Translator(transformer);
-      if (setTranslator != null)
+      if (addTranslator != null)
       {
          try
          {
-            setTranslator.invoke(translator);
+            addTranslator.invoke(translator);
          }
          catch (Exception e)
          {
