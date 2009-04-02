@@ -56,7 +56,7 @@ public class JBoss50ClassLoader extends JBoss5ClassLoader
       }
       catch (Exception ignored)
       {
-         log.info("Policy doesn't have setTranslator, falling back to ClassLoaderSystem.");
+         log.info("Policy doesn't have addTranslator, falling back to ClassLoaderSystem.");
 
          Method getClassLoaderDomain = getMethod(BaseClassLoaderPolicy.class, "getClassLoaderDomain");
          BaseClassLoaderDomain domain = invokeMethod(getClassLoaderDomain, getPolicy(), BaseClassLoaderDomain.class);
