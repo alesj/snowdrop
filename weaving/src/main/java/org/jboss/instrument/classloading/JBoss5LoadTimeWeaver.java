@@ -52,7 +52,7 @@ public class JBoss5LoadTimeWeaver extends ReflectionHelper implements LoadTimeWe
          throw new IllegalArgumentException(classLoader + " and its parents are not suitable ClassLoaders: " +
                "An [" + BaseClassLoader.class.getName() + "] implementation is required.");
       }
-      this.classLoader = createJBoss5ClassLoader(bcl);
+      this.classLoader = createClassLoaderWrapper(bcl);
    }
 
    /**
@@ -62,7 +62,7 @@ public class JBoss5LoadTimeWeaver extends ReflectionHelper implements LoadTimeWe
     * @param bcl the base classloader
     * @return new JBoss5 classloader wrapper
     */
-   protected JBoss5ClassLoader createJBoss5ClassLoader(BaseClassLoader bcl)
+   protected JBoss5ClassLoader createClassLoaderWrapper(BaseClassLoader bcl)
    {
       int versionNumber = 0;
       String tag;
