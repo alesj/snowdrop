@@ -28,21 +28,21 @@
   </modules>
   
   <properties>
-    <version.jboss.vfs>2.1.0.GA</version.jboss.vfs>
+    <version.jboss.vfs>2.2.0.M1</version.jboss.vfs>
     <version.jboss.man>2.0.0.GA</version.jboss.man>
     <version.jboss.mdr>2.0.1.GA</version.jboss.mdr>
-    <version.jboss.microcontainer>2.0.4.GA</version.jboss.microcontainer>
-    <version.jboss.deployers>2.0.5.GA</version.jboss.deployers>
-    <version.jboss.classloader>2.0.4.GA</version.jboss.classloader>
-    <version.jboss.common.core>2.2.11.GA</version.jboss.common.core>
+    <version.jboss.microcontainer>2.2.0.M1</version.jboss.microcontainer>
+    <version.jboss.classloader>2.2.0.M2</version.jboss.classloader>
+    <version.jboss.deployers>2.2.0.M1</version.jboss.deployers>
+    <version.jboss.common.core>2.2.12.GA</version.jboss.common.core>
     <version.jboss.common.logging.spi>2.0.5.GA</version.jboss.common.logging.spi>
     <version.jboss.common.logging.log4j>2.0.5.GA</version.jboss.common.logging.log4j>
-    <version.jbossxb>2.0.0.GA</version.jbossxb>
+    <version.jbossxb>2.0.1.Beta3</version.jbossxb>
     <version.jboss.aop>2.0.1.GA</version.jboss.aop>
     <version.jboss.pojocache>3.0.0.GA</version.jboss.pojocache>
     <version.org.jboss.test>1.0.5.GA</version.org.jboss.test>
     <version.junit>4.4</version.junit>
-    <version.javassist>3.9.0.GA</version.javassist>
+    <version.javassist>3.10.0.GA</version.javassist>
     <version.javaee>3.0.0.GA</version.javaee>
     <version.xerces>2.9.1</version.xerces>
     <version.aopalliance>1.0</version.aopalliance>
