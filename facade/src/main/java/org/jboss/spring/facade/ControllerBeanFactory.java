@@ -46,6 +46,7 @@ import org.springframework.beans.factory.NoSuchBeanDefinitionException;
  * BeanFactory facade over MC's Controller.
  *
  * @author <a href="mailto:ales.justin@jboss.org">Ales Justin</a>
+ * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
  */
 public class ControllerBeanFactory implements BeanFactory
 {
@@ -94,7 +95,10 @@ public class ControllerBeanFactory implements BeanFactory
    @SuppressWarnings("unchecked")
    public Object getBean(String name, Class clazz) throws BeansException
    {
-      return getExactBean(name, clazz);
+      if (clazz == null)
+        return getBean(name);
+      else
+        return getBeanWithType(name, clazz);
    }
 
    /**
@@ -106,10 +110,10 @@ public class ControllerBeanFactory implements BeanFactory
     * @return exact bean
     * @throws BeansException for any error
     */
-   protected <T> T getExactBean(String name, Class<T> clazz) throws BeansException
+   protected <T> T getBeanWithType(String name, Class<T> clazz) throws BeansException
    {
       Object result = getBean(name);
-      if (clazz.isInstance(result) == false)
+      if (!clazz.isInstance(result))
          throw new BeanNotOfRequiredTypeException(name, clazz, result.getClass());
 
       return clazz.cast(result);
@@ -118,7 +122,7 @@ public class ControllerBeanFactory implements BeanFactory
    @SuppressWarnings({"SynchronizationOnLocalVariableOrMethodParameter"})
    public Object getBean(String name, Object[] parameters) throws BeansException
    {
-      AbstractBeanFactory result = getExactBean(name, AbstractBeanFactory.class);
+      AbstractBeanFactory result = getBeanWithType(name, AbstractBeanFactory.class);
       ConstructorMetaData cmd = result.getConstructor();
 
       BeanMetaDataBuilder builder = BeanMetaDataBuilder.createBuilder("Temp");
@@ -147,7 +151,7 @@ public class ControllerBeanFactory implements BeanFactory
 
    public boolean isSingleton(String name) throws NoSuchBeanDefinitionException
    {
-      return isPrototype(name) == false;
+      return !isPrototype(name);
    }
 
    public boolean isPrototype(String name) throws NoSuchBeanDefinitionException
