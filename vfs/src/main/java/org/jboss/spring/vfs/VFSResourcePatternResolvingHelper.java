@@ -42,13 +42,16 @@ import org.springframework.util.PathMatcher;
  *
  * @author <a href="mailto:ales.justin@jboss.com">Ales Justin</a>
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
+ *
+ * Note: Thanks to David Ward for providing a fix for resource path matching.
  */
 public class VFSResourcePatternResolvingHelper
 {
 
     private static Logger log = Logger.getLogger(VFSResourcePatternResolvingHelper.class);
 
-    public static Resource[] locateResources(String locationPattern, String rootDirPath, ClassLoader classLoader, PathMatcher pathMatcher)
+    public static Resource[] locateResources(String locationPattern, String rootDirPath, ClassLoader classLoader,
+                                             PathMatcher pathMatcher, boolean oneMatchingRootOnly)
             throws IOException
     {
         String subPattern = locationPattern.substring(rootDirPath.length());
@@ -57,9 +60,14 @@ public class VFSResourcePatternResolvingHelper
 
         List<Resource> resources = new ArrayList<Resource>();
         Enumeration<URL> urls = classLoader.getResources(rootDirPath);
-        while (urls.hasMoreElements())
-            resources.addAll(getVFSResources(urls.nextElement(), subPattern, pathMatcher));
-
+        if (!oneMatchingRootOnly)
+        {
+            while (urls.hasMoreElements())
+                resources.addAll(getVFSResources(urls.nextElement(), subPattern, pathMatcher));
+        } else
+        {
+            resources.addAll(getVFSResources(classLoader.getResource(rootDirPath), subPattern, pathMatcher));
+        }
         return resources.toArray(new Resource[resources.size()]);
     }
 
@@ -68,6 +76,7 @@ public class VFSResourcePatternResolvingHelper
      *
      * @param rootURL    the root URL
      * @param subPattern the sub pattern
+     * @param pathMatcher the PathMatcher used for matching directories
      * @return vfs resources list
      * @throws java.io.IOException for any error
      */
@@ -75,7 +84,7 @@ public class VFSResourcePatternResolvingHelper
     {
         log.debug("Scanning url: " + rootURL + ", sub-pattern: " + subPattern);
         VirtualFile root = VFS.getRoot(rootURL);
-        PatternVirtualFileVisitor visitor = new PatternVirtualFileVisitor(subPattern, pathMatcher);
+        PatternVirtualFileVisitor visitor = new PatternVirtualFileVisitor(root.getPathName(), subPattern, pathMatcher);
         root.visit(visitor);
         if (log.isTraceEnabled())
             log.trace("Found resources: " + visitor);
@@ -87,11 +96,13 @@ public class VFSResourcePatternResolvingHelper
         private final String subPattern;
         private final List<Resource> resources = new ArrayList<Resource>();
         private final PathMatcher pathMatcher;
+        private final String rootPath;
 
-        private PatternVirtualFileVisitor(String subPattern, PathMatcher pathMatcher)
+        private PatternVirtualFileVisitor(String rootPath, String subPattern, PathMatcher pathMatcher)
         {
             this.subPattern = subPattern;
             this.pathMatcher = pathMatcher;
+            this.rootPath = rootPath.length() == 0 || rootPath.endsWith("/") ? rootPath : rootPath + "/";
         }
 
         public VisitorAttributes getAttributes()
@@ -101,7 +112,7 @@ public class VFSResourcePatternResolvingHelper
 
         public void visit(VirtualFile vf)
         {
-            if (pathMatcher.match(subPattern, vf.getPathName()))
+            if (pathMatcher.match(subPattern, vf.getPathName().substring(rootPath.length())))
                 resources.add(new VFSResource(vf));
         }
 

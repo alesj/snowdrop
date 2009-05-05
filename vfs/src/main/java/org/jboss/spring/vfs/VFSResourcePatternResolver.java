@@ -47,13 +47,25 @@ public class VFSResourcePatternResolver extends PathMatchingResourcePatternResol
       super(new VFSResourceLoader(classLoader));
    }
 
-   protected Resource[] findPathMatchingResources(String locationPattern) throws IOException
-   {
-      if (locationPattern.startsWith(CLASSPATH_ALL_URL_PREFIX))
-         locationPattern = locationPattern.substring(CLASSPATH_ALL_URL_PREFIX.length());
-      String rootDirPath = determineRootDir(locationPattern);
-      return VFSResourcePatternResolvingHelper.locateResources(locationPattern, rootDirPath, getClassLoader(), getPathMatcher());
-   }
+    protected Resource[] findPathMatchingResources(String locationPattern) throws IOException
+    {
+       if (locationPattern.startsWith(CLASSPATH_ALL_URL_PREFIX))
+       {
+           locationPattern = locationPattern.substring(CLASSPATH_ALL_URL_PREFIX.length());
+           String rootDirPath = determineRootDir(locationPattern);
+           return VFSResourcePatternResolvingHelper.locateResources(locationPattern, rootDirPath, getClassLoader(), getPathMatcher(), false);
+       }
+       if (locationPattern.startsWith(CLASSPATH_URL_PREFIX))
+       {
+           locationPattern = locationPattern.substring(CLASSPATH_URL_PREFIX.length());
+            String rootDirPath = determineRootDir(locationPattern);
+           return VFSResourcePatternResolvingHelper.locateResources(locationPattern, rootDirPath, getClassLoader(), getPathMatcher(), true);
+       }
+       else
+       {
+           return super.findPathMatchingResources(locationPattern);
+       }
+    }
 
    protected Resource convertClassLoaderURL(URL url)
    {
