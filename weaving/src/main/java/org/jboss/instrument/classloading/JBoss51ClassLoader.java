@@ -40,7 +40,7 @@ public class JBoss51ClassLoader extends JBoss5ClassLoader
 
    protected void addTranslator(Translator translator)
    {
-      // TODO - once we update JBCL to 2.0.5.GA 
-      // getPolicy().addTranslator(translator);
+
+      getPolicy().addTranslator(translator);
    }
 }
