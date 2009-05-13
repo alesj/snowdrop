@@ -40,7 +40,6 @@ public class JBoss51ClassLoader extends JBoss5ClassLoader
 
    protected void addTranslator(Translator translator)
    {
-
       getPolicy().addTranslator(translator);
    }
 }
