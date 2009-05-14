@@ -42,7 +42,7 @@ public class VFSResourceLoader extends DefaultResourceLoader
       Assert.notNull(location, "Location must not be null");
       if (location.startsWith(CLASSPATH_URL_PREFIX))
       {
-         return new VFSResource(this.getClassLoader().getResource(location.substring(CLASSPATH_URL_PREFIX.length())));
+         return new VFSResource(getClassLoader().getResource(location.substring(CLASSPATH_URL_PREFIX.length())));
       }
       else
       {
@@ -52,6 +52,6 @@ public class VFSResourceLoader extends DefaultResourceLoader
 
    protected Resource getResourceByPath(String path)
    {
-      return new VFSResource(this.getClassLoader().getResource(path)); 
+      return new VFSResource(getClassLoader().getResource(path)); 
    }
 }
