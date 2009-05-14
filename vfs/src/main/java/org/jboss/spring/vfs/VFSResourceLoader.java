@@ -53,6 +53,10 @@ public class VFSResourceLoader extends DefaultResourceLoader
       {
          return super.getResource(location);
       }
+   }
 
+   protected Resource getResourceByPath(String path)
+   {
+      return new VFSResource(this.getClassLoader().getResource(path)); 
    }
 }
