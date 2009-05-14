@@ -21,11 +21,6 @@
  */
 package org.jboss.spring.vfs;
 
-import java.net.URL;
-
-import org.jboss.virtual.VFS;
-import org.jboss.virtual.VirtualFile;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.util.Assert;
