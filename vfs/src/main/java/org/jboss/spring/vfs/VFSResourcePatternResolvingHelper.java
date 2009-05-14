@@ -23,9 +23,7 @@ package org.jboss.spring.vfs;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
+import java.util.*;
 
 import org.jboss.logging.Logger;
 import org.jboss.virtual.VFS;
@@ -80,7 +78,7 @@ public class VFSResourcePatternResolvingHelper
      * @return vfs resources list
      * @throws java.io.IOException for any error
      */
-    public static List<Resource> getVFSResources(URL rootURL, String subPattern, PathMatcher pathMatcher) throws IOException
+    public static Set<Resource> getVFSResources(URL rootURL, String subPattern, PathMatcher pathMatcher) throws IOException
     {
         log.debug("Scanning url: " + rootURL + ", sub-pattern: " + subPattern);
         VirtualFile root = VFS.getRoot(rootURL);
@@ -94,7 +92,7 @@ public class VFSResourcePatternResolvingHelper
     protected static class PatternVirtualFileVisitor implements VirtualFileVisitor
     {
         private final String subPattern;
-        private final List<Resource> resources = new ArrayList<Resource>();
+        private final Set<Resource> resources = new HashSet<Resource>();
         private final PathMatcher pathMatcher;
         private final String rootPath;
 
@@ -116,7 +114,7 @@ public class VFSResourcePatternResolvingHelper
                 resources.add(new VFSResource(vf));
         }
 
-        public List<Resource> getResources()
+        public Set<Resource> getResources()
         {
             return resources;
         }

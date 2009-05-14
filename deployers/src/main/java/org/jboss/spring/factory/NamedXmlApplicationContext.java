@@ -35,7 +35,7 @@ import org.jboss.spring.vfs.VFSResourcePatternResolver;
 /**
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
  */
-public class NamedXmlApplicationContext extends ClassPathXmlApplicationContext implements Nameable
+public class NamedXmlApplicationContext extends VFSClassPathXmlApplicationContext implements Nameable
 {
    private String defaultName;
    private Resource resource;
@@ -91,8 +91,4 @@ public class NamedXmlApplicationContext extends ClassPathXmlApplicationContext i
       return name;
    }
 
-   protected ResourcePatternResolver getResourcePatternResolver()
-   {
-      return new VFSResourcePatternResolver(getClassLoader());
-   }
 }

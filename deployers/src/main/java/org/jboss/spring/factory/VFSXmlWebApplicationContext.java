@@ -41,7 +41,7 @@ public class VFSXmlWebApplicationContext extends XmlWebApplicationContext
    protected ResourcePatternResolver getResourcePatternResolver()
    {
       return new VFSServletContextResourcePatternResolver(
-              new WebApplicationContextAwareVFSResourceLoader());
+              new WebApplicationContextAwareVFSResourceLoader(getClassLoader()));
    }
 
    /**
@@ -51,11 +51,22 @@ public class VFSXmlWebApplicationContext extends XmlWebApplicationContext
     */
    private class WebApplicationContextAwareVFSResourceLoader extends VFSResourceLoader
    {
-      @Override
+
+      WebApplicationContextAwareVFSResourceLoader(ClassLoader classLoader) {
+         super(classLoader);
+      }
+
+       @Override
       protected Resource getResourceByPath(String path)
       {
          return VFSXmlWebApplicationContext.this.getResourceByPath(path);
       }
    }
+
+    @Override
+    public Resource getResource(String location)
+    {
+        return getResourcePatternResolver().getResource(location);
+    }
 }
 

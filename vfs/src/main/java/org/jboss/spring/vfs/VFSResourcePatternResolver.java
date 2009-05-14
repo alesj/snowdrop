@@ -23,10 +23,12 @@ package org.jboss.spring.vfs;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Set;
 
 import org.jboss.virtual.VFS;
 import org.jboss.virtual.VirtualFile;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 /**
@@ -37,14 +39,9 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
  */
 public class VFSResourcePatternResolver extends PathMatchingResourcePatternResolver
 {
-   public VFSResourcePatternResolver()
+   public VFSResourcePatternResolver(ResourceLoader resourceLoader)
    {
-      super(new VFSResourceLoader());
-   }
-
-   public VFSResourcePatternResolver(ClassLoader classLoader)
-   {
-      super(new VFSResourceLoader(classLoader));
+      super(resourceLoader);
    }
 
     protected Resource[] findPathMatchingResources(String locationPattern) throws IOException
@@ -58,7 +55,7 @@ public class VFSResourcePatternResolver extends PathMatchingResourcePatternResol
        if (locationPattern.startsWith(CLASSPATH_URL_PREFIX))
        {
            locationPattern = locationPattern.substring(CLASSPATH_URL_PREFIX.length());
-            String rootDirPath = determineRootDir(locationPattern);
+           String rootDirPath = determineRootDir(locationPattern);
            return VFSResourcePatternResolvingHelper.locateResources(locationPattern, rootDirPath, getClassLoader(), getPathMatcher(), true);
        }
        else
@@ -66,18 +63,5 @@ public class VFSResourcePatternResolver extends PathMatchingResourcePatternResol
            return super.findPathMatchingResources(locationPattern);
        }
     }
-
-   protected Resource convertClassLoaderURL(URL url)
-   {
-      try
-      {
-         VirtualFile file = VFS.getRoot(url);
-         return new VFSResource(file);
-      }
-      catch (IOException e)
-      {
-         throw new RuntimeException(e);
-      }
-   }
 
 }

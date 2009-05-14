@@ -30,14 +30,16 @@ import java.io.InputStream;
 
 import org.jboss.virtual.VirtualFile;
 import org.jboss.virtual.VFSUtils;
+import org.jboss.virtual.VFS;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.AbstractResource;
 
 /**
  * VFS based Resource.
  *
  * @author <a href="mailto:ales.justin@jboss.com">Ales Justin</a>
  */
-public class VFSResource implements Resource
+public class VFSResource extends AbstractResource
 {
    private VirtualFile file;
 
@@ -46,6 +48,19 @@ public class VFSResource implements Resource
       if (file == null)
          throw new IllegalArgumentException("Null file");
       this.file = file;
+   }
+
+   public VFSResource(URL url)
+   {
+      if (url == null)
+         throw new IllegalArgumentException("Null url");
+      try
+      {
+         this.file = VFS.getRoot(url);
+      } catch (IOException e)
+      {
+         throw new IllegalArgumentException("Cannot retrieve file from URL: ", e);
+      }
    }
 
    public boolean exists()
@@ -163,4 +178,20 @@ public class VFSResource implements Resource
    {
       return getDescription();
    }
+
+    @Override
+    public boolean equals(Object other) {
+      if (other instanceof VFSResource)
+      {
+         return file.equals(((VFSResource)other).file);
+      } else
+      {
+         return false;
+      }
+    }
+
+    @Override
+    public int hashCode() {
+      return file.hashCode();
+    }
 }

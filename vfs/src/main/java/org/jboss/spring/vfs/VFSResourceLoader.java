@@ -36,11 +36,7 @@ import org.springframework.util.Assert;
  * @author <a href="mailto:ales.justin@jboss.com">Ales Justin</a>
  */
 public class VFSResourceLoader extends DefaultResourceLoader
-{
-   public VFSResourceLoader()
-   {
-   }
-
+{    
    public VFSResourceLoader(ClassLoader classLoader)
    {
       super(classLoader);
@@ -51,22 +47,12 @@ public class VFSResourceLoader extends DefaultResourceLoader
       Assert.notNull(location, "Location must not be null");
       if (location.startsWith(CLASSPATH_URL_PREFIX))
       {
-         return new ClassPathResource(location.substring(CLASSPATH_URL_PREFIX.length()), getClassLoader());
+         return new VFSResource(this.getClassLoader().getResource(location.substring(CLASSPATH_URL_PREFIX.length())));
       }
       else
       {
-         try
-         {
-            // Try to parse the location as a URL...
-            URL url = new URL(location);
-            VirtualFile file = VFS.getRoot(url);
-            return new VFSResource(file);
-         }
-         catch (Exception ex)
-         {
-            // No URL -> resolve as resource path.
-            return getResourceByPath(location);
-         }
+         return super.getResource(location);
       }
+
    }
 }
