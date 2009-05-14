@@ -35,59 +35,67 @@ import org.jboss.spring.vfs.VFSResourceLoader;
  *
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
  */
-public class VFSClassPathXmlApplicationContext extends ClassPathXmlApplicationContext 
+public class VFSClassPathXmlApplicationContext extends ClassPathXmlApplicationContext
 {
-    public VFSClassPathXmlApplicationContext() {
-        super();
-    }
+   public VFSClassPathXmlApplicationContext()
+   {
+      super();
+   }
 
-    public VFSClassPathXmlApplicationContext(ApplicationContext parent) {
-        super(parent);
-    }
+   public VFSClassPathXmlApplicationContext(ApplicationContext parent)
+   {
+      super(parent);
+   }
 
-    public VFSClassPathXmlApplicationContext(String configLocation) throws BeansException {
-        super(configLocation);
-    }
+   public VFSClassPathXmlApplicationContext(String configLocation) throws BeansException
+   {
+      super(configLocation);
+   }
 
-    public VFSClassPathXmlApplicationContext(String[] configLocations) throws BeansException {
-        super(configLocations);
-    }
+   public VFSClassPathXmlApplicationContext(String[] configLocations) throws BeansException
+   {
+      super(configLocations);
+   }
 
-    public VFSClassPathXmlApplicationContext(String[] configLocations, ApplicationContext parent) throws BeansException {
-        super(configLocations, parent);
-    }
+   public VFSClassPathXmlApplicationContext(String[] configLocations, ApplicationContext parent) throws BeansException
+   {
+      super(configLocations, parent);
+   }
 
-    public VFSClassPathXmlApplicationContext(String[] configLocations, boolean refresh) throws BeansException {
-        super(configLocations, refresh);
-    }
+   public VFSClassPathXmlApplicationContext(String[] configLocations, boolean refresh) throws BeansException
+   {
+      super(configLocations, refresh);
+   }
 
-    public VFSClassPathXmlApplicationContext(String[] configLocations, boolean refresh, ApplicationContext parent) throws BeansException {
-        super(configLocations, refresh, parent);
-    }
+   public VFSClassPathXmlApplicationContext(String[] configLocations, boolean refresh, ApplicationContext parent) throws BeansException
+   {
+      super(configLocations, refresh, parent);
+   }
 
-    public VFSClassPathXmlApplicationContext(String path, Class clazz) throws BeansException {
-        super(path, clazz);
-    }
+   public VFSClassPathXmlApplicationContext(String path, Class clazz) throws BeansException
+   {
+      super(path, clazz);
+   }
 
-    public VFSClassPathXmlApplicationContext(String[] paths, Class clazz) throws BeansException {
-        super(paths, clazz);
-    }
+   public VFSClassPathXmlApplicationContext(String[] paths, Class clazz) throws BeansException
+   {
+      super(paths, clazz);
+   }
 
-    public VFSClassPathXmlApplicationContext(String[] paths, Class clazz, ApplicationContext parent) throws BeansException {
-        super(paths, clazz, parent);
-    }
+   public VFSClassPathXmlApplicationContext(String[] paths, Class clazz, ApplicationContext parent) throws BeansException
+   {
+      super(paths, clazz, parent);
+   }
 
+   protected ResourcePatternResolver getResourcePatternResolver()
+   {
+      return new VFSResourcePatternResolver(new VFSResourceLoader(getClassLoader()));
+   }
 
-    protected ResourcePatternResolver getResourcePatternResolver()
-    {
-       return new VFSResourcePatternResolver(new VFSResourceLoader(getClassLoader()));
-    }
-
-    @Override
-    public Resource getResource(String location)
-    {
-        return getResourcePatternResolver().getResource(location);
-    }
-
+   @Override
+   public Resource getResource(String location)
+   {
+      return getResourcePatternResolver().getResource(location);
+   }
 }
 

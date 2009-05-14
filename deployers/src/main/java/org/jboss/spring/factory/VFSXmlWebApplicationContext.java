@@ -36,7 +36,6 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
  */
 public class VFSXmlWebApplicationContext extends XmlWebApplicationContext
 {
-
    @Override
    protected ResourcePatternResolver getResourcePatternResolver()
    {

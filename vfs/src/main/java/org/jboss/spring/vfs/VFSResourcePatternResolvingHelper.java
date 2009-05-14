@@ -45,7 +45,6 @@ import org.springframework.util.PathMatcher;
  */
 public class VFSResourcePatternResolvingHelper
 {
-
     private static Logger log = Logger.getLogger(VFSResourcePatternResolvingHelper.class);
 
     public static Resource[] locateResources(String locationPattern, String rootDirPath, ClassLoader classLoader,

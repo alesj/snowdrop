@@ -57,7 +57,8 @@ public class VFSResource extends AbstractResource
       try
       {
          this.file = VFS.getRoot(url);
-      } catch (IOException e)
+      }
+      catch (IOException e)
       {
          throw new IllegalArgumentException("Cannot retrieve file from URL: ", e);
       }
@@ -179,19 +180,22 @@ public class VFSResource extends AbstractResource
       return getDescription();
    }
 
-    @Override
-    public boolean equals(Object other) {
+   @Override
+   public boolean equals(Object other)
+   {
       if (other instanceof VFSResource)
       {
          return file.equals(((VFSResource)other).file);
-      } else
+      }
+      else
       {
          return false;
       }
-    }
+   }
 
-    @Override
-    public int hashCode() {
+   @Override
+   public int hashCode()
+   {
       return file.hashCode();
-    }
+   }
 }
