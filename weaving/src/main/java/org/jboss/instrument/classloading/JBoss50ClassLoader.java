@@ -88,6 +88,7 @@ public class JBoss50ClassLoader extends JBoss5ClassLoader
       }
       else
       {
+         //noinspection deprecation
          system.setTranslator(translator);
       }
    }
