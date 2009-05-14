@@ -43,7 +43,6 @@ public abstract class JBoss5ClassLoader extends ReflectionHelper
    private final BaseClassLoader classLoader;
    private ClassLoaderPolicy policy;
 
-   @SuppressWarnings("unchecked")
    protected JBoss5ClassLoader(BaseClassLoader classLoader)
    {
       Assert.notNull(classLoader, "ClassLoader must not be null");
@@ -121,7 +120,7 @@ public abstract class JBoss5ClassLoader extends ReflectionHelper
    /**
     * Instantiation action.
     */
-   private class InstantiationAction implements PrivilegedExceptionAction
+   private class InstantiationAction implements PrivilegedExceptionAction<Object>
    {
       public Object run() throws Exception
       {
