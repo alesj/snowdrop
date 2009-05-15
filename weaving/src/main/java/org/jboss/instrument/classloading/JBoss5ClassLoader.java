@@ -30,6 +30,7 @@ import org.jboss.classloader.spi.ClassLoaderPolicy;
 import org.jboss.classloader.spi.base.BaseClassLoader;
 import org.jboss.util.loading.Translator;
 import org.springframework.util.Assert;
+import org.springframework.instrument.classloading.SimpleThrowawayClassLoader;
 
 /**
  * Reflective wrapper around a JBoss5 class loader. Used to
@@ -114,7 +115,7 @@ public abstract class JBoss5ClassLoader extends ReflectionHelper
 
    public ClassLoader getThrowawayClassLoader()
    {
-      return new BaseClassLoader(policy);
+      return new SimpleThrowawayClassLoader(classLoader);
    }
 
    /**
