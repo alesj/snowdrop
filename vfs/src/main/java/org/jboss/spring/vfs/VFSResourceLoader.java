@@ -23,7 +23,12 @@ package org.jboss.spring.vfs;
 
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.AbstractResource;
 import org.springframework.util.Assert;
+
+import java.net.URL;
+import java.io.InputStream;
+import java.io.IOException;
 
 /**
  * VFS based ResourceLoader.
@@ -42,7 +47,11 @@ public class VFSResourceLoader extends DefaultResourceLoader
       Assert.notNull(location, "Location must not be null");
       if (location.startsWith(CLASSPATH_URL_PREFIX))
       {
-         return new VFSResource(getClassLoader().getResource(location.substring(CLASSPATH_URL_PREFIX.length())));
+         URL url = getClassLoader().getResource(location.substring(CLASSPATH_URL_PREFIX.length()));
+         if (url != null)
+            return new VFSResource(url);
+         else
+            return new InexistentResource();
       }
       else
       {
@@ -54,4 +63,20 @@ public class VFSResourceLoader extends DefaultResourceLoader
    {
       return new VFSResource(getClassLoader().getResource(path)); 
    }
+
+    private static class InexistentResource extends AbstractResource {
+
+        public String getDescription() {
+            return null;
+        }
+
+        public InputStream getInputStream() throws IOException {
+            throw new IOException("Resource does not exist");
+        }
+
+        @Override
+                public boolean exists() {
+            return false;
+        }
+    }
 }
