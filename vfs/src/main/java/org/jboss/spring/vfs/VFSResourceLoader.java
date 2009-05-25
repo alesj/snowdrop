@@ -29,13 +29,15 @@ import org.springframework.util.Assert;
 import java.net.URL;
 import java.io.InputStream;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 
 /**
  * VFS based ResourceLoader.
  *
  * @author <a href="mailto:ales.justin@jboss.com">Ales Justin</a>
  */
-public class VFSResourceLoader extends DefaultResourceLoader
+public class
+        VFSResourceLoader extends DefaultResourceLoader
 {    
    public VFSResourceLoader(ClassLoader classLoader)
    {
@@ -47,11 +49,7 @@ public class VFSResourceLoader extends DefaultResourceLoader
       Assert.notNull(location, "Location must not be null");
       if (location.startsWith(CLASSPATH_URL_PREFIX))
       {
-         URL url = getClassLoader().getResource(location.substring(CLASSPATH_URL_PREFIX.length()));
-         if (url != null)
-            return new VFSResource(url);
-         else
-            return new InexistentResource();
+         return getResourceByPath(location.substring(CLASSPATH_URL_PREFIX.length()));
       }
       else
       {
@@ -61,22 +59,34 @@ public class VFSResourceLoader extends DefaultResourceLoader
 
    protected Resource getResourceByPath(String path)
    {
-      return new VFSResource(getClassLoader().getResource(path)); 
+      URL url = getClassLoader().getResource(path);
+      if (url != null)
+         return new VFSResource(url);
+      else
+         return new InexistentResource(path);
    }
 
-    private static class InexistentResource extends AbstractResource {
+   /* A special type of resource, for the case when the resource does not exit */
+   private static class InexistentResource extends AbstractResource
+   {
+      private final String path;
 
-        public String getDescription() {
-            return null;
-        }
+       private InexistentResource(String path) {
+           this.path = path;
+       }
 
-        public InputStream getInputStream() throws IOException {
-            throw new IOException("Resource does not exist");
-        }
+       public String getDescription()
+      {
+         return null;
+      }
 
-        @Override
-                public boolean exists() {
-            return false;
-        }
+      public InputStream getInputStream() throws IOException
+      {
+         throw new FileNotFoundException("Resource does not exist for path " + path);
+      }
+
+      public boolean exists() {
+         return false;
+      }
     }
 }
