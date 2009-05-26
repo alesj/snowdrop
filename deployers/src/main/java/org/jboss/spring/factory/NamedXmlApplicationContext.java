@@ -23,14 +23,13 @@ package org.jboss.spring.factory;
 
 import java.io.IOException;
 
+import org.jboss.spring.vfs.context.VFSClassPathXmlApplicationContext;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.ResourceEntityResolver;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.ResourcePatternResolver;
-import org.jboss.spring.vfs.VFSResourcePatternResolver;
 
 /**
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
