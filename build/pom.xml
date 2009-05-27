@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
     <groupId>org.jboss.spring-int</groupId>
     <artifactId>jboss-spring-int-parent</artifactId>
@@ -15,34 +16,67 @@
   <profiles>
     <profile>
       <id>dist</id>
-	<build>
-	    <plugins>
-	      <plugin>
-		<groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-assembly-plugin</artifactId>
-		<version>2.2-beta-2</version>
-		<executions>
-		  <execution>
-		    <id>make-assembly</id>
-		    <phase>package</phase>
-		    <goals>
-		      <goal>attached</goal>
-		    </goals>
-		    <configuration>
-		      <finalName>jboss-spring-int-${project.version}</finalName>
-		      <descriptors>
-			<descriptor>src/assembly/dist.xml</descriptor>
-			<descriptor>src/assembly/dist-with-deps.xml</descriptor>
-			<descriptor>src/assembly/src.xml</descriptor>
-		      </descriptors>
-		    </configuration>
-		  </execution>
-		</executions>
-	      </plugin>
-	    </plugins>
-	  </build>
-      </profile>
-    </profiles>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>2.2-beta-3</version>
+            <executions>
+              <execution>
+                <id>make-assembly</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>single</goal>
+                </goals>
+                <configuration>
+                  <finalName>jboss-spring-int-${project.version}</finalName>
+                  <descriptors>
+                    <descriptor>${basedir}/src/assembly/dist.xml</descriptor>
+                    <descriptor>${basedir}/src/assembly/dist-with-deps.xml</descriptor>
+                    <descriptor>${basedir}/src/assembly/src.xml</descriptor>
+                  </descriptors>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>deployer</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>2.2-beta-3</version>
+            <executions>
+              <execution>
+                <id>make-assembly</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>single</goal>
+                </goals>
+                <configuration>
+                  <finalName>jboss-spring-${project.version}.deployer</finalName>
+                  <descriptors>
+                    <descriptor>${basedir}/src/assembly/deployer.xml</descriptor>
+                  </descriptors>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+      <dependencies>
+        <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-core</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
 
   <dependencies>
     <dependency>
@@ -53,6 +87,10 @@
       <groupId>org.jboss.spring-int</groupId>
       <artifactId>jboss-spring-int-deployers</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.jboss.spring-int</groupId>
+      <artifactId>jboss-spring-int-weaving</artifactId>
+    </dependency>
   </dependencies>
-  
+
 </project>

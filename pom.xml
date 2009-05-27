@@ -166,6 +166,11 @@
         <artifactId>jboss-spring-int-vfs</artifactId>
         <version>${project.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.jboss.spring-int</groupId>
+        <artifactId>jboss-spring-int-weaving</artifactId>
+        <version>${project.version}</version>
+      </dependency>
 
       <dependency>
         <groupId>org.jboss.microcontainer</groupId>
