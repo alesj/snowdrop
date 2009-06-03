@@ -176,41 +176,49 @@
         <groupId>org.jboss.microcontainer</groupId>
         <artifactId>jboss-dependency</artifactId>
         <version>${version.jboss.microcontainer}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.jboss.microcontainer</groupId>
         <artifactId>jboss-kernel</artifactId>
         <version>${version.jboss.microcontainer}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.jboss.microcontainer</groupId>
         <artifactId>jboss-aop-mc-int</artifactId>
         <version>${version.jboss.microcontainer}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.jboss.microcontainer</groupId>
         <artifactId>jboss-spring-int</artifactId>
         <version>${version.jboss.microcontainer}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.jboss.microcontainer</groupId>
         <artifactId>jboss-guice-int</artifactId>
         <version>${version.jboss.microcontainer}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.jboss.deployers</groupId>
         <artifactId>jboss-deployers-client</artifactId>
         <version>${version.jboss.deployers}</version>
+        <scope>provided</scope>
       </dependency>      
       <dependency>
         <groupId>org.jboss.deployers</groupId>
         <artifactId>jboss-deployers-client-spi</artifactId>
         <version>${version.jboss.deployers}</version>
+        <scope>provided</scope>
       </dependency>      
       <dependency>
         <groupId>org.jboss.deployers</groupId>
         <artifactId>jboss-deployers-core-spi</artifactId>
         <version>${version.jboss.deployers}</version>
+        <scope>provided</scope>
       </dependency>      
       <dependency>
         <groupId>org.jboss.deployers</groupId>
@@ -222,101 +230,121 @@
             <artifactId>javassist</artifactId>
           </exclusion>
         </exclusions>
+        <scope>provided</scope>
       </dependency>      
       <dependency>
         <groupId>org.jboss.deployers</groupId>
         <artifactId>jboss-deployers-spi</artifactId>
         <version>${version.jboss.deployers}</version>
+        <scope>provided</scope>
       </dependency>      
       <dependency>
         <groupId>org.jboss.deployers</groupId>
         <artifactId>jboss-deployers-structure-spi</artifactId>
         <version>${version.jboss.deployers}</version>
+        <scope>provided</scope>
       </dependency>      
       <dependency>
         <groupId>org.jboss.deployers</groupId>
         <artifactId>jboss-deployers-vfs</artifactId>
         <version>${version.jboss.deployers}</version>
+        <scope>provided</scope>
       </dependency>      
       <dependency>
         <groupId>org.jboss.deployers</groupId>
         <artifactId>jboss-deployers-vfs-spi</artifactId>
         <version>${version.jboss.deployers}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.jboss.cl</groupId>
         <artifactId>jboss-classloader</artifactId>
         <version>${version.jboss.classloader}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.jboss.cl</groupId>
         <artifactId>jboss-classloading</artifactId>
         <version>${version.jboss.classloader}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.jboss.cl</groupId>
         <artifactId>jboss-classloading-vfs</artifactId>
         <version>${version.jboss.classloader}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.jboss.man</groupId>
         <artifactId>jboss-managed</artifactId>
         <version>${version.jboss.man}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.jboss.man</groupId>
         <artifactId>jboss-metatype</artifactId>
         <version>${version.jboss.man}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.jboss</groupId>
         <artifactId>jboss-mdr</artifactId>
         <version>${version.jboss.mdr}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.jboss</groupId>
         <artifactId>jboss-common-core</artifactId>
         <version>${version.jboss.common.core}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.jboss.logging</groupId>
         <artifactId>jboss-logging-spi</artifactId>
         <version>${version.jboss.common.logging.spi}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.jboss.logging</groupId>
         <artifactId>jboss-logging-log4j</artifactId>
         <version>${version.jboss.common.logging.log4j}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.jboss</groupId>
         <artifactId>jbossxb</artifactId>
         <version>${version.jbossxb}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.jboss</groupId>
         <artifactId>jboss-vfs</artifactId>
         <version>${version.jboss.vfs}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.jboss.aop</groupId>
         <artifactId>jboss-aop</artifactId>
         <version>${version.jboss.aop}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.jboss</groupId>
         <artifactId>javassist</artifactId>
         <version>${version.javassist}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.jboss.javaee</groupId>
         <artifactId>jboss-ejb-api</artifactId>
         <version>${version.javaee}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>apache-xerces</groupId>
         <artifactId>xml-apis</artifactId>
         <version>${version.xerces}</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>aopalliance</groupId>
@@ -352,6 +380,7 @@
         <groupId>org.jboss.cache</groupId>
         <artifactId>jbosscache-pojo</artifactId>
         <version>${version.jboss.pojocache}</version>
+        <scope>provided</scope>
       </dependency>
       <!-- test dependencies -->
       <dependency>
