@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd" [
+<!ENTITY % RH-ENTITIES SYSTEM "Common_Config/rh-entities.ent">
+]>
+<book>
+  <bookinfo>
+    <title>JBoss Spring Integration Package 1.0.0</title>
+
+    <subtitle>User Guide</subtitle>
+
+    <issuenum>1.0</issuenum>
+
+    <productnumber>2</productnumber>
+
+    <xi:include href="author-group.xml"
+                xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+    <xi:include href="legal-notice.xml"
+                xmlns:xi="http://www.w3.org/2001/XInclude" />
+  </bookinfo>
+
+  <preface>
+    <title>What This Guide Covers</title>
+
+    <para>This user guide aims to cover the functionality of the JBoss Spring
+    Integation Pack, its components, and to provide information on how to use
+    it optimally for running Spring applications in JBoss.</para>
+
+    <para>The current version of the package is supporting the following
+    configuration:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>JBoss AS 5.x</para>
+      </listitem>
+
+      <listitem>
+        <para>Spring 2.5.x</para>
+      </listitem>
+    </itemizedlist>
+  </preface>
+
+  <chapter>
+    <title>Introduction</title>
+
+    <section>
+      <title></title>
+
+      <para></para>
+    </section>
+  </chapter>
+</book>
