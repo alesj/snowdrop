@@ -45,9 +45,155 @@
     <title>Introduction</title>
 
     <section>
-      <title></title>
+      <title>Strutcture of the package</title>
 
-      <para></para>
+      <para>This package contains a few utilities to be used by Spring
+      applications runinng in JBoss. They're adding support for:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>resource scanning - i.e. scanning the classpath for bean
+          definitions or using "classpath*:"-style patterns</para>
+        </listitem>
+
+        <listitem>
+          <para>load-time weaving</para>
+        </listitem>
+
+        <listitem>
+          <para>bootstrapping and registering application contexts to be used
+          by Java EE applications</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>The distribution contains the following files:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>jboss-spring-int-vfs.jar - the library containing the support
+          classes for resource scanning</para>
+        </listitem>
+
+        <listitem>
+          <para>jboss-spring-int-weaving.jar - the library containing the
+          support classes for load-time weaving</para>
+        </listitem>
+
+        <listitem>
+          <para>spring-deployer.zip - the Spring Deployer</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Component usage</title>
+
+    <para>This chapter details how to use the individual components of the
+    package.</para>
+
+    <section>
+      <title>The VFS-supporting application contexts</title>
+
+      <para>For using this functionality, the jboss-spring-int-vfs.jar file
+      needs to be added to the application.</para>
+
+      <para>This library supports resource scanning in JBoss' Virtual File
+      System. When doing resource scanning, the Spring framework assumes that
+      the resources are either coming from a directory or a packaged jar, and
+      treats the URLs encountered in the process of scanning resources
+      accordingly. This assumption does not hold in JBoss' Virtual File
+      System.</para>
+
+      <para>The solution to this problem is in implementing a different
+      underlying resource resolution mechanism, namely in amending the
+      functionality of the
+      <literal>PathMatchingResourcePatternResolver</literal>. From the user's
+      perspective, using this different resolution mechanism is done through
+      using one of the two ApplicationContext implementations provided by this
+      library, which are:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>org.jboss.spring.vfs.context.VFSClassPathXmlApplicationContext</literal>
+          - to be used instead of
+          <literal>org.springframework.context.support.ClassPathXmlApplicationContext</literal></para>
+        </listitem>
+
+        <listitem>
+          <para><literal>org.jboss.spring.vfs.context.VFSXmlWebApplicationContext</literal>
+          - to be used instead of
+          <literal>org.springframework.web.context.support.XmlWebApplicationContext</literal></para>
+        </listitem>
+      </itemizedlist>
+
+      <para>In many cases, the
+      <literal>VFSClassPathXmlApplicationContext</literal> would be
+      instantiated on its own, using something like:</para>
+
+      <programlisting language="java">ApplicationContext context = 
+  new VFSClassPathXmlApplicationContext("classpath:/context-definition-file.xml");</programlisting>
+
+      <para>The XmlWebApplicationContext is not instantiated directly, though,
+      but bootstrapped by either the ContextLoaderListener, or the
+      DispatcherServlet. In this case, the class to be used for bootstrapping
+      needs to be used to trigger an instantiation of the VFS-enabled context.
+      </para>
+
+      <para>For changing the type of application context created by the
+      ContextLoaderListener, use the contextClass parameter, as shown in the
+      sample below (the emphasized portion):</para>
+
+      <programlisting language="xml">&lt;context-param&gt;
+  &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+  &lt;param-value&gt;classpath*:spring-contexts/*.xml&lt;/param-value&gt;
+&lt;/context-param&gt;
+
+<emphasis role="bold">&lt;context-param&gt;
+  &lt;param-name&gt;contextClass&lt;/param-name&gt;
+  &lt;param-value&gt;org.jboss.spring.vfs.context.VFSXmlWebApplicationContext&lt;/param-value&gt;
+&lt;/context-param&gt;</emphasis>
+
+&lt;listener&gt;
+  &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+&lt;/listener&gt;</programlisting>
+
+      <para>For changing the type of application context created by the
+      DispatcherServlet, use the contextClass parameter again, but this time
+      on the <literal>DispatcherServlet</literal> definition (emphasized
+      portion again):</para>
+
+      <programlisting language="xml">&lt;servlet&gt;
+  &lt;servlet-name&gt;spring-mvc-servlet&lt;/servlet-name&gt;
+  &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+  &lt;init-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;/WEB-INF/mvc-config.xml&lt;/param-value&gt;
+  &lt;/init-param&gt;
+<emphasis role="bold">  &lt;init-param&gt;
+    &lt;param-name&gt;contextClass&lt;/param-name&gt;
+    &lt;param-value&gt;org.jboss.spring.vfs.context.VFSXmlWebApplicationContext&lt;/param-value&gt;
+  &lt;/init-param&gt;
+</emphasis>&lt;/servlet&gt;</programlisting>
+
+      <para>Both configurations can be seen at work in the web-scanning
+      sample.</para>
+
+      <remark>In general, it is a good idea to pay attention to this error. If
+      encountered while the application is starting, you definitely need to
+      replace the default ApplicationContext with one of the VFS-enabled
+      implementations.</remark>
+
+      <para><programlisting>Caused by: java.util.zip.ZipException: error in opening zip file
+	at java.util.zip.ZipFile.open(Native Method)
+	at java.util.zip.ZipFile.&lt;init&gt;(ZipFile.java:114)
+	at java.util.jar.JarFile.&lt;init&gt;(JarFile.java:133)
+	at java.util.jar.JarFile.&lt;init&gt;(JarFile.java:70)
+	at org.springframework.core.io.support
+ .PathMatchingResourcePatternResolver.
+  doFindPathMatchingJarResources(PathMatchingResourcePatternResolver.java:448)
+</programlisting>(the listing has been wrapped for formatting
+      purposes).</para>
     </section>
   </chapter>
 </book>
