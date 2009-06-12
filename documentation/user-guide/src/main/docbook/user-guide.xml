@@ -45,7 +45,7 @@
     <title>Introduction</title>
 
     <section>
-      <title>Strutcture of the package</title>
+      <title>Structure of the package</title>
 
       <para>This package contains a few utilities to be used by Spring
       applications runinng in JBoss. They're adding support for:</para>
