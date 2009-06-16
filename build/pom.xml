@@ -16,6 +16,11 @@
   <profiles>
     <profile>
       <id>dist</id>
+      <activation>
+        <property>
+          <name>!nojars</name>
+        </property>
+      </activation>
       <build>
         <plugins>
           <plugin>
@@ -43,41 +48,7 @@
         </plugins>
       </build>
     </profile>
-    <profile>
-      <id>deployer</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <version>2.2-beta-3</version>
-            <executions>
-              <execution>
-                <id>make-assembly</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>single</goal>
-                </goals>
-                <configuration>
-                  <finalName>jboss-spring-${project.version}.deployer</finalName>
-                  <descriptors>
-                    <descriptor>${basedir}/src/assembly/deployer.xml</descriptor>
-                  </descriptors>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-      <dependencies>
-        <dependency>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring-core</artifactId>
-        </dependency>
-      </dependencies>
-    </profile>
   </profiles>
-
   <dependencies>
     <dependency>
       <groupId>org.jboss.spring-int</groupId>
@@ -90,7 +61,7 @@
     <dependency>
       <groupId>org.jboss.spring-int</groupId>
       <artifactId>jboss-spring-int-weaving</artifactId>
-    </dependency>
+    </dependency> 
   </dependencies>
 
 </project>

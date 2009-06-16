@@ -2,10 +2,22 @@
   <formats>
     <format>zip</format>
   </formats>
+  <fileSets>
+    <fileSet>
+      <directory>../deployers/target/</directory>
+      <outputDirectory>/dist/deployer</outputDirectory>
+      <includes>
+        <include>*.zip</include>
+      </includes>
+    </fileSet>
+  </fileSets>
   <dependencySets>
     <dependencySet>
-      <outputDirectory>/</outputDirectory>
+      <outputDirectory>/dist/lib</outputDirectory>
       <useTransitiveDependencies>false</useTransitiveDependencies>
+      <excludes>
+        <exclude>org.jboss.spring-int:jboss-spring-int-deployers:*</exclude>
+      </excludes>
     </dependencySet>
   </dependencySets>
 </assembly>

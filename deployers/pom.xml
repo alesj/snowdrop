@@ -12,10 +12,47 @@
   <url>http://www.jboss.org/jbossmc</url>
   <description>JBoss Spring Integration - Deployers</description>
 
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <excludes>
+          <exclude>META-INF/spring-deployers-beans.xml</exclude>
+        </excludes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.2-beta-3</version>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <finalName>jboss-spring.deployer</finalName>
+              <descriptors>
+                <descriptor>${basedir}/src/assembly/deployer.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>    
+  </build>
+
   <dependencies>
     <dependency>
       <groupId>org.jboss.spring-int</groupId>
       <artifactId>jboss-spring-int-vfs</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.spring-int</groupId>
+      <artifactId>jboss-spring-int-weaving</artifactId>
     </dependency>
     <!-- Compile (global dependencies) -->
     <dependency>

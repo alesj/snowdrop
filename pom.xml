@@ -382,6 +382,12 @@
         <version>${version.jboss.pojocache}</version>
         <scope>provided</scope>
       </dependency>
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>servlet-api</artifactId>
+        <scope>provided</scope>
+        <version>2.3</version>
+      </dependency>
       <!-- test dependencies -->
       <dependency>
         <groupId>org.jboss</groupId>

@@ -8,7 +8,7 @@
       <directory>..</directory>
       <outputDirectory></outputDirectory>
       <excludes>
-        <exclude>*/target/</exclude>
+        <exclude>**/target/</exclude>
       </excludes>
     </fileSet>
   </fileSets>
