@@ -5,7 +5,7 @@
   <fileSets>
     <fileSet>
       <directory>../deployers/target/</directory>
-      <outputDirectory>/dist/deployer</outputDirectory>
+      <outputDirectory>/deployer</outputDirectory>
       <includes>
         <include>*.zip</include>
       </includes>
@@ -13,11 +13,8 @@
   </fileSets>
   <dependencySets>
     <dependencySet>
-      <outputDirectory>/dist/lib</outputDirectory>
+      <outputDirectory>/lib</outputDirectory>
       <useTransitiveDependencies>false</useTransitiveDependencies>
-      <excludes>
-        <exclude>org.jboss.spring-int:jboss-spring-int-deployers:*</exclude>
-      </excludes>
     </dependencySet>
   </dependencySets>
 </assembly>
