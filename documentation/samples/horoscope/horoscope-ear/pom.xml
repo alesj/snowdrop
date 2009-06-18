@@ -1,0 +1,72 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <artifactId>horoscope</artifactId>
+    <groupId>org.jboss.spring-int.samples</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.jboss.spring-int.samples</groupId>
+  <artifactId>horoscope-ear</artifactId>
+  <packaging>ear</packaging>
+  <name>horoscope-ear Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+
+    <dependencies>
+      <dependency>
+        <groupId>org.jboss.spring-int.samples</groupId>
+        <artifactId>horoscope-war</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <type>war</type>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.spring-int.samples</groupId>
+        <artifactId>horoscope-ejb</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <type>ejb</type>
+      </dependency>
+<!--
+      <dependency>
+        <groupId>org.jboss.spring-int.samples</groupId>
+        <artifactId>horoscope-spring</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+      </dependency>
+-->
+    </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-ear-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <displayName>JBoss Spring</displayName>
+          <finalName>horoscope</finalName>
+          <earName>horoscope</earName>
+          <defaultLibBundleDir>/lib/</defaultLibBundleDir>
+          <modules>
+            <ejbModule>
+              <groupId>org.jboss.spring-int.samples</groupId>
+              <artifactId>horoscope-ejb</artifactId>
+            </ejbModule>
+            <webModule>
+              <groupId>org.jboss.spring-int.samples</groupId>
+              <artifactId>horoscope-war</artifactId>
+              <contextRoot>/horoscope</contextRoot>
+            </webModule>
+<!--
+            <jarModule>
+              <groupId>org.jboss.spring-int.samples</groupId>
+              <artifactId>horoscope-spring</artifactId>
+              <bundleDir>/</bundleDir>
+            </jarModule>
+-->
+          </modules>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+
+</project>

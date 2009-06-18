@@ -1,0 +1,28 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+
+ <!-- <bean id="controller" class="org.jboss.tutorial.web.AppController"/>
+-->
+  <context:annotation-config/>
+   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+     <property name="prefix" value="/WEB-INF/jsp/"/>
+     <property name="suffix" value=".jsp"/>
+   </bean>
+
+
+   <bean id="appController" class="org.jboss.tutorial.web.AppController">
+     <!-- <property name="randomizer">
+         <ref bean="randomizer"/>
+      </property>
+      <property name="horoscope">
+         <ref bean="horoscope"/>
+      </property>-->
+   </bean>
+
+</beans>

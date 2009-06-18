@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.jboss.spring-int.samples</groupId>
+  <artifactId>horoscope</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <modules>
+    <module>horoscope-ejb</module>
+    <module>horoscope-war</module>
+    <module>horoscope-ear</module>
+  </modules>
+  <packaging>pom</packaging>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.jboss.spring-int.samples</groupId>
+        <artifactId>horoscope-war</artifactId>
+        <version>${project.version}</version>
+        <type>war</type>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.spring-int.samples</groupId>
+        <artifactId>horoscope-ejb</artifactId>
+        <version>${project.version}</version>
+        <type>ejb</type>
+      </dependency>
+<!--
+      <dependency>
+        <groupId>org.jboss.spring-int.samples</groupId>
+        <artifactId>horoscope-spring</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+-->
+      <dependency>
+        <groupId>org.jboss.spring-int.samples</groupId>
+        <artifactId>horoscope-ear</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+</project>
