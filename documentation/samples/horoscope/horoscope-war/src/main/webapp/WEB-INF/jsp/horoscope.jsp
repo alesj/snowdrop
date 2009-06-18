@@ -1,3 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-The prediction for this month is: <c:out value="${horoscope}"/>
+<%@taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<html>
+<body>
+  This month's prediction is: <c:out value="${horoscope}"/>
+</body>
+</html>

@@ -47,26 +47,6 @@ public class AppController
 
    private @EJB (mappedName = "horoscope/HoroscopeBean/local") Horoscope horoscope;
 
-   public Randomizer getRandomizer()
-   {
-      return randomizer;
-   }
-
-   public void setRandomizer(Randomizer randomizer)
-   {
-      this.randomizer = randomizer;
-   }
-
-   public Horoscope getHoroscope()
-   {
-      return horoscope;
-   }
-
-   public void setHoroscope(Horoscope horoscope)
-   {
-      this.horoscope = horoscope;
-   }
-
    @RequestMapping("/number")
    public ModelAndView numberHandler(@RequestParam("radius") int radius)
          throws Exception
