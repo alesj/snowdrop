@@ -17,7 +17,7 @@
       <resource>
         <directory>src/main/resources</directory>
         <excludes>
-          <exclude>META-INF/spring-deployers-beans.xml</exclude>
+          <exclude>META-INF/spring-deployers-jboss-beans.xml</exclude>
         </excludes>
       </resource>
     </resources>
@@ -65,6 +65,7 @@
           <artifactId>jboss-vfs</artifactId>
         </exclusion>
       </exclusions>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>apache-xerces</groupId>
@@ -114,10 +115,12 @@
       <groupId>org.jboss.aop</groupId>
       <artifactId>jboss-aop</artifactId>
       <version>${version.jboss.aop}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.jboss.javaee</groupId>
       <artifactId>jboss-ejb-api</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
