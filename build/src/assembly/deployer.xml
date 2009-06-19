@@ -1,20 +1,21 @@
 <assembly>
+  <id>deployer</id>
   <formats>
     <format>zip</format>
   </formats>
   <fileSets>
     <fileSet>
       <directory>${basedir}/src/main/resources</directory>
-      <outputDirectory></outputDirectory>
+      <outputDirectory>META-INF</outputDirectory>
       <includes>
-        <include>META-INF/spring-deployers-jboss-beans.xml</include>
+        <include>spring-deployers-jboss-beans.xml</include>
       </includes>
     </fileSet>
   </fileSets>
   <dependencySets>
     <dependencySet>
       <outputDirectory>/</outputDirectory>
-      <useTransitiveDependencies>false</useTransitiveDependencies>
+      <useTransitiveDependencies>true</useTransitiveDependencies>
     </dependencySet>
   </dependencySets>
 </assembly>

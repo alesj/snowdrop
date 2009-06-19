@@ -6,9 +6,9 @@
   <fileSets>
     <fileSet>
       <directory>..</directory>
-      <outputDirectory></outputDirectory>
+      <outputDirectory>/</outputDirectory>
       <excludes>
-        <exclude>**/target/</exclude>
+        <exclude>**/target/**</exclude>
       </excludes>
     </fileSet>
   </fileSets>

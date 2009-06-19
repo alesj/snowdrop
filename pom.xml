@@ -84,7 +84,14 @@
           <artifactId>maven-assembly-plugin</artifactId>
           <executions>
             <execution>
-              <id>make-assembly</id>
+              <id>make-libs</id>
+              <phase>package</phase>
+              <goals>
+                <goal>attached</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>make-deployer</id>
               <phase>package</phase>
               <goals>
                 <goal>attached</goal>

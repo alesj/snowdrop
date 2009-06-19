@@ -13,6 +13,10 @@
   <url>http://www.jboss.com/products/jbossmc</url>
   <description>JBoss Spring Integration Distribution</description>
 
+  <properties>
+    <deployer.version>3.2</deployer.version>
+  </properties>
+
   <profiles>
     <profile>
       <id>dist</id>
@@ -29,7 +33,7 @@
             <version>2.2-beta-3</version>
             <executions>
               <execution>
-                <id>make-assembly</id>
+                <id>make-libs</id>
                 <phase>package</phase>
                 <goals>
                   <goal>single</goal>
@@ -37,9 +41,23 @@
                 <configuration>
                   <finalName>jboss-spring-int-${project.version}</finalName>
                   <descriptors>
-                    <descriptor>${basedir}/src/assembly/dist.xml</descriptor>
-                    <descriptor>${basedir}/src/assembly/dist-with-deps.xml</descriptor>
+                    <descriptor>${basedir}/src/assembly/libs.xml</descriptor>
+                    <descriptor>${basedir}/src/assembly/libs-with-deps.xml</descriptor>
                     <descriptor>${basedir}/src/assembly/src.xml</descriptor>
+                  </descriptors>
+                </configuration>
+              </execution>
+              <execution>
+                <id>make-deployer</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>single</goal>
+                </goals>
+                <configuration>
+                  <finalName>jboss-spring-${deployer.version}.deployer</finalName>
+                  <appendAssemblyId>false</appendAssemblyId>
+                  <descriptors>
+                    <descriptor>${basedir}/src/assembly/deployer.xml</descriptor>
                   </descriptors>
                 </configuration>
               </execution>
