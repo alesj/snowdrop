@@ -16,6 +16,9 @@
     <dependencySet>
       <outputDirectory>/</outputDirectory>
       <useTransitiveDependencies>true</useTransitiveDependencies>
+      <excludes>
+        <exclude>org.springframework:spring-web:*</exclude>
+      </excludes>
     </dependencySet>
   </dependencySets>
 </assembly>
