@@ -7,15 +7,15 @@
   </parent>
   <groupId>org.jboss.spring-int</groupId>
   <artifactId>jboss-spring-int-parent</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0.CR1</version>
   <packaging>pom</packaging>
   <name>JBoss Spring Integration Parent POM</name>
   <url>http://www.jboss.com/products/jbossmc</url>
   <description>JBoss Spring integration</description>
   <scm>
-    <connection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/spring-int/tags/1_0</connection>
-    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/spring-int/branches/1_0</developerConnection>
-    <url>https://svn.jboss.org/repos/jbossas/projects/spring-int/tags/1_0</url>
+    <connection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/spring-int/tags/jboss-spring-int-1.0.0.CR1</connection>
+    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/spring-int/tags/jboss-spring-int-1.0.0.CR1</developerConnection>
+    <url>scm:svn:https://svn.jboss.org/repos/jbossas/projects/spring-int/tags/jboss-spring-int-1.0.0.CR1</url>
   </scm>
 
   <modules>
