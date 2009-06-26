@@ -13,9 +13,9 @@
   <url>http://www.jboss.com/products/jbossmc</url>
   <description>JBoss Spring integration</description>
   <scm>
-    <connection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/spring-int/tags/Branch_1_0</connection>
+    <connection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/spring-int/branches/Branch_1_0</connection>
     <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/spring-int/branches/Branch_1_0</developerConnection>
-    <url>https://svn.jboss.org/repos/jbossas/projects/spring-int/tags/Branch_1_0</url>
+    <url>https://svn.jboss.org/repos/jbossas/projects/spring-int/branches/Branch_1_0</url>
   </scm>
 
   <modules>
