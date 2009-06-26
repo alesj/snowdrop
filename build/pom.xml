@@ -14,7 +14,7 @@
   <description>JBoss Spring Integration Distribution</description>
 
   <properties>
-    <deployer.version>3.2</deployer.version>
+    <deployer.version>3.2.CR1</deployer.version>
   </properties>
 
   <profiles>
