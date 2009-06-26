@@ -18,6 +18,8 @@
       <useTransitiveDependencies>true</useTransitiveDependencies>
       <excludes>
         <exclude>org.springframework:spring-web:*</exclude>
+        <exclude>*:aopalliance:*</exclude>
+        <exclude>*:commons-logging:*</exclude>
       </excludes>
     </dependencySet>
   </dependencySets>

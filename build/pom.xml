@@ -13,6 +13,10 @@
   <url>http://www.jboss.com/products/jbossmc</url>
   <description>JBoss Spring Integration Distribution</description>
 
+  <properties>
+    <deployer.version>3.2</deployer.version>
+  </properties>
+
   <profiles>
     <profile>
       <id>dist</id>
@@ -50,7 +54,7 @@
                   <goal>single</goal>
                 </goals>
                 <configuration>
-                  <finalName>jboss-spring.deployer</finalName>
+                  <finalName>jboss-spring-${deployer.version}.deployer</finalName>
                   <appendAssemblyId>false</appendAssemblyId>
                   <descriptors>
                     <descriptor>${basedir}/src/assembly/deployer.xml</descriptor>
@@ -75,7 +79,7 @@
     <dependency>
       <groupId>org.jboss.spring-int</groupId>
       <artifactId>jboss-spring-int-weaving</artifactId>
-    </dependency> 
+    </dependency>
   </dependencies>
 
 </project>
