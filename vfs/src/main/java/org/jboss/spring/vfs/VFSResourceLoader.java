@@ -35,6 +35,7 @@ import org.springframework.util.Assert;
  * VFS based ResourceLoader.
  *
  * @author <a href="mailto:ales.justin@jboss.com">Ales Justin</a>
+ * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
  */
 public class VFSResourceLoader extends DefaultResourceLoader
 {

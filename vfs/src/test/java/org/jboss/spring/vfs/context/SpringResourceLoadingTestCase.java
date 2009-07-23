@@ -26,7 +26,7 @@ import org.junit.Test;
 import org.springframework.core.io.Resource;
 
 /**
- * @author: marius
+ * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
  */
 public class SpringResourceLoadingTestCase
 {
