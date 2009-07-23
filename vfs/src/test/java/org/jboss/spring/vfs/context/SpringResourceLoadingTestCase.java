@@ -28,41 +28,46 @@ import org.springframework.core.io.Resource;
 /**
  * @author: marius
  */
-public class SpringResourceLoadingTestCase {
-
-    @Test
-    public void testLoadResourceFromClasspath() {
-        VFSXmlWebApplicationContext context = new VFSXmlWebApplicationContext();
-        context.setConfigLocations(new String[]{"classpath:spring-config/spring-app-config.xml"});
-        context.refresh();
-        String myBean = (String) context.getBean("myBean");
-    }
-
-
-    @Test
-    public void testLoadResourceFromClasspathWildCard() {
-        VFSXmlWebApplicationContext context = new VFSXmlWebApplicationContext();
-        context.setConfigLocations(new String[]{"classpath*:spring-config/spring-app-config.xml"});
-        context.refresh();
-        String myBean = (String) context.getBean("myBean");
-    }
-
-     @Test
-    public void testLoadWildCardedResourceFromClasspath() {
-        VFSXmlWebApplicationContext context = new VFSXmlWebApplicationContext();
-        context.setConfigLocations(new String[]{"classpath:/spring-config/spring-*.xml"});
-        context.refresh();
-        String myBean = (String) context.getBean("myBean");
-    }
+public class SpringResourceLoadingTestCase
+{
 
    @Test
-   public void testLoadWildCardedResourceFromClasspathWildCard() {
-       VFSXmlWebApplicationContext context = new VFSXmlWebApplicationContext();
-       context.setConfigLocations(new String[]{"classpath*:/spring-config/spring-*.xml"});
-       context.refresh();
-       String myBean = (String) context.getBean("myBean");
-       Resource r = context.getResource("classpath:/spring-config/spring-app-config.xml");
-       Assert.assertNotNull(r);
+   public void testLoadResourceFromClasspath()
+   {
+      VFSXmlWebApplicationContext context = new VFSXmlWebApplicationContext();
+      context.setConfigLocations(new String[]{"classpath:spring-config/spring-app-config.xml"});
+      context.refresh();
+      String myBean = (String) context.getBean("myBean");
+   }
+
+
+   @Test
+   public void testLoadResourceFromClasspathWildCard()
+   {
+      VFSXmlWebApplicationContext context = new VFSXmlWebApplicationContext();
+      context.setConfigLocations(new String[]{"classpath*:spring-config/spring-app-config.xml"});
+      context.refresh();
+      String myBean = (String) context.getBean("myBean");
+   }
+
+   @Test
+   public void testLoadWildCardedResourceFromClasspath()
+   {
+      VFSXmlWebApplicationContext context = new VFSXmlWebApplicationContext();
+      context.setConfigLocations(new String[]{"classpath:/spring-config/spring-*.xml"});
+      context.refresh();
+      String myBean = (String) context.getBean("myBean");
+   }
+
+   @Test
+   public void testLoadWildCardedResourceFromClasspathWildCard()
+   {
+      VFSXmlWebApplicationContext context = new VFSXmlWebApplicationContext();
+      context.setConfigLocations(new String[]{"classpath*:/spring-config/spring-*.xml"});
+      context.refresh();
+      String myBean = (String) context.getBean("myBean");
+      Resource r = context.getResource("classpath:/spring-config/spring-app-config.xml");
+      Assert.assertNotNull(r);
    }
 
 }
