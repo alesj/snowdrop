@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+    <persistence-unit name="orders" transaction-type="RESOURCE_LOCAL">
+        <class>org.jboss.spring.samples.orders.domain.entities.User</class>
+        <class>org.jboss.spring.samples.orders.domain.entities.Order</class>
+        <class>org.jboss.spring.samples.orders.domain.entities.OrderItem</class>
+        </persistence-unit>
+</persistence>
