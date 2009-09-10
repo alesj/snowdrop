@@ -19,6 +19,7 @@
   </scm>
 
   <modules>
+    <module>aop</module>
     <module>cluster</module>
     <module>deployers</module>
     <module>facade</module>
@@ -28,13 +29,13 @@
   </modules>
 
   <properties>
-    <version.jboss.vfs>2.1.1.GA</version.jboss.vfs>
-    <version.jboss.man>2.1.0.CR8</version.jboss.man>
+    <version.jboss.vfs>2.1.2.GA</version.jboss.vfs>
+    <version.jboss.man>2.1.0.GA</version.jboss.man>
     <version.jboss.mdr>2.0.1.GA</version.jboss.mdr>
-    <version.jboss.microcontainer>2.0.5.GA</version.jboss.microcontainer>
-    <version.jboss.classloader>2.0.5.GA</version.jboss.classloader>
-    <version.jboss.deployers>2.0.6.GA</version.jboss.deployers>
-    <version.jboss.common.core>2.2.13.GA</version.jboss.common.core>
+    <version.jboss.microcontainer>2.0.8.GA</version.jboss.microcontainer>
+    <version.jboss.classloader>2.0.6.SP1</version.jboss.classloader>
+    <version.jboss.deployers>2.0.8.GA</version.jboss.deployers>
+    <version.jboss.common.core>2.2.14.GA</version.jboss.common.core>
     <version.jboss.common.logging.spi>2.0.5.GA</version.jboss.common.logging.spi>
     <version.jboss.common.logging.log4j>2.0.5.GA</version.jboss.common.logging.log4j>
     <version.jbossxb>2.0.1.GA</version.jbossxb>
