@@ -5,17 +5,17 @@
     <artifactId>jboss-parent</artifactId>
     <version>4</version>
   </parent>
-  <groupId>org.jboss.spring-int</groupId>
-  <artifactId>jboss-spring-int-parent</artifactId>
+  <groupId>org.jboss.snowdrop</groupId>
+  <artifactId>snowdrop-parent</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>JBoss Spring Integration Parent POM</name>
+  <name>Snowdrop Parent POM</name>
   <url>http://www.jboss.com/products/jbossmc</url>
-  <description>JBoss Spring integration</description>
+  <description>Snowdrop</description>
   <scm>
-    <connection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/spring-int/tags/1_0</connection>
-    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/spring-int/branches/1_0</developerConnection>
-    <url>https://svn.jboss.org/repos/jbossas/projects/spring-int/tags/1_0</url>
+    <connection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/snowdrop/tags/1_0</connection>
+    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/snowdrop/branches/1_0</developerConnection>
+    <url>https://svn.jboss.org/repos/jbossas/projects/snowdrop/tags/1_0</url>
   </scm>
 
   <modules>
@@ -72,7 +72,7 @@
         <version>2.0-beta-9</version>
         <configuration>
           <generateReleasePoms>false</generateReleasePoms>
-          <tagBase>https://svn.jboss.org/repos/jbossas/projects/spring-int/tags</tagBase>
+          <tagBase>https://svn.jboss.org/repos/jbossas/projects/snowdrop/tags</tagBase>
           <autoVersionSubmodules>true</autoVersionSubmodules>
         </configuration>
       </plugin>
@@ -154,28 +154,28 @@
     <dependencies>
 
       <dependency>
-        <groupId>org.jboss.spring-int</groupId>
-        <artifactId>jboss-spring-int-cluster</artifactId>
+        <groupId>org.jboss.snowdrop</groupId>
+        <artifactId>snowdrop-cluster</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.jboss.spring-int</groupId>
-        <artifactId>jboss-spring-int-deployers</artifactId>
+        <groupId>org.jboss.snowdrop</groupId>
+        <artifactId>snowdrop-deployers</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.jboss.spring-int</groupId>
-        <artifactId>jboss-spring-int-facade</artifactId>
+        <groupId>org.jboss.snowdrop</groupId>
+        <artifactId>snowdrop-facade</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.jboss.spring-int</groupId>
-        <artifactId>jboss-spring-int-vfs</artifactId>
+        <groupId>org.jboss.snowdrop</groupId>
+        <artifactId>snowdrop-vfs</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.jboss.spring-int</groupId>
-        <artifactId>jboss-spring-int-weaving</artifactId>
+        <groupId>org.jboss.snowdrop</groupId>
+        <artifactId>snowdrop-weaving</artifactId>
         <version>${project.version}</version>
       </dependency>
 
@@ -199,7 +199,7 @@
       </dependency>
       <dependency>
         <groupId>org.jboss.microcontainer</groupId>
-        <artifactId>jboss-spring-int</artifactId>
+        <artifactId>snowdrop</artifactId>
         <version>${version.jboss.microcontainer}</version>
         <scope>provided</scope>
       </dependency>

@@ -5,7 +5,7 @@
 ]>
 <book>
   <bookinfo>
-    <title>JBoss Spring Integration Package 1.0.0</title>
+    <title>Snowdrop 1.0.0</title>
 
     <subtitle>User Guide</subtitle>
 
@@ -23,9 +23,12 @@
   <preface>
     <title>What This Guide Covers</title>
 
-    <para>This user guide aims to cover the functionality of the JBoss Spring
-    Integation Pack, its components, and to provide information on how to use
-    it optimally for running Spring applications in JBoss.</para>
+    <para>Snowdrop is a utilities package for Spring applications running in
+    JBoss.</para>
+
+    <para>This user guide aims to cover the functionality of Snowdrop, its
+    components, and to provide information on how to use it optimally for
+    running Spring applications in JBoss.</para>
 
     <para>The current version of the package is supporting the following
     configuration:</para>
@@ -47,8 +50,8 @@
     <section>
       <title>Structure of the package</title>
 
-      <para>This package contains a few utilities to be used by Spring
-      applications runinng in JBoss. They're adding support for:</para>
+      <para>Snowdrop contains a few utilities to be used by Spring
+      applications runinng in JBoss, namely support for:</para>
 
       <itemizedlist>
         <listitem>
@@ -70,13 +73,13 @@
 
       <itemizedlist>
         <listitem>
-          <para>jboss-spring-int-vfs.jar - the library containing the support
-          classes for resource scanning</para>
+          <para>snowdrop-vfs.jar - the library containing the support classes
+          for resource scanning</para>
         </listitem>
 
         <listitem>
-          <para>jboss-spring-int-weaving.jar - the library containing the
-          support classes for load-time weaving</para>
+          <para>snowdrop-weaving.jar - the library containing the support
+          classes for load-time weaving</para>
         </listitem>
 
         <listitem>
@@ -95,8 +98,8 @@
     <section>
       <title>The VFS-supporting application contexts</title>
 
-      <para>For using this functionality, the jboss-spring-int-vfs.jar file
-      needs to be added to the application.</para>
+      <para>For using this functionality, the snowdrop-vfs.jar file needs to
+      be added to the application.</para>
 
       <para>This library supports resource scanning in JBoss' Virtual File
       System. When doing resource scanning, the Spring framework assumes that
@@ -137,8 +140,8 @@
       <para>The XmlWebApplicationContext is not instantiated directly, though,
       but bootstrapped by either the ContextLoaderListener, or the
       DispatcherServlet. In this case, the class to be used for bootstrapping
-      needs to be used to trigger an instantiation of the VFS-enabled context.
-      </para>
+      needs to be used to trigger an instantiation of the VFS-enabled
+      context.</para>
 
       <para>For changing the type of application context created by the
       ContextLoaderListener, use the contextClass parameter, as shown in the
@@ -191,8 +194,8 @@
   at java.util.jar.JarFile.&lt;init&gt;(JarFile.java:133)
   at java.util.jar.JarFile.&lt;init&gt;(JarFile.java:70)
   at org.springframework.core.io.support.PathMatchingResourcePatternResolver
-	.doFindPathMatchingJarResources(PathMatchingResourcePatternResolver.java:448)</programlisting>
-(the listing has been wrapped for formatting purposes).</para>
+ .doFindPathMatchingJarResources(PathMatchingResourcePatternResolver.java:448)</programlisting>
+        (the listing has been wrapped for formatting purposes).</para>
       </note>
     </section>
 
@@ -204,11 +207,11 @@
       support), the Spring framework needs to install its own transformers in
       the classloader. In certain cases (like for JBoss 5.x), a
       classloader-specific LoadTimeWeaver is necessary. The functionalities
-      described in this chapter are included in the
-      jboss-spring-int-weaving.jar file.</para>
+      described in this chapter are included in the snowdrop-weaving.jar
+      file.</para>
 
-      <para>To that effect, if a load-time weaver needs to be defined in the        www
-      Spring application context, use the JBoss5LoadTimeWeaver class, as
+      <para>To that effect, if a load-time weaver needs to be defined in the
+      www Spring application context, use the JBoss5LoadTimeWeaver class, as
       follows:</para>
 
       <programlisting language="JAVA">&lt;context:load-time-weaver weaver-class="org.jboss.instrument.classloading.JBoss5LoadTimeWeaver"/&gt;</programlisting>
@@ -218,52 +221,104 @@
       <title>The Spring Deployer</title>
 
       <para>The role of the Spring Deployer is to allow the bootstrapping of a
-      Spring application context, binding it in JNDI and using it </para>
+      Spring application context, binding it in JNDI and using it</para>
 
-      <section >
-    <title> JBoss + Spring + EJB 3.0 Integration</title>
-    <para> This distribution contains a JBoss Deployer that supports Spring packaging in JBoss. What this means is that you can create JAR archives with a <emphasis>META-INF/jboss-spring.xml</emphasis> file and your Spring bean factories will automatically be deployed. Also supported in this distribution is EJB 3.0 integration. You can deploy Spring archives and be able to inject beans created in these deployment directly into an EJB using a @Spring annotation. </para>
-  </section>
-  <section >
-    <title> Installation</title>
-    <para> If you are using EJB 3.0 and JDK 5 integration, copy the jboss-spring-jdk5.deployer directory into the JBoss deploy/ directory. If you are using JDK 1.4, then copy the jboss-spring.deployer/ into the deploy directory. If you look inside these <emphasis>.deployer</emphasis> deployments you will see that only a partial Spring distribution is contained. If you need a full Spring distribution, then copy those jars into the <emphasis>.deployer</emphasis> directory or into the lib/ directory of your JBoss configuration. </para>
-  </section>
-  <section >
-    <title> Spring deployments</title>
-    <para> You can create Spring deployments that work much in the same way .sar&apos;s, .war&apos;s, .ear&apos;s, .har&apos;s, and .rar&apos;s work. Using the JBoss Spring deployer you can create Spring jars: </para>
-    <screen>
+      <section>
+        <title>JBoss + Spring + EJB 3.0 Integration</title>
+
+        <para>This distribution contains a JBoss Deployer that supports Spring
+        packaging in JBoss. What this means is that you can create JAR
+        archives with a <emphasis>META-INF/jboss-spring.xml</emphasis> file
+        and your Spring bean factories will automatically be deployed. Also
+        supported in this distribution is EJB 3.0 integration. You can deploy
+        Spring archives and be able to inject beans created in these
+        deployment directly into an EJB using a @Spring annotation.</para>
+      </section>
+
+      <section>
+        <title>Installation</title>
+
+        <para>If you are using EJB 3.0 and JDK 5 integration, copy the
+        jboss-spring-jdk5.deployer directory into the JBoss deploy/ directory.
+        If you are using JDK 1.4, then copy the jboss-spring.deployer/ into
+        the deploy directory. If you look inside these
+        <emphasis>.deployer</emphasis> deployments you will see that only a
+        partial Spring distribution is contained. If you need a full Spring
+        distribution, then copy those jars into the
+        <emphasis>.deployer</emphasis> directory or into the lib/ directory of
+        your JBoss configuration.</para>
+      </section>
+
+      <section>
+        <title>Spring deployments</title>
+
+        <para>You can create Spring deployments that work much in the same way
+        .sar's, .war's, .ear's, .har's, and .rar's work. Using the JBoss
+        Spring deployer you can create Spring jars:</para>
+
+        <screen>
 my-app.spring/
    org/
       acme/
           MyBean.class
           MyBean2.class
    META-INF/
-           jboss-spring.xml
-</screen>
-    <para> So, my-app.spring is a jar that contains classes, like any other JAR and a jboss-spring.xml file in the META-INF/ of the jar. This jboss-spring.xml file is like any other Spring xml file. By default, the JBoss Spring Deployer will register this bean factory defined in the XML file into JNDI. It will be registered in a non-serialized form so you don&apos;t have to worry about JNDI serialization! The default JNDI name will be the short name of the deployment file. So in this example, the bean factory described in the <emphasis>META-INF/jboss-spring.xml</emphasis> file will be registered under the &quot;my-app&quot; JNDI name. </para>
-    <para> Alternatively, you do not have to create an archive. You can put your jar libraries under server/&lt;config-name&gt;/lib and just put an XML file of the form: &lt;name&gt;-spring.xml into the JBoss deploy directory. For example, my-app-spring.xml. Again, the JNDI name will be by default, the short name of the XML file, in the case my-app-spring.xml will produce a JNDI binding of &quot;my-app&quot;. </para>
-  </section>
-  <section >
-    <title> Deployment</title>
-    <para> Once you have created a <emphasis>.spring</emphasis> archive or a <emphasis>-spring.xml</emphasis> file, all you have to do is put it in the JBoss deploy/ directory and it will be deployed into the JBoss runtime. You can also embed these deployments inside an EAR, EJB-JAR, SAR, etc. as JBoss supports nested archives.  </para>
-  </section>
-  <section >
-    <title> Defining the JNDI name</title>
-    <para> You can specify the JNDI name explicitly by putting it in the description element of the Spring XML.  </para>
-    <programlisting language="XML">
+           jboss-spring.xml</screen>
+
+        <para>So, my-app.spring is a jar that contains classes, like any other
+        JAR and a jboss-spring.xml file in the META-INF/ of the jar. This
+        jboss-spring.xml file is like any other Spring xml file. By default,
+        the JBoss Spring Deployer will register this bean factory defined in
+        the XML file into JNDI. It will be registered in a non-serialized form
+        so you don't have to worry about JNDI serialization! The default JNDI
+        name will be the short name of the deployment file. So in this
+        example, the bean factory described in the
+        <emphasis>META-INF/jboss-spring.xml</emphasis> file will be registered
+        under the "my-app" JNDI name.</para>
+
+        <para>Alternatively, you do not have to create an archive. You can put
+        your jar libraries under server/&lt;config-name&gt;/lib and just put
+        an XML file of the form: &lt;name&gt;-spring.xml into the JBoss deploy
+        directory. For example, my-app-spring.xml. Again, the JNDI name will
+        be by default, the short name of the XML file, in the case
+        my-app-spring.xml will produce a JNDI binding of "my-app".</para>
+      </section>
+
+      <section>
+        <title>Deployment</title>
+
+        <para>Once you have created a <emphasis>.spring</emphasis> archive or
+        a <emphasis>-spring.xml</emphasis> file, all you have to do is put it
+        in the JBoss deploy/ directory and it will be deployed into the JBoss
+        runtime. You can also embed these deployments inside an EAR, EJB-JAR,
+        SAR, etc. as JBoss supports nested archives.</para>
+      </section>
+
+      <section>
+        <title>Defining the JNDI name</title>
+
+        <para>You can specify the JNDI name explicitly by putting it in the
+        description element of the Spring XML.</para>
+
+        <programlisting language="XML">
   &lt;beans&gt;
-    &lt;description&gt;BeanFactory=(MyApp)&lt;/description&gt;
-</programlisting>
-    <para> MyApp will be used as the JNDI name in this example. </para>
-  </section>
-  <section >
-    <title> Parent Bean factories</title>
-    <para> Sometimes you want your deployed Spring bean factory to be able to reference beans deployed in another Spring deployment. You can do this by declaring a parent bean factory in the description element in the Spring XML.  </para>
-  <programlisting language="XML">
+    &lt;description&gt;BeanFactory=(MyApp)&lt;/description&gt;</programlisting>
+
+        <para>MyApp will be used as the JNDI name in this example.</para>
+      </section>
+
+      <section>
+        <title>Parent Bean factories</title>
+
+        <para>Sometimes you want your deployed Spring bean factory to be able
+        to reference beans deployed in another Spring deployment. You can do
+        this by declaring a parent bean factory in the description element in
+        the Spring XML.</para>
+
+        <programlisting language="XML">
   &lt;beans&gt;
-    &lt;description&gt;BeanFactory=(AnotherApp) ParentBeanFactory=(MyApp)&lt;/description&gt;
-</programlisting>
-  </section>
+    &lt;description&gt;BeanFactory=(AnotherApp) ParentBeanFactory=(MyApp)&lt;/description&gt;</programlisting>
+      </section>
     </section>
   </chapter>
 </book>
