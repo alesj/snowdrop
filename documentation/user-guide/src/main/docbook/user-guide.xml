@@ -5,13 +5,9 @@
 ]>
 <book>
   <bookinfo>
-    <title>Snowdrop 1.0.0</title>
+    <title>Snowdrop 1.0</title>
 
     <subtitle>User Guide</subtitle>
-
-    <issuenum>1.0</issuenum>
-
-    <productnumber>2</productnumber>
 
     <xi:include href="author-group.xml"
                 xmlns:xi="http://www.w3.org/2001/XInclude" />
@@ -23,12 +19,24 @@
   <preface>
     <title>What This Guide Covers</title>
 
-    <para>Snowdrop is a utilities package for Spring applications running in
-    JBoss.</para>
+    <para>Snowdrop is a utility package that contains JBoss-specific
+    extensions to the Spring Framework. These extensions are
+    either:<itemizedlist>
+        <listitem>
+          <para>Extensions to Spring Framework classes, that can be used
+          wherever the generic implementations provided by the framework do
+          not integrate correctly with the JBoss Application server</para>
+        </listitem>
 
-    <para>This user guide aims to cover the functionality of Snowdrop, its
-    components, and to provide information on how to use it optimally for
-    running Spring applications in JBoss.</para>
+        <listitem>
+          <para>JBoss AS-specific extensions for deploying and running Spring
+          applications</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <para>This user guide aims to cover the functionality of Snowdrop, to
+    describe its components, and to provide information on how to use it
+    optimally for running Spring applications in JBoss.</para>
 
     <para>The current version of the package is supporting the following
     configuration:</para>
@@ -50,8 +58,7 @@
     <section>
       <title>Structure of the package</title>
 
-      <para>Snowdrop contains a few utilities to be used by Spring
-      applications runinng in JBoss, namely support for:</para>
+      <para>Snowdrop contains libraries that offer support for:</para>
 
       <itemizedlist>
         <listitem>
@@ -190,9 +197,7 @@
 
         <para><programlisting language="JAVA">Caused by: java.util.zip.ZipException: error in opening zip file
   at java.util.zip.ZipFile.open(Native Method)
-  at java.util.zip.ZipFile.&lt;init&gt;(ZipFile.java:114)
-  at java.util.jar.JarFile.&lt;init&gt;(JarFile.java:133)
-  at java.util.jar.JarFile.&lt;init&gt;(JarFile.java:70)
+  ...
   at org.springframework.core.io.support.PathMatchingResourcePatternResolver
  .doFindPathMatchingJarResources(PathMatchingResourcePatternResolver.java:448)</programlisting>
         (the listing has been wrapped for formatting purposes).</para>
@@ -300,9 +305,10 @@ my-app.spring/
         <para>You can specify the JNDI name explicitly by putting it in the
         description element of the Spring XML.</para>
 
-        <programlisting language="XML">
-  &lt;beans&gt;
-    &lt;description&gt;BeanFactory=(MyApp)&lt;/description&gt;</programlisting>
+        <programlisting language="XML">&lt;beans&gt;
+    &lt;description&gt;BeanFactory=(MyApp)&lt;/description&gt;
+...
+&lt;/beans&gt;</programlisting>
 
         <para>MyApp will be used as the JNDI name in this example.</para>
       </section>
@@ -315,9 +321,10 @@ my-app.spring/
         this by declaring a parent bean factory in the description element in
         the Spring XML.</para>
 
-        <programlisting language="XML">
-  &lt;beans&gt;
-    &lt;description&gt;BeanFactory=(AnotherApp) ParentBeanFactory=(MyApp)&lt;/description&gt;</programlisting>
+        <programlisting language="XML">&lt;beans&gt;
+    &lt;description&gt;BeanFactory=(AnotherApp) ParentBeanFactory=(MyApp)&lt;/description&gt;
+...
+&lt;/beans&gt;</programlisting>
       </section>
     </section>
   </chapter>
