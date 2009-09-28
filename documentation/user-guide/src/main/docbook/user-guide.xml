@@ -154,6 +154,7 @@
       ContextLoaderListener, use the contextClass parameter, as shown in the
       sample below:</para>
 
+      <?dbfo-need height="5in" ?>
       <informalexample>
         <programlisting language="XML">&lt;context-param&gt;
   &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
@@ -192,7 +193,7 @@
 
       <para>Both configurations can be seen at work in the web-scanning
       sample.</para>
-
+     <?dbfo-need height="5in" ?>
       <note>
         <para>In general, it is a good idea to pay attention to this error. If
         encountered while the application is starting, you definitely need to
@@ -324,9 +325,9 @@
         the Spring XML.</para>
 
         <programlisting language="XML">&lt;beans&gt;
-    &lt;description&gt;BeanFactory=(AnotherApp) ParentBeanFactory=(MyApp)&lt;/description&gt;
-...
-&lt;/beans&gt;</programlisting>
+  &lt;description&gt;BeanFactory=(AnotherApp) ParentBeanFactory=(MyApp)&lt;/description&gt;
+  ...
+  &lt;/beans&gt;</programlisting>
       </section>
     </section>
   </chapter>
