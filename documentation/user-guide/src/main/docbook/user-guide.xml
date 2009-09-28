@@ -152,21 +152,23 @@
 
       <para>For changing the type of application context created by the
       ContextLoaderListener, use the contextClass parameter, as shown in the
-      sample below (the emphasized portion):</para>
+      sample below:</para>
 
-      <programlisting language="XML">&lt;context-param&gt;
+      <informalexample>
+        <programlisting language="XML">&lt;context-param&gt;
   &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
   &lt;param-value&gt;classpath*:spring-contexts/*.xml&lt;/param-value&gt;
 &lt;/context-param&gt;
-
 <emphasis role="bold">&lt;context-param&gt;
   &lt;param-name&gt;contextClass&lt;/param-name&gt;
-&lt;param-value&gt;org.jboss.spring.vfs.context.VFSXmlWebApplicationContext&lt;/param-value&gt;
+  &lt;param-value&gt;
+    org.jboss.spring.vfs.context.VFSXmlWebApplicationContext
+  &lt;/param-value&gt;
 &lt;/context-param&gt;</emphasis>
-
 &lt;listener&gt;
   &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
 &lt;/listener&gt;</programlisting>
+      </informalexample>
 
       <para>For changing the type of application context created by the
       DispatcherServlet, use the contextClass parameter again, but this time
@@ -179,10 +181,12 @@
   &lt;init-param&gt;
     &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
     &lt;param-value&gt;/WEB-INF/mvc-config.xml&lt;/param-value&gt;
-  &lt;/init-param&gt;
-<emphasis role="bold">  &lt;init-param&gt;
-    &lt;param-name&gt;contextClass&lt;/param-name&gt;
-  &lt;param-value&gt;org.jboss.spring.vfs.context.VFSXmlWebApplicationContext&lt;/param-value&gt;
+  &lt;/init-param&gt;<emphasis role="bold">  
+  &lt;init-param&gt;
+  &lt;param-name&gt;contextClass&lt;/param-name&gt;
+    &lt;param-value&gt;
+      org.jboss.spring.vfs.context.VFSXmlWebApplicationContext
+    &lt;/param-value&gt;
   &lt;/init-param&gt;
 </emphasis>&lt;/servlet&gt;</programlisting>
 
@@ -196,7 +200,6 @@
         implementations.</para>
 
         <para><programlisting language="JAVA">Caused by: java.util.zip.ZipException: error in opening zip file
-  at java.util.zip.ZipFile.open(Native Method)
   ...
   at org.springframework.core.io.support.PathMatchingResourcePatternResolver
  .doFindPathMatchingJarResources(PathMatchingResourcePatternResolver.java:448)</programlisting>
@@ -261,8 +264,7 @@
         .sar's, .war's, .ear's, .har's, and .rar's work. Using the JBoss
         Spring deployer you can create Spring jars:</para>
 
-        <screen>
-my-app.spring/
+        <screen>my-app.spring/
    org/
       acme/
           MyBean.class
