@@ -12,8 +12,6 @@
     <xi:include href="author-group.xml"
                 xmlns:xi="http://www.w3.org/2001/XInclude" />
 
-    <xi:include href="legal-notice.xml"
-                xmlns:xi="http://www.w3.org/2001/XInclude" />
   </bookinfo>
 
   <preface>
@@ -308,6 +306,7 @@
         <para>You can specify the JNDI name explicitly by putting it in the
         description element of the Spring XML.</para>
 
+        <?dbfo-need height="5in" ?>
         <programlisting language="XML">&lt;beans&gt;
     &lt;description&gt;BeanFactory=(MyApp)&lt;/description&gt;
 ...
