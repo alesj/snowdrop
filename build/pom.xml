@@ -1,16 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
-    <groupId>org.jboss.spring-int</groupId>
-    <artifactId>jboss-spring-int-parent</artifactId>
+    <groupId>org.jboss.snowdrop</groupId>
+    <artifactId>snowdrop-parent</artifactId>
     <version>1.1.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.jboss.spring-int</groupId>
-  <artifactId>jboss-spring-int</artifactId>
+  <groupId>org.jboss.snowdrop</groupId>
+  <artifactId>snowdrop</artifactId>
   <packaging>pom</packaging>
-  <name>JBoss Spring Integration Distribution</name>
+  <name>Snowdrop Distribution</name>
   <url>http://www.jboss.com/products/jbossmc</url>
-  <description>JBoss Spring Integration Distribution</description>
+  <description>Snowdrop Distribution</description>
 
   <properties>
     <deployer.version>3.2.CR1</deployer.version>
@@ -38,7 +38,7 @@
                   <goal>single</goal>
                 </goals>
                 <configuration>
-                  <finalName>jboss-spring-int-${project.version}</finalName>
+                  <finalName>snowdrop-${project.version}</finalName>
                   <descriptors>
                     <descriptor>${basedir}/src/assembly/libs.xml</descriptor>
                     <descriptor>${basedir}/src/assembly/libs-with-deps.xml</descriptor>
@@ -68,16 +68,16 @@
   </profiles>
   <dependencies>
     <dependency>
-      <groupId>org.jboss.spring-int</groupId>
-      <artifactId>jboss-spring-int-vfs</artifactId>
+      <groupId>org.jboss.snowdrop</groupId>
+      <artifactId>snowdrop-extensions</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.jboss.spring-int</groupId>
-      <artifactId>jboss-spring-int-deployers</artifactId>
+      <groupId>org.jboss.snowdrop</groupId>
+      <artifactId>snowdrop-deployers</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.jboss.spring-int</groupId>
-      <artifactId>jboss-spring-int-weaving</artifactId>
+      <groupId>org.jboss.snowdrop</groupId>
+      <artifactId>snowdrop-weaving</artifactId>
     </dependency>
   </dependencies>
 

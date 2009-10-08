@@ -2,11 +2,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
     <artifactId>horoscope</artifactId>
-    <groupId>org.jboss.spring-int.samples</groupId>
+    <groupId>org.jboss.snowdrop.samples</groupId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.jboss.spring-int.samples</groupId>
+  <groupId>org.jboss.snowdrop.samples</groupId>
   <artifactId>horoscope-war</artifactId>
   <packaging>war</packaging>
   <name>horoscope-war Maven Webapp</name>
@@ -24,7 +24,7 @@
       <version>2.5.6.SEC01</version>
     </dependency>
     <dependency>
-       <groupId>org.jboss.spring-int.samples</groupId>
+       <groupId>org.jboss.snowdrop.samples</groupId>
        <artifactId>horoscope-ejb</artifactId>
        <version>1.0.0-SNAPSHOT</version>
        <scope>provided</scope>

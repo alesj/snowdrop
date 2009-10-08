@@ -3,11 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>orders</artifactId>
-        <groupId>org.jboss.spring-int.samples</groupId>
+        <groupId>org.jboss.snowdrop.samples</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.jboss.spring-int.samples</groupId>
+    <groupId>org.jboss.snowdrop.samples</groupId>
     <artifactId>orders-domain</artifactId>
     <packaging>ejb</packaging>
     <version>1.0.0-SNAPSHOT</version>
@@ -84,8 +84,8 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.jboss.spring-int</groupId>
-            <artifactId>jboss-spring-int-vfs</artifactId>
+            <groupId>org.jboss.snowdrop</groupId>
+            <artifactId>snowdrop-vfs</artifactId>
             <version>1.1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
