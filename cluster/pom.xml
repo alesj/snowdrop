@@ -15,28 +15,8 @@
   <dependencies>
     <!-- Compile (global dependencies) -->
     <dependency>
-      <groupId>org.jboss</groupId>
-      <artifactId>jboss-common-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.jboss.logging</groupId>
-      <artifactId>jboss-logging-spi</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-aop</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
     </dependency>
     <dependency>
       <groupId>org.jboss.cache</groupId>
@@ -51,6 +31,10 @@
           <artifactId>jboss-aop</artifactId>
         </exclusion>
       </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.cache</groupId>
+      <artifactId>jbosscache-core</artifactId>
     </dependency>
   </dependencies>
   
