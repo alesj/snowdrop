@@ -7,11 +7,11 @@
 	template="layout/template.xhtml">
 	<ui:define name="content">
         <h:form>
-        <h:inputText value="#{accountCreate.firstName}" label="First name"/><p/>
-        <h:inputText value="#{accountCreate.lastName}" label="Last name"/><p/>
-        <h:inputText value="#{accountCreate.address}" label="Address"/><p/>
-        <h:inputText value="#{accountCreate.city}" label="City"/><p/>
-        <h:inputText value="#{accountCreate.provinceOrState}" label="ProvinceOrState"/><p/>
+        First name: <h:inputText value="#{accountCreate.firstName}" label="First name"/>
+        Last name: <h:inputText value="#{accountCreate.lastName}" label="Last name"/><p/>
+        Address: <h:inputText value="#{accountCreate.address}" label="Address"/><p/>
+        City: <h:inputText value="#{accountCreate.city}" label="City"/><p/>
+        Province: <h:inputText value="#{accountCreate.provinceOrState}" label="ProvinceOrState"/><p/>
         <h:commandButton value="Save" action="#{accountCreate.create}" />
         </h:form>
 	</ui:define>
