@@ -1,0 +1,18 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	template="layout/template.xhtml">
+	<ui:define name="content">
+        <h:form>
+        <h:inputText value="#{accountCreate.firstName}" label="First name"/><p/>
+        <h:inputText value="#{accountCreate.lastName}" label="Last name"/><p/>
+        <h:inputText value="#{accountCreate.address}" label="Address"/><p/>
+        <h:inputText value="#{accountCreate.city}" label="City"/><p/>
+        <h:inputText value="#{accountCreate.provinceOrState}" label="ProvinceOrState"/><p/>
+        <h:commandButton value="Save" action="#{accountCreate.create}" />
+        </h:form>
+	</ui:define>
+</ui:composition>
