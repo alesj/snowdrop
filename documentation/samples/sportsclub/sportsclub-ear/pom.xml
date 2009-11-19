@@ -44,6 +44,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-ear-plugin</artifactId>
+                <version>2.4</version>
                 <configuration>
                     <displayName>Stay Fit! Sample Application</displayName>
                     <defaultLibBundleDir>/lib/</defaultLibBundleDir>
@@ -57,14 +58,14 @@
                             <artifactId>sportsclub-web</artifactId>
                             <contextRoot>/sportsclub</contextRoot>
                         </webModule>
-                        <module>
+                        <jarModule>
                             <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
                             <artifactId>sportsclub-domain</artifactId>
-                        </module>
-                        <module>
+                        </jarModule>
+                        <jarModule>
                             <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
                             <artifactId>sportsclub-hibernate-dao</artifactId>
-                        </module>
+                        </jarModule>
                     </modules>
                 </configuration>
             </plugin>
