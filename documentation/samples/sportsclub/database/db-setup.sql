@@ -45,7 +45,7 @@ insert into PUBLIC.PERSON (PERSON.CITY, PERSON.PROVINCEORSTATE, PERSON.STREETADD
 values ('Toronto', 'Ontario', '1 Yonge', 'Samuel', 'Vimes', '');
 
 insert into PUBLIC.PERSON (PERSON.CITY, PERSON.PROVINCEORSTATE, PERSON.STREETADDRESS, PERSON.FIRSTNAME, PERSON.LASTNAME, PERSON.MIDDLENAME)
-values ('Toronto', 'Ontario', '1 Bloor', 'Havelock', 'Vettinari', '');
+values ('Toronto', 'Ontario', '1 Bloor', 'Havelock', 'Vetinari', '');
 
 insert into PUBLIC.PERSON (PERSON.CITY, PERSON.PROVINCEORSTATE, PERSON.STREETADDRESS, PERSON.FIRSTNAME, PERSON.LASTNAME, PERSON.MIDDLENAME)
 values ('Toronto', 'Ontario', '1 Yonge', 'Sybil', 'Vimes', '');

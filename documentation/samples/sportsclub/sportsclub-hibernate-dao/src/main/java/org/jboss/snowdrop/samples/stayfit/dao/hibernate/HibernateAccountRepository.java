@@ -11,14 +11,12 @@ import org.jboss.snowdrop.samples.sportsclub.domain.repository.AccountRepository
 /**
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
  */
-public class HibernateAccountRepository implements AccountRepository
+public class HibernateAccountRepository extends HibernateRepository<Account, Integer> implements AccountRepository
 {
 
-   private SessionFactory sessionFactory;
-
-   public void setSessionFactory(SessionFactory sessionFactory)
+   public HibernateAccountRepository()
    {
-      this.sessionFactory = sessionFactory;
+      super(Account.class);
    }
 
    public List<Account> findByPersonName(String name)
@@ -29,10 +27,5 @@ public class HibernateAccountRepository implements AccountRepository
             "or a.subscriber.name.middleName like :name");
       query.setString("name", "%" + name + "%");
       return (List<Account>)query.list();
-   }
-
-   public void save(Account account)
-   {
-      this.sessionFactory.getCurrentSession().saveOrUpdate(account);
    }
 }

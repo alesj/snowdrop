@@ -14,10 +14,35 @@ public class Equipment
    @Id
    private long id;
 
-   @Basic
    private String name;
 
-   @Basic
    private String description;
 
+   private EquipmentType equipmentType;
+
+
+   public long getId()
+   {
+      return id;
+   }
+
+   public String getDescription()
+   {
+      return description;
+   }
+
+   public void setDescription(String description)
+   {
+      this.description = description;
+   }
+
+   public String getName()
+   {
+      return name;
+   }
+
+   public void setName(String name)
+   {
+      this.name = name;
+   }
 }

@@ -26,6 +26,18 @@
             <type>war</type>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
+            <artifactId>sportsclub-domain</artifactId>
+            <type>jar</type>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
+            <artifactId>sportsclub-hibernate-dao</artifactId>
+            <type>jar</type>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -45,6 +57,14 @@
                             <artifactId>sportsclub-web</artifactId>
                             <contextRoot>/sportsclub</contextRoot>
                         </webModule>
+                        <module>
+                            <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
+                            <artifactId>sportsclub-domain</artifactId>
+                        </module>
+                        <module>
+                            <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
+                            <artifactId>sportsclub-hibernate-dao</artifactId>
+                        </module>
                     </modules>
                 </configuration>
             </plugin>

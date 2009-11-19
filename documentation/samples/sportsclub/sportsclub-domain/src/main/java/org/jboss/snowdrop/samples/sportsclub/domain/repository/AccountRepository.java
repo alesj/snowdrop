@@ -7,9 +7,7 @@ import org.jboss.snowdrop.samples.sportsclub.domain.entity.Account;
 /**
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
  */
-public interface AccountRepository
+public interface AccountRepository extends Repository<Account, Integer>
 {
    List<Account> findByPersonName(String name);
-
-   void save(Account account);
 }

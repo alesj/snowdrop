@@ -10,12 +10,6 @@
     <!-- hibernate dialect -->
     <property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property>
 
-
-
-    <!-- Automatic schema creation (begin) -->
-    <property name="hibernate.hbm2ddl.auto">create-drop</property>
-    <!-- Automatic schema creation (end) -->
-
     <!-- Simple memory-only cache -->
     <property name="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>
 
@@ -33,6 +27,7 @@
     <mapping class="org.jboss.snowdrop.samples.sportsclub.domain.entity.Equipment"/>
     <mapping class="org.jboss.snowdrop.samples.sportsclub.domain.entity.Name"/>
     <mapping class="org.jboss.snowdrop.samples.sportsclub.domain.entity.Person"/>
+    <mapping class="org.jboss.snowdrop.samples.sportsclub.domain.entity.Membership"/>
 
 </session-factory>
 </hibernate-configuration>

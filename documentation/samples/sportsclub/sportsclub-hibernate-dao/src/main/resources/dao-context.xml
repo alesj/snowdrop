@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/jee
-       http://www.springframework.org/schema/jee/spring-jee.xsd">
+       http://www.springframework.org/schema/jee/spring-jee.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="dataSource" ref="stayFitDS"/>
         <property name="configLocation" value="classpath:/hibernate/hibernate.cfg.xml"/>
         <property name="hibernateProperties">
             <value>
-                hibernate.hbm2ddl.auto=validate
+                hibernate.hbm2ddl.auto=create-drop
             </value>
         </property>
-        <!--<property name="annotatedClasses">-->
-           <!--<list>-->
-               <!--<value>org.jboss.snowdrop.samples.sportsclub.domain.entity.Account</value>-->
-               <!--<value>org.jboss.snowdrop.samples.sportsclub.domain.entity.Person</value>-->
-               <!--<value>org.jboss.snowdrop.samples.sportsclub.domain.entity.Name</value>-->
-               <!--<value>org.jboss.snowdrop.samples.sportsclub.domain.entity.Address</value>-->
-               <!--<value>org.jboss.snowdrop.samples.sportsclub.domain.entity.Equipment</value>-->
-           <!--</list>-->
-        <!--</property>-->
+    </bean>
+
+    <bean class="org.jboss.snowdrop.samples.stayfit.dao.hibernate.initializer.DatabaseInitializer">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="transactionManager" ref="transactionManager"/>
+
     </bean>
 
     <bean id="accountRepository" class="org.jboss.snowdrop.samples.stayfit.dao.hibernate.HibernateAccountRepository">
@@ -34,6 +34,12 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
+    <bean id="membershipRepository" class="org.jboss.snowdrop.samples.stayfit.dao.hibernate.HibernateMembershipRepository">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
     <jee:jndi-lookup jndi-name="java:/StayFitDS" id="stayFitDS"/>
+
+    <tx:jta-transaction-manager/>
 
 </beans>

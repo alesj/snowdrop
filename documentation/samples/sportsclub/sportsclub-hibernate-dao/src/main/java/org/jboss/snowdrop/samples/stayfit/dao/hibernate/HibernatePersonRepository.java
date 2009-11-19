@@ -7,17 +7,12 @@ import org.jboss.snowdrop.samples.sportsclub.domain.repository.PersonRepository;
 /**
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
  */
-public class HibernatePersonRepository implements PersonRepository
+public class HibernatePersonRepository extends HibernateRepository<Person, Integer> implements PersonRepository
 {
-   private SessionFactory sessionFactory;
 
-   public void setSessionFactory(SessionFactory sessionFactory)
+   public HibernatePersonRepository()
    {
-      this.sessionFactory = sessionFactory;
+      super(Person.class);
    }
 
-   public void save(Person person)
-   {
-      sessionFactory.getCurrentSession().saveOrUpdate(person);
-   }
 }

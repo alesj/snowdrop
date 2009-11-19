@@ -83,7 +83,7 @@ public class AccountCreate
       return account;
    }
 
-   public void create()
+   public String create()
    {
       Person person = new Person();
       person.setAddress(new Address());
@@ -98,6 +98,7 @@ public class AccountCreate
       person.getAddress().setStreetAddress(address);
 
 
-      subscriptionService.createAccountForPerson(person);
+      account = subscriptionService.createAccountForPerson(person);
+      return "success";
    }
 }

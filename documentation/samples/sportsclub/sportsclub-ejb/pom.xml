@@ -17,13 +17,15 @@
         <dependency>
             <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
             <artifactId>sportsclub-domain</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
 
          <dependency>
             <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
             <artifactId>sportsclub-hibernate-dao</artifactId>
             <version>${project.version}</version>
-            <scope>runtime</scope>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

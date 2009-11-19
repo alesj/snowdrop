@@ -6,6 +6,7 @@
 	xmlns:a4j="http://richfaces.org/a4j"
 	template="layout/template.xhtml">
 	<ui:define name="content">
+        <rich:panel>
         <h:form>
         First name: <h:inputText value="#{accountCreate.firstName}" label="First name"/>
         Last name: <h:inputText value="#{accountCreate.lastName}" label="Last name"/><p/>
@@ -14,5 +15,6 @@
         Province: <h:inputText value="#{accountCreate.provinceOrState}" label="ProvinceOrState"/><p/>
         <h:commandButton value="Save" action="#{accountCreate.create}" />
         </h:form>
+        </rich:panel>
 	</ui:define>
 </ui:composition>
