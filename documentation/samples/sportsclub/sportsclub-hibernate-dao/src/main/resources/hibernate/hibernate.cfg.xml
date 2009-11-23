@@ -26,8 +26,10 @@
     <mapping class="org.jboss.snowdrop.samples.sportsclub.domain.entity.Address"/>
     <mapping class="org.jboss.snowdrop.samples.sportsclub.domain.entity.Equipment"/>
     <mapping class="org.jboss.snowdrop.samples.sportsclub.domain.entity.Name"/>
-    <mapping class="org.jboss.snowdrop.samples.sportsclub.domain.entity.Person"/>
+    <mapping class="org.jboss.snowdrop.samples.sportsclub.domain.entity.Invoice"/>
     <mapping class="org.jboss.snowdrop.samples.sportsclub.domain.entity.Membership"/>
+    <mapping class="org.jboss.snowdrop.samples.sportsclub.domain.entity.Person"/>
+    <mapping class="org.jboss.snowdrop.samples.sportsclub.domain.entity.Reservation"/>
 
 </session-factory>
 </hibernate-configuration>
