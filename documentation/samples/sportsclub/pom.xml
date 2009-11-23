@@ -12,6 +12,8 @@
         <module>sportsclub-web</module>
         <module>sportsclub-ear</module>
         <module>sportsclub-hibernate-dao</module>
+        <module>sportsclub-reservations-web</module>
+        <module>sportsclub-reservations-spring</module>
     </modules>
     <packaging>pom</packaging>
 
