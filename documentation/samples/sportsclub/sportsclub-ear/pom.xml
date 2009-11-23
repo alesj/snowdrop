@@ -38,6 +38,18 @@
             <type>jar</type>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
+            <artifactId>sportsclub-reservations-spring</artifactId>
+            <type>jar</type>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
+            <artifactId>sportsclub-reservations-web</artifactId>
+            <type>war</type>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -66,6 +78,15 @@
                             <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
                             <artifactId>sportsclub-hibernate-dao</artifactId>
                         </jarModule>
+                        <jarModule>
+                            <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
+                            <artifactId>sportsclub-reservations-spring</artifactId>
+                        </jarModule>
+                        <webModule>
+                            <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
+                            <artifactId>sportsclub-reservations-web</artifactId>
+                            <contextRoot>/sportsclub/reservations</contextRoot> <!-- TODO: Not sure about this -->
+                        </webModule>
                     </modules>
                 </configuration>
             </plugin>
