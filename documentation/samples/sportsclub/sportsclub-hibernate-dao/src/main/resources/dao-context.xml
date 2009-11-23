@@ -38,6 +38,10 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
+    <bean id="reservationRepository" class="org.jboss.snowdrop.samples.stayfit.dao.hibernate.HibernateReservationRepository">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
     <jee:jndi-lookup jndi-name="java:/StayFitDS" id="stayFitDS"/>
 
     <tx:jta-transaction-manager/>
