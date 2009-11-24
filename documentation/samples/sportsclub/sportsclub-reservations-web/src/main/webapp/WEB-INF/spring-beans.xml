@@ -9,6 +9,10 @@
 
     <import resource="classpath*:reservations-service.xml"/>
 
+    <bean id="availableEquipments" class="org.jboss.snowdrop.samples.sportsclub.jsf.beans.AvailableEquipments">
+        <property name="equipmentRepository" ref="equipmentRepository"/>
+    </bean>
+
     <context:annotation-config/>
     
 </beans>
