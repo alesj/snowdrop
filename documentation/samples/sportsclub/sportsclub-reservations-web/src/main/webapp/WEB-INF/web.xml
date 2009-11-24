@@ -26,6 +26,12 @@
         <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
         <param-value>server</param-value>
     </context-param>
+    <!--
+    <context-param>
+        <param-name>org.richfaces.SKIN</param-name>
+        <param-value>lagune</param-value>
+    </context-param>
+    -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/spring-beans.xml</param-value>
@@ -37,6 +43,19 @@
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
+
+    <filter>
+        <display-name>Ajax4jsf Filter</display-name>
+        <filter-name>ajax4jsf</filter-name>
+        <filter-class>org.ajax4jsf.Filter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ajax4jsf</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+    </filter-mapping>
 
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
