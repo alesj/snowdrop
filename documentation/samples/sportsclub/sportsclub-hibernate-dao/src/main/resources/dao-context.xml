@@ -43,5 +43,8 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
+    <bean id="equipmentRepository" class="org.jboss.snowdrop.samples.stayfit.dao.hibernate.HibernateEquipmentRepository">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 
 </beans>
