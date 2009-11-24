@@ -1,4 +1,4 @@
-package org.jboss.snowdrop.samples.stayfit.ejb;
+package org.jboss.snowdrop.samples.sportsclub.ejb;
 
 import javax.ejb.Local;
 import java.util.List;

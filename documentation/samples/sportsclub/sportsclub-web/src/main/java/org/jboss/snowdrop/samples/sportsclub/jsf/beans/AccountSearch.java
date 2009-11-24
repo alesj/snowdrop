@@ -1,7 +1,7 @@
 package org.jboss.snowdrop.samples.sportsclub.jsf.beans;
 
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Account;
-import org.jboss.snowdrop.samples.stayfit.ejb.SubscriptionService;
+import org.jboss.snowdrop.samples.sportsclub.ejb.SubscriptionService;
 
 import javax.ejb.EJB;
 import java.util.Collections;

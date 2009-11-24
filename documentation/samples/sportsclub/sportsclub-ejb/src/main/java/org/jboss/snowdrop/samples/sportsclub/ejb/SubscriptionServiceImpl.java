@@ -1,4 +1,4 @@
-package org.jboss.snowdrop.samples.stayfit.ejb;
+package org.jboss.snowdrop.samples.sportsclub.ejb;
 
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
@@ -10,6 +10,7 @@ import org.jboss.snowdrop.samples.sportsclub.domain.entity.Account;
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Person;
 import org.jboss.snowdrop.samples.sportsclub.domain.repository.AccountRepository;
 import org.jboss.snowdrop.samples.sportsclub.domain.repository.PersonRepository;
+import org.jboss.snowdrop.samples.sportsclub.ejb.SubscriptionService;
 import org.jboss.spring.callback.SpringLifecycleInterceptor;
 
 /**
