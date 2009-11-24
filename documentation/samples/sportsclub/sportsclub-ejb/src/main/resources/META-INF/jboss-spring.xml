@@ -5,8 +5,8 @@
 
     <description>BeanFactory=(SpringDao)</description>
 
-    <import resource="classpath:dao-context.xml"/>
-    <import resource="classpath:infrastructure.xml"/>
+    <import resource="classpath*:dao-context.xml"/>
+    <import resource="classpath*:infrastructure.xml"/>
 
 
 </beans>

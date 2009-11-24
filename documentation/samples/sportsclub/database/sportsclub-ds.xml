@@ -3,7 +3,7 @@
 
       <jndi-name>StayFitDS</jndi-name>
 
-      <connection-url>jdbc:hsqldb:hsql://localhost/accountsdb</connection-url>
+      <connection-url>jdbc:hsqldb:hsql://localhost/sportsclubdb</connection-url>
 
       <!-- The driver class -->
       <driver-class>org.hsqldb.jdbcDriver</driver-class>

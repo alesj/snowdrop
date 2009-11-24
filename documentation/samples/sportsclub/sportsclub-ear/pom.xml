@@ -38,7 +38,7 @@
             <type>jar</type>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
+       <dependency>
             <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
             <artifactId>sportsclub-reservations-spring</artifactId>
             <type>jar</type>
@@ -58,7 +58,7 @@
                 <artifactId>maven-ear-plugin</artifactId>
                 <version>2.4</version>
                 <configuration>
-                    <displayName>Stay Fit! Sample Application</displayName>
+                    <displayName>Sports Club Sample Application</displayName>
                     <defaultLibBundleDir>/lib/</defaultLibBundleDir>
                     <modules>
                         <ejbModule>
