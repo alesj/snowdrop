@@ -22,7 +22,7 @@
         </dependency>
         <dependency>
             <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
-            <artifactId>sportsclub-web</artifactId>
+            <artifactId>sportsclub-subscriptions-web</artifactId>
             <type>war</type>
             <version>${project.version}</version>
         </dependency>
@@ -67,8 +67,8 @@
                         </ejbModule>
                         <webModule>
                             <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
-                            <artifactId>sportsclub-web</artifactId>
-                            <contextRoot>/sportsclub</contextRoot>
+                            <artifactId>sportsclub-subscriptions-web</artifactId>
+                            <contextRoot>/sportsclub/subscriptions</contextRoot>
                         </webModule>
                         <jarModule>
                             <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>

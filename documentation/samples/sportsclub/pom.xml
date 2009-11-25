@@ -9,7 +9,7 @@
     <modules>
         <module>sportsclub-domain</module>
         <module>sportsclub-ejb</module>
-        <module>sportsclub-web</module>
+        <module>sportsclub-subscriptions-web</module>
         <module>sportsclub-ear</module>
         <module>sportsclub-hibernate-dao</module>
         <module>sportsclub-reservations-web</module>

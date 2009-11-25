@@ -8,10 +8,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
-    <artifactId>sportsclub-web</artifactId>
+    <artifactId>sportsclub-subscriptions-web</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>Sports Club Sample EJB-based JSF Front-End</name>
+    <name>Sports Club Subscriptions Front-End</name>
 
     <dependencies>
 
