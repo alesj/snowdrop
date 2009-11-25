@@ -17,7 +17,15 @@
             <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
             <artifactId>sportsclub-domain</artifactId>
             <version>${project.version}</version>
-            <type>ejb</type>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
+            <artifactId>sportsclub-hibernate-dao</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
             <scope>provided</scope>
         </dependency>
 
@@ -25,7 +33,7 @@
             <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
             <artifactId>sportsclub-reservations-spring</artifactId>
             <version>${project.version}</version>
-            <type>ejb</type>
+            <type>jar</type>
             <scope>provided</scope>
         </dependency>
 
