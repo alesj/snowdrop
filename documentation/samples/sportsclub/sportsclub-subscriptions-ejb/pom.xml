@@ -8,9 +8,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
-    <artifactId>sportsclub-ejb</artifactId>
+    <artifactId>sportsclub-subscriptions-ejb</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>Sports Club Sample Spring-Backed EJBs</name>
+    <name>Sports Club Subscriptions Spring-Backed EJBs</name>
     <packaging>ejb</packaging>
 
     <dependencies>

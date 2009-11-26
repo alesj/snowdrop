@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
-            <artifactId>sportsclub-ejb</artifactId>
+            <artifactId>sportsclub-subscriptions-ejb</artifactId>
             <type>ejb</type>
             <version>${project.version}</version>
         </dependency>
@@ -63,7 +63,7 @@
                     <modules>
                         <ejbModule>
                             <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
-                            <artifactId>sportsclub-ejb</artifactId>
+                            <artifactId>sportsclub-subscriptions-ejb</artifactId>
                         </ejbModule>
                         <webModule>
                             <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>

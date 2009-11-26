@@ -8,7 +8,7 @@
     <name>Sports Club Sample Parent</name>
     <modules>
         <module>sportsclub-domain</module>
-        <module>sportsclub-ejb</module>
+        <module>sportsclub-subscriptions-ejb</module>
         <module>sportsclub-subscriptions-web</module>
         <module>sportsclub-ear</module>
         <module>sportsclub-hibernate-dao</module>

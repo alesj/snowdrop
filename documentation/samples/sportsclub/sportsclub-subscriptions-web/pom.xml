@@ -11,7 +11,7 @@
     <artifactId>sportsclub-subscriptions-web</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>Sports Club Subscriptions Front-End</name>
+    <name>Sports Club Subscriptions JSF Front-End</name>
 
     <dependencies>
 
