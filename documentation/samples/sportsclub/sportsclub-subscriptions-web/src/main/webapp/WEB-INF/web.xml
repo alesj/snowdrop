@@ -32,6 +32,11 @@
 		</param-name>
 		<param-value>server</param-value>
 	</context-param>
+
+    <context-param>
+        <param-name>org.richfaces.SKIN</param-name>
+        <param-value>blueSky</param-value>
+    </context-param>
     
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>

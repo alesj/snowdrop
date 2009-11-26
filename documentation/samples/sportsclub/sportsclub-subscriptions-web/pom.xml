@@ -17,7 +17,7 @@
 
         <dependency>
             <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
-            <artifactId>sportsclub-ejb</artifactId>
+            <artifactId>sportsclub-subscriptions-ejb</artifactId>
             <version>${project.version}</version>
             <type>ejb</type>
             <scope>provided</scope>
@@ -37,6 +37,16 @@
         </dependency>
 
         <dependency>
+            <groupId>javax.faces</groupId>
+            <artifactId>jsf-impl</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>    
+
+        <dependency>
             <groupId>com.sun.facelets</groupId>
             <artifactId>jsf-facelets</artifactId>
         </dependency>
@@ -52,9 +62,15 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.richfaces.ui</groupId>
             <artifactId>richfaces-ui</artifactId>
         </dependency>
     </dependencies>
-
+    
 </project>

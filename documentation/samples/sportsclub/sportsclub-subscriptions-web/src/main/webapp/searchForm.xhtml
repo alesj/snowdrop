@@ -7,12 +7,12 @@
                 template="layout/template.xhtml">
     <ui:define name="content">
         <rich:panel>
-            <f:facet name="Search for accounts">
+            
                 <h:form>
                     <h:inputText value="#{accountManager.name}" label="Search name"/>
                     <h:commandButton action="#{accountManager.searchAccounts}"/>
                 </h:form>
-            </f:facet>
+
         </rich:panel>
     </ui:define>
 </ui:composition>
