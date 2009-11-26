@@ -1,7 +1,7 @@
 <datasources>
    <local-tx-datasource>
 
-      <jndi-name>StayFitDS</jndi-name>
+      <jndi-name>SportsClubDS</jndi-name>
 
       <connection-url>jdbc:hsqldb:hsql://localhost/sportsclubdb</connection-url>
 

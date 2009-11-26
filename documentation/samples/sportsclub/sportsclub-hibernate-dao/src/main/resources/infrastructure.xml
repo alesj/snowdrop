@@ -18,7 +18,7 @@
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
     </bean>
 
-    <jee:jndi-lookup jndi-name="java:/StayFitDS" id="stayFitDS"/>
+    <jee:jndi-lookup jndi-name="${datasource.jndi.name}" id="stayFitDS"/>
 
     <tx:jta-transaction-manager/>
 
