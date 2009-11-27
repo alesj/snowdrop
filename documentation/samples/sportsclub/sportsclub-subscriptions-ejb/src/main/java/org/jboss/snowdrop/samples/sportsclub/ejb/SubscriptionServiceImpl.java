@@ -10,6 +10,9 @@ import org.jboss.snowdrop.samples.sportsclub.domain.entity.Account;
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Person;
 import org.jboss.snowdrop.samples.sportsclub.domain.repository.AccountRepository;
 import org.jboss.snowdrop.samples.sportsclub.domain.repository.PersonRepository;
+import org.jboss.snowdrop.samples.sportsclub.domain.repository.criteria.AccountSearchCriteria;
+import org.jboss.snowdrop.samples.sportsclub.domain.repository.criteria.PersonSearchCriteria;
+import org.jboss.snowdrop.samples.sportsclub.domain.repository.criteria.Range;
 import org.jboss.snowdrop.samples.sportsclub.ejb.SubscriptionService;
 import org.jboss.spring.callback.SpringLifecycleInterceptor;
 
@@ -27,9 +30,23 @@ public class SubscriptionServiceImpl implements SubscriptionService
    @Spring(bean = "personRepository", jndiName = "SpringDao")
    private PersonRepository personRepository;
 
-   public List<Account> findAccountsBySubscriberName(String name)
+   public List<Account> findAccountsBySubscriberName(String name, int minIndex, int maxIndex)
    {
-      return accountRepository.findByPersonName(name);
+      PersonSearchCriteria personSearchCriteria = new PersonSearchCriteria();
+      personSearchCriteria.setName(name);
+      AccountSearchCriteria accountSearchCriteria = new AccountSearchCriteria();
+      accountSearchCriteria.setPersonSearchCriteria(personSearchCriteria);
+      accountSearchCriteria.setRange(new Range(minIndex, maxIndex));
+      return accountRepository.findByCriteria(accountSearchCriteria);
+   }
+
+   public int countAccountsBySubscriberName(String name)
+   {
+      PersonSearchCriteria personSearchCriteria = new PersonSearchCriteria();
+      personSearchCriteria.setName(name);
+      AccountSearchCriteria accountSearchCriteria = new AccountSearchCriteria();
+      accountSearchCriteria.setPersonSearchCriteria(personSearchCriteria);
+      return accountRepository.countByCriteria(accountSearchCriteria);
    }
 
    public Account createAccountForPerson(Person person)

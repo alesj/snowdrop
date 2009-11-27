@@ -1,5 +1,6 @@
 package org.jboss.snowdrop.samples.stayfit.dao.hibernate.initializer;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.*;
@@ -42,6 +43,11 @@ public class DatabaseInitializer implements InitializingBean
          {
             Session session = sessionFactory.getCurrentSession();
 
+            Query query = session.createQuery("select count(m) from Membership m");
+
+            if (((Long) query.uniqueResult()) > 0 )
+               return null;
+
             Membership silverMembership = createMembership("SILVER", "600.0");
             save(session, silverMembership);
             Membership goldMembership = createMembership("GOLD", "900.0");
@@ -60,7 +66,17 @@ public class DatabaseInitializer implements InitializingBean
 
             person = createPerson("Havelock", "Vetinari", "1 Bloor", "Toronto", "Ontario", "Canada");
             save(session, person);
+            save(session, createAccount(platinumMembership, BillingType.BIWEEKLY, person));
+
+            person = createPerson("Nobby", "Nobbs", "1 Dufferin", "Toronto", "Ontario", "Canada");
+            save(session, person);
             save(session, createAccount(goldMembership, BillingType.BIWEEKLY, person));
+
+            person = createPerson("Carrot", "Ironfoundersson", "1 King", "Toronto", "Ontario", "Canada");
+            save(session, person);
+            save(session, createAccount(platinumMembership, BillingType.BIWEEKLY, person));
+
+
 
             return null;
          }

@@ -12,7 +12,9 @@ import org.jboss.snowdrop.samples.sportsclub.domain.entity.Person;
 @Local
 public interface SubscriptionService
 {
-   List<Account> findAccountsBySubscriberName(String name);
-
    Account createAccountForPerson(Person person);
+
+   int countAccountsBySubscriberName(String name);
+
+   List<Account> findAccountsBySubscriberName(String name, int minIndex, int maxIndex);
 }

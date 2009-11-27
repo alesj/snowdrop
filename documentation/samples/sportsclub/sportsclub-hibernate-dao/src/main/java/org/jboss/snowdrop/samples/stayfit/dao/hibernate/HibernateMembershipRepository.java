@@ -1,6 +1,7 @@
 package org.jboss.snowdrop.samples.stayfit.dao.hibernate;
 
 import org.hibernate.Query;
+import org.hibernate.criterion.Projections;
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Membership;
 import org.jboss.snowdrop.samples.sportsclub.domain.repository.MembershipRepository;
 
@@ -21,5 +22,10 @@ public class HibernateMembershipRepository extends HibernateRepository<Membershi
    {
       Query query = getCurrentSession().createQuery("from Membership m where m.active");
       return query.list();
+   }
+
+   public int countAll()
+   {
+      return (Integer)getCurrentSession().createCriteria(Membership.class).setProjection(Projections.count("code")).uniqueResult();
    }
 }

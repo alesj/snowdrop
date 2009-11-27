@@ -14,4 +14,6 @@ public interface Repository<T, I>
    void delete(T object);
 
    Collection<T> findAll();
+   
+   int countAll();
 }

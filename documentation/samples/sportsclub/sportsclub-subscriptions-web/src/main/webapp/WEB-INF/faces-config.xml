@@ -8,7 +8,7 @@
         <view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
     </application>
     <managed-bean>
-        <managed-bean-name>accountManager</managed-bean-name>
+        <managed-bean-name>accountSearch</managed-bean-name>
         <managed-bean-class>org.jboss.snowdrop.samples.sportsclub.jsf.beans.AccountSearch</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
@@ -17,12 +17,12 @@
         <managed-bean-class>org.jboss.snowdrop.samples.sportsclub.jsf.beans.AccountCreate</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
-    <navigation-rule>
-        <from-view-id>/searchForm.xhtml</from-view-id>
-        <navigation-case>
-            <to-view-id>/searchResult.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+    <!--<navigation-rule>-->
+        <!--<from-view-id>/searchForm.xhtml</from-view-id>-->
+        <!--<navigation-case>-->
+            <!--<to-view-id>/searchResult.xhtml</to-view-id>-->
+        <!--</navigation-case>-->
+    <!--</navigation-rule>-->
     <navigation-rule>
         <from-view-id>/createForm.xhtml</from-view-id>
         <navigation-case>

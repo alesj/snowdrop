@@ -6,13 +6,56 @@
                 xmlns:a4j="http://richfaces.org/a4j"
                 template="layout/template.xhtml">
     <ui:define name="content">
-        <rich:panel>
-            
-                <h:form>
-                    <h:inputText value="#{accountManager.name}" label="Search name"/>
-                    <h:commandButton action="#{accountManager.searchAccounts}"/>
-                </h:form>
 
+
+        <rich:panel>
+            <f:facet name="header">Search for an account</f:facet>
+            <h:form>
+                <h:inputText value="#{accountSearch.name}" label="Search name"/>
+                <a4j:commandButton value="Search" action="#{accountSearch.searchAccounts}"
+                                   reRender="searchResults"/>
+            </h:form>
         </rich:panel>
+
+
+        <a4j:outputPanel id="searchResults">
+            <h:form>
+                <rich:panel header="Search results" rendered="#{accountSearch.searchInfoAvailable}">
+
+                    <rich:dataTable id="searchResultsTable" value="#{accountSearch}" var="account" rows="2">
+                        <rich:column>
+                            <f:facet name="header">
+                                <h:outputText value="First Name"/>
+                            </f:facet>
+                            <h:outputText value="#{account.subscriber.name.firstName}"/>
+                        </rich:column>
+                        <rich:column>
+                            <f:facet name="header">
+                                <h:outputText value="Last Name"/>
+                            </f:facet>
+                            <h:outputText value="#{account.subscriber.name.lastName}"/>
+                        </rich:column>
+                        <rich:column>
+                            <f:facet name="header">
+                                <h:outputText value="City"/>
+                            </f:facet>
+                            <h:outputText value="#{account.subscriber.address.city}"/>
+                        </rich:column>
+                        <rich:column>
+                            <f:facet name="header">
+                                <h:outputText value="Membership"/>
+                            </f:facet>
+                            <h:outputText value="#{account.membership.code}"/>
+                        </rich:column>
+                        <f:facet name="footer">
+                            <rich:datascroller id="sc2" for="searchResultsTable" maxPages="5"
+                                               page="#{accountSearch.currentPage}"/>
+                        </f:facet>
+                    </rich:dataTable>
+                </rich:panel>
+            </h:form>
+        </a4j:outputPanel>
+
+
     </ui:define>
 </ui:composition>
