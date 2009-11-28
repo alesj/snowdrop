@@ -28,6 +28,6 @@ public class TestHibernateAccountDao
    public void testAccountRepository()
    {
       Collection<Account> accounts = accountRepository.findAll();
-      Assert.assertEquals(3, accounts.size());
+      Assert.assertEquals(5, accounts.size());
    }
 }
