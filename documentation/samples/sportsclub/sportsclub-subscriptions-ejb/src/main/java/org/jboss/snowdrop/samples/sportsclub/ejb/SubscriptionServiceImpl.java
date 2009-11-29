@@ -3,12 +3,15 @@ package org.jboss.snowdrop.samples.sportsclub.ejb;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.jboss.annotation.spring.Spring;
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Account;
+import org.jboss.snowdrop.samples.sportsclub.domain.entity.Membership;
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Person;
 import org.jboss.snowdrop.samples.sportsclub.domain.repository.AccountRepository;
+import org.jboss.snowdrop.samples.sportsclub.domain.repository.MembershipRepository;
 import org.jboss.snowdrop.samples.sportsclub.domain.repository.PersonRepository;
 import org.jboss.snowdrop.samples.sportsclub.domain.repository.criteria.AccountSearchCriteria;
 import org.jboss.snowdrop.samples.sportsclub.domain.repository.criteria.PersonSearchCriteria;
@@ -30,6 +33,9 @@ public class SubscriptionServiceImpl implements SubscriptionService
    @Spring(bean = "personRepository", jndiName = "SpringDao")
    private PersonRepository personRepository;
 
+   @Spring(bean = "membershipRepository", jndiName = "SpringDao")
+   private MembershipRepository membershipRepository;
+
    public List<Account> findAccountsBySubscriberName(String name, int minIndex, int maxIndex)
    {
       PersonSearchCriteria personSearchCriteria = new PersonSearchCriteria();
@@ -49,13 +55,18 @@ public class SubscriptionServiceImpl implements SubscriptionService
       return accountRepository.countByCriteria(accountSearchCriteria);
    }
 
-   public Account createAccountForPerson(Person person)
+   public Account createAccountForPerson(Person person, Membership membership)
    {
       Account account = new Account();
       account.setSubscriber(person);
+      account.setMembership(membership);
       personRepository.save(person);
       accountRepository.save(account);
       return account;
    }
 
+   public Collection<Membership> getMembershipTypes()
+   {
+      return membershipRepository.findAllActiveMembershipTypes();
+   }
 }

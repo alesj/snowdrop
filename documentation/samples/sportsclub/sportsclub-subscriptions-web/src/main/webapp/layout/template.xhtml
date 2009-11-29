@@ -16,10 +16,19 @@
     </head>
 
 
-    <body class="main-body" style="position: relative;">
+    <body class="main-body">
 
-    <div style="position: relative; height: auto; overflow: hidden; min-height: 100%; zoom: 1;" class="main-panel">
-        <ui:insert name="content"/>
+    <div style="width: 100%; height: 116px; left: 0px;">
+        <ui:include src="/includes/header.xhtml"/>
+    </div>
+
+    <div style="height: 100%; WIDTH: 800px" id="content" class="clearfix">
+		<ui:insert name="content"/>
+	</div>
+
+
+    <div style="width: 100%; height: 82px; left: 0px;">
+        <ui:include src="/includes/footer.xhtml"/>
     </div>
 
     </body>

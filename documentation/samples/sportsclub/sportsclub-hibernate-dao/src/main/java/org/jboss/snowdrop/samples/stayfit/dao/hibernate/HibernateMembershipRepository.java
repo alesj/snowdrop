@@ -1,7 +1,9 @@
 package org.jboss.snowdrop.samples.stayfit.dao.hibernate;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Membership;
 import org.jboss.snowdrop.samples.sportsclub.domain.repository.MembershipRepository;
 
@@ -10,7 +12,7 @@ import java.util.List;
 /**
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
  */
-public class HibernateMembershipRepository extends HibernateRepository<Membership, Integer> implements MembershipRepository
+public class HibernateMembershipRepository extends HibernateRepository<Membership, String> implements MembershipRepository
 {
 
    public HibernateMembershipRepository()
@@ -20,7 +22,7 @@ public class HibernateMembershipRepository extends HibernateRepository<Membershi
 
    public List<Membership> findAllActiveMembershipTypes()
    {
-      Query query = getCurrentSession().createQuery("from Membership m where m.active");
+      Criteria query = getCurrentSession().createCriteria(Membership.class).add(Restrictions.eq("active", true));
       return query.list();
    }
 

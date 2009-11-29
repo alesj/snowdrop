@@ -25,8 +25,6 @@ public class AccountSearch extends ExtendedDataModel
 
    private String name;
 
-   private List<Account> accounts = Collections.<Account>emptyList();
-
    private int currentPage;
    private int currentRow;
    private Long currentId;
@@ -46,20 +44,9 @@ public class AccountSearch extends ExtendedDataModel
 
    public String searchAccounts()
    {
-//      List<Account> list = subscriptionService.findAccountsBySubscriberName(name);
-//      accountsMap = new HashMap<Long, Account>();
-//      for (Account row : list)
-//      {
-//         Long id = row.getId();
-//         accountsMap.put(id, row);
-//      }
       rowCount = subscriptionService.countAccountsBySubscriberName(name);
+      currentPage = 1;
       return "success";
-   }
-
-   public List<Account> getAccounts()
-   {
-      return accounts;
    }
 
    public int getCurrentPage()

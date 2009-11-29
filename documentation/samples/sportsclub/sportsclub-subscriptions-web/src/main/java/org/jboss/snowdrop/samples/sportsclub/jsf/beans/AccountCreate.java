@@ -2,6 +2,7 @@ package org.jboss.snowdrop.samples.sportsclub.jsf.beans;
 
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Account;
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Address;
+import org.jboss.snowdrop.samples.sportsclub.domain.entity.Membership;
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Name;
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Person;
 import org.jboss.snowdrop.samples.sportsclub.ejb.SubscriptionService;
@@ -16,7 +17,11 @@ public class AccountCreate
    @EJB
    private SubscriptionService subscriptionService;
 
+   private ReferenceData referenceData;
+
    private String firstName;
+
+   private String middleName;
 
    private String lastName;
 
@@ -27,6 +32,13 @@ public class AccountCreate
    private String address;
 
    private Account account = null;
+
+   private Membership membership = null;
+
+   public void setReferenceData(ReferenceData referenceData)
+   {
+      this.referenceData = referenceData;
+   }
 
    public String getAddress()
    {
@@ -98,7 +110,27 @@ public class AccountCreate
       person.getAddress().setStreetAddress(address);
 
 
-      account = subscriptionService.createAccountForPerson(person);
+      account = subscriptionService.createAccountForPerson(person, membership);
       return "success";
+   }
+
+   public void setMiddleName(String middleName)
+   {
+      this.middleName = middleName;
+   }
+
+   public String getMiddleName()
+   {
+      return middleName;
+   }
+
+   public void setMembership(Membership membership)
+   {
+      this.membership = membership;
+   }
+
+   public Membership getMembership()
+   {
+      return membership;
    }
 }

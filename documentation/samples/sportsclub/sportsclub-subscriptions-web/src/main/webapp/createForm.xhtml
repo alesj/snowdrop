@@ -1,20 +1,35 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:rich="http://richfaces.org/rich"
-	xmlns:a4j="http://richfaces.org/a4j"
-	template="layout/template.xhtml">
-	<ui:define name="content">
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j"
+                template="layout/template.xhtml">
+    <ui:define name="content">
         <rich:panel>
-        <h:form>
-        First name: <h:inputText value="#{accountCreate.firstName}" label="First name"/>
-        Last name: <h:inputText value="#{accountCreate.lastName}" label="Last name"/><p/>
-        Address: <h:inputText value="#{accountCreate.address}" label="Address"/><p/>
-        City: <h:inputText value="#{accountCreate.city}" label="City"/><p/>
-        Province: <h:inputText value="#{accountCreate.provinceOrState}" label="ProvinceOrState"/><p/>
-        <h:commandButton value="Save" action="#{accountCreate.create}" />
-        </h:form>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="First name"/>
+                    <rich:inplaceInput defaultLabel="Click to enter" value="#{accountCreate.firstName}"/>
+                    <h:outputLabel value="Middle name"/>
+                    <rich:inplaceInput defaultLabel="Click to enter" value="#{accountCreate.middleName}"/>
+                    <h:outputLabel value="Last name"/>
+                    <rich:inplaceInput defaultLabel="Click to enter" value="#{accountCreate.lastName}"/>
+                    <h:outputLabel value="Address"/>
+                    <rich:inplaceInput defaultLabel="Click to enter" value="#{accountCreate.address}"/>
+                    <h:outputLabel value="City"/>
+                    <rich:inplaceInput defaultLabel="Click to enter" value="#{accountCreate.city}"/>
+                    <h:outputLabel value="Province"/>
+                    <rich:inplaceInput defaultLabel="Click to enter" value="#{accountCreate.provinceOrState}"/>
+                    <h:outputLabel value="Membership"/>
+                    <rich:inplaceSelect defaultLabel="Click to select" value="#{accountCreate.membership}"
+                                        showControls="true" converter="#{membershipConverter}">
+                        <f:selectItems value="#{referenceData.membershipTypes}"/>
+                    </rich:inplaceSelect>
+                    <h:commandButton value="Save" action="#{accountCreate.create}"/>
+                </h:panelGrid>
+            </h:form>
         </rich:panel>
-	</ui:define>
+
+    </ui:define>
 </ui:composition>

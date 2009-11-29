@@ -17,6 +17,20 @@
         <managed-bean-class>org.jboss.snowdrop.samples.sportsclub.jsf.beans.AccountCreate</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>referenceData</managed-bean-name>
+        <managed-bean-class>org.jboss.snowdrop.samples.sportsclub.jsf.beans.ReferenceData</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>membershipConverter</managed-bean-name>
+        <managed-bean-class>org.jboss.snowdrop.samples.sportsclub.jsf.beans.MembershipConverter</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+        <managed-property>
+            <property-name>referenceData</property-name>
+            <value>#{referenceData}</value>
+        </managed-property>
+    </managed-bean>
     <!--<navigation-rule>-->
         <!--<from-view-id>/searchForm.xhtml</from-view-id>-->
         <!--<navigation-case>-->

@@ -3,7 +3,6 @@ package org.jboss.snowdrop.samples.sportsclub.jsf.beans;
 import org.jboss.snowdrop.samples.sportsclub.domain.repository.EquipmentRepository;
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Equipment;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Collections;
 import java.util.Date;

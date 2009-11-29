@@ -51,4 +51,33 @@ public class Membership
    {
       this.active = active;
    }
+
+   @Override
+   public boolean equals(Object o)
+   {
+      if (this == o)
+      {
+         return true;
+      }
+      if (o == null || getClass() != o.getClass())
+      {
+         return false;
+      }
+
+      Membership that = (Membership) o;
+
+      if (code != null ? !code.equals(that.code) : that.code != null)
+      {
+         return false;
+      }
+
+      return true;
+   }
+
+   @Override
+   public int hashCode()
+   {
+      return code != null ? code.hashCode() : 0;
+   }
+   
 }

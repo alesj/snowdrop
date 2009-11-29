@@ -45,8 +45,10 @@ public class DatabaseInitializer implements InitializingBean
 
             Query query = session.createQuery("select count(m) from Membership m");
 
-            if (((Long) query.uniqueResult()) > 0 )
+            if (((Long) query.uniqueResult()) > 0)
+            {
                return null;
+            }
 
             Membership silverMembership = createMembership("SILVER", "600.0");
             save(session, silverMembership);
@@ -58,10 +60,10 @@ public class DatabaseInitializer implements InitializingBean
 
             Person person = createPerson("Samuel", "Vimes", "1 Yonge", "Toronto", "Ontario", "Canada");
             save(session, person);
-            save(session,createAccount(silverMembership, BillingType.MONTHLY, person));
+            save(session, createAccount(silverMembership, BillingType.MONTHLY, person));
 
             person = createPerson("Sibyl", "Vimes", "1 Yonge", "Toronto", "Ontario", "Canada");
-            save(session,person);
+            save(session, person);
             save(session, createAccount(goldMembership, BillingType.WEEKLY, person));
 
             person = createPerson("Havelock", "Vetinari", "1 Bloor", "Toronto", "Ontario", "Canada");
@@ -76,6 +78,34 @@ public class DatabaseInitializer implements InitializingBean
             save(session, person);
             save(session, createAccount(platinumMembership, BillingType.BIWEEKLY, person));
 
+
+            person = createPerson("Magrat", "Garlick", "1 King", "Lancre", "Ramtops", "Canada");
+            save(session, person);
+            save(session, createAccount(platinumMembership, BillingType.BIWEEKLY, person));
+
+            person = createPerson("Gytha", "Ogg", "1 King", "Lancre", "Ramtops", "Canada");
+            save(session, person);
+            save(session, createAccount(platinumMembership, BillingType.BIWEEKLY, person));
+
+            person = createPerson("Esmerelda", "Weatherwax", "1 King", "Lancre", "Ramtops", "Canada");
+            save(session, person);
+            save(session, createAccount(platinumMembership, BillingType.MONTHLY, person));
+
+            person = createPerson("Mustrum", "Ridcully", "1 King", "Lancre", "Ramtops", "Canada");
+            save(session, person);
+            save(session, createAccount(platinumMembership, BillingType.BIWEEKLY, person));
+
+            person = createPerson("Bill", "Door", "1 King", "Lancre", "Ramtops", "Canada");
+            save(session, person);
+            save(session, createAccount(platinumMembership, BillingType.BIWEEKLY, person));
+
+            person = createPerson("Angua", "von Uberwald", "1 King", "Lancre", "Ramtops", "Canada");
+            save(session, person);
+            save(session, createAccount(platinumMembership, BillingType.BIWEEKLY, person));
+
+            person = createPerson("Claude", "Dibbler", "1 King", "Lancre", "Ramtops", "Canada");
+            save(session, person);
+            save(session, createAccount(platinumMembership, BillingType.BIWEEKLY, person));
 
 
             return null;

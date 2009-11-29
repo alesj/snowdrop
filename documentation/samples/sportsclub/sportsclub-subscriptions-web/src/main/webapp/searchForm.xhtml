@@ -22,7 +22,7 @@
             <h:form>
                 <rich:panel header="Search results" rendered="#{accountSearch.searchInfoAvailable}">
 
-                    <rich:dataTable id="searchResultsTable" value="#{accountSearch}" var="account" rows="2">
+                    <rich:dataTable id="searchResultsTable" value="#{accountSearch}" var="account" rows="5">
                         <rich:column>
                             <f:facet name="header">
                                 <h:outputText value="First Name"/>
@@ -46,6 +46,12 @@
                                 <h:outputText value="Membership"/>
                             </f:facet>
                             <h:outputText value="#{account.membership.code}"/>
+                        </rich:column>
+                        <rich:column>
+                            <f:facet name="header">
+                                <h:outputText value="Billing"/>
+                            </f:facet>
+                            <h:outputText value="#{account.billingType}"/>
                         </rich:column>
                         <f:facet name="footer">
                             <rich:datascroller id="sc2" for="searchResultsTable" maxPages="5"
