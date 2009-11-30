@@ -12,7 +12,7 @@ import java.util.Date;
 public class Account
 {
    @Id @GeneratedValue
-   private long id;
+   private Long id;
 
    @OneToOne
    private Person subscriber;
