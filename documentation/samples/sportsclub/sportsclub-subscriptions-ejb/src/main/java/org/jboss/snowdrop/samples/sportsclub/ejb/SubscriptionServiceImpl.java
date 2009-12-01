@@ -1,6 +1,7 @@
 package org.jboss.snowdrop.samples.sportsclub.ejb;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
 import javax.interceptor.Interceptors;
 
 import java.util.Collection;
@@ -55,6 +56,7 @@ public class SubscriptionServiceImpl implements SubscriptionService
       return accountRepository.countByCriteria(accountSearchCriteria);
    }
 
+   @TransactionAttribute
    public Account createAccountForPerson(Person person, Membership membership)
    {
       Account account = new Account();

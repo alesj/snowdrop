@@ -21,6 +21,12 @@
                     <rich:inplaceInput defaultLabel="Click to enter" value="#{accountCreate.city}"/>
                     <h:outputLabel value="Province"/>
                     <rich:inplaceInput defaultLabel="Click to enter" value="#{accountCreate.provinceOrState}"/>
+                    <h:outputLabel value="Billing"/>
+                    <rich:inplaceSelect defaultLabel="Click to select"
+                                        value="#{accountCreate.billingType}">
+                        <f:converter converterId="enumConverter" />
+                        <f:selectItems value="#{referenceData.billingTypes}"/>
+                    </rich:inplaceSelect>
                     <h:outputLabel value="Membership"/>
                     <rich:inplaceSelect defaultLabel="Click to select" value="#{accountCreate.membership}"
                                         showControls="true" converter="#{membershipConverter}">

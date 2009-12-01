@@ -2,6 +2,7 @@ package org.jboss.snowdrop.samples.sportsclub.jsf.beans;
 
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Account;
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Address;
+import org.jboss.snowdrop.samples.sportsclub.domain.entity.BillingType;
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Membership;
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Name;
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Person;
@@ -34,6 +35,8 @@ public class AccountCreate
    private Account account = null;
 
    private Membership membership = null;
+
+   private BillingType billingType;
 
    public void setReferenceData(ReferenceData referenceData)
    {
@@ -132,5 +135,15 @@ public class AccountCreate
    public Membership getMembership()
    {
       return membership;
+   }
+
+   public void setBillingType(BillingType billingType)
+   {
+      this.billingType = billingType;
+   }
+
+   public BillingType getBillingType()
+   {
+      return billingType;
    }
 }
