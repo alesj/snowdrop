@@ -1,8 +1,6 @@
 package org.jboss.snowdrop.samples.sportsclub.domain.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
@@ -11,13 +9,14 @@ import javax.persistence.Id;
 @Entity
 public class Equipment
 {
-   @Id
+   @Id @GeneratedValue
    private long id;
 
    private String name;
 
    private String description;
 
+   @Column(name = "eqp_type_id", nullable = false, updatable = false)
    private EquipmentType equipmentType;
 
 
@@ -44,5 +43,15 @@ public class Equipment
    public void setName(String name)
    {
       this.name = name;
+   }
+
+   public EquipmentType getEquipmentType()
+   {
+      return equipmentType;
+   }
+
+   public void setEquipmentType(EquipmentType equipmentType)
+   {
+      this.equipmentType = equipmentType;
    }
 }

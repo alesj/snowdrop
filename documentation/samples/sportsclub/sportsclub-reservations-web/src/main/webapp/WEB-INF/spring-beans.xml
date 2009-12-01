@@ -11,10 +11,10 @@
 
     <import resource="classpath*:infrastructure.xml"/>
 
-    <bean id="availableEquipments" class="org.jboss.snowdrop.samples.sportsclub.jsf.beans.AvailableEquipments" scope="request">
-        <property name="equipmentRepository" ref="equipmentRepository"/>
+    <bean id="reservationsBean" class="org.jboss.snowdrop.samples.sportsclub.jsf.beans.ReservationsBean" scope="session">
+        <property name="reservationService" ref="reservationService"/>
     </bean>
-
+    
     <context:annotation-config/>
     
 </beans>

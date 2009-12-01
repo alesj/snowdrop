@@ -8,7 +8,12 @@ import java.util.Date;
 /**
  *
  */
-public interface ReservationService {
+public interface ReservationService
+{
     
     List<Reservation> getReservations(Date fromDate, Date toDate);
+    List<Reservation> getReservationBefore(Date date);
+    List<Reservation> getReservationAfter(Date date);
+    List<Reservation> getAllReservation();
+
 }

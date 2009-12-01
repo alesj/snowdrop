@@ -1,9 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <datasources>
    <local-tx-datasource>
 
       <jndi-name>SportsClubDS</jndi-name>
 
       <connection-url>jdbc:hsqldb:hsql://localhost/sportsclubdb</connection-url>
+      <!--connection-url>jdbc:hsqldb:${jboss.server.data.dir}${/}hypersonic${/}sportsclubdb</connection-url-->
+      <!--connection-url>jdbc:hsqldb:mem:sportsclub</connection-url-->
+      <!--connection-url>jdbc:hsqldb:.</connection-url-->
 
       <!-- The driver class -->
       <driver-class>org.hsqldb.jdbcDriver</driver-class>

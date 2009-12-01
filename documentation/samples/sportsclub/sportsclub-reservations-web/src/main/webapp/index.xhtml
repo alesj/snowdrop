@@ -1,0 +1,13 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	template="layout/template.xhtml">
+	<ui:define name="content">
+        <h:outputLink value="listReservationForm.jsf"><h:outputText value="List Reservations"/></h:outputLink>
+        <rich:separator/> 
+        <h:outputLink value="createReservationForm.jsf"><h:outputText value="Create New Reservation"/></h:outputLink>
+	</ui:define>
+</ui:composition>

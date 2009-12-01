@@ -15,6 +15,8 @@ import java.lang.reflect.Member;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import static org.jboss.snowdrop.samples.sportsclub.domain.entity.EquipmentType.*;
+
 /**
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
  */
@@ -77,8 +79,7 @@ public class DatabaseInitializer implements InitializingBean
             person = createPerson("Carrot", "Ironfoundersson", "1 King", "Toronto", "Ontario", "Canada");
             save(session, person);
             save(session, createAccount(platinumMembership, BillingType.BIWEEKLY, person));
-
-
+             
             person = createPerson("Magrat", "Garlick", "1 King", "Lancre", "Ramtops", "Canada");
             save(session, person);
             save(session, createAccount(platinumMembership, BillingType.BIWEEKLY, person));
@@ -108,6 +109,15 @@ public class DatabaseInitializer implements InitializingBean
             save(session, createAccount(platinumMembership, BillingType.BIWEEKLY, person));
 
 
+            Equipment equipment = createEquipment("Engage", "95T Engage by LifeFitness", TREADMILL);
+            save(session, equipment);
+
+            equipment = createEquipment("Inclusive", "95T Inclusive by LifeFitness", TREADMILL);
+            save(session, equipment);
+
+            equipment = createEquipment("Omnidirectional", "Cyberwalk", TREADMILL);
+            save(session, equipment);
+
             return null;
          }
       });
@@ -117,6 +127,7 @@ public class DatabaseInitializer implements InitializingBean
    {
       session.save(entity);
       session.flush();
+      //session.evict(entity);
    }
 
    private static Account createAccount(Membership silverMembership, BillingType billingType, Person person)
@@ -151,5 +162,24 @@ public class DatabaseInitializer implements InitializingBean
       membership.setActive(true);
       membership.setAnnualFee(new BigDecimal(amount));
       return membership;
+   }
+
+   private static Equipment createEquipment(String name, String description, EquipmentType type)
+   {
+      Equipment equipment = new Equipment();
+      equipment.setDescription(description);
+      equipment.setName(name);
+      equipment.setEquipmentType(type);
+      return equipment;
+   }
+
+   private static Reservation createReservation(Date fromDate, Date toDate, Equipment equipment, Account account)
+   {
+      Reservation reservation = new Reservation();
+      reservation.setAccount(account);
+      reservation.setEquipment(equipment);
+      reservation.setFrom(fromDate);
+      reservation.setTo(toDate);
+      return reservation;
    }
 }

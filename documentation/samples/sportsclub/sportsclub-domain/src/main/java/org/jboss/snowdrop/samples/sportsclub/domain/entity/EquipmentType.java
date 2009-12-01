@@ -5,7 +5,7 @@ package org.jboss.snowdrop.samples.sportsclub.domain.entity;
  */
 public enum EquipmentType
 {
-   THREADMILL,
+   TREADMILL,
    STEPPER,
    COURT
 }
