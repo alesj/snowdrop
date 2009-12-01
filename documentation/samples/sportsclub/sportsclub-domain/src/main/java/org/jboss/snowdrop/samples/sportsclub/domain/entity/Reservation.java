@@ -1,22 +1,23 @@
 package org.jboss.snowdrop.samples.sportsclub.domain.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
  */
+
 @Entity
 public class Reservation
 {
 
-   @Id
+   @Id @GeneratedValue
    private long id;
 
+   @Column(name = "fromDT")
    private Date from;
 
+   @Column(name = "toDT")
    private Date to;
 
    @ManyToOne

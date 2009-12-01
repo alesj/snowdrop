@@ -14,6 +14,8 @@ import javax.annotation.PostConstruct;
 import java.lang.reflect.Member;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Calendar;
+import java.util.Locale;
 
 import static org.jboss.snowdrop.samples.sportsclub.domain.entity.EquipmentType.*;
 
@@ -60,6 +62,12 @@ public class DatabaseInitializer implements InitializingBean
             save(session, platinumMembership);
 
 
+            // Accounts are populated later (see below)
+            Account account1;
+            Account account2;
+            Account account3;
+
+
             Person person = createPerson("Samuel", "Vimes", "1 Yonge", "Toronto", "Ontario", "Canada");
             save(session, person);
             save(session, createAccount(silverMembership, BillingType.MONTHLY, person));
@@ -98,25 +106,38 @@ public class DatabaseInitializer implements InitializingBean
 
             person = createPerson("Bill", "Door", "1 King", "Lancre", "Ramtops", "Canada");
             save(session, person);
-            save(session, createAccount(platinumMembership, BillingType.BIWEEKLY, person));
+            account1 = createAccount(platinumMembership, BillingType.BIWEEKLY, person);
+            save(session, account1);
 
             person = createPerson("Angua", "von Uberwald", "1 King", "Lancre", "Ramtops", "Canada");
             save(session, person);
-            save(session, createAccount(platinumMembership, BillingType.BIWEEKLY, person));
+            account2 = createAccount(platinumMembership, BillingType.BIWEEKLY, person);
+            save(session, account2);
 
             person = createPerson("Claude", "Dibbler", "1 King", "Lancre", "Ramtops", "Canada");
             save(session, person);
-            save(session, createAccount(platinumMembership, BillingType.BIWEEKLY, person));
+            account3 = createAccount(platinumMembership, BillingType.BIWEEKLY, person);
+            save(session, account3);
 
 
-            Equipment equipment = createEquipment("Engage", "95T Engage by LifeFitness", TREADMILL);
-            save(session, equipment);
+            Equipment equipment1 = createEquipment("Engage", "95T Engage by LifeFitness", TREADMILL);
+            save(session, equipment1);
 
-            equipment = createEquipment("Inclusive", "95T Inclusive by LifeFitness", TREADMILL);
-            save(session, equipment);
+            Equipment equipment2 = createEquipment("Inclusive", "95T Inclusive by LifeFitness", TREADMILL);
+            save(session, equipment2);
 
-            equipment = createEquipment("Omnidirectional", "Cyberwalk", TREADMILL);
-            save(session, equipment);
+            Equipment equipment3 = createEquipment("Omnidirectional", "Cyberwalk", TREADMILL);
+            save(session, equipment3);
+
+
+            Reservation reservation = createReservation(createDate(2009,02,01), createDate(2009,10,31), equipment1, account1);
+            save(session, reservation);
+
+            reservation = createReservation(createDate(2009,01,01), createDate(2009,12,31), equipment2, account2);
+            save(session, reservation);
+
+            reservation = createReservation(createDate(2009,05,01), createDate(2009,10,31), equipment3, account3);
+            save(session, reservation);
 
             return null;
          }
@@ -127,7 +148,6 @@ public class DatabaseInitializer implements InitializingBean
    {
       session.save(entity);
       session.flush();
-      //session.evict(entity);
    }
 
    private static Account createAccount(Membership silverMembership, BillingType billingType, Person person)
@@ -175,11 +195,20 @@ public class DatabaseInitializer implements InitializingBean
 
    private static Reservation createReservation(Date fromDate, Date toDate, Equipment equipment, Account account)
    {
+      assert fromDate.before(toDate);
       Reservation reservation = new Reservation();
       reservation.setAccount(account);
       reservation.setEquipment(equipment);
       reservation.setFrom(fromDate);
       reservation.setTo(toDate);
       return reservation;
+   }
+
+   /** Months are human readable and start at 1! */
+   private static Date createDate(int year, int month, int day)
+   {
+      Calendar cal = Calendar.getInstance(Locale.US);
+      cal.set(year, month-1, day);
+      return cal.getTime();
    }
 }
