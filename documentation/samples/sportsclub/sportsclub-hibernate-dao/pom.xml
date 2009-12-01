@@ -33,6 +33,7 @@
         <dependency>
             <groupId>org.jboss.snowdrop.samples.sportsclub</groupId>
             <artifactId>sportsclub-test-infrastructure</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

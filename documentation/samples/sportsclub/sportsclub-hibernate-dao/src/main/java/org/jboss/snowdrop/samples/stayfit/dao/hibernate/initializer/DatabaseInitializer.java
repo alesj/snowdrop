@@ -208,6 +208,7 @@ public class DatabaseInitializer implements InitializingBean
    private static Date createDate(int year, int month, int day)
    {
       Calendar cal = Calendar.getInstance(Locale.US);
+      cal.clear();
       cal.set(year, month-1, day);
       return cal.getTime();
    }

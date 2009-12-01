@@ -22,18 +22,18 @@ public class HibernateReservationRepository extends HibernateRepository<Reservat
    {
 
       Criteria cri = getCurrentSession().createCriteria(Reservation.class);
-      cri.add(and(le("fromDate", fromDate), ge("toDate", toDate)));
+      cri.add(and(ge("from", fromDate), le("to", toDate)));
 
       return cri.list();
    }
 
    public List<Reservation> getReservationsBefore(Date date)
    {
-      return getCurrentSession().createCriteria(Reservation.class).add(le("toDate", date)).list();
+      return getCurrentSession().createCriteria(Reservation.class).add(le("to", date)).list();
    }
 
    public List<Reservation> getReservationsAfter(Date date)
    {
-      return getCurrentSession().createCriteria(Reservation.class).add(ge("fromDate", date)).list();
+      return getCurrentSession().createCriteria(Reservation.class).add(ge("from", date)).list();
    }
 }

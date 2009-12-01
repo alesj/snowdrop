@@ -24,7 +24,8 @@ public interface ReservationRepository extends Repository<Reservation, Integer> 
 
     /**
      * Return all reservations before given date.
-     * This means all reservations whose toDate.before(date) is true.    
+     * This means all reservations whose toDate.before(date) is true.
+     * It checks the right boundary of the date range interval, i.e. (infinity, date&gt;
      * @param date
      * @return
      */
@@ -32,7 +33,8 @@ public interface ReservationRepository extends Repository<Reservation, Integer> 
 
     /**
      * Return all reservations after given date.
-     * This means all reservations whose fromDate.after(date) is true. 
+     * This means all reservations whose fromDate.after(date) is true.
+     * It checks the left boundary of the date range interval, i.e. &lt;date, infinity)
      * @param date
      * @return
      */
