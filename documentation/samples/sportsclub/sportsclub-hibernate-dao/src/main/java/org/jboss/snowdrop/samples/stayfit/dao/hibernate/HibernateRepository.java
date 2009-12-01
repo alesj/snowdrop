@@ -32,6 +32,7 @@ public abstract class HibernateRepository<T, I extends Serializable> implements 
       return this.sessionFactory.getCurrentSession();
    }
 
+   
    public T findById(I id)
    {
       return (T)getCurrentSession().get(clazz, id);

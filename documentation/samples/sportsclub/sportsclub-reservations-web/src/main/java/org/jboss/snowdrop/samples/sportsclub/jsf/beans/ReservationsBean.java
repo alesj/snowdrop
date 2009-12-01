@@ -16,7 +16,7 @@ public class ReservationsBean
    private Date toDate;
    private List<Reservation> availableReservations;
 
-   public void populateReservations()
+   public String populateReservations()
    {
       if (fromDate != null && toDate != null)
       {
@@ -31,7 +31,7 @@ public class ReservationsBean
       {
          availableReservations = reservationService.getAllReservation();
       }
-
+      return "success";
    }
 
    public ReservationService getReservationService()

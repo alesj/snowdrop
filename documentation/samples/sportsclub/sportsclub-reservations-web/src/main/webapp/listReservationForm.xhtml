@@ -9,13 +9,14 @@
     <ui:define name="content">
 
         Display reservations in the following date range (dates are optional):<br/>
-        from: <rich:calendar/>
-        to: <rich:calendar/>
-        <h:commandButton id="submit" value="Display" action="populateReservations"></h:commandButton>
-
+        <h:form>
+        from: <rich:calendar value="#{reservationsBean.fromDate}"/>
+        to: <rich:calendar value="#{reservationsBean.toDate}"/>
+        <h:commandButton id="submit" value="Display" action="#{reservationsBean.populateReservations}"></h:commandButton>
+        </h:form>
         <rich:separator/>
 
-        <h:dataTable id="reservationTable" value="#{reservationsBean.reservations}" var="reservation">
+        <h:dataTable id="reservationTable" value="#{reservationsBean.availableReservations}" var="reservation">
 
             <f:facet name="header">
                 <h:outputText value="Available Reseravtions"/>
