@@ -8,71 +8,69 @@ import java.util.List;
 
 /**
  */
-public class ReservationsBean {
+public class ReservationsBean
+{
 
-    private ReservationService reservationService;
-    private Date fromDate;
-    private Date toDate;
-    private List<Reservation> availableReservations;
+   private ReservationService reservationService;
+   private Date fromDate;
+   private Date toDate;
+   private List<Reservation> availableReservations;
 
-    public void populateReservations()
-    {
-        if (fromDate != null && toDate != null)
-        {
-            availableReservations = reservationService.getReservations(fromDate, toDate);
-        }
-        else if (fromDate == null && toDate != null)
-        {
-            availableReservations = reservationService.getReservationBefore(toDate);
-        }
-        else if (fromDate != null && toDate == null)
-        {
-            availableReservations = reservationService.getReservationAfter(fromDate);
-        }
-        else
-        {
-            availableReservations = reservationService.getAllReservation();
-        }
+   public void populateReservations()
+   {
+      if (fromDate != null && toDate != null)
+      {
+         availableReservations = reservationService.getReservations(fromDate, toDate);
+      } else if (fromDate == null && toDate != null)
+      {
+         availableReservations = reservationService.getReservationBefore(toDate);
+      } else if (fromDate != null && toDate == null)
+      {
+         availableReservations = reservationService.getReservationAfter(fromDate);
+      } else
+      {
+         availableReservations = reservationService.getAllReservation();
+      }
 
-    }
+   }
 
-    public ReservationService getReservationService()
-    {
-        return reservationService;
-    }
+   public ReservationService getReservationService()
+   {
+      return reservationService;
+   }
 
-    public void setReservationService(ReservationService reservationService)
-    {
-        this.reservationService = reservationService;
-    }
+   public void setReservationService(ReservationService reservationService)
+   {
+      this.reservationService = reservationService;
+   }
 
-    public Date getFromDate()
-    {
-        return fromDate;
-    }
+   public Date getFromDate()
+   {
+      return fromDate;
+   }
 
-    public void setFromDate(Date fromDate)
-    {
-        this.fromDate = fromDate;
-    }
+   public void setFromDate(Date fromDate)
+   {
+      this.fromDate = fromDate;
+   }
 
-    public Date getToDate()
-    {
-        return toDate;
-    }
+   public Date getToDate()
+   {
+      return toDate;
+   }
 
-    public void setToDate(Date toDate)
-    {
-        this.toDate = toDate;
-    }
+   public void setToDate(Date toDate)
+   {
+      this.toDate = toDate;
+   }
 
-    public List<Reservation> getAvailableReservations()
-    {
-        return availableReservations;
-    }
+   public List<Reservation> getAvailableReservations()
+   {
+      return availableReservations;
+   }
 
-    public void setAvailableReservations(List<Reservation> availableReservations)
-    {
-        this.availableReservations = availableReservations;
-    }
+   public void setAvailableReservations(List<Reservation> availableReservations)
+   {
+      this.availableReservations = availableReservations;
+   }
 }

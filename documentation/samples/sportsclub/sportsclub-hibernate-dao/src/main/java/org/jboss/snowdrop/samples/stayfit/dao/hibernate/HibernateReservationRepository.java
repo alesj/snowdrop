@@ -13,27 +13,27 @@ import java.util.Date;
 public class HibernateReservationRepository extends HibernateRepository<Reservation, Integer> implements ReservationRepository
 {
 
-    public HibernateReservationRepository()
-    {
-        super(Reservation.class);
-    }
+   public HibernateReservationRepository()
+   {
+      super(Reservation.class);
+   }
 
-    public List<Reservation> getReservations(Date fromDate, Date toDate)
-    {
+   public List<Reservation> getReservations(Date fromDate, Date toDate)
+   {
 
-        Criteria cri = getCurrentSession().createCriteria(Reservation.class);
-        cri.add( and( le("fromDate", fromDate), ge("toDate", toDate) ) );
+      Criteria cri = getCurrentSession().createCriteria(Reservation.class);
+      cri.add(and(le("fromDate", fromDate), ge("toDate", toDate)));
 
-        return cri.list();
-    }
+      return cri.list();
+   }
 
-    public List<Reservation> getReservationsBefore(Date date)
-    {
-        return getCurrentSession().createCriteria(Reservation.class).add(le("toDate", date)).list();
-    }
+   public List<Reservation> getReservationsBefore(Date date)
+   {
+      return getCurrentSession().createCriteria(Reservation.class).add(le("toDate", date)).list();
+   }
 
-    public List<Reservation> getReservationsAfter(Date date)
-    {
-        return getCurrentSession().createCriteria(Reservation.class).add(ge("fromDate", date)).list();
-    }
+   public List<Reservation> getReservationsAfter(Date date)
+   {
+      return getCurrentSession().createCriteria(Reservation.class).add(ge("fromDate", date)).list();
+   }
 }
