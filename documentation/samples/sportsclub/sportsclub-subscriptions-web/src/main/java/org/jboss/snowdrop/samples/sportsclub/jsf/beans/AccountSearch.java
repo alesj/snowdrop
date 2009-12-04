@@ -89,10 +89,6 @@ public class AccountSearch extends ExtendedDataModel
       {
          rowCount = subscriptionService.countAccountsBySubscriberName(name);
       }
-      else
-      {
-         return rowCount;
-      }
       return rowCount;
    }
 
