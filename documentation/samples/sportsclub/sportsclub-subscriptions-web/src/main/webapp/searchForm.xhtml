@@ -25,6 +25,12 @@
                     <rich:dataTable id="searchResultsTable" value="#{accountSearch}" var="account" rows="5">
                         <rich:column>
                             <f:facet name="header">
+                                <h:outputText value="Account #"/>
+                            </f:facet>
+                            <h:outputText value="#{account.id}"/>
+                        </rich:column>
+                        <rich:column>
+                            <f:facet name="header">
                                 <h:outputText value="First Name"/>
                             </f:facet>
                             <h:outputText value="#{account.subscriber.name.firstName}"/>
@@ -53,6 +59,12 @@
                             </f:facet>
                             <h:outputText value="#{account.billingType}"/>
                         </rich:column>
+                        <rich:column>
+                            <f:facet name="header">
+                                <h:outputText value="Edit"/>
+                            </f:facet>
+                            <a4j:commandLink value="Edit" onclick="Richfaces.showModalPanel('')"/>
+                        </rich:column>
                         <f:facet name="footer">
                             <rich:datascroller id="sc2" for="searchResultsTable" maxPages="5"
                                                page="#{accountSearch.currentPage}"/>
@@ -62,6 +74,20 @@
             </h:form>
         </a4j:outputPanel>
 
+        <rich:modalPanel id="edit">
+
+            <f:facet name="header">
+
+                <h:outputText value="I'm panel header"/>
+
+            </f:facet>
+
+            <p> My panel
+            </p>
+
+            <a onclick="Richfaces.hideModalPanel('pnl');" href="#">Hide ModalPanel</a>
+
+        </rich:modalPanel>
 
     </ui:define>
 </ui:composition>

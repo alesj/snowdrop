@@ -10,4 +10,7 @@ import java.util.List;
 public interface MembershipRepository extends Repository<Membership, String>
 {
    List<Membership> findAllActiveMembershipTypes();
+
+   List<String> findAllMembershipCodes();
+
 }

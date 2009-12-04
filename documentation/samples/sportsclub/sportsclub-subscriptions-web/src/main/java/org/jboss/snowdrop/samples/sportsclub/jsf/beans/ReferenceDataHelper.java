@@ -5,6 +5,7 @@ import javax.ejb.EJB;
 import javax.faces.model.SelectItem;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -15,21 +16,21 @@ import org.jboss.snowdrop.samples.sportsclub.ejb.SubscriptionService;
 /**
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
  */
-public class ReferenceData
+public class ReferenceDataHelper
 {
 
    @EJB
    SubscriptionService subscriptionService;
 
-   Map<String, Membership> membershipTypes;
-
-   SelectItem[] billingTypes;
-
-   ReentrantLock lock = new ReentrantLock();
-
+   private SelectItem[] billingTypes;
 
    @PostConstruct
    void init()
+   {
+      initBillingTypes();
+   }
+
+   private void initBillingTypes()
    {
       billingTypes = new SelectItem[BillingType.values().length];
       int i=0;
@@ -44,30 +45,20 @@ public class ReferenceData
       return billingTypes;
    }
 
-   public Map<String, Membership> getMembershipTypes()
+
+
+   public SelectItem[] getMembershipCodes()
    {
+      List<String> membershipCodes = subscriptionService.getMembershipTypes();
 
-      if (membershipTypes == null)
+      SelectItem[] selectItems = new SelectItem[membershipCodes.size()];
+      int i = 0;
+      for (String membershipCode: membershipCodes)
       {
-         try
-         {
-            lock.lock();
-            if (membershipTypes == null)
-            {
-               Collection<Membership> memberships = subscriptionService.getMembershipTypes();
-               membershipTypes = new HashMap<String, Membership>();
-               for (Membership membership: memberships)
-               {
-                  membershipTypes.put(membership.getCode(), membership);
-               }
-            }
-         }
-         finally
-         {
-            lock.unlock();
-         }
+         selectItems[i++] = new SelectItem(membershipCode);
       }
-
-      return membershipTypes;
+      
+      return selectItems;
    }
+
 }

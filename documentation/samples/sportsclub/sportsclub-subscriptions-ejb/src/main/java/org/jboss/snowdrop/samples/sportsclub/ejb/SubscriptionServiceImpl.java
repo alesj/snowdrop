@@ -4,11 +4,12 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.interceptor.Interceptors;
 
-import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.jboss.annotation.spring.Spring;
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Account;
+import org.jboss.snowdrop.samples.sportsclub.domain.entity.BillingType;
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Membership;
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Person;
 import org.jboss.snowdrop.samples.sportsclub.domain.repository.AccountRepository;
@@ -57,18 +58,21 @@ public class SubscriptionServiceImpl implements SubscriptionService
    }
 
    @TransactionAttribute
-   public Account createAccountForPerson(Person person, Membership membership)
+   public Account createAccount(Person person, String membershipCode, BillingType billingType)
    {
       Account account = new Account();
       account.setSubscriber(person);
-      account.setMembership(membership);
+      membershipRepository.findById(membershipCode);
+      account.setMembership(membershipRepository.findById(membershipCode));
+      account.setBillingType(billingType);
+      account.setCreationDate(new Date());
       personRepository.save(person);
       accountRepository.save(account);
       return account;
    }
 
-   public Collection<Membership> getMembershipTypes()
+   public List<String> getMembershipTypes()
    {
-      return membershipRepository.findAllActiveMembershipTypes();
+      return membershipRepository.findAllMembershipCodes();
    }
 }

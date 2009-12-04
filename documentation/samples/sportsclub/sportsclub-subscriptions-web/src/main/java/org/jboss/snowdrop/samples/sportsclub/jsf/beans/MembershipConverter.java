@@ -2,6 +2,8 @@ package org.jboss.snowdrop.samples.sportsclub.jsf.beans;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UISelectItem;
+import javax.faces.component.UISelectOne;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
@@ -13,25 +15,17 @@ import org.jboss.snowdrop.samples.sportsclub.domain.entity.Membership;
  */
 public class MembershipConverter implements Converter
 {
-
-   private ReferenceData referenceData;
-
-   public void setReferenceData(ReferenceData referenceData)
-   {
-      this.referenceData = referenceData;
-   }
-
    public Object getAsObject(FacesContext context, UIComponent component, String value)
    {
       if (value == null)
          return null;
-      if (!referenceData.getMembershipTypes().containsKey(value))
+      if (component instanceof UISelectOne)
       {
-         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Wrong code", "Membership code " + value + " does not exist or is not active.");
-         throw new ConverterException(message);
+         return ((UISelectOne)component);
       }
-      return referenceData.getMembershipTypes().get(value);
+      return null;
    }
+
 
    public String getAsString(FacesContext context, UIComponent component, Object value)
    {

@@ -30,4 +30,10 @@ public class HibernateMembershipRepository extends HibernateRepository<Membershi
    {
       return (Integer)getCurrentSession().createCriteria(Membership.class).setProjection(Projections.count("code")).uniqueResult();
    }
+
+   public List<String> findAllMembershipCodes()
+   {
+      Criteria query = getCurrentSession().createCriteria(Membership.class).add(Restrictions.eq("active", true)).setProjection(Projections.property("code"));
+      return query.list();
+   }
 }
