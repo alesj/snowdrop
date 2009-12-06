@@ -3,23 +3,11 @@ package org.jboss.snowdrop.samples.sportsclub.domain.repository.criteria;
 /**
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
  */
-public class PersonSearchCriteria
+public class PersonSearchCriteria extends AbstractRangeCriteria
 {
    private String name;
 
    private String city;
-
-   private Range range;
-
-   public Range getRange()
-   {
-      return range;
-   }
-
-   public void setRange(Range range)
-   {
-      this.range = range;
-   }
 
    public String getCity()
    {

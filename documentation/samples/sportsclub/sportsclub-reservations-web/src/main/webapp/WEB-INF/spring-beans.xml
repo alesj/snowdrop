@@ -11,7 +11,7 @@
 
     <import resource="classpath*:infrastructure.xml"/>
 
-    <bean id="reservationsBean" class="org.jboss.snowdrop.samples.sportsclub.jsf.beans.ReservationsBean" scope="session">
+    <bean id="reservationSearch" class="org.jboss.snowdrop.samples.sportsclub.jsf.beans.ReservationSearch" scope="request">
         <property name="reservationService" ref="reservationService"/>
     </bean>
     

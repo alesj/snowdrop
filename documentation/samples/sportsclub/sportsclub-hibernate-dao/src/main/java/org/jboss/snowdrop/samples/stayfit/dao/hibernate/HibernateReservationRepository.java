@@ -1,9 +1,11 @@
 package org.jboss.snowdrop.samples.stayfit.dao.hibernate;
 
 import org.jboss.snowdrop.samples.sportsclub.domain.repository.ReservationRepository;
+import org.jboss.snowdrop.samples.sportsclub.domain.repository.criteria.ReservationSearchCriteria;
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Reservation;
 import org.hibernate.Criteria;
 import static org.hibernate.criterion.Restrictions.*;
+import org.hibernate.criterion.Projections;
 
 import java.util.List;
 import java.util.Date;
@@ -18,22 +20,40 @@ public class HibernateReservationRepository extends HibernateRepository<Reservat
       super(Reservation.class);
    }
 
-   public List<Reservation> getReservations(Date fromDate, Date toDate)
+   private Criteria convert(ReservationSearchCriteria reservationSearchCriteria)
    {
+      Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Reservation.class);
 
-      Criteria cri = getCurrentSession().createCriteria(Reservation.class);
-      cri.add(and(ge("from", fromDate), le("to", toDate)));
+      Date from = reservationSearchCriteria.getFromDate();
+      Date to = reservationSearchCriteria.getToDate();
 
+      if (from != null && to != null) criteria.add(and(ge("from", from), le("to", to)));
+      else
+      {
+         if (from != null) criteria.add(ge("from", from));
+         if (to != null) criteria.add(le("to", to));
+      }
+
+      if (reservationSearchCriteria.getRange() != null)
+      {
+         criteria.setFirstResult(reservationSearchCriteria.getRange().getMinIndex());
+         criteria.setMaxResults(reservationSearchCriteria.getRange().length());
+      }
+
+      return criteria;
+   }
+
+   public List<Reservation> getByCriteria(ReservationSearchCriteria criteria)
+   {
+      Criteria cri = convert(criteria);
       return cri.list();
    }
 
-   public List<Reservation> getReservationsBefore(Date date)
+   public Integer countByCriteria(ReservationSearchCriteria criteria)
    {
-      return getCurrentSession().createCriteria(Reservation.class).add(le("to", date)).list();
+      Criteria cri = convert(criteria);
+      cri.setProjection(Projections.count("id"));
+      return (Integer) cri.uniqueResult();
    }
 
-   public List<Reservation> getReservationsAfter(Date date)
-   {
-      return getCurrentSession().createCriteria(Reservation.class).add(ge("from", date)).list();
-   }
 }

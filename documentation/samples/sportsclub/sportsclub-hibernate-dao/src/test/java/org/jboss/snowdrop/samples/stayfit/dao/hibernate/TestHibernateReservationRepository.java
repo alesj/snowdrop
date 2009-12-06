@@ -1,6 +1,7 @@
 package org.jboss.snowdrop.samples.stayfit.dao.hibernate;
 
 import org.jboss.snowdrop.samples.sportsclub.domain.repository.ReservationRepository;
+import org.jboss.snowdrop.samples.sportsclub.domain.repository.criteria.ReservationSearchCriteria;
 import org.jboss.snowdrop.samples.sportsclub.domain.entity.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -32,13 +33,23 @@ public class TestHibernateReservationRepository
       Date from = getDate(2009,1,1);
       Date to = getDate(2009,12,31);
 
-      List<Reservation> reservations = reservationRepository.getReservations(from, to);
+      ReservationSearchCriteria criteria = new ReservationSearchCriteria();
+      criteria.setFromDate(from);
+      criteria.setToDate(to);
+
+      List<Reservation> reservations = reservationRepository.getByCriteria(criteria);
       Assert.assertEquals(3, reservations.size());
 
-      reservations = reservationRepository.getReservationsAfter(getDate(2009,02,01));
+      criteria = new ReservationSearchCriteria();
+      criteria.setFromDate(getDate(2009,02,01));
+
+      reservations = reservationRepository.getByCriteria(criteria);
       Assert.assertEquals(2, reservations.size());
 
-      reservations = reservationRepository.getReservationsBefore(getDate(2009,11,30));
+      criteria = new ReservationSearchCriteria();
+      criteria.setToDate(getDate(2009,11,30));
+
+      reservations = reservationRepository.getByCriteria(criteria);
       Assert.assertEquals(2, reservations.size());
       
    }

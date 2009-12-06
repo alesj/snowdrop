@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j"
+                template="layout/template.xhtml">
+
+    <ui:define name="content">
+
+        <rich:panel>
+            <f:facet name="header">Display reservations in the following date range (dates are optional)</f:facet>
+            <h:form>
+                from:
+                <rich:calendar value="#{reservationSearch.fromDate}"/>
+                to:
+                <rich:calendar value="#{reservationSearch.toDate}"/>
+                <h:commandButton id="submit" value="Display Reservations"
+                                 action="#{reservationSearch.searchReservations}" reRender="searchResults"/>
+            </h:form>
+        </rich:panel>
+
+        <a4j:outputPanel id="searchResults">
+            <h:form>
+                <rich:panel header="Search results">
+                    
+                    <rich:dataTable id="searchResultsTable" value="#{reservationSearch}"
+                                    var="reservation" rows="5">
+
+                       <rich:column>
+                            <f:facet name="header">
+                                <h:outputText value="Reservation #"/>
+                            </f:facet>
+                            <h:outputText value="#{reservation.id}"/>
+                        </rich:column>
+
+                        <rich:column>
+                            <f:facet name="header">
+                                <h:outputText value="Equipment"/>
+                            </f:facet>
+                            <h:outputText value="#{reservation.equipment.name}"/>
+                        </rich:column>
+
+                        <rich:column>
+                            <f:facet name="header">
+                                <h:outputText value="Eqp.Description"/>
+                            </f:facet>
+                            <h:outputText value="#{reservation.equipment.description}"/>
+                        </rich:column>
+
+                        <rich:column>
+                            <f:facet name="header">
+                                <h:outputText value="From"/>
+                            </f:facet>
+                            <h:outputText value="#{reservation.from}"/>
+                        </rich:column>
+
+                        <rich:column>
+                            <f:facet name="header">
+                                <h:outputText value="To"/>
+                            </f:facet>
+                            <h:outputText value="#{reservation.to}"/>
+                        </rich:column>
+
+                        <f:facet name="footer">
+                            <rich:datascroller id="scroller" for="searchResultsTable" maxPages="5"
+                                               page="#{reservationSearch.currentPage}"/>
+                        </f:facet>
+
+                    </rich:dataTable>
+                </rich:panel>
+            </h:form>
+        </a4j:outputPanel>
+
+    </ui:define>
+
+</ui:composition>

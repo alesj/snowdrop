@@ -10,10 +10,7 @@ import java.util.Date;
  */
 public interface ReservationService
 {
-    
-    List<Reservation> getReservations(Date fromDate, Date toDate);
-    List<Reservation> getReservationBefore(Date date);
-    List<Reservation> getReservationAfter(Date date);
-    List<Reservation> getAllReservation();
+   List<Reservation> getReservations(Date fromDate, Date toDate, Integer nim, Integer max);
 
+   Integer countReservationsForRange(Date fromDate, Date toDate);
 }
