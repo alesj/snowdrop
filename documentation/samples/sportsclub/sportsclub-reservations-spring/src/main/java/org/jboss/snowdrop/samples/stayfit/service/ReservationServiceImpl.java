@@ -12,6 +12,7 @@ import java.util.Date;
 /**
  *
  */
+@Transactional
 public class ReservationServiceImpl implements ReservationService
 {
 
