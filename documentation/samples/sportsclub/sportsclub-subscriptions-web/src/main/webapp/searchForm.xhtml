@@ -21,8 +21,11 @@
         <a4j:outputPanel id="searchResults">
             <h:form>
                 <rich:panel header="Search results" rendered="#{accountSearch.searchInfoAvailable}">
-
                     <rich:dataTable id="searchResultsTable" value="#{accountSearch}" var="account" rows="5">
+                        <a4j:support event="onRowClick" reRender="accountData">
+                            <f:setPropertyActionListener value="#{account.id}"
+                                                         target="#{accountSearch.selected}"/>
+                        </a4j:support>
                         <rich:column>
                             <f:facet name="header">
                                 <h:outputText value="Account #"/>
@@ -59,12 +62,6 @@
                             </f:facet>
                             <h:outputText value="#{account.billingType}"/>
                         </rich:column>
-                        <rich:column>
-                            <f:facet name="header">
-                                <h:outputText value="Edit"/>
-                            </f:facet>
-                            <a4j:commandLink value="Edit" onclick="Richfaces.showModalPanel('')"/>
-                        </rich:column>
                         <f:facet name="footer">
                             <rich:datascroller id="sc2" for="searchResultsTable" maxPages="5"
                                                page="#{accountSearch.currentPage}"/>
@@ -72,22 +69,38 @@
                     </rich:dataTable>
                 </rich:panel>
             </h:form>
+
         </a4j:outputPanel>
 
-        <rich:modalPanel id="edit">
 
-            <f:facet name="header">
 
-                <h:outputText value="I'm panel header"/>
+            <a4j:outputPanel id="accountData">
+                <rich:panel rendered="#{accountSearch.currentAccount != null}" >
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="First name"/>
+                            <h:outputText
+                                               value="#{accountSearch.currentAccount.subscriber.name.firstName}"/>
+                            <h:outputLabel value="Middle name"/>
+                            <rich:inplaceInput defaultLabel="Click to enter"
+                                               value="#{accountSearch.currentAccount.subscriber.name.middleName}"/>
+                            <h:outputLabel value="Last name"/>
+                            <h:outputText
+                                               value="#{accountSearch.currentAccount.subscriber.name.lastName}"/>
+                            <h:outputLabel value="Address"/>
+                            <h:outputText
+                                               value="#{accountSearch.currentAccount.subscriber.address.streetAddress}"/>
+                            <h:outputLabel value="City"/>
+                            <h:outputText
+                                               value="#{accountSearch.currentAccount.subscriber.address.city}"/>
+                            <h:outputLabel value="Province"/>
+                            <h:outputText 
+                                               value="#{accountSearch.currentAccount.subscriber.address.provinceOrState}"/>
 
-            </f:facet>
-
-            <p> My panel
-            </p>
-
-            <a onclick="Richfaces.hideModalPanel('pnl');" href="#">Hide ModalPanel</a>
-
-        </rich:modalPanel>
+                        </h:panelGrid>
+                    </h:form>
+                </rich:panel>
+            </a4j:outputPanel>
 
     </ui:define>
 </ui:composition>

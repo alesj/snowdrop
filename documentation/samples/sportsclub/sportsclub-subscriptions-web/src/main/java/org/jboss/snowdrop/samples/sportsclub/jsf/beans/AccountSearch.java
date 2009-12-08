@@ -31,6 +31,7 @@ public class AccountSearch extends ExtendedDataModel
 
    private Map<Long, Account> accountsMap = new HashMap<Long, Account>();
    private Integer rowCount;
+   private Long selected;
 
    public String getName()
    {
@@ -116,6 +117,10 @@ public class AccountSearch extends ExtendedDataModel
          accountsMap.put(id, row);
          visitor.process(context, id, argument);
       }
+      if (selected != null && !accountsMap.containsKey(selected))
+      {
+         selected = null;
+      }
    }
 
    @Override
@@ -140,5 +145,28 @@ public class AccountSearch extends ExtendedDataModel
    public void setWrappedData(Object data)
    {
       throw new UnsupportedOperationException("Not supported");
+   }
+
+   public Account getCurrentAccount()
+   {
+      if (selected != null)
+         return accountsMap.get(selected);
+      else
+         return null;
+   }
+
+   public void saveCurrent()
+   {
+      
+   }
+
+   public void setSelected(Long selected)
+   {
+      this.selected = selected;
+   }
+
+   public Long getSelected()
+   {
+      return selected;
    }
 }

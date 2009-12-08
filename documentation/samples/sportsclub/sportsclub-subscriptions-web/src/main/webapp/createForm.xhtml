@@ -8,7 +8,7 @@
     <ui:define name="content">
         <rich:panel>
             <h:form>
-                <h:panelGrid columns="2">
+                <h:panelGrid columns="2" >
                     <h:outputLabel value="First name"/>
                     <rich:inplaceInput defaultLabel="Click to enter" value="#{accountCreate.person.name.firstName}"/>
                     <h:outputLabel value="Middle name"/>
@@ -31,8 +31,8 @@
                     <rich:inplaceSelect defaultLabel="Click to select" value="#{accountCreate.membershipType}">
                         <f:selectItems value="#{accountCreate.selectableMembershipCodes}"/>
                     </rich:inplaceSelect>
-                    <h:commandButton value="Save" action="#{accountCreate.create}"/>
                 </h:panelGrid>
+                <h:commandButton value="Save" action="#{accountCreate.create}"/>
             </h:form>
         </rich:panel>
 
