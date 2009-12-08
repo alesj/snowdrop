@@ -26,11 +26,6 @@
         <managed-bean-class>org.jboss.snowdrop.samples.sportsclub.jsf.beans.ReferenceDataHelper</managed-bean-class>
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
-    <managed-bean>
-        <managed-bean-name>membershipConverter</managed-bean-name>
-        <managed-bean-class>org.jboss.snowdrop.samples.sportsclub.jsf.beans.MembershipConverter</managed-bean-class>
-        <managed-bean-scope>application</managed-bean-scope>
-    </managed-bean>
     <converter>
         <converter-id>enumConverter</converter-id>
         <converter-class>org.jboss.snowdrop.samples.sportsclub.jsf.beans.BillingTypeConverter</converter-class>
