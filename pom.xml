@@ -48,7 +48,7 @@
     <version.javaee>3.0.0.GA</version.javaee>
     <version.xerces>2.9.1</version.xerces>
     <version.aopalliance>1.0</version.aopalliance>
-    <version.spring>2.5.6</version.spring>
+    <version.spring>2.5.6.SEC01</version.spring>
   </properties>
 
   <build>
