@@ -13,7 +13,7 @@
   <description>Snowdrop Distribution</description>
 
   <properties>
-    <deployer.version>3.2</deployer.version>
+    <deployer.version>3.2.1-SNAPSHOT</deployer.version>
   </properties>
 
   <profiles>
