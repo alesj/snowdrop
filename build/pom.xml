@@ -54,7 +54,6 @@
                 </goals>
                 <configuration>
                   <finalName>jboss-spring-${deployer.version}.deployer</finalName>
-                  <appendAssemblyId>false</appendAssemblyId>
                   <descriptors>
                     <descriptor>${basedir}/src/assembly/deployer.xml</descriptor>
                   </descriptors>
