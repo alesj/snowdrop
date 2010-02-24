@@ -28,9 +28,9 @@ import java.io.IOException;
 import java.io.File;
 import java.io.InputStream;
 
-import org.jboss.virtual.VirtualFile;
-import org.jboss.virtual.VFSUtils;
-import org.jboss.virtual.VFS;
+import org.jboss.vfs.VirtualFile;
+import org.jboss.vfs.VFSUtils;
+import org.jboss.vfs.VFS;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.AbstractResource;
 
@@ -56,9 +56,9 @@ public class VFSResource extends AbstractResource
          throw new IllegalArgumentException("Null url");
       try
       {
-         this.file = VFS.getRoot(url);
+         this.file = VFS.getChild(url);
       }
-      catch (IOException e)
+      catch (Exception e)
       {
          throw new IllegalArgumentException("Cannot retrieve file from URL: ", e);
       }
@@ -66,14 +66,7 @@ public class VFSResource extends AbstractResource
 
    public boolean exists()
    {
-      try
-      {
-         return file.exists();
-      }
-      catch (IOException e)
-      {
-         throw new RuntimeException(e);
-      }
+      return file.exists();
    }
 
    public boolean isOpen()
@@ -83,40 +76,17 @@ public class VFSResource extends AbstractResource
 
    public boolean isReadable()
    {
-      try
-      {
-         return file.getSize() > 0;
-      }
-      catch (IOException e)
-      {
-         throw new RuntimeException(e);
-      }
+      return file.getSize() > 0;
    }
 
    public long lastModified()
    {
-      try
-      {
-         return file.getLastModified();
-      }
-      catch (IOException e)
-      {
-         throw new RuntimeException(e);
-      }
+      return file.getLastModified();
    }
 
    public URL getURL() throws IOException
    {
-      try
-      {
-         return file.toURL();
-      }
-      catch (URISyntaxException e)
-      {
-         IOException ioe = new IOException(e.getMessage());
-         ioe.initCause(e);
-         throw ioe;
-      }
+      return file.toURL();
    }
 
    public URI getURI() throws IOException
@@ -135,23 +105,7 @@ public class VFSResource extends AbstractResource
 
    public File getFile() throws IOException
    {
-      if (VFSUtils.isNestedFile(file))
-         throw new IOException("This resource is a nested resource: " + file);
-
-      try
-      {
-         return new File(VFSUtils.getCompatibleURI(file));
-      }
-      catch (IOException e)
-      {
-         throw e;
-      }
-      catch (Exception e)
-      {
-         IOException ioe = new IOException(e.getMessage());
-         ioe.initCause(e);
-         throw ioe;
-      }
+      return file.getPhysicalFile();
    }
 
    @SuppressWarnings("deprecation")
@@ -159,9 +113,9 @@ public class VFSResource extends AbstractResource
    {
       //VirtualFile.findChild will not scan the parent or current directory
       if (relativePath.startsWith("."))
-         return new VFSResource(VFS.getRoot(new URL(getURL(), relativePath)));
+         return new VFSResource(getChild(new URL(getURL(), relativePath)));
       else
-         return new VFSResource(file.findChild(relativePath));
+         return new VFSResource(file.getChild(relativePath));
    }
 
    public String getFilename()
@@ -201,5 +155,19 @@ public class VFSResource extends AbstractResource
    public int hashCode()
    {
       return file.hashCode();
+   }
+
+   static VirtualFile getChild(URL url) throws IOException
+   {
+      try
+      {
+         return VFS.getChild(url);
+      }
+      catch (URISyntaxException e)
+      {
+         IOException ioe = new IOException(e.getMessage());
+         ioe.initCause(e);
+         throw ioe;
+      }
    }
 }

@@ -224,11 +224,15 @@ public class ControllerBeanFactory implements BeanFactory
    /**
     * Get prototype class.
     *
-    * @param kcc the kernel controller context
+    * @param cc the controller context
     * @return prototype's class
     */
-   protected Class<?> getPrototypeClass(KernelControllerContext kcc)
+   protected Class<?> getPrototypeClass(ControllerContext cc)
    {
+      if (cc instanceof KernelControllerContext == false)
+         return null;
+
+      KernelControllerContext kcc = (KernelControllerContext) cc;
       BeanMetaData bmd = kcc.getBeanMetaData();
       Set<PropertyMetaData> properties = bmd.getProperties();
       for (PropertyMetaData pmd : properties)

@@ -96,20 +96,20 @@ public class KernelControllerListableBeanFactory extends ControllerBeanFactory i
    public String[] getBeanNamesForType(Class clazz, boolean includePrototypes, boolean allowEagerInit)
    {
       List<String> result = new ArrayList<String>();
-      Set<KernelControllerContext> contexts = kernelController.getInstantiatedContexts(clazz);
+      Set<ControllerContext> contexts = kernelController.getInstantiatedContexts(clazz);
       if (contexts != null && contexts.isEmpty() == false)
       {
-         for (KernelControllerContext context : contexts)
+         for (ControllerContext context : contexts)
          {
             result.add(context.getName().toString());
          }
       }
       if (includePrototypes)
       {
-         Set<KernelControllerContext> factories = kernelController.getInstantiatedContexts(AbstractBeanFactory.class);
+         Set<ControllerContext> factories = kernelController.getInstantiatedContexts(AbstractBeanFactory.class);
          if (factories != null && factories.isEmpty() == false)
          {
-            for (KernelControllerContext kcc : factories)
+            for (ControllerContext kcc : factories)
             {
                Class<?> prototypeClass = getPrototypeClass(kcc);
                if (prototypeClass != null)
@@ -137,18 +137,18 @@ public class KernelControllerListableBeanFactory extends ControllerBeanFactory i
    public Map getBeansOfType(Class clazz, boolean includePrototypes, boolean allowEagerInit) throws BeansException
    {
       Map<String, Object> result = new HashMap<String, Object>();
-      Set<KernelControllerContext> contexts = kernelController.getContexts(clazz, ControllerState.INSTALLED);
-      for (KernelControllerContext context : contexts)
+      Set<ControllerContext> contexts = kernelController.getContexts(clazz, ControllerState.INSTALLED);
+      for (ControllerContext context : contexts)
       {
          Object target = context.getTarget();
          result.put(context.getName().toString(), target);
       }
       if (includePrototypes)
       {
-         Set<KernelControllerContext> factories = kernelController.getInstantiatedContexts(AbstractBeanFactory.class);
+         Set<ControllerContext> factories = kernelController.getInstantiatedContexts(AbstractBeanFactory.class);
          if (factories != null && factories.isEmpty() == false)
          {
-            for (KernelControllerContext kcc : factories)
+            for (ControllerContext kcc : factories)
             {
                Class<?> prototypeClass = getPrototypeClass(kcc);
                if (prototypeClass != null)

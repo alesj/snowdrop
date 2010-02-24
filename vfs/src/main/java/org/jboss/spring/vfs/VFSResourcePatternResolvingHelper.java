@@ -26,10 +26,10 @@ import java.net.URL;
 import java.util.*;
 
 import org.jboss.logging.Logger;
-import org.jboss.virtual.VFS;
-import org.jboss.virtual.VirtualFile;
-import org.jboss.virtual.VirtualFileVisitor;
-import org.jboss.virtual.VisitorAttributes;
+import org.jboss.vfs.VFS;
+import org.jboss.vfs.VirtualFile;
+import org.jboss.vfs.VirtualFileVisitor;
+import org.jboss.vfs.VisitorAttributes;
 import org.springframework.core.io.Resource;
 import org.springframework.util.PathMatcher;
 
@@ -80,7 +80,7 @@ public class VFSResourcePatternResolvingHelper
     public static Set<Resource> getVFSResources(URL rootURL, String subPattern, PathMatcher pathMatcher) throws IOException
     {
         log.debug("Scanning url: " + rootURL + ", sub-pattern: " + subPattern);
-        VirtualFile root = VFS.getRoot(rootURL);
+        VirtualFile root = VFSResource.getChild(rootURL);
         PatternVirtualFileVisitor visitor = new PatternVirtualFileVisitor(root.getPathName(), subPattern, pathMatcher);
         root.visit(visitor);
         if (log.isTraceEnabled())
