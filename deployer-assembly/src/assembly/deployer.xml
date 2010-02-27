@@ -15,6 +15,7 @@
   <dependencySets>
     <dependencySet>
       <outputDirectory>/</outputDirectory>
+      <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
       <useTransitiveDependencies>true</useTransitiveDependencies>
       <excludes>
         <exclude>*:aopalliance:*</exclude>

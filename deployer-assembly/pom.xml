@@ -6,12 +6,16 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jboss.snowdrop</groupId>
-  <artifactId>snowdrop</artifactId>
+  <artifactId>jboss-spring-deployer</artifactId>
   <packaging>pom</packaging>
-  <name>Snowdrop - Distribution</name>
+  <name>JBoss Spring Deployer</name>
   <url>http://www.jboss.com/products/jbossmc</url>
   <description>Snowdrop Distribution</description>
 
+  <properties>
+      <deployer.version>3.2.1</deployer.version>
+  </properties>
+    
   <profiles>
     <profile>
       <id>dist</id>
@@ -28,17 +32,16 @@
             <version>2.2-beta-3</version>
             <executions>
               <execution>
-                <id>make-assembly</id>
+               <id>make-assembly</id>
                 <phase>package</phase>
                 <goals>
                   <goal>single</goal>
                 </goals>
                 <configuration>
-                  <finalName>snowdrop-${project.version}</finalName>
+                  <finalName>jboss-spring-${deployer.version}.deployer</finalName>                  
+                  <appendAssemblyId>false</appendAssemblyId>
                   <descriptors>
-                    <descriptor>${basedir}/src/assembly/libs.xml</descriptor>
-                    <descriptor>${basedir}/src/assembly/libs-with-deps.xml</descriptor>
-                    <descriptor>${basedir}/src/assembly/src.xml</descriptor>
+                    <descriptor>${basedir}/src/assembly/deployer.xml</descriptor>
                   </descriptors>
                 </configuration>
               </execution>
