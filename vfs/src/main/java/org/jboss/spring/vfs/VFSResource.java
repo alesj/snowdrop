@@ -157,11 +157,22 @@ public class VFSResource extends AbstractResource
    @SuppressWarnings("deprecation")
    public Resource createRelative(String relativePath) throws IOException
    {
-      //VFSFile.findChild() will find only children
-      if (relativePath.startsWith(".") || relativePath.indexOf("/")==-1 )
+      // if it's a known relative path findChild() won't work 
+      if (relativePath.startsWith(".") || relativePath.indexOf("/") == -1)
+      {
          return new VFSResource(VFS.getRoot(new URL(getURL(), relativePath)));
+      }
       else
-         return new VFSResource(file.findChild(relativePath));
+      {
+         try
+         {
+            return new VFSResource(file.findChild(relativePath));
+         }
+         catch (IOException e)
+         {
+            return new VFSResource(VFS.getRoot(new URL(getURL(), relativePath)));
+         }
+      }
    }
 
    public String getFilename()
