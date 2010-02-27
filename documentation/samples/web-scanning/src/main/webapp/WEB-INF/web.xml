@@ -10,25 +10,16 @@
     <param-value>classpath*:spring-contexts/*.xml</param-value>
   </context-param>
 
-  <context-param>
-    <param-name>contextClass</param-name>
-    <param-value>org.jboss.spring.vfs.context.VFSXmlWebApplicationContext</param-value>
-  </context-param>
-
   <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    <listener-class>org.jboss.spring.vfs.context.DelegatingContextLoaderListener</listener-class>
   </listener>
 
   <servlet>
     <servlet-name>spring-mvc-servlet</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <servlet-class>org.jboss.spring.vfs.context.DelegatingDispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
       <param-value>/WEB-INF/mvc-config.xml</param-value>
-    </init-param>
-    <init-param>
-      <param-name>contextClass</param-name>
-      <param-value>org.jboss.spring.vfs.context.VFSXmlWebApplicationContext</param-value>
     </init-param>
   </servlet>
 
