@@ -2,7 +2,7 @@
   <parent>
     <groupId>org.jboss.snowdrop</groupId>
     <artifactId>snowdrop-parent</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1-CR1</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jboss.snowdrop</groupId>
@@ -59,10 +59,6 @@
     <dependency>
       <groupId>org.jboss.snowdrop</groupId>
       <artifactId>snowdrop-deployers</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.jboss.snowdrop</groupId>
-      <artifactId>snowdrop-weaving</artifactId>
     </dependency>
     <dependency>
         <groupId>org.springframework</groupId>
