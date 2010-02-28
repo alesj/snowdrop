@@ -7,16 +7,16 @@
   </parent>
   <groupId>org.jboss.snowdrop</groupId>
   <artifactId>snowdrop-parent</artifactId>
-  <version>1.0.1-CR1</version>
+  <version>1.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Snowdrop Parent POM</name>
   <url>http://jboss.org/snowdrop</url>
   <description>Snowdrop</description>
 
   <scm>
-    <connection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/snowdrop/tags/snowdrop-parent-1.0.1-CR1</connection>
-    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/snowdrop/tags/snowdrop-parent-1.0.1-CR1</developerConnection>
-    <url>https://svn.jboss.org/repos/jbossas/projects/snowdrop/tags/snowdrop-parent-1.0.1-CR1</url>
+    <connection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/snowdrop/branches/1_0</connection>
+    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/snowdrop/branches/1_0</developerConnection>
+    <url>https://svn.jboss.org/repos/jbossas/projects/snowdrop/branches/1_0</url>
   </scm>
 
   <modules>
