@@ -23,7 +23,7 @@
     <module>cluster</module>
     <module>deployers</module>
     <module>facade</module>
-    <module>utils</module>
+    <module>transaction</module>
     <module>vfs</module>
     <module>weaving</module>
     <module>build</module>

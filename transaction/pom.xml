@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>snowdrop-utils</artifactId>
+    <artifactId>snowdrop-transaction</artifactId>
     <version>1.0.1-SNAPSHOT</version>
     <name>Snowdrop - Transaction</name>
     <description>Snowdrop - Transaction</description>
