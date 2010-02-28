@@ -9,7 +9,7 @@
   <artifactId>snowdrop-facade</artifactId>
   <packaging>jar</packaging>
   <name>Snowdrop - Facade</name>
-  <url>http://www.jboss.org/jbossmc</url>
+  <url>http://www.jboss.org/snowdrop</url>
   <description>Snowdrop - Facade</description>
 
   <dependencies>
@@ -29,14 +29,17 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
+      <optional>true</optional>
     </dependency>
   </dependencies>
 

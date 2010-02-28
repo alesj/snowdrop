@@ -9,7 +9,7 @@
   <artifactId>snowdrop-cluster</artifactId>
   <packaging>jar</packaging>
   <name>Snowdrop - Cluster</name>
-  <url>http://www.jboss.org/jbossmc</url>
+  <url>http://www.jboss.org/snowdrop</url>
   <description>Snowdrop - Cluster</description>
 
   <dependencies>
@@ -17,6 +17,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.jboss.cache</groupId>

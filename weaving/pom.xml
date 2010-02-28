@@ -9,7 +9,7 @@
   <artifactId>snowdrop-weaving</artifactId>
   <packaging>jar</packaging>
   <name>Snowdrop - Weaving</name>
-  <url>http://www.jboss.org/jbossmc</url>
+  <url>http://www.jboss.org/snowdrop</url>
   <description>Snowdrop - Weaving</description>
 
   <dependencies>
@@ -29,10 +29,12 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
+      <optional>true</optional>
     </dependency>
   </dependencies>
 </project>

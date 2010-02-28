@@ -9,7 +9,7 @@
   <artifactId>snowdrop</artifactId>
   <packaging>pom</packaging>
   <name>Snowdrop - Distribution</name>
-  <url>http://www.jboss.com/products/jbossmc</url>
+  <url>http://www.jboss.org/snowdrop</url>
   <description>Snowdrop Distribution</description>
 
   <profiles>

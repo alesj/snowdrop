@@ -9,20 +9,9 @@
   <artifactId>snowdrop-deployers</artifactId>
   <packaging>jar</packaging>
   <name>Snowdrop - Deployers</name>
-  <url>http://www.jboss.org/jbossmc</url>
+  <url>http://www.jboss.org/snowdrop</url>
   <description>Snowdrop - Deployers</description>
-
-  <build>
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-        <excludes>
-          <exclude>META-INF/spring-deployers-jboss-beans.xml</exclude>
-        </excludes>
-      </resource>
-    </resources>
-  </build>
-
+    
   <dependencies>
     <dependency>
       <groupId>org.jboss.snowdrop</groupId>
@@ -82,14 +71,17 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
+      <optional>true</optional>
     </dependency>
   </dependencies>
   

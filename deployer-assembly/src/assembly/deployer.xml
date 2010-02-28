@@ -22,5 +22,13 @@
         <exclude>*:commons-logging:*</exclude>
       </excludes>
     </dependencySet>
+    <dependencySet>
+      <outputDirectory>/</outputDirectory>
+      <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
+      <useTransitiveDependencies>false</useTransitiveDependencies>
+      <includes>
+          <include>org.springframework:spring</include>
+      </includes>
+    </dependencySet>
   </dependencySets>
 </assembly>
