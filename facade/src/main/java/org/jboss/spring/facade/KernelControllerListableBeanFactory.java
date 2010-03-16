@@ -21,21 +21,21 @@
  */
 package org.jboss.spring.facade;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.lang.annotation.Annotation;
+import java.util.*;
 
+import org.jboss.beans.metadata.spi.AnnotationMetaData;
 import org.jboss.beans.metadata.spi.factory.AbstractBeanFactory;
 import org.jboss.dependency.spi.ControllerContext;
 import org.jboss.dependency.spi.ControllerState;
 import org.jboss.dependency.spi.ControllerStateModel;
+import org.jboss.dependency.spi.tracker.ContextFilter;
 import org.jboss.kernel.Kernel;
 import org.jboss.kernel.spi.dependency.KernelController;
 import org.jboss.kernel.spi.dependency.KernelControllerContext;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ListableBeanFactory;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 
 /**
  * ListableBeanFactory facade over MC's KernelController.
@@ -167,4 +167,45 @@ public class KernelControllerListableBeanFactory extends ControllerBeanFactory i
       }
       return result;
    }
+
+    public Map<String, Object> getBeansWithAnnotation(final Class<? extends Annotation> annotationType) throws BeansException {
+        Set<ControllerContext> controllerContexts = kernelController.filter(kernelController.getContextsByState(ControllerState.INSTALLED), new ContextFilter() {
+            public boolean accepts(ControllerContext context) {
+                Set<AnnotationMetaData> annotationMetaDataSet = ((KernelControllerContext) context).getBeanMetaData().getAnnotations();
+                for (AnnotationMetaData annotationMetaData: annotationMetaDataSet)
+                {
+                    if (annotationType.isAssignableFrom(annotationMetaData.getAnnotationInstance().annotationType()))
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+        Map<String, Object> returnedObjects = new HashMap<String, Object>();
+        for (ControllerContext controllerContext: controllerContexts)
+        {
+            returnedObjects.put((String)controllerContext.getName(), controllerContext.getTarget());
+        }
+        return returnedObjects;
+    }
+
+    public <A extends Annotation> A findAnnotationOnBean(String beanName, Class<A> annotationType) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public <T> T getBean(Class<T> tClass) throws BeansException {
+        Set<ControllerContext> foundContexts = new HashSet<ControllerContext>();
+        for (ControllerContext controllerContext : kernelController.getContexts(tClass, ControllerState.INSTALLED)){
+
+        }
+        if (foundContexts.size() != 1)
+        {
+            throw new NoSuchBeanDefinitionException(tClass);
+        }
+        else
+        {
+          return (T) foundContexts.iterator().next().getTarget();  
+        }
+    }
 }

@@ -7,6 +7,8 @@
 
   <bean id="hello" class="springdemo.weaving.hello.HelloService"/>
 
+<!--
   <context:load-time-weaver weaver-class="org.jboss.instrument.classloading.JBoss5LoadTimeWeaver"/>
+-->
 
 </beans>

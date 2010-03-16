@@ -54,4 +54,8 @@ public class CacheScope extends CacheLookup implements Scope
    public void registerDestructionCallback(String string, Runnable runnable)
    {
    }
+
+    public Object resolveContextualObject(String s) {
+        return null;
+    }
 }
