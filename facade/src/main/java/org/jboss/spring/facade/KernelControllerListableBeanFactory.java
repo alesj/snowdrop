@@ -21,12 +21,15 @@
  */
 package org.jboss.spring.facade;
 
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.jboss.beans.metadata.spi.AnnotationMetaData;
 import org.jboss.beans.metadata.spi.factory.AbstractBeanFactory;
 import org.jboss.dependency.spi.ControllerContext;
 import org.jboss.dependency.spi.ControllerState;
@@ -34,8 +37,10 @@ import org.jboss.dependency.spi.ControllerStateModel;
 import org.jboss.kernel.Kernel;
 import org.jboss.kernel.spi.dependency.KernelController;
 import org.jboss.kernel.spi.dependency.KernelControllerContext;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ListableBeanFactory;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 
 /**
  * ListableBeanFactory facade over MC's KernelController.
@@ -83,7 +88,9 @@ public class KernelControllerListableBeanFactory extends ControllerBeanFactory i
       {
          Set<ControllerContext> byState = kernelController.getContextsByState(state);
          for (ControllerContext context : byState)
+         {
             result.add(context.getName().toString());
+         }
       }
       return result.toArray(new String[result.size()]);
    }
@@ -115,13 +122,17 @@ public class KernelControllerListableBeanFactory extends ControllerBeanFactory i
                if (prototypeClass != null)
                {
                   if (clazz.isAssignableFrom(prototypeClass))
+                  {
                      result.add(kcc.getName().toString());
+                  }
                }
                else if (allowEagerInit)
                {
                   Object bean = createBean(kcc.getTarget());
                   if (clazz.isInstance(bean))
+                  {
                      result.add(kcc.getName().toString());
+                  }
                }
             }
          }
@@ -154,17 +165,66 @@ public class KernelControllerListableBeanFactory extends ControllerBeanFactory i
                if (prototypeClass != null)
                {
                   if (clazz.isAssignableFrom(prototypeClass))
+                  {
                      result.put(kcc.getName().toString(), createBean(kcc.getTarget()));
+                  }
                }
                else if (allowEagerInit)
                {
                   Object bean = createBean(kcc.getTarget());
                   if (clazz.isInstance(bean))
+                  {
                      result.put(kcc.getName().toString(), bean);
+                  }
                }
             }
          }
       }
       return result;
+   }
+
+   public Map<String, Object> getBeansWithAnnotation(final Class<? extends Annotation> annotationType) throws BeansException
+   {
+      Set<ControllerContext> controllerContexts = new HashSet<ControllerContext>();
+
+      for (ControllerContext controllerContext : kernelController.getContextsByState(ControllerState.INSTALLED))
+      {
+         Set<AnnotationMetaData> annotationMetaDataSet = ((KernelControllerContext) controllerContext).getBeanMetaData().getAnnotations();
+         for (AnnotationMetaData annotationMetaData : annotationMetaDataSet)
+         {
+            if (annotationType.isAssignableFrom(annotationMetaData.getAnnotationInstance().annotationType()))
+            {
+               controllerContexts.add(controllerContext);
+            }
+         }
+      }
+      Map<String, Object> returnedObjects = new HashMap<String, Object>();
+      for (ControllerContext controllerContext : controllerContexts)
+      {
+         returnedObjects.put((String) controllerContext.getName(), controllerContext.getTarget());
+      }
+      return returnedObjects;
+   }
+
+   public <A extends Annotation> A findAnnotationOnBean(String beanName, Class<A> annotationType)
+   {
+      return null; 
+   }
+
+   public <T> T getBean(Class<T> tClass) throws BeansException
+   {
+      Set<ControllerContext> foundContexts = new HashSet<ControllerContext>();
+      for (ControllerContext controllerContext : kernelController.getContexts(tClass, ControllerState.INSTALLED))
+      {
+
+      }
+      if (foundContexts.size() != 1)
+      {
+         throw new NoSuchBeanDefinitionException(tClass);
+      }
+      else
+      {
+         return (T) foundContexts.iterator().next().getTarget();
+      }
    }
 }

@@ -7,7 +7,7 @@
   </parent>
   <groupId>org.jboss.snowdrop</groupId>
   <artifactId>snowdrop-parent</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Snowdrop Parent POM</name>
   <url>http://jboss.org/snowdrop</url>
@@ -50,7 +50,7 @@
     <version.javaee>3.0.0.GA</version.javaee>
     <version.xerces>2.9.1</version.xerces>
     <version.aopalliance>1.0</version.aopalliance>
-    <version.spring>2.5.6.SEC01</version.spring>
+    <version.spring>3.0.0.RELEASE</version.spring>
   </properties>
 
   <build>

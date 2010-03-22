@@ -21,6 +21,7 @@
  */
 package org.jboss.spring.facade;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.jboss.beans.info.spi.BeanInfo;
@@ -48,7 +49,7 @@ import org.springframework.beans.factory.NoSuchBeanDefinitionException;
  * @author <a href="mailto:ales.justin@jboss.org">Ales Justin</a>
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
  */
-public class ControllerBeanFactory implements BeanFactory
+public abstract class ControllerBeanFactory implements BeanFactory
 {
    private Controller controller;
 
@@ -101,7 +102,7 @@ public class ControllerBeanFactory implements BeanFactory
         return getBeanWithType(name, clazz);
    }
 
-   /**
+    /**
     * Get exact bean.
     *
     * @param name the bean name
@@ -224,11 +225,15 @@ public class ControllerBeanFactory implements BeanFactory
    /**
     * Get prototype class.
     *
-    * @param kcc the kernel controller context
+    * @param cc the controller context
     * @return prototype's class
     */
-   protected Class<?> getPrototypeClass(KernelControllerContext kcc)
+   protected Class<?> getPrototypeClass(ControllerContext cc)
    {
+      if (cc instanceof KernelControllerContext == false)
+         return null;
+
+      KernelControllerContext kcc = (KernelControllerContext) cc;
       BeanMetaData bmd = kcc.getBeanMetaData();
       Set<PropertyMetaData> properties = bmd.getProperties();
       for (PropertyMetaData pmd : properties)

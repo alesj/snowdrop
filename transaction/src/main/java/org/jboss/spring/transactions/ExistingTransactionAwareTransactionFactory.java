@@ -6,6 +6,7 @@ import javax.transaction.SystemException;
 import javax.transaction.Transaction;
 
 import org.springframework.transaction.jta.JtaTransactionManager;
+import org.springframework.transaction.jta.SimpleTransactionFactory;
 import org.springframework.transaction.jta.TransactionFactory;
 
 /**
@@ -21,7 +22,6 @@ public class ExistingTransactionAwareTransactionFactory implements TransactionFa
 {
 
    private JtaTransactionManager wrappedJtaTransactionManager;
-
 
    public JtaTransactionManager getWrappedJtaTransactionManager()
    {
@@ -48,5 +48,8 @@ public class ExistingTransactionAwareTransactionFactory implements TransactionFa
       }
    }
 
-
+   public boolean supportsResourceAdapterManagedTransactions()
+   {
+      return false;  //To change body of implemented methods use File | Settings | File Templates.
+   }
 }
