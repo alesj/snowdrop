@@ -14,9 +14,9 @@
   <description>Snowdrop</description>
 
   <scm>
-    <connection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/snowdrop/branches/1_0</connection>
-    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/snowdrop/branches/1_0</developerConnection>
-    <url>https://svn.jboss.org/repos/jbossas/projects/snowdrop/branches/1_0</url>
+    <connection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/snowdrop/branches/1_1</connection>
+    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/snowdrop/branches/1_1</developerConnection>
+    <url>https://svn.jboss.org/repos/jbossas/projects/snowdrop/branches/1_1</url>
   </scm>
 
   <modules>
