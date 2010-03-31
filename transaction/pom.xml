@@ -3,12 +3,12 @@
     <parent>
         <artifactId>snowdrop-parent</artifactId>
         <groupId>org.jboss.snowdrop</groupId>
-        <version>1.1.0-SNAPSHOT</version>
+        <version>1.1-CR1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>snowdrop-transaction</artifactId>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>1.1-CR1</version>
     <name>Snowdrop - Transaction</name>
     <description>Snowdrop - Transaction</description>
     <url>http://www.jboss.org/snowdrop</url>

@@ -2,7 +2,7 @@
   <parent>
     <groupId>org.jboss.snowdrop</groupId>
     <artifactId>snowdrop-parent</artifactId>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>1.1-CR1</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jboss.snowdrop</groupId>
@@ -36,12 +36,24 @@
                 <configuration>
                   <finalName>snowdrop-${project.version}</finalName>
                   <descriptors>
-                    <descriptor>${basedir}/src/assembly/libs.xml</descriptor>
                     <descriptor>${basedir}/src/assembly/libs-with-deps.xml</descriptor>
                     <descriptor>${basedir}/src/assembly/src.xml</descriptor>
                   </descriptors>
                 </configuration>
               </execution>
+                <execution>
+                  <id>make-assembly-no-deps</id>
+                  <phase>package</phase>
+                  <goals>
+                    <goal>single</goal>
+                  </goals>
+                  <configuration>
+                    <finalName>snowdrop-${project.version}</finalName>
+                    <descriptors>
+                      <descriptor>${basedir}/src/assembly/libs.xml</descriptor>
+                    </descriptors>
+                  </configuration>
+                </execution>              
             </executions>
           </plugin>
         </plugins>
