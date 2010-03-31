@@ -36,12 +36,24 @@
                 <configuration>
                   <finalName>snowdrop-${project.version}</finalName>
                   <descriptors>
-                    <descriptor>${basedir}/src/assembly/libs.xml</descriptor>
                     <descriptor>${basedir}/src/assembly/libs-with-deps.xml</descriptor>
                     <descriptor>${basedir}/src/assembly/src.xml</descriptor>
                   </descriptors>
                 </configuration>
               </execution>
+                <execution>
+                  <id>make-assembly-no-deps</id>
+                  <phase>package</phase>
+                  <goals>
+                    <goal>single</goal>
+                  </goals>
+                  <configuration>
+                    <finalName>snowdrop-${project.version}</finalName>
+                    <descriptors>
+                      <descriptor>${basedir}/src/assembly/libs.xml</descriptor>
+                    </descriptors>
+                  </configuration>
+                </execution>              
             </executions>
           </plugin>
         </plugins>

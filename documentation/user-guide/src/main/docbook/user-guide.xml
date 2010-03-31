@@ -11,7 +11,6 @@
 
     <xi:include href="author-group.xml"
                 xmlns:xi="http://www.w3.org/2001/XInclude" />
-
   </bookinfo>
 
   <preface>
@@ -45,7 +44,7 @@
       </listitem>
 
       <listitem>
-        <para>Spring 2.5.x</para>
+        <para>Spring 2.5.x and 3.0.x</para>
       </listitem>
     </itemizedlist>
   </preface>
@@ -101,7 +100,7 @@
     package.</para>
 
     <section>
-      <title>The VFS-supporting application contexts</title>
+      <title>The VFS-supporting application contexts (Spring 2.5 only)</title>
 
       <para>For using this functionality, the snowdrop-vfs.jar file needs to
       be added to the application.</para>
@@ -153,6 +152,7 @@
       sample below:</para>
 
       <?dbfo-need height="5in" ?>
+
       <informalexample>
         <programlisting language="XML">&lt;context-param&gt;
   &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
@@ -191,7 +191,9 @@
 
       <para>Both configurations can be seen at work in the web-scanning
       sample.</para>
-     <?dbfo-need height="5in" ?>
+
+      <?dbfo-need height="5in" ?>
+
       <note>
         <para>In general, it is a good idea to pay attention to this error. If
         encountered while the application is starting, you definitely need to
@@ -203,6 +205,10 @@
   at org.springframework.core.io.support.PathMatchingResourcePatternResolver
  .doFindPathMatchingJarResources(PathMatchingResourcePatternResolver.java:448)</programlisting>
         (the listing has been wrapped for formatting purposes).</para>
+      </note>
+
+      <note>
+        <para>This feature is necessary</para>
       </note>
     </section>
 
@@ -307,6 +313,7 @@
         description element of the Spring XML.</para>
 
         <?dbfo-need height="5in" ?>
+
         <programlisting language="XML">&lt;beans&gt;
     &lt;description&gt;BeanFactory=(MyApp)&lt;/description&gt;
 ...
