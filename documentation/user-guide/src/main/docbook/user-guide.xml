@@ -11,7 +11,6 @@
 
     <xi:include href="author-group.xml"
                 xmlns:xi="http://www.w3.org/2001/XInclude" />
-
   </bookinfo>
 
   <preface>
@@ -45,7 +44,7 @@
       </listitem>
 
       <listitem>
-        <para>Spring 2.5.x</para>
+        <para>Spring 2.5.x and 3.0.x</para>
       </listitem>
     </itemizedlist>
   </preface>
@@ -101,7 +100,7 @@
     package.</para>
 
     <section>
-      <title>The VFS-supporting application contexts</title>
+      <title>The VFS-supporting application contexts (Spring 2.5 only)</title>
 
       <para>For using this functionality, the snowdrop-vfs.jar file needs to
       be added to the application.</para>
@@ -153,6 +152,7 @@
       sample below:</para>
 
       <?dbfo-need height="5in" ?>
+
       <informalexample>
         <programlisting language="XML">&lt;context-param&gt;
   &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
@@ -191,7 +191,9 @@
 
       <para>Both configurations can be seen at work in the web-scanning
       sample.</para>
-     <?dbfo-need height="5in" ?>
+
+      <?dbfo-need height="5in" ?>
+
       <note>
         <para>In general, it is a good idea to pay attention to this error. If
         encountered while the application is starting, you definitely need to
@@ -203,6 +205,10 @@
   at org.springframework.core.io.support.PathMatchingResourcePatternResolver
  .doFindPathMatchingJarResources(PathMatchingResourcePatternResolver.java:448)</programlisting>
         (the listing has been wrapped for formatting purposes).</para>
+      </note>
+
+      <note>
+        <para>This feature is necessary</para>
       </note>
     </section>
 
@@ -263,7 +269,7 @@
         .sar's, .war's, .ear's, .har's, and .rar's work. Using the JBoss
         Spring deployer you can create Spring jars:</para>
 
-        <screen>my-app.spring/
+        <screen>my-app.jar/
    org/
       acme/
           MyBean.class
@@ -271,7 +277,7 @@
    META-INF/
            jboss-spring.xml</screen>
 
-        <para>So, my-app.spring is a jar that contains classes, like any other
+        <para>So, my-app.jar is a jar that contains classes, like any other
         JAR and a jboss-spring.xml file in the META-INF/ of the jar. This
         jboss-spring.xml file is like any other Spring xml file. By default,
         the JBoss Spring Deployer will register this bean factory defined in
@@ -307,9 +313,11 @@
         description element of the Spring XML.</para>
 
         <?dbfo-need height="5in" ?>
+
         <programlisting language="XML">&lt;beans&gt;
     &lt;description&gt;BeanFactory=(MyApp)&lt;/description&gt;
-...
+    ...
+    &lt;bean id="springBean" class="example.SpringBean"/&gt;
 &lt;/beans&gt;</programlisting>
 
         <para>MyApp will be used as the JNDI name in this example.</para>
@@ -327,6 +335,25 @@
   &lt;description&gt;BeanFactory=(AnotherApp) ParentBeanFactory=(MyApp)&lt;/description&gt;
   ...
   &lt;/beans&gt;</programlisting>
+      </section>
+
+      <section>
+        <title>Injection into EJBs</title>
+
+        <para>Once an ApplicationContext has been successfully bootstrapped,
+        the Spring beans defined in it can be used for injection into EJBs. To
+        that end, the EJBs must be intercepted with the
+        SpringLifecycleInterceptor, as in the following example:</para>
+
+        <programlisting>@Stateless
+@Interceptors(SpringLifecycleInterceptor.class)
+public class InjectedEjbImpl implements InjectedEjb
+{
+   @Spring(bean = "springBeanName", jndiName = "SpringDao")
+   private SpringBean springBean;
+
+   /* rest of the class definition ommitted */
+}</programlisting>
       </section>
     </section>
   </chapter>

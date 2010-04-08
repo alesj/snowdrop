@@ -3,6 +3,7 @@
   <formats>
     <format>zip</format>
   </formats>
+  <baseDirectory>spring.deployer</baseDirectory>
   <fileSets>
     <fileSet>
       <directory>${basedir}/src/main/resources</directory>
@@ -18,7 +19,6 @@
       <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
       <useTransitiveDependencies>true</useTransitiveDependencies>
       <excludes>
-        <exclude>*:aopalliance:*</exclude>
         <exclude>*:commons-logging:*</exclude>
       </excludes>
     </dependencySet>
@@ -27,7 +27,7 @@
       <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
       <useTransitiveDependencies>false</useTransitiveDependencies>
       <includes>
-          <include>org.springframework:spring</include>
+          <include>*:org.springframework:*</include>
       </includes>
     </dependencySet>
   </dependencySets>
