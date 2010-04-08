@@ -269,7 +269,7 @@
         .sar's, .war's, .ear's, .har's, and .rar's work. Using the JBoss
         Spring deployer you can create Spring jars:</para>
 
-        <screen>my-app.spring/
+        <screen>my-app.jar/
    org/
       acme/
           MyBean.class
@@ -277,7 +277,7 @@
    META-INF/
            jboss-spring.xml</screen>
 
-        <para>So, my-app.spring is a jar that contains classes, like any other
+        <para>So, my-app.JAR is a jar that contains classes, like any other
         JAR and a jboss-spring.xml file in the META-INF/ of the jar. This
         jboss-spring.xml file is like any other Spring xml file. By default,
         the JBoss Spring Deployer will register this bean factory defined in
@@ -316,7 +316,8 @@
 
         <programlisting language="XML">&lt;beans&gt;
     &lt;description&gt;BeanFactory=(MyApp)&lt;/description&gt;
-...
+    ...
+    &lt;bean id="springBean" class="example.SpringBean"/&gt;
 &lt;/beans&gt;</programlisting>
 
         <para>MyApp will be used as the JNDI name in this example.</para>
@@ -334,6 +335,29 @@
   &lt;description&gt;BeanFactory=(AnotherApp) ParentBeanFactory=(MyApp)&lt;/description&gt;
   ...
   &lt;/beans&gt;</programlisting>
+      </section>
+
+      <section>
+        <title>Injection into EJBs</title>
+
+        <para>Once an ApplicationContext has been successfully bootstrapped,
+        the Spring beans defined in it can be used for injection into EJBs. To
+        that end, the EJBs must be intercepted with the
+        SpringLifecycleInterceptor, as in the following example:</para>
+
+        <programlisting>@Stateless
+@Interceptors(SpringLifecycleInterceptor.class)
+public class InjectedEjbImpl implements InjectedEjb
+{
+   @Spring(bean = "springBean", jndiName = "MyApp")
+   private SpringBean springBean;
+
+   /* rest of the class definition ommitted */
+}</programlisting>
+
+        <para>In this example, the EJB InjectedEjbImpl will be injected with
+        the bean named 'springBean', defined in the ApplicationContext
+        previously described in sections 3.3 and 3.5.</para>
       </section>
     </section>
   </chapter>
