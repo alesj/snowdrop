@@ -5,7 +5,7 @@
 ]>
 <book>
   <bookinfo>
-    <title>Snowdrop 1.0</title>
+    <title>Snowdrop 1.1</title>
 
     <subtitle>User Guide</subtitle>
 
@@ -44,7 +44,7 @@
       </listitem>
 
       <listitem>
-        <para>Spring 2.5.x and 3.0.x</para>
+        <para>Spring 3.0.x</para>
       </listitem>
     </itemizedlist>
   </preface>
@@ -100,19 +100,27 @@
     package.</para>
 
     <section>
-      <title>The VFS-supporting application contexts (Spring 2.5 only)</title>
+      <title>The VFS-supporting application contexts</title>
+
+      <note>
+        <para>Since Spring 3.0, the ApplicationContext implementations that
+        are shipped with the Spring Framework are compatible with VFS. The
+        components described below are still part of the library, and can be
+        used, especially for backwards compatibility purposes, but it is not
+        required to use them.</para>
+      </note>
 
       <para>For using this functionality, the snowdrop-vfs.jar file needs to
       be added to the application.</para>
 
       <para>This library supports resource scanning in JBoss' Virtual File
-      System. When doing resource scanning, the Spring framework assumes that
-      the resources are either coming from a directory or a packaged jar, and
-      treats the URLs encountered in the process of scanning resources
-      accordingly. This assumption does not hold in JBoss' Virtual File
-      System.</para>
+      System. When doing resource scanning, the 2.5 version of the Spring
+      framework used to assume that the resources are either coming from a
+      directory or a packaged jar, and treats the URLs encountered in the
+      process of scanning resources accordingly. This assumption does not hold
+      in JBoss' Virtual File System.</para>
 
-      <para>The solution to this problem is in implementing a different
+      <para>The solution to this problem was to implement a different
       underlying resource resolution mechanism, namely in amending the
       functionality of the
       <literal>PathMatchingResourcePatternResolver</literal>. From the user's
@@ -206,14 +214,18 @@
  .doFindPathMatchingJarResources(PathMatchingResourcePatternResolver.java:448)</programlisting>
         (the listing has been wrapped for formatting purposes).</para>
       </note>
-
-      <note>
-        <para>This feature is necessary</para>
-      </note>
     </section>
 
     <section>
       <title>Load-time weaving</title>
+
+      <note>
+        <para>Since version 3.0, the Spring Framework supports load-time
+        weaving on JBoss AS 5 out-of the box, without the need to configure a
+        custom load-time weaver. The component described below will still work
+        and can be used, especially in a backwards compatibility scenario, but
+        it is not required to do so.</para>
+      </note>
 
       <para>In order to perform load-time weaving for the application classes
       in Spring (either for using load-time support for AspectJ or for JPA
