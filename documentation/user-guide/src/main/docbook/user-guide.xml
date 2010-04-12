@@ -44,7 +44,7 @@
       </listitem>
 
       <listitem>
-        <para>Spring 2.5.x and 3.0.x</para>
+        <para>Spring 2.5.x</para>
       </listitem>
     </itemizedlist>
   </preface>
@@ -100,7 +100,7 @@
     package.</para>
 
     <section>
-      <title>The VFS-supporting application contexts (Spring 2.5 only)</title>
+      <title>The VFS-supporting application contexts</title>
 
       <para>For using this functionality, the snowdrop-vfs.jar file needs to
       be added to the application.</para>
