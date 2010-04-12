@@ -73,10 +73,6 @@
       <groupId>org.jboss.snowdrop</groupId>
       <artifactId>snowdrop-weaving</artifactId>
     </dependency>
-    <dependency>
-        <groupId>org.jboss.snowdrop</groupId>
-        <artifactId>snowdrop-transaction</artifactId>
-    </dependency>
   </dependencies>
 
 </project>

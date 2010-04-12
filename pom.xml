@@ -23,7 +23,6 @@
     <module>cluster</module>
     <module>deployers</module>
     <module>facade</module>
-    <module>transaction</module>
     <module>vfs</module>
     <module>weaving</module>
     <module>build</module>
@@ -168,11 +167,6 @@
       <dependency>
         <groupId>org.jboss.snowdrop</groupId>
         <artifactId>snowdrop-facade</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.jboss.snowdrop</groupId>
-        <artifactId>snowdrop-transaction</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
