@@ -206,10 +206,6 @@
  .doFindPathMatchingJarResources(PathMatchingResourcePatternResolver.java:448)</programlisting>
         (the listing has been wrapped for formatting purposes).</para>
       </note>
-
-      <note>
-        <para>This feature is necessary</para>
-      </note>
     </section>
 
     <section>
@@ -234,7 +230,8 @@
       <title>The Spring Deployer</title>
 
       <para>The role of the Spring Deployer is to allow the bootstrapping of a
-      Spring application context, binding it in JNDI and using it</para>
+      Spring application context, binding it in JNDI and using it for
+      providing Spring-configured business object instances.</para>
 
       <section>
         <title>JBoss + Spring + EJB 3.0 Integration</title>
