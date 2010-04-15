@@ -7,15 +7,15 @@
   </parent>
   <groupId>org.jboss.snowdrop</groupId>
   <artifactId>snowdrop-parent</artifactId>
-  <version>2.0.0-M1</version>
+  <version>2.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Snowdrop Parent POM</name>
   <url>http://www.jboss.com/products/jbossmc</url>
   <description>Snowdrop</description>
   <scm>
-    <connection>scm:svn:http://anonsvn.jboss.org/repos/jbossas/projects/snowdrop/tags/snowdrop-parent-2.0.0-M1</connection>
-    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/snowdrop/tags/snowdrop-parent-2.0.0-M1</developerConnection>
-    <url>http://viewvc.jboss.org/cgi-bin/viewvc.cgi/jbossas/projects/snowdrop/tags/snowdrop-parent-2.0.0-M1</url>
+    <connection>scm:svn:http://anonsvn.jboss.org/repos/jbossas/projects/snowdrop/trunk</connection>
+    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/snowdrop/trunk</developerConnection>
+    <url>http://viewvc.jboss.org/cgi-bin/viewvc.cgi/jbossas/projects/snowdrop/trunk</url>
   </scm>
 
   <modules>
