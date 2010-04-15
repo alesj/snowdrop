@@ -3,6 +3,7 @@
   <formats>
     <format>zip</format>
   </formats>
+  <baseDirectory>spring.deployer</baseDirectory>
   <fileSets>
     <fileSet>
       <directory>${basedir}/src/main/resources</directory>
@@ -15,12 +16,19 @@
   <dependencySets>
     <dependencySet>
       <outputDirectory>/</outputDirectory>
+      <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
       <useTransitiveDependencies>true</useTransitiveDependencies>
       <excludes>
-        <exclude>org.springframework:spring-web:*</exclude>
-        <exclude>*:aopalliance:*</exclude>
         <exclude>*:commons-logging:*</exclude>
       </excludes>
+    </dependencySet>
+    <dependencySet>
+      <outputDirectory>/</outputDirectory>
+      <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
+      <useTransitiveDependencies>false</useTransitiveDependencies>
+      <includes>
+          <include>*:org.springframework:*</include>
+      </includes>
     </dependencySet>
   </dependencySets>
 </assembly>

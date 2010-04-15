@@ -26,7 +26,8 @@
     <module>vfs</module>
     <module>weaving</module>
     <module>build</module>
-    <!-- module>extensions</module -->
+      <module>deployer-assembly</module>
+      <!-- module>extensions</module -->
   </modules>
 
   <properties>
@@ -86,17 +87,17 @@
           <artifactId>maven-assembly-plugin</artifactId>
           <executions>
             <execution>
-              <id>make-libs</id>
+              <id>make-assembly</id>
               <phase>package</phase>
               <goals>
-                <goal>attached</goal>
+                <goal>single</goal>
               </goals>
             </execution>
-            <execution>
-              <id>make-deployer</id>
+             <execution>
+              <id>make-assembly-no-deps</id>
               <phase>package</phase>
               <goals>
-                <goal>attached</goal>
+                <goal>single</goal>
               </goals>
             </execution>
           </executions>
