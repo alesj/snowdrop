@@ -53,8 +53,8 @@
                                     <goal>single</goal>
                                 </goals>
                                 <configuration>
-                                    <finalName>jboss-spring-deployer-${deployer.version}-nodeps</finalName>
-                                    <appendAssemblyId>false</appendAssemblyId>
+                                    <finalName>jboss-spring-deployer-${deployer.version}</finalName>
+                                    <appendAssemblyId>true</appendAssemblyId>
                                     <descriptors>
                                         <descriptor>${basedir}/src/assembly/deployer-no-deps.xml</descriptor>
                                     </descriptors>
@@ -74,6 +74,10 @@
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
             <artifactId>snowdrop-deployers</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.snowdrop</groupId>
+            <artifactId>snowdrop-facade</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>

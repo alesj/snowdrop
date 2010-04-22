@@ -1,5 +1,5 @@
 <assembly>
-    <id>deployer-no-deps</id>
+    <id>nodeps</id>
     <formats>
         <format>zip</format>
     </formats>
