@@ -9,6 +9,7 @@
       <outputDirectory>/</outputDirectory>
       <excludes>
         <exclude>**/target/**</exclude>
+        <exclude>**/samples/**</exclude>
       </excludes>
     </fileSet>
   </fileSets>
