@@ -4,14 +4,20 @@
   <parent>
     <artifactId>horoscope</artifactId>
     <groupId>org.jboss.snowdrop.samples</groupId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jboss.snowdrop.samples</groupId>
   <artifactId>horoscope-ejb</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <name>Horoscope Example EJB Module</name>
   <packaging>ejb</packaging>
   <dependencies>
+    <dependency>
+      <groupId>org.jboss.ejb3</groupId>
+      <artifactId>jboss-ejb3-ext-api</artifactId>
+      <version>1.0.0</version>
+      <scope>provided</scope>
+    </dependency>
     <dependency>
       <groupId>javax.ejb</groupId>
       <artifactId>ejb-api</artifactId>
@@ -19,15 +25,19 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.jboss.snowdrop</groupId>
-      <artifactId>snowdrop-deployers</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>2.5.6.SEC01</version>
     </dependency>
     <dependency>
-      <groupId>org.jboss.client</groupId>
-      <artifactId>jbossall-client</artifactId>
-      <version>5.0.0.Beta4</version>
-      <scope>provided</scope>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>2.5.6.SEC01</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.snowdrop</groupId>
+      <artifactId>snowdrop-deployers</artifactId>
+      <version>1.0.1.GA</version>
     </dependency>
   </dependencies>
   <build>

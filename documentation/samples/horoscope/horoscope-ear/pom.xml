@@ -3,35 +3,28 @@
   <parent>
     <artifactId>horoscope</artifactId>
     <groupId>org.jboss.snowdrop.samples</groupId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jboss.snowdrop.samples</groupId>
   <artifactId>horoscope-ear</artifactId>
   <packaging>ear</packaging>
-  <name>horoscope-ear Maven Webapp</name>
+  <name>Horoscope Example EAR Module</name>
   <url>http://maven.apache.org</url>
 
     <dependencies>
       <dependency>
         <groupId>org.jboss.snowdrop.samples</groupId>
         <artifactId>horoscope-war</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>${project.version}</version>
         <type>war</type>
       </dependency>
       <dependency>
         <groupId>org.jboss.snowdrop.samples</groupId>
         <artifactId>horoscope-ejb</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>${project.version}</version>
         <type>ejb</type>
       </dependency>
-<!--
-      <dependency>
-        <groupId>org.jboss.snowdrop.samples</groupId>
-        <artifactId>horoscope-spring</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-      </dependency>
--->
     </dependencies>
 
   <build>
@@ -55,14 +48,7 @@
               <artifactId>horoscope-war</artifactId>
               <contextRoot>/horoscope</contextRoot>
             </webModule>
-<!--
-            <jarModule>
-              <groupId>org.jboss.snowdrop.samples</groupId>
-              <artifactId>horoscope-spring</artifactId>
-              <bundleDir>/</bundleDir>
-            </jarModule>
--->
-          </modules>
+        </modules>
         </configuration>
       </plugin>
     </plugins>

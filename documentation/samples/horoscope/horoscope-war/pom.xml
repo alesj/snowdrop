@@ -3,13 +3,13 @@
   <parent>
     <artifactId>horoscope</artifactId>
     <groupId>org.jboss.snowdrop.samples</groupId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jboss.snowdrop.samples</groupId>
   <artifactId>horoscope-war</artifactId>
   <packaging>war</packaging>
-  <name>horoscope-war Maven Webapp</name>
+  <name>Horoscope Example WAR Module</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
@@ -26,7 +26,7 @@
     <dependency>
        <groupId>org.jboss.snowdrop.samples</groupId>
        <artifactId>horoscope-ejb</artifactId>
-       <version>1.0.0-SNAPSHOT</version>
+       <version>${project.version}</version>
        <scope>provided</scope>
       <type>ejb</type>
     </dependency>
