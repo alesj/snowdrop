@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.jboss</groupId>
     <artifactId>jboss-parent</artifactId>
-    <version>4</version>
+    <version>5</version>
   </parent>
   <groupId>org.jboss.snowdrop</groupId>
   <artifactId>snowdrop-parent</artifactId>
@@ -475,14 +475,5 @@
       </properties>
     </profile>
   </profiles>
-
-  <distributionManagement>
-    <repository>
-      <!-- Copy the distribution jar file to a local checkout of the maven repository
-        -  This variable can be set in $MAVEN_HOME/conf/settings.xml -->
-      <id>repository.jboss.org</id>
-      <url>file://${maven.repository.root}</url>
-    </repository>
-  </distributionManagement>
 
 </project>
