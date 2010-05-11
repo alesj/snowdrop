@@ -248,15 +248,26 @@
       <section>
         <title>Installation</title>
 
-        <para>If you are using EJB 3.0 and JDK 5 integration, copy the
-        jboss-spring-jdk5.deployer directory into the JBoss deploy/ directory.
-        If you are using JDK 1.4, then copy the jboss-spring.deployer/ into
-        the deploy directory. If you look inside these
-        <emphasis>.deployer</emphasis> deployments you will see that only a
-        partial Spring distribution is contained. If you need a full Spring
-        distribution, then copy those jars into the
-        <emphasis>.deployer</emphasis> directory or into the lib/ directory of
-        your JBoss configuration.</para>
+        <para>For installing the Snowdrop deployer, unzip the
+        jboss-spring-deployer.zip file in
+        JBOSS_HOME/server/&lt;configuration&gt;/deployers. The distribution
+        you are installing from may or may not contain the Spring jars. If the
+        archive does not contain the Spring jars, please include the following
+        files from the Spring 2.5.6.SEC01 distribution:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>spring-beans.jar;</para>
+          </listitem>
+
+          <listitem>
+            <para>spring-context.jar;</para>
+          </listitem>
+
+          <listitem>
+            <para>spring-core.jar.</para>
+          </listitem>
+        </itemizedlist>
       </section>
 
       <section>
@@ -296,11 +307,11 @@
       <section>
         <title>Deployment</title>
 
-        <para>Once you have created a <emphasis>.spring</emphasis> archive or
-        a <emphasis>-spring.xml</emphasis> file, all you have to do is put it
-        in the JBoss deploy/ directory and it will be deployed into the JBoss
-        runtime. You can also embed these deployments inside an EAR, EJB-JAR,
-        SAR, etc. as JBoss supports nested archives.</para>
+        <para>Once you have created a <emphasis>.spring</emphasis> archive (or
+        a .jar) or a <emphasis>-spring.xml</emphasis> file, all you have to do
+        is put it in the JBoss deploy/ directory and it will be deployed into
+        the JBoss runtime. You can also embed these deployments inside an EAR,
+        EJB-JAR, SAR, etc. as JBoss supports nested archives.</para>
       </section>
 
       <section>
