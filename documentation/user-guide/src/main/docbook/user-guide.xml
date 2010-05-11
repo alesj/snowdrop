@@ -264,15 +264,26 @@
       <section>
         <title>Installation</title>
 
-        <para>If you are using EJB 3.0 and JDK 5 integration, copy the
-        jboss-spring-jdk5.deployer directory into the JBoss deploy/ directory.
-        If you are using JDK 1.4, then copy the jboss-spring.deployer/ into
-        the deploy directory. If you look inside these
-        <emphasis>.deployer</emphasis> deployments you will see that only a
-        partial Spring distribution is contained. If you need a full Spring
-        distribution, then copy those jars into the
-        <emphasis>.deployer</emphasis> directory or into the lib/ directory of
-        your JBoss configuration.</para>
+        <para>For installing the Snowdrop deployer, unzip the
+        jboss-spring-deployer.zip file in
+        JBOSS_HOME/server/&lt;configuration&gt;/deployers. The distribution
+        you are installing from may or may not contain the Spring jars. If the
+        archive does not contain the Spring jars, please include the following
+        files from the Spring 3.0.2.RELEASE distribution:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>org.springframework.beans-3.0.2.RELEASE.jar;</para>
+          </listitem>
+
+          <listitem>
+            <para>org.springframework.context-3.0.2.RELEASE.jar;</para>
+          </listitem>
+
+          <listitem>
+            <para>org.springframework.core-3.0.2.RELEASE.jar.</para>
+          </listitem>
+        </itemizedlist>
       </section>
 
       <section>

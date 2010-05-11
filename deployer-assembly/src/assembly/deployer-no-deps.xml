@@ -17,12 +17,10 @@
         <dependencySet>
             <outputDirectory>/</outputDirectory>
             <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
-            <useTransitiveDependencies>false</useTransitiveDependencies>
-            <excludes>
-                <exclude>*:aopalliance:*</exclude>
-                <exclude>*:commons-logging:*</exclude>
-                <exclude>*:spring-*:*</exclude>
-            </excludes>
+            <includes>
+                <include>org.jboss.snowdrop:snowdrop-vfs:jar</include>
+                <include>org.jboss.snowdrop:snowdrop-deployers:jar</include>
+            </includes>
         </dependencySet>
     </dependencySets>
 </assembly>
