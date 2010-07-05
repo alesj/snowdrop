@@ -9,16 +9,16 @@ import org.jboss.virtual.AssembledDirectory;
 /**
  * @author Marius Bogoevici
  */
-public class SnowdropDeployersTest extends BootstrapDeployersTest
+public class SnowdropDeployersTestCase extends BootstrapDeployersTest
 {
-   public SnowdropDeployersTest(String name)
+   public SnowdropDeployersTestCase(String name)
    {
       super(name);
    }
 
    public static Test suite()
    {
-      return suite(SnowdropDeployersTest.class);
+      return suite(SnowdropDeployersTestCase.class);
    }
 
    public void testSimpleEar() throws Exception
