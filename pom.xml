@@ -260,6 +260,13 @@
       </dependency>
       <dependency>
         <groupId>org.jboss.deployers</groupId>
+        <artifactId>jboss-deployers-vfs</artifactId>
+        <version>${version.jboss.deployers}</version>
+        <type>test-jar</type>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.deployers</groupId>
         <artifactId>jboss-deployers-vfs-spi</artifactId>
         <version>${version.jboss.deployers}</version>
         <scope>provided</scope>

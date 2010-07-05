@@ -68,13 +68,16 @@ public abstract class AbstractSpringMetaDataDeployer<T extends BeanFactory> exte
          ClassLoader old = Thread.currentThread().getContextClassLoader();
          try
          {
-            Thread.currentThread().setContextClassLoader(classLoader);
-            T beanFactory = doCreate(springMetaData);
-            String name = ((Nameable) beanFactory).getName();
-            springMetaData.setName(name);
-            bind(beanFactory, name);
-            if (log.isTraceEnabled())
-               log.trace("Bean factory [" + name + "] binded to local JNDI.");
+            for (SpringContextDescriptor springContextDescriptor: springMetaData.getSpringContextDescriptors())
+            {
+               Thread.currentThread().setContextClassLoader(classLoader);
+               T beanFactory = doCreate(springContextDescriptor);
+               String name = ((Nameable) beanFactory).getName();
+               springContextDescriptor.setName(name);
+               bind(beanFactory, name);
+               if (log.isTraceEnabled())
+                  log.trace("Bean factory [" + name + "] binded to local JNDI.");
+            }
          }
          finally
          {
@@ -88,26 +91,29 @@ public abstract class AbstractSpringMetaDataDeployer<T extends BeanFactory> exte
        * @param metaData the spring meta data
        * @return new bean factory instance
        */
-      protected abstract T doCreate(SpringMetaData metaData);
+      protected abstract T doCreate(SpringContextDescriptor metaData);
 
       public void undeploy(DeploymentUnit unit, SpringMetaData springMetaData)
       {
-         String name = springMetaData.getName();
-         try
+         for (SpringContextDescriptor springContextDescriptor: springMetaData.getSpringContextDescriptors())
          {
-            T beanFactory = lookup(name);
-            if (beanFactory != null)
+            String name = springContextDescriptor.getName();
+            try
             {
-               doClose(beanFactory);
-               unbind(name);
-               if (log.isTraceEnabled())
-                  log.trace("Bean factory [" + name + "] unbinded from local JNDI.");
+               T beanFactory = lookup(name);
+               if (beanFactory != null)
+               {
+                  doClose(beanFactory);
+                  unbind(name);
+                  if (log.isTraceEnabled())
+                     log.trace("Bean factory [" + name + "] unbinded from local JNDI.");
+               }
             }
-         }
-         catch (Exception e)
-         {
-            if (log.isTraceEnabled())
-               log.trace("Exception finding BeanFactory instance named " + name, e);
+            catch (Exception e)
+            {
+               if (log.isTraceEnabled())
+                  log.trace("Exception finding BeanFactory instance named " + name, e);
+            }
          }
       }
 
