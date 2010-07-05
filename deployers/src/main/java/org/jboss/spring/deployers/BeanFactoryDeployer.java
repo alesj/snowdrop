@@ -36,7 +36,7 @@ public class BeanFactoryDeployer extends AbstractSpringMetaDataDeployer<Configur
    {
       return new SpringDeploymentVisitor()
       {
-         protected ConfigurableBeanFactory doCreate(SpringMetaData metaData)
+         protected ConfigurableBeanFactory doCreate(SpringContextDescriptor metaData)
          {
             return new NamedXmlBeanFactory(metaData.getDefaultName(), metaData.getResource());
          }

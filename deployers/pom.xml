@@ -30,6 +30,29 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
+      <groupId>org.jboss.deployers</groupId>
+      <artifactId>jboss-deployers-vfs</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>jboss</groupId>
+          <artifactId>jboss-vfs</artifactId>
+        </exclusion>
+      </exclusions>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.deployers</groupId>
+      <artifactId>jboss-deployers-vfs</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>jboss</groupId>
+          <artifactId>jboss-vfs</artifactId>
+        </exclusion>
+      </exclusions>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>apache-xerces</groupId>
       <artifactId>xml-apis</artifactId>
     </dependency>
@@ -83,6 +106,10 @@
       <artifactId>spring-core</artifactId>
       <optional>true</optional>
     </dependency>
+      <dependency>
+        <groupId>org.jboss</groupId>
+        <artifactId>jboss-test</artifactId>
+      </dependency>
   </dependencies>
   
 </project>

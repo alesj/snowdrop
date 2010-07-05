@@ -22,10 +22,8 @@
 package org.jboss.spring.deployers;
 
 import java.io.Serializable;
-import java.net.URL;
-
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Spring meta data.
@@ -36,58 +34,15 @@ public class SpringMetaData implements Serializable
 {
    private static final long serialVersionUID = 8989753488155849440L;
 
-   private URL fileURL;
-   private String defaultName;
-   private String name;
-   private transient Resource resource;
+   private List<SpringContextDescriptor> springContextDescriptors;
 
-   public SpringMetaData()
+   public SpringMetaData(List<SpringContextDescriptor> springContextDescriptors)
    {
+      this.springContextDescriptors = springContextDescriptors;
    }
 
-   public SpringMetaData(URL fileURL, String defaultName)
+   public List<SpringContextDescriptor> getSpringContextDescriptors()
    {
-      this.fileURL = fileURL;
-      this.defaultName = defaultName;
-   }
-
-   public URL getFileURL()
-   {
-      return fileURL;
-   }
-
-   public void setFileURL(URL fileURL)
-   {
-      this.fileURL = fileURL;
-   }
-
-   public String getDefaultName()
-   {
-      return defaultName;
-   }
-
-   public String getName()
-   {
-      return name != null ? name : defaultName;
-   }
-
-   public void setName(String name)
-   {
-      this.name = name;
-   }
-
-   public Resource getResource()
-   {
-      if (resource == null)
-         resource = new UrlResource(fileURL);
-      return resource;
-   }
-
-   public String toString()
-   {
-      StringBuilder builder = new StringBuilder();
-      builder.append("fileURL=").append(fileURL);
-      builder.append(", defaultName=").append(defaultName);
-      return builder.toString();
+      return Collections.unmodifiableList(springContextDescriptors);
    }
 }
