@@ -21,6 +21,12 @@
  */
 package org.jboss.spring.deployers;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.jboss.deployers.vfs.spi.deployer.AbstractVFSParsingDeployer;
 import org.jboss.deployers.vfs.spi.structure.VFSDeploymentUnit;
 import org.jboss.vfs.VirtualFile;
@@ -56,10 +62,10 @@ public class SpringParserDeployer extends AbstractVFSParsingDeployer<SpringMetaD
    /**
     * Should we use deployment unit's name as default.
     * e.g. using string before .jar|spring|... as the name
-    *
+    * <p/>
     * Previous versions used string before .spring as the name,
     * setting this to true results in this legacy behaviour.
-    *
+    * <p/>
     * Current default is string before -spring.xml.
     *
     * @param useLegacyDefaultName the flag
@@ -103,6 +109,28 @@ public class SpringParserDeployer extends AbstractVFSParsingDeployer<SpringMetaD
       else
          defaultName = getDefaultName(file);
 
-      return new SpringMetaData(file.toURL(), defaultName);
+      return new SpringMetaData(Collections.singletonList(createSpringContextDescriptor(file, defaultName)));
+   }
+
+   private SpringContextDescriptor createSpringContextDescriptor(VirtualFile file, String defaultName)
+         throws MalformedURLException, URISyntaxException
+   {
+      return new SpringContextDescriptor(file.toURL(), defaultName);
+   }
+
+   @Override
+   protected SpringMetaData handleMultipleFiles(VFSDeploymentUnit unit, SpringMetaData root, List<VirtualFile> files) throws Exception
+   {
+      List<SpringContextDescriptor> descriptors = new ArrayList<SpringContextDescriptor>();
+      for (VirtualFile virtualFile : files)
+      {
+         String defaultName;
+         if (isUseLegacyDefaultName())
+            throw new IllegalStateException("Cannot use the legacy default name for multiple Spring configuration files");
+         else
+            defaultName = getDefaultName(virtualFile);
+         descriptors.add(new SpringContextDescriptor(virtualFile.toURL(), defaultName));
+      }
+      return new SpringMetaData(descriptors);
    }
 }

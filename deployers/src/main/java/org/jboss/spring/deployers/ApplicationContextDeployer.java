@@ -36,7 +36,7 @@ public class ApplicationContextDeployer extends AbstractSpringMetaDataDeployer<C
    {
       return new SpringDeploymentVisitor()
       {
-         protected ConfigurableApplicationContext doCreate(SpringMetaData metaData)
+         protected ConfigurableApplicationContext doCreate(SpringContextDescriptor metaData)
          {
             return new NamedXmlApplicationContext(metaData.getDefaultName(), metaData.getResource());
          }

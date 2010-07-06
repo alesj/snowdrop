@@ -42,7 +42,7 @@
     <version.jbossxb>2.0.2.Beta4</version.jbossxb>
     <version.jboss.aop>2.0.1.GA</version.jboss.aop>
     <version.jboss.pojocache>3.0.0.GA</version.jboss.pojocache>
-    <version.org.jboss.test>1.0.5.GA</version.org.jboss.test>
+    <version.org.jboss.test>1.1.9.GA</version.org.jboss.test>
     <version.junit>4.4</version.junit>
     <version.javassist>3.11.0.GA</version.javassist>
     <version.javaee>3.0.0.GA</version.javaee>
@@ -243,6 +243,13 @@
       </dependency>
       <dependency>
         <groupId>org.jboss.deployers</groupId>
+        <artifactId>jboss-deployers-vfs</artifactId>
+        <version>${version.jboss.deployers}</version>
+        <type>test-jar</type>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.deployers</groupId>
         <artifactId>jboss-deployers-vfs-spi</artifactId>
         <version>${version.jboss.deployers}</version>
         <scope>provided</scope>
@@ -386,7 +393,7 @@
       </dependency>
       <!-- test dependencies -->
       <dependency>
-        <groupId>org.jboss</groupId>
+        <groupId>org.jboss.test</groupId>
         <artifactId>jboss-test</artifactId>
         <version>${version.org.jboss.test}</version>
         <scope>test</scope>
