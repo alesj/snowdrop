@@ -10,12 +10,13 @@
   <version>2.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Snowdrop Parent POM</name>
-  <url>http://www.jboss.com/products/jbossmc</url>
+  <url>http://jboss.org/snowdrop</url>
   <description>Snowdrop</description>
+
   <scm>
-    <connection>scm:svn:http://anonsvn.jboss.org/repos/jbossas/projects/snowdrop/trunk</connection>
-    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/snowdrop/trunk</developerConnection>
-    <url>http://viewvc.jboss.org/cgi-bin/viewvc.cgi/jbossas/projects/snowdrop/trunk</url>
+    <connection>scm:git:git@github.com:snowdrop/snowdrop.git</connection>
+    <developerConnection>scm:git:git@github.com:snowdrop/snowdrop.git</developerConnection>
+    <url>scm:git:git@github.com:snowdrop/snowdrop.git</url>
   </scm>
 
   <modules>
