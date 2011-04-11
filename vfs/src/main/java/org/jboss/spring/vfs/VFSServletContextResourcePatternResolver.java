@@ -24,8 +24,6 @@ package org.jboss.spring.vfs;
 import java.io.IOException;
 import java.net.URL;
 
-import org.jboss.vfs.VFS;
-import org.jboss.vfs.VirtualFile;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.web.context.support.ServletContextResourcePatternResolver;
@@ -66,7 +64,7 @@ public class VFSServletContextResourcePatternResolver extends ServletContextReso
    {
       try
       {
-         VirtualFile file = VFS.getChild(url);
+         Object file = VFSUtil.invokeVfsMethod(VFSUtil.VFS_METHOD_GET_ROOT_URL, null, url);
          return new VFSResource(file);
       }
       catch (Exception e)

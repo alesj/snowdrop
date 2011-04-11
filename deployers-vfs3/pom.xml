@@ -1,0 +1,47 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <groupId>org.jboss.snowdrop</groupId>
+    <artifactId>snowdrop-parent</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.jboss.snowdrop</groupId>
+  <artifactId>snowdrop-deployers-vfs3</artifactId>
+  <packaging>jar</packaging>
+  <name>Snowdrop - Deployers - VFS3 </name>
+  <url>http://www.jboss.org/snowdrop</url>
+  <description>Snowdrop - Common Deployer classes </description>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jboss</groupId>
+            <artifactId>jboss-vfs</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-vfs</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.snowdrop</groupId>
+            <artifactId>snowdrop-deployers-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.test</groupId>
+            <artifactId>jboss-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-vfs</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>

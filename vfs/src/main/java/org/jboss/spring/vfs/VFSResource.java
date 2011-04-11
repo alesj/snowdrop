@@ -28,9 +28,6 @@ import java.io.IOException;
 import java.io.File;
 import java.io.InputStream;
 
-import org.jboss.vfs.VirtualFile;
-import org.jboss.vfs.VFSUtils;
-import org.jboss.vfs.VFS;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.AbstractResource;
 
@@ -41,9 +38,9 @@ import org.springframework.core.io.AbstractResource;
  */
 public class VFSResource extends AbstractResource
 {
-   private VirtualFile file;
+   private Object file;
 
-   public VFSResource(VirtualFile file)
+   public VFSResource(Object file)
    {
       if (file == null)
          throw new IllegalArgumentException("Null file");
@@ -56,7 +53,7 @@ public class VFSResource extends AbstractResource
          throw new IllegalArgumentException("Null url");
       try
       {
-         this.file = VFS.getChild(url);
+         this.file = VFSUtil.invokeVfsMethod(VFSUtil.VFS_METHOD_GET_ROOT_URL, null, url);
       }
       catch (Exception e)
       {
@@ -66,7 +63,14 @@ public class VFSResource extends AbstractResource
 
    public boolean exists()
    {
-      return file.exists();
+      try
+      {
+         return (Boolean)VFSUtil.invokeVfsMethod(VFSUtil.VIRTUAL_FILE_METHOD_EXISTS, file);
+      }
+      catch (IOException e)
+      {
+         throw new RuntimeException(e);
+      }
    }
 
    public boolean isOpen()
@@ -76,24 +80,38 @@ public class VFSResource extends AbstractResource
 
    public boolean isReadable()
    {
-      return file.getSize() > 0;
+      try
+      {
+         return ((Long) VFSUtil.invokeVfsMethod(VFSUtil.VIRTUAL_FILE_METHOD_GET_SIZE, file))>0;
+      }
+      catch (IOException e)
+      {
+         throw new RuntimeException(e);
+      }
    }
 
    public long lastModified()
    {
-      return file.getLastModified();
+      try
+      {
+         return ((Long) VFSUtil.invokeVfsMethod(VFSUtil.VIRTUAL_FILE_METHOD_GET_LAST_MODIFIED, file));
+      }
+      catch (IOException e)
+      {
+         throw new RuntimeException(e);
+      }
    }
 
    public URL getURL() throws IOException
    {
-      return file.toURL();
+      return VFSUtil.invokeVfsMethod(VFSUtil.VIRTUAL_FILE_METHOD_TO_URL, file);
    }
 
    public URI getURI() throws IOException
    {
       try
       {
-         return file.toURI();
+         return VFSUtil.invokeMethodWithExpectedExceptionType(VFSUtil.VIRTUAL_FILE_METHOD_TO_URI, file, URISyntaxException.class);
       }
       catch (URISyntaxException e)
       {
@@ -105,22 +123,33 @@ public class VFSResource extends AbstractResource
 
    public File getFile() throws IOException
    {
-      return file.getPhysicalFile();
+      return VFSUtil.getPhysicalFile(file);
    }
 
    @SuppressWarnings("deprecation")
    public Resource createRelative(String relativePath) throws IOException
    {
       //VirtualFile.findChild will not scan the parent or current directory
-      if (relativePath.startsWith(".") || relativePath.indexOf("/")==-1)
+      if (relativePath.startsWith(".") || relativePath.indexOf("/") == -1)
+      {
          return new VFSResource(getChild(new URL(getURL(), relativePath)));
+      }
       else
-         return new VFSResource(file.getChild(relativePath));
+      {
+         return new VFSResource(VFSUtil.invokeVfsMethod(VFSUtil.VIRTUAL_FILE_METHOD_GET_CHILD, file, relativePath));
+      }
    }
 
    public String getFilename()
    {
-      return file.getName();
+      try
+      {
+         return VFSUtil.invokeVfsMethod(VFSUtil.VIRTUAL_FILE_METHOD_GET_NAME, file);
+      }
+      catch (IOException e)
+      {
+         throw new RuntimeException(e);
+      }
    }
 
    public String getDescription()
@@ -130,7 +159,7 @@ public class VFSResource extends AbstractResource
 
    public InputStream getInputStream() throws IOException
    {
-      return file.openStream();
+      return VFSUtil.invokeVfsMethod(VFSUtil.VIRTUAL_FILE_METHOD_GET_INPUT_STREAM, file);
    }
 
    public String toString()
@@ -157,11 +186,11 @@ public class VFSResource extends AbstractResource
       return file.hashCode();
    }
 
-   static VirtualFile getChild(URL url) throws IOException
+   static Object getChild(URL url) throws IOException
    {
       try
       {
-         return VFS.getChild(url);
+         return VFSUtil.invokeMethodWithExpectedExceptionType(VFSUtil.VFS_METHOD_GET_ROOT_URL, null, URISyntaxException.class, url);
       }
       catch (URISyntaxException e)
       {

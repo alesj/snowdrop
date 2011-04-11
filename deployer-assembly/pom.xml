@@ -33,21 +33,7 @@
                         <version>2.2-beta-3</version>
                         <executions>
                             <execution>
-                                <id>make-assembly</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>single</goal>
-                                </goals>
-                                <configuration>
-                                    <finalName>jboss-spring-deployer-${deployer.version}</finalName>
-                                    <appendAssemblyId>false</appendAssemblyId>
-                                    <descriptors>
-                                        <descriptor>${basedir}/src/assembly/deployer.xml</descriptor>
-                                    </descriptors>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>make-assembly-no-deps</id>
+                                <id>make-assembly-as5</id>
                                 <phase>package</phase>
                                 <goals>
                                     <goal>single</goal>
@@ -56,7 +42,49 @@
                                     <finalName>jboss-spring-deployer-${deployer.version}</finalName>
                                     <appendAssemblyId>true</appendAssemblyId>
                                     <descriptors>
-                                        <descriptor>${basedir}/src/assembly/deployer-no-deps.xml</descriptor>
+                                        <descriptor>${basedir}/src/assembly/as5/deployer.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>make-assembly-no-deps-as5</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <configuration>
+                                    <finalName>jboss-spring-deployer-${deployer.version}</finalName>
+                                    <appendAssemblyId>true</appendAssemblyId>
+                                    <descriptors>
+                                        <descriptor>${basedir}/src/assembly/as5/deployer-no-deps.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>make-assembly-as6</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <configuration>
+                                    <finalName>jboss-spring-deployer-${deployer.version}</finalName>
+                                    <appendAssemblyId>true</appendAssemblyId>
+                                    <descriptors>
+                                        <descriptor>${basedir}/src/assembly/as6/deployer.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>make-assembly-no-deps-as6</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <configuration>
+                                    <finalName>jboss-spring-deployer-${deployer.version}</finalName>
+                                    <appendAssemblyId>true</appendAssemblyId>
+                                    <descriptors>
+                                        <descriptor>${basedir}/src/assembly/as6/deployer-no-deps.xml</descriptor>
                                     </descriptors>
                                 </configuration>
                             </execution>
@@ -73,7 +101,15 @@
         </dependency>
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
-            <artifactId>snowdrop-deployers</artifactId>
+            <artifactId>snowdrop-deployers-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.snowdrop</groupId>
+            <artifactId>snowdrop-deployers-vfs2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.snowdrop</groupId>
+            <artifactId>snowdrop-deployers-vfs3</artifactId>
         </dependency>
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>

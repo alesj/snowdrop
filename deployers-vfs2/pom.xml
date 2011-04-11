@@ -1,0 +1,132 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>org.jboss.snowdrop</groupId>
+        <artifactId>snowdrop-parent</artifactId>
+        <version>2.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.jboss.snowdrop</groupId>
+    <artifactId>snowdrop-deployers-vfs2</artifactId>
+    <packaging>jar</packaging>
+    <name>Snowdrop - Deployers - VFS2</name>
+    <url>http://www.jboss.org/snowdop</url>
+    <description>Snowdrop - VFS2-specific deployers for usage in JBoss AS 5</description>
+
+
+    <!-- OIve -->
+    <properties>
+        <version.jboss.classloader>2.0.7.CR2</version.jboss.classloader>
+        <version.jboss.vfs>2.1.3.SP1</version.jboss.vfs>
+        <version.jboss.deployers>2.0.8.SP1</version.jboss.deployers>
+        <version.jboss.mdr>2.0.2.GA</version.jboss.mdr>
+        <version.jboss.kernel>2.0.9.GA</version.jboss.kernel>
+        <version.jboss.common.logging.spi>2.0.5.GA</version.jboss.common.logging.spi>
+        <version.jboss.common.logging.log4j>2.0.5.GA</version.jboss.common.logging.log4j>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jboss.snowdrop</groupId>
+            <artifactId>snowdrop-deployers-common</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jboss.deployers</groupId>
+                    <artifactId>jboss-deployers-spi</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss</groupId>
+            <artifactId>jboss-vfs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-vfs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-vfs-spi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.test</groupId>
+            <artifactId>jboss-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-vfs</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-spi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-core-spi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-structure-spi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-impl</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss</groupId>
+            <artifactId>jboss-mdr</artifactId>
+            <version>${version.jboss.mdr.vfs2}</version>
+            <scope>test</scope>
+        </dependency>
+         <dependency>
+            <groupId>org.jboss</groupId>
+            <artifactId>jboss-common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging-spi</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>apache-xerces</groupId>
+            <artifactId>xml-apis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-client</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-client-spi</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.cl</groupId>
+            <artifactId>jboss-classloader</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.cl</groupId>
+            <artifactId>jboss-classloading</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.jboss.cl</groupId>
+            <artifactId>jboss-classloading-vfs</artifactId>
+        </dependency>
+
+
+    </dependencies>
+
+</project>
