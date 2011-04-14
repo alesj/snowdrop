@@ -9,12 +9,12 @@
     </application>
     <managed-bean>
         <managed-bean-name>accountSearch</managed-bean-name>
-        <managed-bean-class>org.jboss.snowdrop.samples.sportsclub.jsf.beans.AccountSearch</managed-bean-class>
+        <managed-bean-class>org.jboss.spring.samples.sportsclub.jsf.beans.AccountSearch</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <managed-bean-name>accountCreate</managed-bean-name>
-        <managed-bean-class>org.jboss.snowdrop.samples.sportsclub.jsf.beans.AccountCreate</managed-bean-class>
+        <managed-bean-class>org.jboss.spring.samples.sportsclub.jsf.beans.AccountCreate</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
         <managed-property>
             <property-name>referenceDataHelper</property-name>
@@ -23,12 +23,12 @@
     </managed-bean>
     <managed-bean>
         <managed-bean-name>referenceDataHelper</managed-bean-name>
-        <managed-bean-class>org.jboss.snowdrop.samples.sportsclub.jsf.beans.ReferenceDataHelper</managed-bean-class>
+        <managed-bean-class>org.jboss.spring.samples.sportsclub.jsf.beans.ReferenceDataHelper</managed-bean-class>
         <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
     <converter>
         <converter-id>enumConverter</converter-id>
-        <converter-class>org.jboss.snowdrop.samples.sportsclub.jsf.beans.BillingTypeConverter</converter-class>
+        <converter-class>org.jboss.spring.samples.sportsclub.jsf.beans.BillingTypeConverter</converter-class>
     </converter>
     <navigation-rule>
         <from-view-id>*</from-view-id>

@@ -1,4 +1,4 @@
-package org.jboss.snowdrop.samples.stayfit.dao.hibernate;
+package org.jboss.spring.samples.stayfit.dao.hibernate;
 
 import static org.hibernate.criterion.Restrictions.eq;
 import static org.hibernate.criterion.Restrictions.eqProperty;
@@ -15,10 +15,10 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Account;
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.AccountRepository;
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.criteria.AccountSearchCriteria;
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.criteria.PersonSearchCriteria;
+import org.jboss.spring.samples.sportsclub.domain.entity.Account;
+import org.jboss.spring.samples.sportsclub.domain.repository.AccountRepository;
+import org.jboss.spring.samples.sportsclub.domain.repository.criteria.AccountSearchCriteria;
+import org.jboss.spring.samples.sportsclub.domain.repository.criteria.PersonSearchCriteria;
 
 /**
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>

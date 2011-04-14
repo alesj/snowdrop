@@ -1,17 +1,13 @@
-package org.jboss.snowdrop.samples.sportsclub.jsf.beans;
+package org.jboss.spring.samples.sportsclub.jsf.beans;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.model.SelectItem;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.locks.ReentrantLock;
 
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.BillingType;
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Membership;
-import org.jboss.snowdrop.samples.sportsclub.ejb.SubscriptionService;
+import org.jboss.spring.samples.sportsclub.domain.entity.BillingType;
+import org.jboss.spring.samples.sportsclub.domain.entity.Membership;
+import org.jboss.spring.samples.sportsclub.ejb.SubscriptionService;
 
 /**
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>

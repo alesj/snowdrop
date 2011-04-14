@@ -1,6 +1,6 @@
-package org.jboss.snowdrop.samples.sportsclub.domain.repository;
+package org.jboss.spring.samples.sportsclub.domain.repository;
 
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Equipment;
+import org.jboss.spring.samples.sportsclub.domain.entity.Equipment;
 
 import java.util.List;
 import java.util.Date;

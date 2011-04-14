@@ -1,9 +1,9 @@
-package org.jboss.snowdrop.samples.stayfit.service;
+package org.jboss.spring.samples.stayfit.service;
 
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Reservation;
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.ReservationRepository;
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.criteria.ReservationSearchCriteria;
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.criteria.Range;
+import org.jboss.spring.samples.sportsclub.domain.entity.Reservation;
+import org.jboss.spring.samples.sportsclub.domain.repository.ReservationRepository;
+import org.jboss.spring.samples.sportsclub.domain.repository.criteria.ReservationSearchCriteria;
+import org.jboss.spring.samples.sportsclub.domain.repository.criteria.Range;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

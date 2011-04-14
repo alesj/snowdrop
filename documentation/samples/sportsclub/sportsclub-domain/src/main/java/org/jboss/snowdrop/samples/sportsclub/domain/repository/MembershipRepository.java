@@ -1,6 +1,6 @@
-package org.jboss.snowdrop.samples.sportsclub.domain.repository;
+package org.jboss.spring.samples.sportsclub.domain.repository;
 
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Membership;
+import org.jboss.spring.samples.sportsclub.domain.entity.Membership;
 
 import java.util.List;
 

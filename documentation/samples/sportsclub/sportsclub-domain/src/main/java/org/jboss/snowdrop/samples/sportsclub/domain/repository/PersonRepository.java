@@ -1,9 +1,7 @@
-package org.jboss.snowdrop.samples.sportsclub.domain.repository;
+package org.jboss.spring.samples.sportsclub.domain.repository;
 
-import java.util.Collection;
-
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Person;
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.criteria.AccountSearchCriteria;
+import org.jboss.spring.samples.sportsclub.domain.entity.Person;
+import org.jboss.spring.samples.sportsclub.domain.repository.criteria.AccountSearchCriteria;
 
 /**
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>

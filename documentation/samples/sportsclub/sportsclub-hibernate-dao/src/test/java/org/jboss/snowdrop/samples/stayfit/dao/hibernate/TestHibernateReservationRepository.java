@@ -1,8 +1,8 @@
-package org.jboss.snowdrop.samples.stayfit.dao.hibernate;
+package org.jboss.spring.samples.stayfit.dao.hibernate;
 
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.ReservationRepository;
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.criteria.ReservationSearchCriteria;
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Reservation;
+import org.jboss.spring.samples.sportsclub.domain.repository.ReservationRepository;
+import org.jboss.spring.samples.sportsclub.domain.repository.criteria.ReservationSearchCriteria;
+import org.jboss.spring.samples.sportsclub.domain.entity.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;

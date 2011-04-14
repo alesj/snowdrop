@@ -1,23 +1,21 @@
-package org.jboss.snowdrop.samples.stayfit.dao.hibernate.initializer;
+package org.jboss.spring.samples.stayfit.dao.hibernate.initializer;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.*;
+import org.jboss.spring.samples.sportsclub.domain.entity.*;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import javax.annotation.PostConstruct;
-import java.lang.reflect.Member;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.Locale;
 
-import static org.jboss.snowdrop.samples.sportsclub.domain.entity.EquipmentType.*;
+import static org.jboss.spring.samples.sportsclub.domain.entity.EquipmentType.*;
 
 /**
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>

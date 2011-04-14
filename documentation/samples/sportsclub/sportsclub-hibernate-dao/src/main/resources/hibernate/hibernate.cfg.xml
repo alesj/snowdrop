@@ -18,14 +18,14 @@
     <property name="hibernate.use_sql_comments">true</property>
     <property name="hibernate.show_sql">true</property>
 
-    <mapping class="org.jboss.snowdrop.samples.sportsclub.domain.entity.Account"/>
+    <mapping class="org.jboss.spring.samples.sportsclub.domain.entity.Account"/>
     <!--<mapping class="org.jboss.snowdrop.samples.sportsclub.domain.entity.Address"/>--> <!-- Embedded class -->
-    <mapping class="org.jboss.snowdrop.samples.sportsclub.domain.entity.Equipment"/>
+    <mapping class="org.jboss.spring.samples.sportsclub.domain.entity.Equipment"/>
     <!--<mapping class="org.jboss.snowdrop.samples.sportsclub.domain.entity.Name"/>--> <!-- Embedded class -->
-    <mapping class="org.jboss.snowdrop.samples.sportsclub.domain.entity.Invoice"/>
-    <mapping class="org.jboss.snowdrop.samples.sportsclub.domain.entity.Membership"/>
-    <mapping class="org.jboss.snowdrop.samples.sportsclub.domain.entity.Person"/>
-    <mapping class="org.jboss.snowdrop.samples.sportsclub.domain.entity.Reservation"/>
+    <mapping class="org.jboss.spring.samples.sportsclub.domain.entity.Invoice"/>
+    <mapping class="org.jboss.spring.samples.sportsclub.domain.entity.Membership"/>
+    <mapping class="org.jboss.spring.samples.sportsclub.domain.entity.Person"/>
+    <mapping class="org.jboss.spring.samples.sportsclub.domain.entity.Reservation"/>
 
 </session-factory>
 </hibernate-configuration>

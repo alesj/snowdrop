@@ -1,7 +1,7 @@
-package org.jboss.snowdrop.samples.stayfit.dao.hibernate;
+package org.jboss.spring.samples.stayfit.dao.hibernate;
 
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Equipment;
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.EquipmentRepository;
+import org.jboss.spring.samples.sportsclub.domain.entity.Equipment;
+import org.jboss.spring.samples.sportsclub.domain.repository.EquipmentRepository;
 
 import java.util.List;
 import java.util.Date;

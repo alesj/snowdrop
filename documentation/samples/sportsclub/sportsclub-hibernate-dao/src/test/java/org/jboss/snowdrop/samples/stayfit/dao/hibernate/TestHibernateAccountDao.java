@@ -1,9 +1,9 @@
-package org.jboss.snowdrop.samples.stayfit.dao.hibernate;
+package org.jboss.spring.samples.stayfit.dao.hibernate;
 
 import java.util.Collection;
 
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Account;
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.AccountRepository;
+import org.jboss.spring.samples.sportsclub.domain.entity.Account;
+import org.jboss.spring.samples.sportsclub.domain.repository.AccountRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

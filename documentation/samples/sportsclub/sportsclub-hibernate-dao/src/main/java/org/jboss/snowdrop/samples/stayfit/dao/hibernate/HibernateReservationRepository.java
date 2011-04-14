@@ -1,8 +1,8 @@
-package org.jboss.snowdrop.samples.stayfit.dao.hibernate;
+package org.jboss.spring.samples.stayfit.dao.hibernate;
 
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.ReservationRepository;
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.criteria.ReservationSearchCriteria;
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Reservation;
+import org.jboss.spring.samples.sportsclub.domain.repository.ReservationRepository;
+import org.jboss.spring.samples.sportsclub.domain.repository.criteria.ReservationSearchCriteria;
+import org.jboss.spring.samples.sportsclub.domain.entity.Reservation;
 import org.hibernate.Criteria;
 import static org.hibernate.criterion.Restrictions.*;
 import org.hibernate.criterion.Projections;

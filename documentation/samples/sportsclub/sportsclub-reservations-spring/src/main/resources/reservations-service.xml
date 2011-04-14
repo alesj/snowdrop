@@ -10,7 +10,7 @@
     <!-- enable the configuration of transactional behavior based on annotations -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <bean id="reservationService" class="org.jboss.snowdrop.samples.stayfit.service.ReservationServiceImpl">
+    <bean id="reservationService" class="org.jboss.spring.samples.stayfit.service.ReservationServiceImpl">
         <property name="reservationRepository" ref="reservationRepository"/>
     </bean>
 

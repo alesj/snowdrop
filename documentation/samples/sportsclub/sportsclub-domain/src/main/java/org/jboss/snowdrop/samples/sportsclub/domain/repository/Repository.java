@@ -1,4 +1,4 @@
-package org.jboss.snowdrop.samples.sportsclub.domain.repository;
+package org.jboss.spring.samples.sportsclub.domain.repository;
 
 import java.util.Collection;
 

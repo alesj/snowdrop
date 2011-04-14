@@ -1,7 +1,7 @@
-package org.jboss.snowdrop.samples.sportsclub.jsf.beans;
+package org.jboss.spring.samples.sportsclub.jsf.beans;
 
-import org.jboss.snowdrop.samples.stayfit.service.ReservationService;
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Reservation;
+import org.jboss.spring.samples.stayfit.service.ReservationService;
+import org.jboss.spring.samples.sportsclub.domain.entity.Reservation;
 import org.ajax4jsf.model.ExtendedDataModel;
 import org.ajax4jsf.model.DataVisitor;
 import org.ajax4jsf.model.Range;

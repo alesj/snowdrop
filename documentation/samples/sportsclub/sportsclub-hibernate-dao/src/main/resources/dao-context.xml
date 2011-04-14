@@ -21,29 +21,29 @@
         </property>
     </bean>
 
-    <bean class="org.jboss.snowdrop.samples.stayfit.dao.hibernate.initializer.DatabaseInitializer">
+    <bean class="org.jboss.spring.samples.stayfit.dao.hibernate.initializer.DatabaseInitializer">
         <property name="sessionFactory" ref="sessionFactory"/>
         <property name="transactionManager" ref="transactionManager"/>
 
     </bean>
 
-    <bean id="accountRepository" class="org.jboss.snowdrop.samples.stayfit.dao.hibernate.HibernateAccountRepository">
+    <bean id="accountRepository" class="org.jboss.spring.samples.stayfit.dao.hibernate.HibernateAccountRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="personRepository" class="org.jboss.snowdrop.samples.stayfit.dao.hibernate.HibernatePersonRepository">
+    <bean id="personRepository" class="org.jboss.spring.samples.stayfit.dao.hibernate.HibernatePersonRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="membershipRepository" class="org.jboss.snowdrop.samples.stayfit.dao.hibernate.HibernateMembershipRepository">
+    <bean id="membershipRepository" class="org.jboss.spring.samples.stayfit.dao.hibernate.HibernateMembershipRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="reservationRepository" class="org.jboss.snowdrop.samples.stayfit.dao.hibernate.HibernateReservationRepository">
+    <bean id="reservationRepository" class="org.jboss.spring.samples.stayfit.dao.hibernate.HibernateReservationRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="equipmentRepository" class="org.jboss.snowdrop.samples.stayfit.dao.hibernate.HibernateEquipmentRepository">
+    <bean id="equipmentRepository" class="org.jboss.spring.samples.stayfit.dao.hibernate.HibernateEquipmentRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 

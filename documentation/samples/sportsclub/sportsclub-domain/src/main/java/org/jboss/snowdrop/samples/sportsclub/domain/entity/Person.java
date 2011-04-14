@@ -1,7 +1,7 @@
-package org.jboss.snowdrop.samples.sportsclub.domain.entity;
+package org.jboss.spring.samples.sportsclub.domain.entity;
 
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Address;
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Name;
+import org.jboss.spring.samples.sportsclub.domain.entity.Address;
+import org.jboss.spring.samples.sportsclub.domain.entity.Name;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;

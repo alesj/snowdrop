@@ -54,11 +54,11 @@
             <defaultLibBundleDir>/lib/</defaultLibBundleDir>
             <modules>
               <ejbModule>
-                <groupId>org.jboss.snowdrop.samples</groupId>
+                <groupId>org.jboss.spring.samples</groupId>
                 <artifactId>orders-domain</artifactId>
               </ejbModule>
               <webModule>
-                <groupId>org.jboss.snowdrop.samples</groupId>
+                <groupId>org.jboss.spring.samples</groupId>
                 <artifactId>orders-web</artifactId>
                 <contextRoot>/orders</contextRoot>
               </webModule>

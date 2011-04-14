@@ -1,4 +1,4 @@
-package org.jboss.snowdrop.samples.sportsclub.ejb;
+package org.jboss.spring.samples.sportsclub.ejb;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -8,17 +8,17 @@ import java.util.Date;
 import java.util.List;
 
 import org.jboss.annotation.spring.Spring;
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Account;
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.BillingType;
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Membership;
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Person;
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.AccountRepository;
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.MembershipRepository;
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.PersonRepository;
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.criteria.AccountSearchCriteria;
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.criteria.PersonSearchCriteria;
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.criteria.Range;
-import org.jboss.snowdrop.samples.sportsclub.ejb.SubscriptionService;
+import org.jboss.spring.samples.sportsclub.domain.entity.Account;
+import org.jboss.spring.samples.sportsclub.domain.entity.BillingType;
+import org.jboss.spring.samples.sportsclub.domain.entity.Membership;
+import org.jboss.spring.samples.sportsclub.domain.entity.Person;
+import org.jboss.spring.samples.sportsclub.domain.repository.AccountRepository;
+import org.jboss.spring.samples.sportsclub.domain.repository.MembershipRepository;
+import org.jboss.spring.samples.sportsclub.domain.repository.PersonRepository;
+import org.jboss.spring.samples.sportsclub.domain.repository.criteria.AccountSearchCriteria;
+import org.jboss.spring.samples.sportsclub.domain.repository.criteria.PersonSearchCriteria;
+import org.jboss.spring.samples.sportsclub.domain.repository.criteria.Range;
+import org.jboss.spring.samples.sportsclub.ejb.SubscriptionService;
 import org.jboss.spring.callback.SpringLifecycleInterceptor;
 
 /**

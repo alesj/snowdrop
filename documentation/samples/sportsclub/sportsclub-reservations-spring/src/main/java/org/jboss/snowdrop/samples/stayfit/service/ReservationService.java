@@ -1,6 +1,6 @@
-package org.jboss.snowdrop.samples.stayfit.service;
+package org.jboss.spring.samples.stayfit.service;
 
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Reservation;
+import org.jboss.spring.samples.sportsclub.domain.entity.Reservation;
 
 import java.util.List;
 import java.util.Date;

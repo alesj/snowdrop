@@ -1,7 +1,7 @@
-package org.jboss.snowdrop.samples.sportsclub.domain.repository;
+package org.jboss.spring.samples.sportsclub.domain.repository;
 
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Reservation;
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.criteria.ReservationSearchCriteria;
+import org.jboss.spring.samples.sportsclub.domain.entity.Reservation;
+import org.jboss.spring.samples.sportsclub.domain.repository.criteria.ReservationSearchCriteria;
 
 import java.util.List;
 

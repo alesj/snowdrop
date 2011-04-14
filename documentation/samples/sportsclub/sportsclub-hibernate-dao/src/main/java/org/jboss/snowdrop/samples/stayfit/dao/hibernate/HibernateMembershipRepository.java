@@ -1,11 +1,11 @@
-package org.jboss.snowdrop.samples.stayfit.dao.hibernate;
+package org.jboss.spring.samples.stayfit.dao.hibernate;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Membership;
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.MembershipRepository;
+import org.jboss.spring.samples.sportsclub.domain.entity.Membership;
+import org.jboss.spring.samples.sportsclub.domain.repository.MembershipRepository;
 
 import java.util.List;
 

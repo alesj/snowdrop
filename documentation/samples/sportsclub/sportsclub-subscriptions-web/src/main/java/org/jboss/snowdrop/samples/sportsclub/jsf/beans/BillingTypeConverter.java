@@ -1,8 +1,8 @@
-package org.jboss.snowdrop.samples.sportsclub.jsf.beans;
+package org.jboss.spring.samples.sportsclub.jsf.beans;
 
 import javax.faces.convert.EnumConverter;
 
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.BillingType;
+import org.jboss.spring.samples.sportsclub.domain.entity.BillingType;
 
 /**
  * @author Marius Bogoevici

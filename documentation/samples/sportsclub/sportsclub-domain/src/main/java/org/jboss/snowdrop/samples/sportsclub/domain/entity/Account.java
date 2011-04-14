@@ -1,6 +1,6 @@
-package org.jboss.snowdrop.samples.sportsclub.domain.entity;
+package org.jboss.spring.samples.sportsclub.domain.entity;
 
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Person;
+import org.jboss.spring.samples.sportsclub.domain.entity.Person;
 
 import javax.persistence.*;
 import java.util.Date;

@@ -1,16 +1,15 @@
-package org.jboss.snowdrop.samples.sportsclub.jsf.beans;
+package org.jboss.spring.samples.sportsclub.jsf.beans;
 
 import org.ajax4jsf.model.DataVisitor;
 import org.ajax4jsf.model.ExtendedDataModel;
 import org.ajax4jsf.model.Range;
 import org.ajax4jsf.model.SequenceRange;
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Account;
-import org.jboss.snowdrop.samples.sportsclub.ejb.SubscriptionService;
+import org.jboss.spring.samples.sportsclub.domain.entity.Account;
+import org.jboss.spring.samples.sportsclub.ejb.SubscriptionService;
 
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

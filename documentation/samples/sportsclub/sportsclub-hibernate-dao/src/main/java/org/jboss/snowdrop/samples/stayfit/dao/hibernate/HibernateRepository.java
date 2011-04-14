@@ -1,9 +1,9 @@
-package org.jboss.snowdrop.samples.stayfit.dao.hibernate;
+package org.jboss.spring.samples.stayfit.dao.hibernate;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
-import org.jboss.snowdrop.samples.sportsclub.domain.repository.Repository;
+import org.jboss.spring.samples.sportsclub.domain.repository.Repository;
 
 import java.io.Serializable;
 import java.util.Collection;

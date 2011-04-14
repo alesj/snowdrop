@@ -47,11 +47,11 @@
           <defaultLibBundleDir>/lib/</defaultLibBundleDir>
           <modules>
             <ejbModule>
-              <groupId>org.jboss.snowdrop.samples</groupId>
+              <groupId>org.jboss.spring.samples</groupId>
               <artifactId>horoscope-ejb</artifactId>
             </ejbModule>
             <webModule>
-              <groupId>org.jboss.snowdrop.samples</groupId>
+              <groupId>org.jboss.spring.samples</groupId>
               <artifactId>horoscope-war</artifactId>
               <contextRoot>/horoscope</contextRoot>
             </webModule>

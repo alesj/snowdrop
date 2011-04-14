@@ -1,4 +1,4 @@
-package org.jboss.snowdrop.samples.sportsclub.domain.repository.criteria;
+package org.jboss.spring.samples.sportsclub.domain.repository.criteria;
 
 import java.util.Date;
 

@@ -1,14 +1,13 @@
-package org.jboss.snowdrop.samples.sportsclub.ejb;
+package org.jboss.spring.samples.sportsclub.ejb;
 
 import javax.ejb.Local;
 import javax.ejb.TransactionAttribute;
-import java.util.Collection;
 import java.util.List;
 
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Account;
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.BillingType;
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Membership;
-import org.jboss.snowdrop.samples.sportsclub.domain.entity.Person;
+import org.jboss.spring.samples.sportsclub.domain.entity.Account;
+import org.jboss.spring.samples.sportsclub.domain.entity.BillingType;
+import org.jboss.spring.samples.sportsclub.domain.entity.Membership;
+import org.jboss.spring.samples.sportsclub.domain.entity.Person;
 
 /**
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
