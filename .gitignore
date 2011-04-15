@@ -1,0 +1,14 @@
+*.iml
+*.iws
+*.ipr
+.idea/
+aop/target/
+build/target/
+cache/target/
+cluster/target/
+deployer-assembly/target/
+deployers/target/
+facade/target/
+vfs/target/
+weaving/target/
+

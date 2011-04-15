@@ -20,6 +20,7 @@
 
   <modules>
     <module>aop</module>
+    <module>cache</module>
     <module>cluster</module>
     <module>deployers</module>
     <module>facade</module>
@@ -42,13 +43,14 @@
     <version.jbossxb>2.0.2.Beta4</version.jbossxb>
     <version.jboss.aop>2.0.1.GA</version.jboss.aop>
     <version.jboss.pojocache>3.0.0.GA</version.jboss.pojocache>
+    <version.jboss.infinispan>5.0.0.BETA1</version.jboss.infinispan>
     <version.org.jboss.test>1.1.9.GA</version.org.jboss.test>
     <version.junit>4.4</version.junit>
     <version.javassist>3.11.0.GA</version.javassist>
     <version.javaee>3.0.0.GA</version.javaee>
     <version.xerces>2.9.1</version.xerces>
     <version.aopalliance>1.0</version.aopalliance>
-    <version.spring>3.0.1.RELEASE</version.spring>
+    <version.spring>3.1.0.M1</version.spring>
   </properties>
 
   <build>
@@ -126,6 +128,17 @@
       </plugins>
     </pluginManagement>
   </build>
+
+  <repositories>
+      <repository>
+          <id>JBoss Repo</id>
+          <url>https://repository.jboss.org/nexus/content/groups/public</url>
+      </repository>
+      <repository>
+          <id>Spring Milestone</id>
+          <url>http://maven.springframework.org/milestone/</url>
+      </repository>
+  </repositories>
 
   <dependencyManagement>
     <!-- The parent pom manages the inter-dependencies of the modules. -->
@@ -383,6 +396,12 @@
         <groupId>org.jboss.cache</groupId>
         <artifactId>jbosscache-pojo</artifactId>
         <version>${version.jboss.pojocache}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.infinispan</groupId>
+        <artifactId>infinispan-core</artifactId>
+        <version>${version.jboss.infinispan}</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
