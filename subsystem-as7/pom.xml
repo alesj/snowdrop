@@ -65,6 +65,27 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
-		</plugins>
+		
+		<plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+
+                <executions>
+                    <execution>
+                        <id>make-module</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>jboss-spring-deployer-as7</finalName>
+                            <appendAssemblyId>true</appendAssemblyId>
+                            <descriptors>
+                                <descriptor>${basedir}/src/main/assembly/deployer.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            </plugins>
 	</build>
 </project>
