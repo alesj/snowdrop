@@ -24,11 +24,21 @@ package org.jboss.spring.support;
 import java.lang.reflect.Field;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 import org.jboss.annotation.spring.Spring;
 import org.jboss.logging.Logger;
-import org.jboss.util.naming.Util;
+import org.jboss.spring.util.Version;
+import org.jboss.spring.util.VersionProvider;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ListableBeanFactory;
 
@@ -38,6 +48,7 @@ import org.springframework.beans.factory.ListableBeanFactory;
  * It is applied to setter methods and fields annotated with @Spring annotation.
  *
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
+ * @author Marius Bogoevici
  * @see MethodComparator Excludes overridden @Spring annotated methods
  *      Class type check is performed before actual setting.
  */
@@ -82,7 +93,7 @@ public abstract class SpringInjectionSupport
 
    protected Method[] getAllMethods(Object bean)
    {
-      Class beanClass = bean.getClass();
+      Class<?> beanClass = bean.getClass();
       Set<Method> methods = new TreeSet<Method>(METHOD_COMPARATOR);
       while (beanClass != Object.class)
       {
@@ -94,7 +105,7 @@ public abstract class SpringInjectionSupport
 
    protected Field[] getAllFields(Object bean)
    {
-      Class beanClass = bean.getClass();
+      Class<?> beanClass = bean.getClass();
       List<Field> fields = new ArrayList<Field>();
       while (beanClass != Object.class)
       {
@@ -122,12 +133,20 @@ public abstract class SpringInjectionSupport
    {
       if (jndiName == null || jndiName.length() == 0)
          throw new IllegalArgumentException("Empty BeanFactory jndi name.");
+      // On JBoss AS 7, custom bindings can be created only under java:/jboss
+      // so this is what the deployer does
+      // Append the prefix if the path is relative - should allow deployments that 
+      // worked in JBoss AS 5/6 to be portable in JBoss AS 7
+      if (VersionProvider.VERSION.equals(Version.AS_7) && !jndiName.startsWith("java:")) 
+      {
+          jndiName += "jboss/";
+      }
       return jndiName;
    }
 
-   private Object getObjectFromBeanFactory(Spring spring, String defaultBeanName, Class beanType) throws Exception
+   private Object getObjectFromBeanFactory(Spring spring, String defaultBeanName, Class<?> beanType) throws Exception
    {
-      BeanFactory beanFactory = (BeanFactory) Util.lookup(getJndiName(spring.jndiName()), BeanFactory.class);
+      BeanFactory beanFactory = lookup(getJndiName(spring.jndiName()), BeanFactory.class);
       String beanName = spring.bean();
       if (beanName != null && beanName.length() > 0)
       {
@@ -139,7 +158,7 @@ public abstract class SpringInjectionSupport
          if (beanFactory instanceof ListableBeanFactory)
          {
             ListableBeanFactory lbf = (ListableBeanFactory) beanFactory;
-            Map beans = lbf.getBeansOfType(beanType);
+            Map<?,?> beans = lbf.getBeansOfType(beanType);
             if (beans.size() > 1)
             {
                Object bean = beans.get(defaultBeanName);
@@ -165,6 +184,29 @@ public abstract class SpringInjectionSupport
          }
       }
    }
+
+   /**
+     * @param jndiName the JNDI location of the Spring context relative to 
+     * 'java:' on JBoss AS5 and JBoss AS6 and 'java:jboss' on JBoss AS7 
+     * @param expectedClass the expected type of the retrieved object 
+     * @return
+     */
+    private <T> T lookup(String jndiName, Class<T> expectedClass) {
+        Object instance;
+        try {
+            InitialContext initialContext = new InitialContext();
+            instance = initialContext.lookup(jndiName);
+            if (! (expectedClass.isAssignableFrom(instance.getClass()))) 
+            {
+                throw new IllegalArgumentException("Cannot retrieve an " + 
+                    expectedClass.getName() + " from " + jndiName + " - a " +
+                     instance.getClass().getName() + " found instead");
+            }
+        } catch (NamingException e) {
+           throw new IllegalStateException(e);
+        }
+        return expectedClass.cast(instance);
+    }
 
    private void injectToMethod(Object target, Method method, Spring spring) throws Exception
    {
@@ -217,10 +259,10 @@ public abstract class SpringInjectionSupport
 
          if (name1.equals(name2))
          {
-            Class returnType1 = m1.getReturnType();
-            Class returnType2 = m2.getReturnType();
-            Class[] params1 = m1.getParameterTypes();
-            Class[] params2 = m1.getParameterTypes();
+            Class<?> returnType1 = m1.getReturnType();
+            Class<?> returnType2 = m2.getReturnType();
+            Class<?>[] params1 = m1.getParameterTypes();
+            Class<?>[] params2 = m1.getParameterTypes();
             if (params1.length == params2.length)
             {
                if (returnType1.equals(returnType2))

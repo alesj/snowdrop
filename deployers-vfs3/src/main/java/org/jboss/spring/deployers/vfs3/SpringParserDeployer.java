@@ -34,6 +34,7 @@ import org.jboss.vfs.VirtualFile;
  * Picks up -spring.xml file.
  *
  * @author <a href="mailto:ales.justin@jboss.com">Ales Justin</a>
+ * @author Marius Bogoevici
  */
 public class SpringParserDeployer extends AbstractVFSParsingDeployer<SpringMetaData>
 {

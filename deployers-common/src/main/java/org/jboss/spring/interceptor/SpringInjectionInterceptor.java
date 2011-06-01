@@ -32,6 +32,7 @@ import org.jboss.spring.support.SpringInjectionSupport;
  * (in order to inject beans).
  *
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
+ * @author Marius Bogoevici
  * @see SpringInjectionSupport
  */
 public class SpringInjectionInterceptor extends SpringInjectionSupport implements Interceptor
