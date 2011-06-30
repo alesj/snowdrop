@@ -22,29 +22,25 @@
 
 package org.jboss.spring.deployers.as7;
 
-import org.jboss.as.controller.BasicOperationResult;
-import org.jboss.as.controller.ModelAddOperationHandler;
+import org.jboss.as.controller.AbstractBoottimeAddStepHandler;
 import org.jboss.as.controller.OperationContext;
 import org.jboss.as.controller.OperationFailedException;
-import org.jboss.as.controller.OperationHandler;
-import org.jboss.as.controller.OperationResult;
-import org.jboss.as.controller.ResultHandler;
-import org.jboss.as.controller.RuntimeTask;
-import org.jboss.as.controller.RuntimeTaskContext;
-import org.jboss.as.controller.operations.common.Util;
-import org.jboss.as.server.BootOperationContext;
-import org.jboss.as.server.BootOperationHandler;
+import org.jboss.as.controller.ServiceVerificationHandler;
+import org.jboss.as.server.AbstractDeploymentChainStep;
+import org.jboss.as.server.DeploymentProcessorTarget;
 import org.jboss.as.server.deployment.Phase;
 import org.jboss.dmr.ModelNode;
 import org.jboss.logging.Logger;
 import org.jboss.msc.service.ServiceController;
+
+import java.util.List;
 
 import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.OP_ADDR;
 
 /**
  * @author Marius Bogoevici
  */
-public class SpringSubsystemAdd implements ModelAddOperationHandler, BootOperationHandler {
+public class SpringSubsystemAdd extends AbstractBoottimeAddStepHandler {
 
     private static final Logger log = Logger.getLogger("org.jboss.as.spring");
 
@@ -52,27 +48,20 @@ public class SpringSubsystemAdd implements ModelAddOperationHandler, BootOperati
     public static final SpringSubsystemAdd INSTANCE = new SpringSubsystemAdd();
 
     @Override
-    public OperationResult execute(final OperationContext context, final ModelNode operation, final ResultHandler resultHandler) {
+    protected void performBoottime(OperationContext operationContext, ModelNode modelNode, ModelNode modelNode1, ServiceVerificationHandler serviceVerificationHandler, List<ServiceController<?>> serviceControllers) throws OperationFailedException {
+       log.info("Activating Spring Deployer subsystem");
+       operationContext.addStep(new AbstractDeploymentChainStep() {
+            protected void execute(DeploymentProcessorTarget bootContext) {
+                bootContext.addDeploymentProcessor(Phase.PARSE,  Integer.MAX_VALUE, new SpringStructureProcessor());
+                             bootContext.addDeploymentProcessor(Phase.DEPENDENCIES,  Integer.MAX_VALUE, new SpringDependencyProcessor());
+                             bootContext.addDeploymentProcessor(Phase.INSTALL,  Integer.MAX_VALUE, new SpringBootstrapProcessor());
+                         }
+        }, OperationContext.Stage.RUNTIME);
+    }
 
-        context.getSubModel().setEmptyObject();
-
-        if (context instanceof BootOperationContext) {
-            log.infof("Activating Spring deployer subsystem");
-            final BootOperationContext bootContext = (BootOperationContext) context;
-            context.getRuntimeContext().setRuntimeTask(new RuntimeTask() {
-                public void execute(RuntimeTaskContext context) throws OperationFailedException {
-                    bootContext.addDeploymentProcessor(Phase.PARSE,  Integer.MAX_VALUE, new SpringStructureProcessor());
-                    bootContext.addDeploymentProcessor(Phase.DEPENDENCIES,  Integer.MAX_VALUE, new SpringDependencyProcessor());
-                    bootContext.addDeploymentProcessor(Phase.INSTALL,  Integer.MAX_VALUE, new SpringBootstrapProcessor());
-                    resultHandler.handleResultComplete();
-                }
-            });
-        } else {
-            resultHandler.handleResultComplete();
-        }
-
-        final ModelNode compensatingOperation = Util.getResourceRemoveOperation(operation.require(OP_ADDR));
-        return new BasicOperationResult(compensatingOperation);
+    @Override
+    protected void populateModel(ModelNode modelNode, ModelNode modelNode1) throws OperationFailedException {
+       modelNode.setEmptyObject();
     }
 
 }

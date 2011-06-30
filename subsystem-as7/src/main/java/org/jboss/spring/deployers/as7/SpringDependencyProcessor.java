@@ -51,7 +51,7 @@ public class SpringDependencyProcessor implements DeploymentUnitProcessor {
         ModuleDependency moduleDependency = new ModuleDependency(Module.getBootModuleLoader(), MODULE_IDENTIFIER, false, false, true);
         moduleDependency.addExportFilter(PathFilters.getMetaInfFilter(), true);
         moduleDependency.addImportFilter(PathFilters.getMetaInfFilter(), true);
-        moduleSpecification.addDependency(moduleDependency);
+        moduleSpecification.addUserDependency(moduleDependency);
     }
 
     @Override
