@@ -21,7 +21,7 @@
   -->
 <module xmlns="urn:jboss:module:1.0" name="org.jboss.as.spring">
   <resources>
-      <resource-root path="spring-deployer-as7.jar"/>
+      <resource-root path="snowdrop-subsystem-as7.jar"/>
       <resource-root path="spring-beans.jar"/>
       <resource-root path="spring-asm.jar"/>
       <resource-root path="spring-core.jar"/>
@@ -30,6 +30,7 @@
       <resource-root path="spring-expression.jar"/>
       <resource-root path="snowdrop-vfs.jar"/>
       <resource-root path="snowdrop-deployers-common.jar"/>
+      <resource-root path="snowdrop-deployers-common-jandex.jar"/>
       <resource-root path="snowdrop-weaving.jar"/>
   </resources>
   <dependencies>

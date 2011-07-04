@@ -1,72 +1,128 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<artifactId>snowdrop-parent</artifactId>
-		<groupId>org.jboss.snowdrop</groupId>
-		<version>2.0.0-SNAPSHOT</version>
-		<relativePath>..</relativePath>
-	</parent>
-	<artifactId>snowdrop-subsystem-as7</artifactId>
-	<name>Snowdrop AS7 Subsystem</name>
-	<description>Spring subsystem for JBoss AS7</description>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>snowdrop-parent</artifactId>
+        <groupId>org.jboss.snowdrop</groupId>
+        <version>2.0.0-SNAPSHOT</version>
+        <relativePath>..</relativePath>
+    </parent>
+    <artifactId>snowdrop-subsystem-as7</artifactId>
+    <name>Snowdrop AS7 Subsystem</name>
+    <description>Spring subsystem for JBoss AS7</description>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.jboss.as</groupId>
-			<artifactId>jboss-as-controller</artifactId>
-			<version>${version.org.jboss.as7}</version>
-		</dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-controller</artifactId>
+            <version>${version.org.jboss.as7}</version>
+        </dependency>
 
-		<dependency>
-			<groupId>org.jboss.as</groupId>
-			<artifactId>jboss-as-server</artifactId>
-			<version>${version.org.jboss.as7}</version>
-		</dependency>
+        <dependency>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-server</artifactId>
+            <version>${version.org.jboss.as7}</version>
+        </dependency>
 
-		<dependency>
-			<groupId>org.jboss.as</groupId>
-			<artifactId>jboss-as-naming</artifactId>
-			<version>${version.org.jboss.as7}</version>
-		</dependency>
+        <dependency>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-naming</artifactId>
+            <version>${version.org.jboss.as7}</version>
+        </dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>org.jboss.snowdrop</groupId>
-			<artifactId>snowdrop-vfs</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.jboss.snowdrop</groupId>
+            <artifactId>snowdrop-vfs</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>org.jboss.snowdrop</groupId>
-			<artifactId>snowdrop-deployers-common</artifactId>
-		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.jboss.snowdrop</groupId>
+            <artifactId>snowdrop-deployers-common</artifactId>
+        </dependency>
+    </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-		
-		<plugin>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/dependency/lib</outputDirectory>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                            <stripVersion>true</stripVersion>
+                            <includeGroupIds>org.springframework,org.jboss.snowdrop</includeGroupIds>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <inherited>false</inherited>
+                <executions>
+                    <execution>
+                        <id>build-dist</id>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+
+                            <tasks>
+                                <taskdef name="jandex" classname="org.jboss.jandex.JandexAntTask"/>
+
+
+                                <echo message="Scanning"/>
+                                <jandex run="true" newJar="true">
+                                    <fileset dir="${project.build.directory}/dependency/lib"/>
+                                </jandex>
+
+                            </tasks>
+
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jboss</groupId>
+                        <artifactId>jandex</artifactId>
+                        <version>${version.org.jboss.jandex}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
 
                 <executions>
@@ -86,6 +142,6 @@
                     </execution>
                 </executions>
             </plugin>
-            </plugins>
-	</build>
+        </plugins>
+    </build>
 </project>

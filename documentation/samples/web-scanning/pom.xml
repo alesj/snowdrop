@@ -9,7 +9,7 @@
     <url>http://maven.apache.org</url>
 
     <properties>
-        <version.spring>3.0.2.RELEASE</version.spring>
+        <version.spring>3.0.5.RELEASE</version.spring>
         <version.snowdrop>2.0.0-M1-SP1</version.snowdrop>
     </properties>
 

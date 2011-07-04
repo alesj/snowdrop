@@ -52,6 +52,7 @@ public class SpringDependencyProcessor implements DeploymentUnitProcessor {
         moduleDependency.addExportFilter(PathFilters.getMetaInfFilter(), true);
         moduleDependency.addImportFilter(PathFilters.getMetaInfFilter(), true);
         moduleSpecification.addUserDependency(moduleDependency);
+        deploymentUnit.addToAttachmentList(Attachments.ADDITIONAL_ANNOTATION_INDEXES, MODULE_IDENTIFIER);
     }
 
     @Override

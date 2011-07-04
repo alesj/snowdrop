@@ -33,24 +33,19 @@
         <include>module.xml</include>
       </includes>
     </fileSet>
+    <fileSet>
+        <directory>${basedir}/target/dependency/lib</directory>
+         <outputDirectory>/</outputDirectory>
+      <includes>
+        <include>*.jar</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+        <directory>${basedir}/target</directory>
+        <outputDirectory>/</outputDirectory>
+        <includes>
+            <include>${project.artifactId}.jar</include>
+        </includes>
+    </fileSet>
   </fileSets>
-  <dependencySets>
-    <dependencySet>
-      <outputDirectory>/</outputDirectory>
-      <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
-      <useTransitiveDependencies>true</useTransitiveDependencies>
-      <includes>
-          <include>org.jboss.snowdrop:*:*</include>
-          <include>org.jboss.as.spring:spring-deployer-as7:*</include>
-      </includes>
-    </dependencySet>
-    <dependencySet>
-      <outputDirectory>/</outputDirectory>
-      <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
-      <useTransitiveDependencies>false</useTransitiveDependencies>
-      <includes>
-          <include>org.springframework:*:*</include>
-      </includes>
-    </dependencySet>
-  </dependencySets>
 </assembly>
