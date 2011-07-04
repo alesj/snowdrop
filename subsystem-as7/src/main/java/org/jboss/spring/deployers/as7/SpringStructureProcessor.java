@@ -62,9 +62,10 @@ public class SpringStructureProcessor implements DeploymentUnitProcessor {
             }
         }
 
-        SpringDeployment springDeployment = new SpringDeployment(springContextLocations);
-
-        springDeployment.attachTo(deploymentUnit);
+        if (!springContextLocations.isEmpty()) {
+            SpringDeployment springDeployment = new SpringDeployment(springContextLocations);
+            springDeployment.attachTo(deploymentUnit);
+        }
 
     }
 

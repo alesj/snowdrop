@@ -52,6 +52,9 @@ public class SpringBootstrapProcessor implements DeploymentUnitProcessor {
     public void deploy(DeploymentPhaseContext phaseContext) throws DeploymentUnitProcessingException {
         ServiceTarget serviceTarget = phaseContext.getServiceTarget();
         SpringDeployment locations = SpringDeployment.retrieveFrom(phaseContext.getDeploymentUnit());
+        if (locations == null) {
+            return;
+        }
         for (VirtualFile virtualFile : locations.getContextDefinitionLocations()) {
             NamedXmlApplicationContext applicationContext;
              ClassLoader cl = Thread.currentThread().getContextClassLoader();

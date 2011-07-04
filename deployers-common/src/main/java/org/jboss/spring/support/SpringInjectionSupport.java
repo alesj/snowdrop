@@ -139,14 +139,16 @@ public abstract class SpringInjectionSupport
       // worked in JBoss AS 5/6 to be portable in JBoss AS 7
       if (VersionProvider.VERSION.equals(Version.AS_7) && !jndiName.startsWith("java:")) 
       {
-          jndiName += "jboss/";
+          jndiName = "java:jboss/" + jndiName;
       }
       return jndiName;
    }
 
    private Object getObjectFromBeanFactory(Spring spring, String defaultBeanName, Class<?> beanType) throws Exception
    {
-      BeanFactory beanFactory = lookup(getJndiName(spring.jndiName()), BeanFactory.class);
+       String jndiName = getJndiName(spring.jndiName());
+       System.out.println("Looking up " + jndiName);
+       BeanFactory beanFactory = lookup(jndiName, BeanFactory.class);
       String beanName = spring.bean();
       if (beanName != null && beanName.length() > 0)
       {

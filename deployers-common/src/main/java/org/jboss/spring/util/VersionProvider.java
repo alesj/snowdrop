@@ -37,25 +37,11 @@ public class VersionProvider
     {
         // on JBoss AS 5 and JBoss AS 6
         Version version = null;
-        try 
-        {
-            ClassUtils.getDefaultClassLoader().loadClass("org.jboss.classloader.spi.base.BaseClassLoader");
+        ClassLoader classLoader = ClassUtils.getDefaultClassLoader();
+        if (classLoader.getClass().getName().startsWith("org.jboss.classloader")) {
             version = Version.AS_5_OR_6;
-        } 
-        catch (ClassNotFoundException e) 
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        try 
-        {
-            ClassUtils.getDefaultClassLoader().loadClass("org.jboss.modules.ModuleClassLoader");
+        } else if (classLoader.getClass().getName().startsWith("org.jboss.modules")) {
             version = Version.AS_7;
-        } 
-        catch (ClassNotFoundException e) 
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
         if (version == null) 
         {
