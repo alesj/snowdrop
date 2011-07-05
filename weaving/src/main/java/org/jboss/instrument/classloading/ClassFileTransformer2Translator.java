@@ -31,24 +31,22 @@ import org.jboss.util.loading.Translator;
  *
  * @author <a href="mailto:ales.justin@jboss.org">Ales Justin</a>
  */
-public class ClassFileTransformer2Translator implements Translator
-{
-   private ClassFileTransformer transformer;
+public class ClassFileTransformer2Translator implements Translator {
 
-   public ClassFileTransformer2Translator(ClassFileTransformer transformer)
-   {
-      if (transformer == null)
-         throw new IllegalArgumentException("Null transformer");
+    private ClassFileTransformer transformer;
 
-      this.transformer = transformer;
-   }
+    public ClassFileTransformer2Translator(ClassFileTransformer transformer) {
+        if (transformer == null) {
+            throw new IllegalArgumentException("Null transformer");
+        }
 
-   public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) throws Exception
-   {
-      return transformer.transform(loader, className, classBeingRedefined, protectionDomain, classfileBuffer);
-   }
+        this.transformer = transformer;
+    }
 
-   public void unregisterClassLoader(ClassLoader loader)
-   {
-   }
+    public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) throws Exception {
+        return transformer.transform(loader, className, classBeingRedefined, protectionDomain, classfileBuffer);
+    }
+
+    public void unregisterClassLoader(ClassLoader loader) {
+    }
 }

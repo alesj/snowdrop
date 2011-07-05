@@ -9,9 +9,8 @@ import java.util.List;
  * @author: marius
  */
 @Local
-public interface OrderService
-{
+public interface OrderService {
 
-   List<Order> getOrdersForUserId(String userId);
+    List<Order> getOrdersForUserId(String userId);
 
 }

@@ -15,14 +15,14 @@ import javax.persistence.JoinColumn;
 public class Order {
 
     @Id
-    @Column(name="ORDER_ID")
+    @Column(name = "ORDER_ID")
     private long id;
 
-    @Column (name = "ORDER_NAME")
+    @Column(name = "ORDER_NAME")
     private String name;
 
     @ManyToOne
-    @JoinColumn(name="ORDER_CREATED_BY")
+    @JoinColumn(name = "ORDER_CREATED_BY")
     private User createdBy;
 
     public long getId() {

@@ -24,17 +24,15 @@ package org.jboss.spring.facade;
 /**
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
  */
-public class ComplexService
-{
+public class ComplexService {
+
     private Adder adder;
 
-    public void setAdder(Adder adder)
-    {
+    public void setAdder(Adder adder) {
         this.adder = adder;
     }
 
-    public String processNumbers (int i, int j)
-    {
-        return "Result is: " + adder.add(i, j);  
+    public String processNumbers(int i, int j) {
+        return "Result is: " + adder.add(i, j);
     }
 }

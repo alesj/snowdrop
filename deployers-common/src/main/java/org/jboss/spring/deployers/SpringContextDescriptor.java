@@ -9,62 +9,57 @@ import org.springframework.core.io.UrlResource;
 /**
  * @author Marius Bogoevici
  */
-public class SpringContextDescriptor implements Serializable
-{
+public class SpringContextDescriptor implements Serializable {
+
     private static final long serialVersionUID = 8989753488155849440L;
 
-   private URL fileURL;
-   private String defaultName;
-   private String name;
-   private transient Resource resource;
+    private URL fileURL;
 
-   public SpringContextDescriptor()
-   {
-   }
+    private String defaultName;
 
-   public SpringContextDescriptor(URL fileURL, String defaultName)
-   {
-      this.fileURL = fileURL;
-      this.defaultName = defaultName;
-   }
+    private String name;
 
-   public URL getFileURL()
-   {
-      return fileURL;
-   }
+    private transient Resource resource;
 
-   public void setFileURL(URL fileURL)
-   {
-      this.fileURL = fileURL;
-   }
+    public SpringContextDescriptor() {
+    }
 
-   public String getDefaultName()
-   {
-      return defaultName;
-   }
+    public SpringContextDescriptor(URL fileURL, String defaultName) {
+        this.fileURL = fileURL;
+        this.defaultName = defaultName;
+    }
 
-   public String getName()
-   {
-      return name != null ? name : defaultName;
-   }
+    public URL getFileURL() {
+        return fileURL;
+    }
 
-   public void setName(String name)
-   {
-      this.name = name;
-   }
+    public void setFileURL(URL fileURL) {
+        this.fileURL = fileURL;
+    }
 
-   public Resource getResource()
-   {
-      if (resource == null)
-         resource = new UrlResource(fileURL);
-      return resource;
-   }
+    public String getDefaultName() {
+        return defaultName;
+    }
 
-   public String toString()
-   {
-      StringBuilder builder = new StringBuilder();
-      builder.append("fileURL=").append(fileURL);
-      builder.append(", defaultName=").append(defaultName);
-      return builder.toString();
-   }
+    public String getName() {
+        return name != null ? name : defaultName;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Resource getResource() {
+        if (resource == null) {
+            resource = new UrlResource(fileURL);
+        }
+        return resource;
+    }
+
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("fileURL=").append(fileURL);
+        builder.append(", defaultName=").append(defaultName);
+        return builder.toString();
+    }
 }

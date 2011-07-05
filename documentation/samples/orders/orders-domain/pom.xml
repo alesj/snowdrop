@@ -90,13 +90,13 @@
         </dependency>
     </dependencies>
     <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-ejb-plugin</artifactId>
-        <configuration>
-          <ejbVersion>3.0</ejbVersion>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-ejb-plugin</artifactId>
+                <configuration>
+                    <ejbVersion>3.0</ejbVersion>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

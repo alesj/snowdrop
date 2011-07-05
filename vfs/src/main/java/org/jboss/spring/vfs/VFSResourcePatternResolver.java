@@ -33,30 +33,23 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
  * @author <a href="mailto:ales.justin@jboss.com">Ales Justin</a>
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
  */
-public class VFSResourcePatternResolver extends PathMatchingResourcePatternResolver
-{
-   public VFSResourcePatternResolver(ResourceLoader resourceLoader)
-   {
-      super(resourceLoader);
-   }
+public class VFSResourcePatternResolver extends PathMatchingResourcePatternResolver {
 
-    protected Resource[] findPathMatchingResources(String locationPattern) throws IOException
-    {
-       if (locationPattern.startsWith(CLASSPATH_ALL_URL_PREFIX))
-       {
-           locationPattern = locationPattern.substring(CLASSPATH_ALL_URL_PREFIX.length());
-           String rootDirPath = determineRootDir(locationPattern);
-           return VFSResourcePatternResolvingHelper.locateResources(locationPattern, rootDirPath, getClassLoader(), getPathMatcher(), false);
-       }
-       else if (locationPattern.startsWith(CLASSPATH_URL_PREFIX))
-       {
-           locationPattern = locationPattern.substring(CLASSPATH_URL_PREFIX.length());
-           String rootDirPath = determineRootDir(locationPattern);
-           return VFSResourcePatternResolvingHelper.locateResources(locationPattern, rootDirPath, getClassLoader(), getPathMatcher(), true);
-       }
-       else
-       {
-           return super.findPathMatchingResources(locationPattern);
-       }
+    public VFSResourcePatternResolver(ResourceLoader resourceLoader) {
+        super(resourceLoader);
+    }
+
+    protected Resource[] findPathMatchingResources(String locationPattern) throws IOException {
+        if (locationPattern.startsWith(CLASSPATH_ALL_URL_PREFIX)) {
+            locationPattern = locationPattern.substring(CLASSPATH_ALL_URL_PREFIX.length());
+            String rootDirPath = determineRootDir(locationPattern);
+            return VFSResourcePatternResolvingHelper.locateResources(locationPattern, rootDirPath, getClassLoader(), getPathMatcher(), false);
+        } else if (locationPattern.startsWith(CLASSPATH_URL_PREFIX)) {
+            locationPattern = locationPattern.substring(CLASSPATH_URL_PREFIX.length());
+            String rootDirPath = determineRootDir(locationPattern);
+            return VFSResourcePatternResolvingHelper.locateResources(locationPattern, rootDirPath, getClassLoader(), getPathMatcher(), true);
+        } else {
+            return super.findPathMatchingResources(locationPattern);
+        }
     }
 }

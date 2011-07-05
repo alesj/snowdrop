@@ -10,24 +10,21 @@ import javax.ejb.Stateless;
  * @author: marius
  */
 @Stateless
-public class UserServiceBean implements UserService
-{
+public class UserServiceBean implements UserService {
 
-   private UserRepository userRepository;
+    private UserRepository userRepository;
 
-   public UserServiceBean()
-   {
-      VFSClassPathXmlApplicationContext applicationContext =
-            new VFSClassPathXmlApplicationContext(
-                  new String[]{"classpath:/application-context.xml",
-                        "classpath:/application-infrastructure.xml"});
+    public UserServiceBean() {
+        VFSClassPathXmlApplicationContext applicationContext =
+                new VFSClassPathXmlApplicationContext(
+                        new String[]{"classpath:/application-context.xml",
+                                "classpath:/application-infrastructure.xml"});
 
-      userRepository = ((UserRepository) applicationContext.getBeansOfType(UserRepository.class).values().iterator().next());
-   }
+        userRepository = ((UserRepository) applicationContext.getBeansOfType(UserRepository.class).values().iterator().next());
+    }
 
-   public User createUser(String id)
-   {
-      return userRepository.createUser(id);
-   }
-   
+    public User createUser(String id) {
+        return userRepository.createUser(id);
+    }
+
 }

@@ -7,22 +7,22 @@
            http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
 
- <!-- <bean id="controller" class="org.jboss.tutorial.web.AppController"/>
--->
-  <context:annotation-config/>
-   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-     <property name="prefix" value="/WEB-INF/jsp/"/>
-     <property name="suffix" value=".jsp"/>
-   </bean>
+    <!-- <bean id="controller" class="org.jboss.tutorial.web.AppController"/>
+    -->
+    <context:annotation-config/>
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
 
 
-   <bean id="appController" class="org.jboss.tutorial.web.AppController">
-     <!-- <property name="randomizer">
-         <ref bean="randomizer"/>
-      </property>
-      <property name="horoscope">
-         <ref bean="horoscope"/>
-      </property>-->
-   </bean>
+    <bean id="appController" class="org.jboss.tutorial.web.AppController">
+        <!-- <property name="randomizer">
+           <ref bean="randomizer"/>
+        </property>
+        <property name="horoscope">
+           <ref bean="horoscope"/>
+        </property>-->
+    </bean>
 
 </beans>

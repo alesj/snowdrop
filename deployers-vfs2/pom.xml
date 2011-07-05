@@ -86,7 +86,7 @@
             <version>${version.jboss.mdr.vfs2}</version>
             <scope>test</scope>
         </dependency>
-         <dependency>
+        <dependency>
             <groupId>org.jboss</groupId>
             <artifactId>jboss-common-core</artifactId>
         </dependency>

@@ -10,11 +10,9 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
 import java.io.IOException;
 
 @Service
-public class HelloServiceImpl implements HelloService
-{
+public class HelloServiceImpl implements HelloService {
 
-    public String greet(String name)
-    {
+    public String greet(String name) {
         return "Hello, " + name + "!";
     }
 

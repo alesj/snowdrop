@@ -29,12 +29,11 @@ import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
  *
  * @author Marius Bogoevici
  */
-public class JBossNamespaceHandler extends NamespaceHandlerSupport
-{
-   public void init()
-   {
-      registerBeanDefinitionParser("mbean-server", new MBeanServerBeanDefinitionParser());
-      registerBeanDefinitionParser("resource-adapter", new JBossJcaResourceAdapterParser());
-      registerBeanDefinitionParser("activation-spec-factory", new JBossActivationSpecBeanDefinitionParser());
-   }
+public class JBossNamespaceHandler extends NamespaceHandlerSupport {
+
+    public void init() {
+        registerBeanDefinitionParser("mbean-server", new MBeanServerBeanDefinitionParser());
+        registerBeanDefinitionParser("resource-adapter", new JBossJcaResourceAdapterParser());
+        registerBeanDefinitionParser("activation-spec-factory", new JBossActivationSpecBeanDefinitionParser());
+    }
 }

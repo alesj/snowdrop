@@ -27,9 +27,9 @@ import javax.ejb.Local;
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
  */
 @Local
-public interface Horoscope
-{
-   String getHoroscope(int month);
+public interface Horoscope {
 
-   void clear();
+    String getHoroscope(int month);
+
+    void clear();
 }

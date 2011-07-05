@@ -35,27 +35,23 @@ import org.jboss.spring.support.SpringInjectionSupport;
  * @author Marius Bogoevici
  * @see SpringInjectionSupport
  */
-public class SpringInjectionInterceptor extends SpringInjectionSupport implements Interceptor
-{
-   public SpringInjectionInterceptor()
-   {
-      log.info("Instantiating " + getName());
-   }
+public class SpringInjectionInterceptor extends SpringInjectionSupport implements Interceptor {
 
-   public String getName()
-   {
-      return "SpringInjectionInterceptor";
-   }
+    public SpringInjectionInterceptor() {
+        log.info("Instantiating " + getName());
+    }
 
-   public Object invoke(Invocation invocation) throws Throwable
-   {
-      if (!(invocation instanceof ConstructorInvocation))
-      {
-         throw new IllegalArgumentException("This interceptor is meant to be applied" +
-               " only on new instantiation of @Spring annotated objects");
-      }
-      Object target = invocation.invokeNext();
-      inject(target);
-      return target;
-   }
+    public String getName() {
+        return "SpringInjectionInterceptor";
+    }
+
+    public Object invoke(Invocation invocation) throws Throwable {
+        if (!(invocation instanceof ConstructorInvocation)) {
+            throw new IllegalArgumentException("This interceptor is meant to be applied" +
+                    " only on new instantiation of @Spring annotated objects");
+        }
+        Object target = invocation.invokeNext();
+        inject(target);
+        return target;
+    }
 }

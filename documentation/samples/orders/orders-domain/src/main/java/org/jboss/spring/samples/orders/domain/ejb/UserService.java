@@ -9,9 +9,8 @@ import javax.ejb.Local;
  * @author: marius
  */
 @Local
-public interface UserService
-{
+public interface UserService {
 
-   User createUser(String id);
+    User createUser(String id);
 
 }

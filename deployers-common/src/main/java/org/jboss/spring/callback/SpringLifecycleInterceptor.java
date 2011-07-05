@@ -34,14 +34,13 @@ import org.jboss.spring.support.SpringInjectionSupport;
  * @see SpringPassivationInterceptor
  * @see SpringInjectionSupport
  */
-public class SpringLifecycleInterceptor extends SpringPassivationInterceptor
-{
-   private static final long serialVersionUID = 365239483909594775L;
+public class SpringLifecycleInterceptor extends SpringPassivationInterceptor {
 
-   @PostConstruct
-   public void postConstruct(InvocationContext ctx) throws Exception
-   {
-      inject(ctx.getTarget());
-      ctx.proceed();
-   }
+    private static final long serialVersionUID = 365239483909594775L;
+
+    @PostConstruct
+    public void postConstruct(InvocationContext ctx) throws Exception {
+        inject(ctx.getTarget());
+        ctx.proceed();
+    }
 }

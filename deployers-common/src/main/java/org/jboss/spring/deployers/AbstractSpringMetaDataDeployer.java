@@ -35,183 +35,153 @@ import org.springframework.beans.factory.BeanFactory;
 
 /**
  * Deploys SpringMetaData.
- * @see ApplicationContextDeployer
- * @see BeanFactoryDeployer
  *
  * @param <T> exact bean factory type
  * @author <a href="mailto:ales.justin@jboss.com">Ales Justin</a>
+ * @see ApplicationContextDeployer
+ * @see BeanFactoryDeployer
  */
-public abstract class AbstractSpringMetaDataDeployer<T extends BeanFactory> extends AbstractRealDeployerWithInput<SpringMetaData>
-{
-   protected AbstractSpringMetaDataDeployer()
-   {
-      setDeploymentVisitor(createDeploymentVisitor());
-   }
+public abstract class AbstractSpringMetaDataDeployer<T extends BeanFactory> extends AbstractRealDeployerWithInput<SpringMetaData> {
 
-   /**
-    * Create deployment visitor.
-    *
-    * @return the deployment visitor
-    */
-   protected abstract DeploymentVisitor<SpringMetaData> createDeploymentVisitor();
+    protected AbstractSpringMetaDataDeployer() {
+        setDeploymentVisitor(createDeploymentVisitor());
+    }
 
-   protected abstract class SpringDeploymentVisitor implements DeploymentVisitor<SpringMetaData>
-   {
-      public Class<SpringMetaData> getVisitorType()
-      {
-         return SpringMetaData.class;
-      }
+    /**
+     * Create deployment visitor.
+     *
+     * @return the deployment visitor
+     */
+    protected abstract DeploymentVisitor<SpringMetaData> createDeploymentVisitor();
 
-      public void deploy(DeploymentUnit unit, SpringMetaData springMetaData) throws DeploymentException
-      {
-         ClassLoader classLoader = unit.getClassLoader();
-         ClassLoader old = Thread.currentThread().getContextClassLoader();
-         try
-         {
-            for (SpringContextDescriptor springContextDescriptor: springMetaData.getSpringContextDescriptors())
-            {
-               Thread.currentThread().setContextClassLoader(classLoader);
-               T beanFactory = doCreate(springContextDescriptor);
-               String name = ((Nameable) beanFactory).getName();
-               springContextDescriptor.setName(name);
-               bind(beanFactory, name);
-               if (log.isTraceEnabled())
-                  log.trace("Bean factory [" + name + "] binded to local JNDI.");
+    protected abstract class SpringDeploymentVisitor implements DeploymentVisitor<SpringMetaData> {
+
+        public Class<SpringMetaData> getVisitorType() {
+            return SpringMetaData.class;
+        }
+
+        public void deploy(DeploymentUnit unit, SpringMetaData springMetaData) throws DeploymentException {
+            ClassLoader classLoader = unit.getClassLoader();
+            ClassLoader old = Thread.currentThread().getContextClassLoader();
+            try {
+                for (SpringContextDescriptor springContextDescriptor : springMetaData.getSpringContextDescriptors()) {
+                    Thread.currentThread().setContextClassLoader(classLoader);
+                    T beanFactory = doCreate(springContextDescriptor);
+                    String name = ((Nameable) beanFactory).getName();
+                    springContextDescriptor.setName(name);
+                    bind(beanFactory, name);
+                    if (log.isTraceEnabled()) {
+                        log.trace("Bean factory [" + name + "] binded to local JNDI.");
+                    }
+                }
+            } finally {
+                Thread.currentThread().setContextClassLoader(old);
             }
-         }
-         finally
-         {
-            Thread.currentThread().setContextClassLoader(old);
-         }
-      }
+        }
 
-      /**
-       * Do create BeanFactory instance.
-       *
-       * @param metaData the spring meta data
-       * @return new bean factory instance
-       */
-      protected abstract T doCreate(SpringContextDescriptor metaData);
+        /**
+         * Do create BeanFactory instance.
+         *
+         * @param metaData the spring meta data
+         * @return new bean factory instance
+         */
+        protected abstract T doCreate(SpringContextDescriptor metaData);
 
-      public void undeploy(DeploymentUnit unit, SpringMetaData springMetaData)
-      {
-         for (SpringContextDescriptor springContextDescriptor: springMetaData.getSpringContextDescriptors())
-         {
-            String name = springContextDescriptor.getName();
-            try
-            {
-               T beanFactory = lookup(name);
-               if (beanFactory != null)
-               {
-                  doClose(beanFactory);
-                  unbind(name);
-                  if (log.isTraceEnabled())
-                     log.trace("Bean factory [" + name + "] unbinded from local JNDI.");
-               }
+        public void undeploy(DeploymentUnit unit, SpringMetaData springMetaData) {
+            for (SpringContextDescriptor springContextDescriptor : springMetaData.getSpringContextDescriptors()) {
+                String name = springContextDescriptor.getName();
+                try {
+                    T beanFactory = lookup(name);
+                    if (beanFactory != null) {
+                        doClose(beanFactory);
+                        unbind(name);
+                        if (log.isTraceEnabled()) {
+                            log.trace("Bean factory [" + name + "] unbinded from local JNDI.");
+                        }
+                    }
+                } catch (Exception e) {
+                    if (log.isTraceEnabled()) {
+                        log.trace("Exception finding BeanFactory instance named " + name, e);
+                    }
+                }
             }
-            catch (Exception e)
-            {
-               if (log.isTraceEnabled())
-                  log.trace("Exception finding BeanFactory instance named " + name, e);
-            }
-         }
-      }
+        }
 
-      /**
-       * Do close bean factory.
-       *
-       * @param beanFactory the bean factory to close
-       */
-      protected abstract void doClose(T beanFactory);
-   }
+        /**
+         * Do close bean factory.
+         *
+         * @param beanFactory the bean factory to close
+         */
+        protected abstract void doClose(T beanFactory);
+    }
 
-   /**
-    * Bind factory to non-serializable JNDI context.
-    *
-    * @param beanFactory the bean factory
-    * @param name the jndi name
-    * @throws DeploymentException for any error
-    */
-   protected void bind(T beanFactory, String name) throws DeploymentException
-   {
-      InitialContext ctx = null;
-      try
-      {
-         ctx = new InitialContext();
-         NonSerializableFactory.rebind(ctx, name, beanFactory);
-      }
-      catch (NamingException e)
-      {
-         throw new DeploymentException("Unable to bind BeanFactory into JNDI", e);
-      }
-      finally
-      {
-         if (ctx != null)
-         {
-            try
-            {
-               ctx.close();
+    /**
+     * Bind factory to non-serializable JNDI context.
+     *
+     * @param beanFactory the bean factory
+     * @param name        the jndi name
+     * @throws DeploymentException for any error
+     */
+    protected void bind(T beanFactory, String name) throws DeploymentException {
+        InitialContext ctx = null;
+        try {
+            ctx = new InitialContext();
+            NonSerializableFactory.rebind(ctx, name, beanFactory);
+        } catch (NamingException e) {
+            throw new DeploymentException("Unable to bind BeanFactory into JNDI", e);
+        } finally {
+            if (ctx != null) {
+                try {
+                    ctx.close();
+                } catch (Throwable ignored) {
+                }
             }
-            catch (Throwable ignored)
-            {
-            }
-         }
-      }
-   }
+        }
+    }
 
-   /**
-    * Unind factory from non-serializable JNDI context.
-    *
-    * @param name the jndi name
-    */
-   protected void unbind(String name)
-   {
-      InitialContext ctx = null;
-      try
-      {
-         ctx = new InitialContext();
-         ctx.unbind(name);
-         NonSerializableFactory.unbind(name);
-      }
-      catch (NamingException e)
-      {
-         log.warn("Unable to unbind BeanFactory from JNDI", e);
-      }
-      finally
-      {
-         if (ctx != null)
-         {
-            try
-            {
-               ctx.close();
+    /**
+     * Unind factory from non-serializable JNDI context.
+     *
+     * @param name the jndi name
+     */
+    protected void unbind(String name) {
+        InitialContext ctx = null;
+        try {
+            ctx = new InitialContext();
+            ctx.unbind(name);
+            NonSerializableFactory.unbind(name);
+        } catch (NamingException e) {
+            log.warn("Unable to unbind BeanFactory from JNDI", e);
+        } finally {
+            if (ctx != null) {
+                try {
+                    ctx.close();
+                } catch (Throwable ignored) {
+                }
             }
-            catch (Throwable ignored)
-            {
-            }
-         }
-      }
-   }
+        }
+    }
 
-   /**
-    * Do a jndi lookup for bean factory.
-    *
-    * @param name the jndi name
-    * @return bean factory instance
-    * @throws Exception for any exception
-    */
-   protected T lookup(String name) throws Exception
-   {
-      Class<T> beanFactoryClass = getExactBeanFactoryClass();
-      T beanFactory = beanFactoryClass.cast(Util.lookup(name, beanFactoryClass));
-      if (log.isTraceEnabled())
-         log.trace("Found Spring bean factory [" + name + "]: " + beanFactory);
-      return beanFactory;
-   }
+    /**
+     * Do a jndi lookup for bean factory.
+     *
+     * @param name the jndi name
+     * @return bean factory instance
+     * @throws Exception for any exception
+     */
+    protected T lookup(String name) throws Exception {
+        Class<T> beanFactoryClass = getExactBeanFactoryClass();
+        T beanFactory = beanFactoryClass.cast(Util.lookup(name, beanFactoryClass));
+        if (log.isTraceEnabled()) {
+            log.trace("Found Spring bean factory [" + name + "]: " + beanFactory);
+        }
+        return beanFactory;
+    }
 
-   /**
-    * Exact bean factory class.
-    *
-    * @return the bean factory class
-    */
-   protected abstract Class<T> getExactBeanFactoryClass();
+    /**
+     * Exact bean factory class.
+     *
+     * @return the bean factory class
+     */
+    protected abstract Class<T> getExactBeanFactoryClass();
 }

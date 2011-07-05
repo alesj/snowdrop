@@ -4,5 +4,5 @@
         <class>org.jboss.spring.samples.orders.domain.entities.User</class>
         <class>org.jboss.spring.samples.orders.domain.entities.Order</class>
         <class>org.jboss.spring.samples.orders.domain.entities.OrderItem</class>
-        </persistence-unit>
+    </persistence-unit>
 </persistence>

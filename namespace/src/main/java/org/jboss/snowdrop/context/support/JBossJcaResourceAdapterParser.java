@@ -40,35 +40,29 @@ import org.w3c.dom.Element;
  *
  * @author Marius Bogoevici
  */
-public class JBossJcaResourceAdapterParser  extends AbstractBeanDefinitionParser
-{
+public class JBossJcaResourceAdapterParser extends AbstractBeanDefinitionParser {
 
-   private static final String DEFAULT_JCA_MBEAN_NAME = "jboss.jca:name='jms-ra.rar',service=RARDeployment";
+    private static final String DEFAULT_JCA_MBEAN_NAME = "jboss.jca:name='jms-ra.rar',service=RARDeployment";
 
-   private static final String FACTORY_METHOD_NAME = "getAttribute";
+    private static final String FACTORY_METHOD_NAME = "getAttribute";
 
-   @Override
-   protected boolean shouldGenerateIdAsFallback()
-   {
-      return true;
-   }
+    @Override
+    protected boolean shouldGenerateIdAsFallback() {
+        return true;
+    }
 
-   @Override
-   protected AbstractBeanDefinition parseInternal(Element element, ParserContext parserContext)
-   {
-      BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition();
-      builder.getRawBeanDefinition().setFactoryBeanName(DEFAULT_JBOSS_MBEAN_SERVER_BEAN_NAME);
-      builder.getRawBeanDefinition().setFactoryMethodName(FACTORY_METHOD_NAME);
-      try
-      {
-         builder.addConstructorArgValue(ObjectName.getInstance(DEFAULT_JCA_MBEAN_NAME));
-      }
-      catch (MalformedObjectNameException e)
-      {
-         throw new IllegalArgumentException(e);
-      }
-      builder.addConstructorArgValue("ResourceAdapter");
-      return builder.getBeanDefinition();
-   }
+    @Override
+    protected AbstractBeanDefinition parseInternal(Element element, ParserContext parserContext) {
+        BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition();
+        builder.getRawBeanDefinition().setFactoryBeanName(DEFAULT_JBOSS_MBEAN_SERVER_BEAN_NAME);
+        builder.getRawBeanDefinition().setFactoryMethodName(FACTORY_METHOD_NAME);
+        try {
+            builder.addConstructorArgValue(ObjectName.getInstance(DEFAULT_JCA_MBEAN_NAME));
+        } catch (MalformedObjectNameException e) {
+            throw new IllegalArgumentException(e);
+        }
+        builder.addConstructorArgValue("ResourceAdapter");
+        return builder.getBeanDefinition();
+    }
 
 }

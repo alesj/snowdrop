@@ -17,16 +17,15 @@ import java.util.List;
  */
 @Stateless
 @Interceptors(SpringBeanAutowiringInterceptor.class)
-public class OrderServiceBean implements OrderService
-{
-   @Autowired
-   private UserRepository userRepository;
+public class OrderServiceBean implements OrderService {
 
-   @Autowired
-   private OrderRepository orderRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-   public OrderServiceBean()
-   {
+    @Autowired
+    private OrderRepository orderRepository;
+
+    public OrderServiceBean() {
 //      VFSClassPathXmlApplicationContext applicationContext =
 //            new VFSClassPathXmlApplicationContext(
 //                  new String[]{"classpath:/application-context.xml",
@@ -34,11 +33,10 @@ public class OrderServiceBean implements OrderService
 //
 //      userRepository = ((UserRepository) applicationContext.getBeansOfType(UserRepository.class).values().iterator().next());
 //      orderRepository = ((OrderRepository) applicationContext.getBeansOfType(OrderRepository.class).values().iterator().next());
-   }
+    }
 
-   public List<Order> getOrdersForUserId(String userId)
-   {
-      User u = userRepository.getUserById(userId);
-      return orderRepository.getOrdersForUser(u);
-   }
+    public List<Order> getOrdersForUserId(String userId) {
+        User u = userRepository.getUserById(userId);
+        return orderRepository.getOrdersForUser(u);
+    }
 }

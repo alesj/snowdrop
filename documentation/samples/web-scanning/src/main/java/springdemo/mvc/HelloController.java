@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.HashMap;
 
 @Controller
-public class HelloController
-{
+public class HelloController {
+
     @Autowired
     private HelloService helloService;
 
@@ -22,5 +22,5 @@ public class HelloController
         model.put("message", helloService.greet(name));
         return model;
     }
-    
+
 }

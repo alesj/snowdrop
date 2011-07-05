@@ -13,16 +13,16 @@ import javax.persistence.Column;
 public class OrderItem {
 
     @Id
-    @Column(name="ORDER_ITEM_ID")
+    @Column(name = "ORDER_ITEM_ID")
     private long id;
 
-    @Column(name="ORDER_ITEM_NAME")
+    @Column(name = "ORDER_ITEM_NAME")
     private String name;
 
-    @Column(name="ORDER_ITEM_QUANTITY")
+    @Column(name = "ORDER_ITEM_QUANTITY")
     private double quantity;
 
-    @Column(name="ORDER_ITEM_PRICE_PER_UNIT")
+    @Column(name = "ORDER_ITEM_PRICE_PER_UNIT")
     private double pricePerUnit;
 
     public long getId() {

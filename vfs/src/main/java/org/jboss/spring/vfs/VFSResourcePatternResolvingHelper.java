@@ -42,137 +42,114 @@ import org.springframework.util.PathMatcher;
  *         <p/>
  *         Note: Thanks to David Ward for providing a fix for resource path matching.
  */
-public class VFSResourcePatternResolvingHelper
-{
-   private static Logger log = Logger.getLogger(VFSResourcePatternResolvingHelper.class);
+public class VFSResourcePatternResolvingHelper {
 
-   public static Resource[] locateResources(String locationPattern, String rootDirPath, ClassLoader classLoader,
-                                            PathMatcher pathMatcher, boolean oneMatchingRootOnly)
-         throws IOException
-   {
-      String subPattern = locationPattern.substring(rootDirPath.length());
-      if (rootDirPath.startsWith("/"))
-      {
-         rootDirPath = rootDirPath.substring(1);
-      }
+    private static Logger log = Logger.getLogger(VFSResourcePatternResolvingHelper.class);
 
-      List<Resource> resources = new ArrayList<Resource>();
-      Enumeration<URL> urls = classLoader.getResources(rootDirPath);
-      if (!oneMatchingRootOnly)
-      {
-         while (urls.hasMoreElements())
-         {
-            resources.addAll(getVFSResources(urls.nextElement(), subPattern, pathMatcher));
-         }
-      }
-      else
-      {
-         resources.addAll(getVFSResources(classLoader.getResource(rootDirPath), subPattern, pathMatcher));
-      }
-      return resources.toArray(new Resource[resources.size()]);
-   }
+    public static Resource[] locateResources(String locationPattern, String rootDirPath, ClassLoader classLoader,
+                                             PathMatcher pathMatcher, boolean oneMatchingRootOnly)
+            throws IOException {
+        String subPattern = locationPattern.substring(rootDirPath.length());
+        if (rootDirPath.startsWith("/")) {
+            rootDirPath = rootDirPath.substring(1);
+        }
 
-   /**
-    * Get VFS resources.
-    *
-    * @param rootURL     the root URL
-    * @param subPattern  the sub pattern
-    * @param pathMatcher the PathMatcher used for matching directories
-    * @return vfs resources list
-    * @throws java.io.IOException for any error
-    */
-   public static Set<Resource> getVFSResources(URL rootURL, String subPattern, PathMatcher pathMatcher) throws IOException
-   {
-      log.debug("Scanning url: " + rootURL + ", sub-pattern: " + subPattern);
-      Object root = VFSResource.getChild(rootURL);
-      String pathName = VFSUtil.invokeVfsMethod(VFSUtil.VIRTUAL_FILE_METHOD_GET_PATH_NAME, root);
-      PatternVirtualFileVisitorInvocationHandler visitorInvocationHandler = new PatternVirtualFileVisitorInvocationHandler(pathName, subPattern, pathMatcher);
-      Object visitor = Proxy.newProxyInstance(VFSUtil.VIRTUAL_FILE_VISITOR_CLASS.getClassLoader(),
-            new Class<?>[]{VFSUtil.VIRTUAL_FILE_VISITOR_CLASS}, visitorInvocationHandler);
-      VFSUtil.invokeVfsMethod(VFSUtil.VIRTUAL_FILE_METHOD_VISIT, root, visitor);
-      if (log.isTraceEnabled())
-      {
-         log.trace("Found resources: " + visitor);
-      }
-      return  visitorInvocationHandler.getResources();
-   }
-
-
-   protected static class PatternVirtualFileVisitorInvocationHandler implements InvocationHandler
-   {
-      private final String subPattern;
-      private final Set<Resource> resources = new HashSet<Resource>();
-      private final PathMatcher pathMatcher;
-      private final String rootPath;
-
-      private PatternVirtualFileVisitorInvocationHandler(String rootPath, String subPattern, PathMatcher pathMatcher)
-      {
-         this.subPattern = subPattern;
-         this.pathMatcher = pathMatcher;
-         this.rootPath = rootPath.length() == 0 || rootPath.endsWith("/") ? rootPath : rootPath + "/";
-      }
-
-      public Object invoke(Object proxy, Method method, Object[] args) throws Throwable
-      {
-         String methodName = method.getName();
-         if (Object.class.equals(method.getDeclaringClass()))
-         {
-            if (methodName.equals("equals"))
-            {
-               // Only consider equal when proxies are identical.
-               return (proxy == args[0]);
+        List<Resource> resources = new ArrayList<Resource>();
+        Enumeration<URL> urls = classLoader.getResources(rootDirPath);
+        if (!oneMatchingRootOnly) {
+            while (urls.hasMoreElements()) {
+                resources.addAll(getVFSResources(urls.nextElement(), subPattern, pathMatcher));
             }
-            else if (methodName.equals("hashCode"))
-            {
-               return System.identityHashCode(proxy);
+        } else {
+            resources.addAll(getVFSResources(classLoader.getResource(rootDirPath), subPattern, pathMatcher));
+        }
+        return resources.toArray(new Resource[resources.size()]);
+    }
+
+    /**
+     * Get VFS resources.
+     *
+     * @param rootURL     the root URL
+     * @param subPattern  the sub pattern
+     * @param pathMatcher the PathMatcher used for matching directories
+     * @return vfs resources list
+     * @throws java.io.IOException for any error
+     */
+    public static Set<Resource> getVFSResources(URL rootURL, String subPattern, PathMatcher pathMatcher) throws IOException {
+        log.debug("Scanning url: " + rootURL + ", sub-pattern: " + subPattern);
+        Object root = VFSResource.getChild(rootURL);
+        String pathName = VFSUtil.invokeVfsMethod(VFSUtil.VIRTUAL_FILE_METHOD_GET_PATH_NAME, root);
+        PatternVirtualFileVisitorInvocationHandler visitorInvocationHandler = new PatternVirtualFileVisitorInvocationHandler(pathName, subPattern, pathMatcher);
+        Object visitor = Proxy.newProxyInstance(VFSUtil.VIRTUAL_FILE_VISITOR_CLASS.getClassLoader(),
+                new Class<?>[]{VFSUtil.VIRTUAL_FILE_VISITOR_CLASS}, visitorInvocationHandler);
+        VFSUtil.invokeVfsMethod(VFSUtil.VIRTUAL_FILE_METHOD_VISIT, root, visitor);
+        if (log.isTraceEnabled()) {
+            log.trace("Found resources: " + visitor);
+        }
+        return visitorInvocationHandler.getResources();
+    }
+
+
+    protected static class PatternVirtualFileVisitorInvocationHandler implements InvocationHandler {
+
+        private final String subPattern;
+
+        private final Set<Resource> resources = new HashSet<Resource>();
+
+        private final PathMatcher pathMatcher;
+
+        private final String rootPath;
+
+        private PatternVirtualFileVisitorInvocationHandler(String rootPath, String subPattern, PathMatcher pathMatcher) {
+            this.subPattern = subPattern;
+            this.pathMatcher = pathMatcher;
+            this.rootPath = rootPath.length() == 0 || rootPath.endsWith("/") ? rootPath : rootPath + "/";
+        }
+
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+            String methodName = method.getName();
+            if (Object.class.equals(method.getDeclaringClass())) {
+                if (methodName.equals("equals")) {
+                    // Only consider equal when proxies are identical.
+                    return (proxy == args[0]);
+                } else if (methodName.equals("hashCode")) {
+                    return System.identityHashCode(proxy);
+                }
+            } else if ("getAttributes".equals(methodName)) {
+                return getAttributes();
+            } else if ("visit".equals(methodName)) {
+                visit(args[0]);
+                return null;
+            } else if ("toString".equals(methodName)) {
+                return toString();
             }
-         }
-         else if ("getAttributes".equals(methodName))
-         {
-            return getAttributes();
-         }
-         else if ("visit".equals(methodName))
-         {
-            visit(args[0]);
-            return null;
-         }
-         else if ("toString".equals(methodName))
-         {
-            return toString();
-         }
 
-         throw new IllegalStateException("Unexpected method invocation: " + method);
-      }
+            throw new IllegalStateException("Unexpected method invocation: " + method);
+        }
 
-      private Object getAttributes() throws IllegalAccessException
-      {
-         return VFSUtil.VISITOR_ATTRIBUTES_FIELD_RECURSE.get(null);
-      }
+        private Object getAttributes() throws IllegalAccessException {
+            return VFSUtil.VISITOR_ATTRIBUTES_FIELD_RECURSE.get(null);
+        }
 
-      private void visit(Object vf) throws IOException
-      {
-         if (pathMatcher.match(subPattern, VFSUtil.<String>invokeVfsMethod(VFSUtil.VIRTUAL_FILE_METHOD_GET_PATH_NAME, vf).substring(rootPath.length())))
-         {
-            resources.add(new VFSResource(vf));
-         }
-      }
+        private void visit(Object vf) throws IOException {
+            if (pathMatcher.match(subPattern, VFSUtil.<String>invokeVfsMethod(VFSUtil.VIRTUAL_FILE_METHOD_GET_PATH_NAME, vf).substring(rootPath.length()))) {
+                resources.add(new VFSResource(vf));
+            }
+        }
 
-      public Set<Resource> getResources()
-      {
-         return resources;
-      }
+        public Set<Resource> getResources() {
+            return resources;
+        }
 
-      public int size()
-      {
-         return resources.size();
-      }
+        public int size() {
+            return resources.size();
+        }
 
-      public String toString()
-      {
-         StringBuffer buffer = new StringBuffer();
-         buffer.append("sub-pattern: ").append(subPattern);
-         buffer.append(", resources: ").append(resources);
-         return buffer.toString();
-      }
-   }
+        public String toString() {
+            StringBuffer buffer = new StringBuffer();
+            buffer.append("sub-pattern: ").append(subPattern);
+            buffer.append(", resources: ").append(resources);
+            return buffer.toString();
+        }
+    }
 }

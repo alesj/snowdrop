@@ -24,7 +24,7 @@ public class JpaOrderRepository implements OrderRepository {
     public List<Order> getOrdersForUser(User user) {
         Query q = entityManager.createQuery("select o from Order o where o.createdBy.id = ?1");
         q.setParameter(1, user.getId());
-        return (List<Order>) q.getResultList(); 
+        return (List<Order>) q.getResultList();
     }
 
 }

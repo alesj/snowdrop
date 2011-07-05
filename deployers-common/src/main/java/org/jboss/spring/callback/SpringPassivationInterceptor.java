@@ -39,37 +39,32 @@ import org.jboss.spring.support.SpringInjectionSupport;
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
  * @see org.jboss.spring.support.SpringInjectionSupport
  */
-public class SpringPassivationInterceptor extends SpringInjectionSupport implements Serializable
-{
-   private static final long serialVersionUID = -7259379236645796135L;
+public class SpringPassivationInterceptor extends SpringInjectionSupport implements Serializable {
 
-   @PostActivate
-   public void postActivate(InvocationContext ctx) throws Exception
-   {
-      inject(ctx.getTarget());
-      ctx.proceed();
-   }
+    private static final long serialVersionUID = -7259379236645796135L;
 
-   @PrePassivate
-   public void prePassivate(InvocationContext ctx) throws Exception
-   {
-      Field[] fields = getAllFields(ctx.getTarget());
-      for (Field f : fields)
-      {
-         boolean isSerializable = Serializable.class.isAssignableFrom(f.getType());
-         boolean isTransient = Modifier.isTransient(f.getModifiers());
-         if (!isSerializable && !isTransient)
-         {
-            f.setAccessible(true);
-            f.set(ctx.getTarget(), null);
-         }
-      }
-      ctx.proceed();
-   }
+    @PostActivate
+    public void postActivate(InvocationContext ctx) throws Exception {
+        inject(ctx.getTarget());
+        ctx.proceed();
+    }
 
-   @PreDestroy
-   public void preDestroy(InvocationContext ctx) throws Exception
-   {
-      ctx.proceed();
-   }
+    @PrePassivate
+    public void prePassivate(InvocationContext ctx) throws Exception {
+        Field[] fields = getAllFields(ctx.getTarget());
+        for (Field f : fields) {
+            boolean isSerializable = Serializable.class.isAssignableFrom(f.getType());
+            boolean isTransient = Modifier.isTransient(f.getModifiers());
+            if (!isSerializable && !isTransient) {
+                f.setAccessible(true);
+                f.set(ctx.getTarget(), null);
+            }
+        }
+        ctx.proceed();
+    }
+
+    @PreDestroy
+    public void preDestroy(InvocationContext ctx) throws Exception {
+        ctx.proceed();
+    }
 }

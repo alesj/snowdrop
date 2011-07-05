@@ -23,15 +23,15 @@ package org.jboss.spring.factory;
 
 /**
  * Instatiable.
- * 
+ *
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
  */
-public interface Instantiable
-{
-   /**
-    * Do instantiate.
-    *
-    * @return true if instantiated.
-    */
-   boolean doInstantiate();
+public interface Instantiable {
+
+    /**
+     * Do instantiate.
+     *
+     * @return true if instantiated.
+     */
+    boolean doInstantiate();
 }

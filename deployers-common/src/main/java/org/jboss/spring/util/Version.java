@@ -24,8 +24,8 @@ package org.jboss.spring.util;
 
 /**
  * JBoss AS version
- * @author Marius Bogoevici
  *
+ * @author Marius Bogoevici
  */
 public enum Version {
     AS_5_OR_6,

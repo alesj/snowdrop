@@ -33,12 +33,10 @@ import org.springframework.core.io.UrlResource;
 /**
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
  */
-public class KernelControllerListableBeanFactoryTestCase
-{               
+public class KernelControllerListableBeanFactoryTestCase {
 
     @Test
-    public void testKernelControllerAssignableAsParentBeanFactory() throws Throwable
-    {
+    public void testKernelControllerAssignableAsParentBeanFactory() throws Throwable {
         BasicBootstrap bootstrap = new BasicBootstrap();
         bootstrap.run();
         BasicXMLDeployer deployer = new BasicXMLDeployer(bootstrap.getKernel());
@@ -51,8 +49,7 @@ public class KernelControllerListableBeanFactoryTestCase
     }
 
     @Test(expected = BeanCreationException.class)
-    public void testConfigurationFailsIfParentBeanMissing() throws Throwable
-    {
+    public void testConfigurationFailsIfParentBeanMissing() throws Throwable {
         BasicBootstrap bootstrap = new BasicBootstrap();
         bootstrap.run();
         BasicXMLDeployer deployer = new BasicXMLDeployer(bootstrap.getKernel());
@@ -63,5 +60,5 @@ public class KernelControllerListableBeanFactoryTestCase
         Assert.assertEquals("Result is: 2", service.processNumbers(1, 1));
         deployer.shutdown();
     }
-    
+
 }

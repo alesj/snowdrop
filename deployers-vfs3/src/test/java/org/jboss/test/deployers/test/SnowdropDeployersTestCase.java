@@ -13,28 +13,25 @@ import org.junit.Assert;
 /**
  * @author Marius Bogoevici
  */
-public class SnowdropDeployersTestCase extends BootstrapDeployersTest
-{
-   public SnowdropDeployersTestCase(String name)
-   {
-      super(name);
-   }
+public class SnowdropDeployersTestCase extends BootstrapDeployersTest {
 
-   public static Test suite()
-   {
-      return AbstractTestCaseWithSetup.suite(SnowdropDeployersTestCase.class);
-   }
+    public SnowdropDeployersTestCase(String name) {
+        super(name);
+    }
 
-   public void testSimpleEar() throws Exception
-   {
-      System.setProperty("java.naming.factory.initial", MockInitialContextFactory.class.getName());
-      VirtualFile ear = VFS.getChild("multiplefiles-top-level.ear");
-      createAssembledDirectory(ear).addPath("multiplefiles");
-      VFSDeploymentUnit unit = assertDeploy(ear);
-      Assert.assertNotNull(NonSerializableFactory.lookup("TestContext1"));
-      Assert.assertNotNull(NonSerializableFactory.lookup("TestContext2"));
-      undeploy(unit);
-      Assert.assertNull(NonSerializableFactory.lookup("TestContext1"));
-      Assert.assertNull(NonSerializableFactory.lookup("TestContext2"));
-   }
+    public static Test suite() {
+        return AbstractTestCaseWithSetup.suite(SnowdropDeployersTestCase.class);
+    }
+
+    public void testSimpleEar() throws Exception {
+        System.setProperty("java.naming.factory.initial", MockInitialContextFactory.class.getName());
+        VirtualFile ear = VFS.getChild("multiplefiles-top-level.ear");
+        createAssembledDirectory(ear).addPath("multiplefiles");
+        VFSDeploymentUnit unit = assertDeploy(ear);
+        Assert.assertNotNull(NonSerializableFactory.lookup("TestContext1"));
+        Assert.assertNotNull(NonSerializableFactory.lookup("TestContext2"));
+        undeploy(unit);
+        Assert.assertNull(NonSerializableFactory.lookup("TestContext1"));
+        Assert.assertNull(NonSerializableFactory.lookup("TestContext2"));
+    }
 }

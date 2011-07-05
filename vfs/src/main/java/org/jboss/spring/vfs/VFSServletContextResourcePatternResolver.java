@@ -29,47 +29,37 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.web.context.support.ServletContextResourcePatternResolver;
 
 /**
- *  VFS based ServletContextResourcePatternResolver
+ * VFS based ServletContextResourcePatternResolver
  *
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
  */
-public class VFSServletContextResourcePatternResolver extends ServletContextResourcePatternResolver
-{
-    public VFSServletContextResourcePatternResolver(ResourceLoader resourceLoader)
-    {
+public class VFSServletContextResourcePatternResolver extends ServletContextResourcePatternResolver {
+
+    public VFSServletContextResourcePatternResolver(ResourceLoader resourceLoader) {
         super(resourceLoader);
     }
 
-   protected Resource[] findPathMatchingResources(String locationPattern) throws IOException
-   {
-      if (locationPattern.startsWith(CLASSPATH_ALL_URL_PREFIX))
-      {
-          locationPattern = locationPattern.substring(CLASSPATH_ALL_URL_PREFIX.length());
-          String rootDirPath = determineRootDir(locationPattern);
-          return VFSResourcePatternResolvingHelper.locateResources(locationPattern, rootDirPath, getClassLoader(), getPathMatcher(), false);
-      }
-      if (locationPattern.startsWith(CLASSPATH_URL_PREFIX))
-      {
-          locationPattern = locationPattern.substring(CLASSPATH_URL_PREFIX.length());
-           String rootDirPath = determineRootDir(locationPattern);
-          return VFSResourcePatternResolvingHelper.locateResources(locationPattern, rootDirPath, getClassLoader(), getPathMatcher(), true);
-      }
-      else
-      {
-          return super.findPathMatchingResources(locationPattern);
-      }
-   }
+    protected Resource[] findPathMatchingResources(String locationPattern) throws IOException {
+        if (locationPattern.startsWith(CLASSPATH_ALL_URL_PREFIX)) {
+            locationPattern = locationPattern.substring(CLASSPATH_ALL_URL_PREFIX.length());
+            String rootDirPath = determineRootDir(locationPattern);
+            return VFSResourcePatternResolvingHelper.locateResources(locationPattern, rootDirPath, getClassLoader(), getPathMatcher(), false);
+        }
+        if (locationPattern.startsWith(CLASSPATH_URL_PREFIX)) {
+            locationPattern = locationPattern.substring(CLASSPATH_URL_PREFIX.length());
+            String rootDirPath = determineRootDir(locationPattern);
+            return VFSResourcePatternResolvingHelper.locateResources(locationPattern, rootDirPath, getClassLoader(), getPathMatcher(), true);
+        } else {
+            return super.findPathMatchingResources(locationPattern);
+        }
+    }
 
-   protected Resource convertClassLoaderURL(URL url)
-   {
-      try
-      {
-         Object file = VFSUtil.invokeVfsMethod(VFSUtil.VFS_METHOD_GET_ROOT_URL, null, url);
-         return new VFSResource(file);
-      }
-      catch (Exception e)
-      {
-         throw new RuntimeException(e);
-      }
-   }
+    protected Resource convertClassLoaderURL(URL url) {
+        try {
+            Object file = VFSUtil.invokeVfsMethod(VFSUtil.VFS_METHOD_GET_ROOT_URL, null, url);
+            return new VFSResource(file);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

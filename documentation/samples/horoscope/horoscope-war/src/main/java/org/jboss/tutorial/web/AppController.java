@@ -40,41 +40,38 @@ import org.springframework.web.servlet.ModelAndView;
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
  */
 @Controller
-public class AppController
-{
-    
-   private @EJB(mappedName = "horoscope/RandomizerBean/local") Randomizer randomizer;
+public class AppController {
 
-   private @EJB (mappedName = "horoscope/HoroscopeBean/local") Horoscope horoscope;
+    private
+    @EJB(mappedName = "horoscope/RandomizerBean/local")
+    Randomizer randomizer;
 
-   @RequestMapping("/number")
-   public ModelAndView numberHandler(@RequestParam("radius") int radius)
-         throws Exception
-   {
-      return new ModelAndView("main", "number", randomizer.getNumber(radius));
-   }
+    private
+    @EJB(mappedName = "horoscope/HoroscopeBean/local")
+    Horoscope horoscope;
 
-   @RequestMapping("/word")
-   public ModelAndView wordHandler(HttpServletRequest request, HttpServletResponse response)
-         throws Exception
-   {
-      return new ModelAndView("main", "word", randomizer.getWord());
-   }
+    @RequestMapping("/number")
+    public ModelAndView numberHandler(@RequestParam("radius") int radius)
+            throws Exception {
+        return new ModelAndView("main", "number", randomizer.getNumber(radius));
+    }
 
-   @RequestMapping("/horoscope")
-   public Map horoscopeHandler(@RequestParam(value = "clear", required = false) String clear,
-                                        @RequestParam("month") int month) throws Exception
-   {
-      Map map = new HashMap();
-      if (clear != null)
-      {
-         horoscope.clear();
-      }
-      else
-      {
-         map.put("horoscope", horoscope.getHoroscope(month));
-      }
-      return map;
-   }
+    @RequestMapping("/word")
+    public ModelAndView wordHandler(HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+        return new ModelAndView("main", "word", randomizer.getWord());
+    }
+
+    @RequestMapping("/horoscope")
+    public Map horoscopeHandler(@RequestParam(value = "clear", required = false) String clear,
+                                @RequestParam("month") int month) throws Exception {
+        Map map = new HashMap();
+        if (clear != null) {
+            horoscope.clear();
+        } else {
+            map.put("horoscope", horoscope.getHoroscope(month));
+        }
+        return map;
+    }
 
 }

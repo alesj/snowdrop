@@ -31,15 +31,13 @@ import org.jboss.util.loading.Translator;
  *
  * @author <a href="mailto:ales.justin@jboss.org">Ales Justin</a>
  */
-public class JBoss51ClassLoader extends JBoss5ClassLoader
-{
-   public JBoss51ClassLoader(BaseClassLoader classLoader)
-   {
-      super(classLoader);
-   }
+public class JBoss51ClassLoader extends JBoss5ClassLoader {
 
-   protected void addTranslator(Translator translator)
-   {
-      getPolicy().addTranslator(translator);
-   }
+    public JBoss51ClassLoader(BaseClassLoader classLoader) {
+        super(classLoader);
+    }
+
+    protected void addTranslator(Translator translator) {
+        getPolicy().addTranslator(translator);
+    }
 }

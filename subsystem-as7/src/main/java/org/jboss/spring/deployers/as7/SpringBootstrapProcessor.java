@@ -57,7 +57,7 @@ public class SpringBootstrapProcessor implements DeploymentUnitProcessor {
         }
         for (VirtualFile virtualFile : locations.getContextDefinitionLocations()) {
             NamedXmlApplicationContext applicationContext;
-             ClassLoader cl = Thread.currentThread().getContextClassLoader();
+            ClassLoader cl = Thread.currentThread().getContextClassLoader();
             try {
                 Thread.currentThread().setContextClassLoader(phaseContext.getDeploymentUnit().getAttachment(Attachments.MODULE).getClassLoader());
                 applicationContext = new NamedXmlApplicationContext(phaseContext.getDeploymentUnit().getName(), new VFSResource(virtualFile));
@@ -72,9 +72,9 @@ public class SpringBootstrapProcessor implements DeploymentUnitProcessor {
             serviceBuilder.install();
             String jndiName = JndiName.of("java:jboss").append(applicationContext.getName()).getAbsoluteName();
             int index = jndiName.indexOf("/");
-                                String namespace = (index > 5) ? jndiName.substring(5, index) : null;
-                                String binding = (index > 5) ? jndiName.substring(index + 1) : jndiName.substring(5);
-                                ServiceName naming = (namespace != null) ? ContextNames.JAVA_CONTEXT_SERVICE_NAME.append(namespace) : ContextNames.JAVA_CONTEXT_SERVICE_NAME;
+            String namespace = (index > 5) ? jndiName.substring(5, index) : null;
+            String binding = (index > 5) ? jndiName.substring(index + 1) : jndiName.substring(5);
+            ServiceName naming = (namespace != null) ? ContextNames.JAVA_CONTEXT_SERVICE_NAME.append(namespace) : ContextNames.JAVA_CONTEXT_SERVICE_NAME;
             ServiceName bindingName = naming.append(binding);
             BinderService binder = new BinderService(binding);
             serviceTarget.addService(bindingName, binder)

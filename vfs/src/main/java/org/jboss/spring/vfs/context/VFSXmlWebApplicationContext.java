@@ -34,37 +34,33 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
  *
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
  */
-public class VFSXmlWebApplicationContext extends XmlWebApplicationContext
-{
-   @Override
-   protected ResourcePatternResolver getResourcePatternResolver()
-   {
-      return new VFSServletContextResourcePatternResolver(
-              new WebApplicationContextAwareVFSResourceLoader(getClassLoader()));
-   }
-
-   /**
-    * Customization of {@link VFSResourceLoader} that delegates to the owner class
-    * (i.e. XmlWebApplicationContext) for retrieving resources by path, allowing
-    * for ServletContextResources to be returned in this case.
-    */
-   private class WebApplicationContextAwareVFSResourceLoader extends VFSResourceLoader
-   {
-
-      WebApplicationContextAwareVFSResourceLoader(ClassLoader classLoader) {
-         super(classLoader);
-      }
-
-       @Override
-      protected Resource getResourceByPath(String path)
-      {
-         return VFSXmlWebApplicationContext.this.getResourceByPath(path);
-      }
-   }
+public class VFSXmlWebApplicationContext extends XmlWebApplicationContext {
 
     @Override
-    public Resource getResource(String location)
-    {
+    protected ResourcePatternResolver getResourcePatternResolver() {
+        return new VFSServletContextResourcePatternResolver(
+                new WebApplicationContextAwareVFSResourceLoader(getClassLoader()));
+    }
+
+    /**
+     * Customization of {@link VFSResourceLoader} that delegates to the owner class
+     * (i.e. XmlWebApplicationContext) for retrieving resources by path, allowing
+     * for ServletContextResources to be returned in this case.
+     */
+    private class WebApplicationContextAwareVFSResourceLoader extends VFSResourceLoader {
+
+        WebApplicationContextAwareVFSResourceLoader(ClassLoader classLoader) {
+            super(classLoader);
+        }
+
+        @Override
+        protected Resource getResourceByPath(String path) {
+            return VFSXmlWebApplicationContext.this.getResourceByPath(path);
+        }
+    }
+
+    @Override
+    public Resource getResource(String location) {
         return getResourcePatternResolver().getResource(location);
     }
 }

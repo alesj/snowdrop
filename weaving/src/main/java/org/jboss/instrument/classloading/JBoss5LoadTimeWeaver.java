@@ -34,99 +34,88 @@ import org.springframework.util.ClassUtils;
  *
  * @author <a href="mailto:ales.justin@jboss.org">Ales Justin</a>
  */
-public class JBoss5LoadTimeWeaver extends ReflectionHelper implements LoadTimeWeaver
-{
-   private JBoss5ClassLoader classLoader;
+public class JBoss5LoadTimeWeaver extends ReflectionHelper implements LoadTimeWeaver {
 
-   public JBoss5LoadTimeWeaver()
-   {
-      this(ClassUtils.getDefaultClassLoader());
-   }
+    private JBoss5ClassLoader classLoader;
 
-   public JBoss5LoadTimeWeaver(ClassLoader classLoader)
-   {
-      Assert.notNull(classLoader, "ClassLoader must not be null");
-      BaseClassLoader bcl = determineClassLoader(classLoader);
-      if (bcl == null)
-      {
-         throw new IllegalArgumentException(classLoader + " and its parents are not suitable ClassLoaders: " +
-               "An [" + BaseClassLoader.class.getName() + "] implementation is required.");
-      }
-      this.classLoader = createClassLoaderWrapper(bcl);
-   }
+    public JBoss5LoadTimeWeaver() {
+        this(ClassUtils.getDefaultClassLoader());
+    }
 
-   /**
-    * Create a JBoss5 classloader wrapper
-    * based on the underlying JBossAS version.
-    *
-    * @param bcl the base classloader
-    * @return new JBoss5 classloader wrapper
-    */
-   protected JBoss5ClassLoader createClassLoaderWrapper(BaseClassLoader bcl)
-   {
-      int versionNumber = 0;
-      String tag;
-      
-      try
-      {
-         // BCL should see Version class
-         Class<?> versionClass = bcl.loadClass("org.jboss.Version");
-         Method getInstance = getMethod(versionClass, "getInstance");
-         Object version = getInstance.invoke(null); // static method
+    public JBoss5LoadTimeWeaver(ClassLoader classLoader) {
+        Assert.notNull(classLoader, "ClassLoader must not be null");
+        BaseClassLoader bcl = determineClassLoader(classLoader);
+        if (bcl == null) {
+            throw new IllegalArgumentException(classLoader + " and its parents are not suitable ClassLoaders: " +
+                    "An [" + BaseClassLoader.class.getName() + "] implementation is required.");
+        }
+        this.classLoader = createClassLoaderWrapper(bcl);
+    }
 
-         Method getMajor = getMethod(versionClass, "getMajor");
-         versionNumber += 100 * invokeMethod(getMajor, version, Integer.class);
-         Method getMinor = getMethod(versionClass, "getMinor");
-         versionNumber += 10 * invokeMethod(getMinor, version, Integer.class);
-         Method getRevision = getMethod(versionClass, "getRevision");
-         versionNumber += invokeMethod(getRevision, version, Integer.class);
-         Method getTag = getMethod(versionClass, "getTag");
-         tag = invokeMethod(getTag, version, String.class);
-      }
-      catch (Exception e)
-      {
-         log.warn("Exception creating JBoss5 CL wrapper: " + e + ", falling back to JBoss50ClassLoader wrapper.");
-         return new JBoss50ClassLoader(bcl);
-      }
+    /**
+     * Create a JBoss5 classloader wrapper
+     * based on the underlying JBossAS version.
+     *
+     * @param bcl the base classloader
+     * @return new JBoss5 classloader wrapper
+     */
+    protected JBoss5ClassLoader createClassLoaderWrapper(BaseClassLoader bcl) {
+        int versionNumber = 0;
+        String tag;
 
-      if (versionNumber < 500) // this only works on new MC code
-         throw new IllegalArgumentException("JBoss5LoadTimeWeaver can only be used on new JBoss Microcontainer ClassLoader.");
-      else if (versionNumber <= 501 || (versionNumber == 510 && "Beta1".equals(tag)))
-         return new JBoss50ClassLoader(bcl);
-      else
-         return new JBoss51ClassLoader(bcl);
-   }
+        try {
+            // BCL should see Version class
+            Class<?> versionClass = bcl.loadClass("org.jboss.Version");
+            Method getInstance = getMethod(versionClass, "getInstance");
+            Object version = getInstance.invoke(null); // static method
 
-   /**
-    * Find first BaseClassLoader implementation.
-    *
-    * @param classLoader the classloader
-    * @return BaseClassLoader instance or null if not found
-    */
-   private BaseClassLoader determineClassLoader(ClassLoader classLoader)
-   {
-      for (ClassLoader cl = classLoader; cl != null; cl = cl.getParent())
-      {
-         if (cl instanceof BaseClassLoader)
-         {
-            return (BaseClassLoader)cl;
-         }
-      }
-      return null;
-   }
+            Method getMajor = getMethod(versionClass, "getMajor");
+            versionNumber += 100 * invokeMethod(getMajor, version, Integer.class);
+            Method getMinor = getMethod(versionClass, "getMinor");
+            versionNumber += 10 * invokeMethod(getMinor, version, Integer.class);
+            Method getRevision = getMethod(versionClass, "getRevision");
+            versionNumber += invokeMethod(getRevision, version, Integer.class);
+            Method getTag = getMethod(versionClass, "getTag");
+            tag = invokeMethod(getTag, version, String.class);
+        } catch (Exception e) {
+            log.warn("Exception creating JBoss5 CL wrapper: " + e + ", falling back to JBoss50ClassLoader wrapper.");
+            return new JBoss50ClassLoader(bcl);
+        }
 
-   public void addTransformer(ClassFileTransformer transformer)
-   {
-      classLoader.addTransformer(transformer);
-   }
+        if (versionNumber < 500) // this only works on new MC code
+        {
+            throw new IllegalArgumentException("JBoss5LoadTimeWeaver can only be used on new JBoss Microcontainer ClassLoader.");
+        } else if (versionNumber <= 501 || (versionNumber == 510 && "Beta1".equals(tag))) {
+            return new JBoss50ClassLoader(bcl);
+        } else {
+            return new JBoss51ClassLoader(bcl);
+        }
+    }
 
-   public ClassLoader getInstrumentableClassLoader()
-   {
-      return classLoader.getInternalClassLoader();
-   }
+    /**
+     * Find first BaseClassLoader implementation.
+     *
+     * @param classLoader the classloader
+     * @return BaseClassLoader instance or null if not found
+     */
+    private BaseClassLoader determineClassLoader(ClassLoader classLoader) {
+        for (ClassLoader cl = classLoader; cl != null; cl = cl.getParent()) {
+            if (cl instanceof BaseClassLoader) {
+                return (BaseClassLoader) cl;
+            }
+        }
+        return null;
+    }
 
-   public ClassLoader getThrowawayClassLoader()
-   {
-      return classLoader.getThrowawayClassLoader();
-   }
+    public void addTransformer(ClassFileTransformer transformer) {
+        classLoader.addTransformer(transformer);
+    }
+
+    public ClassLoader getInstrumentableClassLoader() {
+        return classLoader.getInternalClassLoader();
+    }
+
+    public ClassLoader getThrowawayClassLoader() {
+        return classLoader.getThrowawayClassLoader();
+    }
 }

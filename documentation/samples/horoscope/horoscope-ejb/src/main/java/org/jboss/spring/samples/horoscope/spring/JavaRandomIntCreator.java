@@ -26,14 +26,12 @@ import java.util.Random;
 /**
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
  */
-public class JavaRandomIntCreator implements IntCreator
-{
+public class JavaRandomIntCreator implements IntCreator {
 
-   private Random random = new Random();
+    private Random random = new Random();
 
-   public int createInt(int radius)
-   {
-      return random.nextInt(radius);
-   }
+    public int createInt(int radius) {
+        return random.nextInt(radius);
+    }
 
 }

@@ -56,7 +56,6 @@ import org.jboss.staxmapper.XMLExtendedStreamWriter;
 
 /**
  * @author Marius Bogoevici
- * 
  */
 public class SpringExtension implements Extension {
 

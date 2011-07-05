@@ -30,26 +30,21 @@ import org.springframework.context.ConfigurableApplicationContext;
  *
  * @author <a href="mailto:ales.justin@jboss.com">Ales Justin</a>
  */
-public class ApplicationContextDeployer extends AbstractSpringMetaDataDeployer<ConfigurableApplicationContext>
-{
-   protected DeploymentVisitor<SpringMetaData> createDeploymentVisitor()
-   {
-      return new SpringDeploymentVisitor()
-      {
-         protected ConfigurableApplicationContext doCreate(SpringContextDescriptor metaData)
-         {
-            return new NamedXmlApplicationContext(metaData.getDefaultName(), metaData.getResource());
-         }
+public class ApplicationContextDeployer extends AbstractSpringMetaDataDeployer<ConfigurableApplicationContext> {
 
-         protected void doClose(ConfigurableApplicationContext beanFactory)
-         {
-            beanFactory.close();
-         }
-      };
-   }
+    protected DeploymentVisitor<SpringMetaData> createDeploymentVisitor() {
+        return new SpringDeploymentVisitor() {
+            protected ConfigurableApplicationContext doCreate(SpringContextDescriptor metaData) {
+                return new NamedXmlApplicationContext(metaData.getDefaultName(), metaData.getResource());
+            }
 
-   protected Class<ConfigurableApplicationContext> getExactBeanFactoryClass()
-   {
-      return ConfigurableApplicationContext.class;
-   }
+            protected void doClose(ConfigurableApplicationContext beanFactory) {
+                beanFactory.close();
+            }
+        };
+    }
+
+    protected Class<ConfigurableApplicationContext> getExactBeanFactoryClass() {
+        return ConfigurableApplicationContext.class;
+    }
 }

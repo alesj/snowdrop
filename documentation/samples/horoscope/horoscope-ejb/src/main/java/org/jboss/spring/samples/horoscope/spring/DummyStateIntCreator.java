@@ -24,15 +24,13 @@ package org.jboss.spring.samples.horoscope.spring;
 /**
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
  */
-public class DummyStateIntCreator implements IntCreator
-{
+public class DummyStateIntCreator implements IntCreator {
 
-   private int state = 1;
+    private int state = 1;
 
-   public int createInt(int radius)
-   {
-      state = (state * 3 * 7 * 19 * 37) % radius;
-      return state;
-   }
+    public int createInt(int radius) {
+        state = (state * 3 * 7 * 19 * 37) % radius;
+        return state;
+    }
 
 }

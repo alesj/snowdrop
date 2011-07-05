@@ -7,7 +7,7 @@ import org.jboss.spring.samples.orders.domain.entities.User;
  */
 public interface UserRepository {
 
-   User getUserById(String id);
+    User getUserById(String id);
 
-   User createUser(String id);
+    User createUser(String id);
 }

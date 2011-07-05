@@ -9,15 +9,13 @@ import javax.naming.spi.InitialContextFactory;
 /**
  * @author Marius Bogoevici
  */
-public class MockInitialContextFactory implements InitialContextFactory
-{
-   public MockInitialContextFactory()
-   {
-   }
+public class MockInitialContextFactory implements InitialContextFactory {
 
-   public Context getInitialContext(Hashtable<?, ?> environment) throws NamingException
-   {
-      return new MockContext();
-   }
+    public MockInitialContextFactory() {
+    }
+
+    public Context getInitialContext(Hashtable<?, ?> environment) throws NamingException {
+        return new MockContext();
+    }
 
 }

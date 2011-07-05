@@ -53,8 +53,7 @@ public class SpringDeployment {
         deploymentUnit.putAttachment(ATTACHMENT_KEY, this);
     }
 
-    public static SpringDeployment retrieveFrom(DeploymentUnit deploymentUnit)
-    {
+    public static SpringDeployment retrieveFrom(DeploymentUnit deploymentUnit) {
         return deploymentUnit.getAttachment(ATTACHMENT_KEY);
     }
 }

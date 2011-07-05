@@ -37,63 +37,53 @@ import org.springframework.util.Assert;
  * @author <a href="mailto:ales.justin@jboss.com">Ales Justin</a>
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
  */
-public class VFSResourceLoader extends DefaultResourceLoader
-{
-   public VFSResourceLoader(ClassLoader classLoader)
-   {
-      super(classLoader);
-   }
+public class VFSResourceLoader extends DefaultResourceLoader {
 
-   public Resource getResource(String location)
-   {
-      Assert.notNull(location, "Location must not be null");
-      if (location.startsWith(CLASSPATH_URL_PREFIX))
-      {
-         return doGetResourceForLocation(location.substring(CLASSPATH_URL_PREFIX.length()));
-      }
-      else
-      {
-         return super.getResource(location);
-      }
-   }
+    public VFSResourceLoader(ClassLoader classLoader) {
+        super(classLoader);
+    }
 
-   protected Resource getResourceByPath(String path)
-   {
-      return doGetResourceForLocation(path);
-   }
+    public Resource getResource(String location) {
+        Assert.notNull(location, "Location must not be null");
+        if (location.startsWith(CLASSPATH_URL_PREFIX)) {
+            return doGetResourceForLocation(location.substring(CLASSPATH_URL_PREFIX.length()));
+        } else {
+            return super.getResource(location);
+        }
+    }
 
-   private Resource doGetResourceForLocation(String path)
-   {
-      URL url = getClassLoader().getResource(path);
-      if (url != null)
-         return new VFSResource(url);
-      else
-         return new InexistentResource(path);
-   }
+    protected Resource getResourceByPath(String path) {
+        return doGetResourceForLocation(path);
+    }
 
-   /* A special type of resource, for the case when the resource does not exit */
-   private static class InexistentResource extends AbstractResource
-   {
-      private final String path;
+    private Resource doGetResourceForLocation(String path) {
+        URL url = getClassLoader().getResource(path);
+        if (url != null) {
+            return new VFSResource(url);
+        } else {
+            return new InexistentResource(path);
+        }
+    }
 
-      private InexistentResource(String path)
-      {
-         this.path = path;
-      }
+    /* A special type of resource, for the case when the resource does not exit */
+    private static class InexistentResource extends AbstractResource {
 
-      public String getDescription()
-      {
-         return null;
-      }
+        private final String path;
 
-      public InputStream getInputStream() throws IOException
-      {
-         throw new FileNotFoundException("Resource does not exist for path " + path);
-      }
+        private InexistentResource(String path) {
+            this.path = path;
+        }
 
-      public boolean exists()
-      {
-         return false;
-      }
-   }
+        public String getDescription() {
+            return null;
+        }
+
+        public InputStream getInputStream() throws IOException {
+            throw new FileNotFoundException("Resource does not exist for path " + path);
+        }
+
+        public boolean exists() {
+            return false;
+        }
+    }
 }

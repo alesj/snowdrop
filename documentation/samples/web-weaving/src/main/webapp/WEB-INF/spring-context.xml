@@ -5,10 +5,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-  <bean id="hello" class="springdemo.weaving.hello.HelloService"/>
+    <bean id="hello" class="springdemo.weaving.hello.HelloService"/>
 
-<!--
-  <context:load-time-weaver weaver-class="org.jboss.instrument.classloading.JBoss5LoadTimeWeaver"/>
--->
+    <!--
+      <context:load-time-weaver weaver-class="org.jboss.instrument.classloading.JBoss5LoadTimeWeaver"/>
+    -->
 
 </beans>

@@ -39,30 +39,26 @@ import org.jboss.ejb3.annotation.LocalBinding;
  */
 @Stateful
 @Interceptors(SpringLifecycleInterceptor.class)
-public class HoroscopeBean implements Horoscope, Serializable
-{
+public class HoroscopeBean implements Horoscope, Serializable {
 
-   private static final long serialVersionUID = 2300669204640707036L;
+    private static final long serialVersionUID = 2300669204640707036L;
 
-   private Set<String> sentences = new TreeSet<String>();
+    private Set<String> sentences = new TreeSet<String>();
 
-   @Spring(jndiName = "horoscopeContext", bean = "horoscopeSentenceCreator")
-   private WordsCreator horoscopeCreator;
+    @Spring(jndiName = "horoscopeContext", bean = "horoscopeSentenceCreator")
+    private WordsCreator horoscopeCreator;
 
-   public String getHoroscope(int month)
-   {
-      String sentence = horoscopeCreator.createWord();
-      if (!sentences.add(sentence))
-      {
-         System.out.println("Repeating horoscope sentence.");
-      }
-      return sentence;
-   }
+    public String getHoroscope(int month) {
+        String sentence = horoscopeCreator.createWord();
+        if (!sentences.add(sentence)) {
+            System.out.println("Repeating horoscope sentence.");
+        }
+        return sentence;
+    }
 
-   @Remove
-   public void clear()
-   {
-      sentences.clear();
-   }
+    @Remove
+    public void clear() {
+        sentences.clear();
+    }
 
 }

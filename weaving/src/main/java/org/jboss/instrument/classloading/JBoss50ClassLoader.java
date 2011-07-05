@@ -37,59 +37,45 @@ import org.jboss.util.loading.Translator;
  *
  * @author <a href="mailto:ales.justin@jboss.org">Ales Justin</a>
  */
-public class JBoss50ClassLoader extends JBoss5ClassLoader
-{
-   private Method addTranslator;
-   private ClassLoaderSystem system;
+public class JBoss50ClassLoader extends JBoss5ClassLoader {
 
-   public JBoss50ClassLoader(BaseClassLoader classLoader)
-   {
-      super(classLoader);
-   }
+    private Method addTranslator;
 
-   protected void fallbackStrategy() throws Exception
-   {
-      try
-      {
-         // let's check if we have a patched policy, with translator per policy
-         addTranslator = getMethod(BaseClassLoaderPolicy.class, "addTranslator");
-      }
-      catch (Exception ignored)
-      {
-         log.info("Policy doesn't have addTranslator, falling back to ClassLoaderSystem.");
+    private ClassLoaderSystem system;
 
-         Method getClassLoaderDomain = getMethod(BaseClassLoaderPolicy.class, "getClassLoaderDomain");
-         BaseClassLoaderDomain domain = invokeMethod(getClassLoaderDomain, getPolicy(), BaseClassLoaderDomain.class);
-         Method getClassLoaderSystem = getMethod(BaseClassLoaderDomain.class, "getClassLoaderSystem");
-         BaseClassLoaderSystem system = invokeMethod(getClassLoaderSystem, domain, BaseClassLoaderSystem.class);
-         if (system instanceof ClassLoaderSystem)
-         {
-            this.system = ClassLoaderSystem.class.cast(system);
-         }
-         else
-         {
-            throw new IllegalArgumentException("ClassLoaderSyatem must be instance of [" + ClassLoaderSystem.class.getName() + "]");
-         }
-      }
-   }
+    public JBoss50ClassLoader(BaseClassLoader classLoader) {
+        super(classLoader);
+    }
 
-   protected void addTranslator(Translator translator)
-   {
-      if (addTranslator != null)
-      {
-         try
-         {
-            addTranslator.invoke(translator);
-         }
-         catch (Exception e)
-         {
-            throw new IllegalArgumentException(e);
-         }
-      }
-      else
-      {
-         //noinspection deprecation
-         system.setTranslator(translator);
-      }
-   }
+    protected void fallbackStrategy() throws Exception {
+        try {
+            // let's check if we have a patched policy, with translator per policy
+            addTranslator = getMethod(BaseClassLoaderPolicy.class, "addTranslator");
+        } catch (Exception ignored) {
+            log.info("Policy doesn't have addTranslator, falling back to ClassLoaderSystem.");
+
+            Method getClassLoaderDomain = getMethod(BaseClassLoaderPolicy.class, "getClassLoaderDomain");
+            BaseClassLoaderDomain domain = invokeMethod(getClassLoaderDomain, getPolicy(), BaseClassLoaderDomain.class);
+            Method getClassLoaderSystem = getMethod(BaseClassLoaderDomain.class, "getClassLoaderSystem");
+            BaseClassLoaderSystem system = invokeMethod(getClassLoaderSystem, domain, BaseClassLoaderSystem.class);
+            if (system instanceof ClassLoaderSystem) {
+                this.system = ClassLoaderSystem.class.cast(system);
+            } else {
+                throw new IllegalArgumentException("ClassLoaderSyatem must be instance of [" + ClassLoaderSystem.class.getName() + "]");
+            }
+        }
+    }
+
+    protected void addTranslator(Translator translator) {
+        if (addTranslator != null) {
+            try {
+                addTranslator.invoke(translator);
+            } catch (Exception e) {
+                throw new IllegalArgumentException(e);
+            }
+        } else {
+            //noinspection deprecation
+            system.setTranslator(translator);
+        }
+    }
 }

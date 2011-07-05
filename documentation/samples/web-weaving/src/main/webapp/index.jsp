@@ -1,1 +1,1 @@
-<jsp:forward page="/spring/hello?name=Visitor" />
+<jsp:forward page="/spring/hello?name=Visitor"/>

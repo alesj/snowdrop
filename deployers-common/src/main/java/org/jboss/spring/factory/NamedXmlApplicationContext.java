@@ -34,60 +34,58 @@ import org.springframework.core.io.Resource;
 /**
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
  */
-public class NamedXmlApplicationContext extends VFSClassPathXmlApplicationContext implements Nameable
-{
-   private String defaultName;
-   private Resource resource;
-   private NamedXmlBeanDefinitionReader beanDefinitionReader;
+public class NamedXmlApplicationContext extends VFSClassPathXmlApplicationContext implements Nameable {
 
-   public NamedXmlApplicationContext(String defaultName, Resource resource) throws BeansException
-   {
-      this(defaultName, resource, true);
-   }
+    private String defaultName;
 
-   public NamedXmlApplicationContext(String defaultName, Resource resource, boolean refresh) throws BeansException
-   {
-      //loading config from Resource
-      super(new String[]{}, false);
-      this.defaultName = defaultName;
-      this.resource = resource;
-      if (refresh)
-      {
-         refresh();
-      }
-   }
+    private Resource resource;
 
-   protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throws IOException
-   {
-      // Create a new XmlBeanDefinitionReader for the given BeanFactory.
-      beanDefinitionReader = new NamedXmlBeanDefinitionReader(beanFactory);
+    private NamedXmlBeanDefinitionReader beanDefinitionReader;
 
-      // Configure the bean definition reader with this context's
-      // resource loading environment.
-      beanDefinitionReader.setResourceLoader(this);
-      ClassLoader cl = getClassLoader();
-      if (cl != null)
-         beanDefinitionReader.setBeanClassLoader(cl);
-      beanDefinitionReader.setEntityResolver(new ResourceEntityResolver(this));
+    public NamedXmlApplicationContext(String defaultName, Resource resource) throws BeansException {
+        this(defaultName, resource, true);
+    }
 
-      // Allow a subclass to provide custom initialization of the reader,
-      // then proceed with actually loading the bean definitions.
-      initBeanDefinitionReader(beanDefinitionReader);
-      loadBeanDefinitions(beanDefinitionReader);
-   }
+    public NamedXmlApplicationContext(String defaultName, Resource resource, boolean refresh) throws BeansException {
+        //loading config from Resource
+        super(new String[]{}, false);
+        this.defaultName = defaultName;
+        this.resource = resource;
+        if (refresh) {
+            refresh();
+        }
+    }
 
-   protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) throws BeansException, IOException
-   {
-      reader.loadBeanDefinitions(resource);
-   }
+    protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throws IOException {
+        // Create a new XmlBeanDefinitionReader for the given BeanFactory.
+        beanDefinitionReader = new NamedXmlBeanDefinitionReader(beanFactory);
 
-   public String getName()
-   {
-      String name = beanDefinitionReader.getName() != null ? beanDefinitionReader.getName() : defaultName;
-      if (name == null)
-         throw new IllegalArgumentException("Bean factory JNDI name must be set!");
+        // Configure the bean definition reader with this context's
+        // resource loading environment.
+        beanDefinitionReader.setResourceLoader(this);
+        ClassLoader cl = getClassLoader();
+        if (cl != null) {
+            beanDefinitionReader.setBeanClassLoader(cl);
+        }
+        beanDefinitionReader.setEntityResolver(new ResourceEntityResolver(this));
 
-      return name;
-   }
+        // Allow a subclass to provide custom initialization of the reader,
+        // then proceed with actually loading the bean definitions.
+        initBeanDefinitionReader(beanDefinitionReader);
+        loadBeanDefinitions(beanDefinitionReader);
+    }
+
+    protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) throws BeansException, IOException {
+        reader.loadBeanDefinitions(resource);
+    }
+
+    public String getName() {
+        String name = beanDefinitionReader.getName() != null ? beanDefinitionReader.getName() : defaultName;
+        if (name == null) {
+            throw new IllegalArgumentException("Bean factory JNDI name must be set!");
+        }
+
+        return name;
+    }
 
 }

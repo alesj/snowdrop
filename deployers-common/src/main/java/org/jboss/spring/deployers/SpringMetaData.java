@@ -32,19 +32,17 @@ import java.util.List;
  * @author <a href="mailto:ales.justin@jboss.com">Ales Justin</a>
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
  */
-public class SpringMetaData implements Serializable
-{
-   private static final long serialVersionUID = 8989753488155849440L;
+public class SpringMetaData implements Serializable {
 
-   private List<SpringContextDescriptor> springContextDescriptors;
+    private static final long serialVersionUID = 8989753488155849440L;
 
-   public SpringMetaData(List<SpringContextDescriptor> springContextDescriptors)
-   {
-      this.springContextDescriptors = springContextDescriptors;
-   }
+    private List<SpringContextDescriptor> springContextDescriptors;
 
-   public List<SpringContextDescriptor> getSpringContextDescriptors()
-   {
-      return Collections.unmodifiableList(springContextDescriptors);
-   }
+    public SpringMetaData(List<SpringContextDescriptor> springContextDescriptors) {
+        this.springContextDescriptors = springContextDescriptors;
+    }
+
+    public List<SpringContextDescriptor> getSpringContextDescriptors() {
+        return Collections.unmodifiableList(springContextDescriptors);
+    }
 }

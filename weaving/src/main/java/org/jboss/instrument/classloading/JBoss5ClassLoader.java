@@ -39,94 +39,85 @@ import org.springframework.instrument.classloading.SimpleThrowawayClassLoader;
  *
  * @author <a href="mailto:ales.justin@jboss.org">Ales Justin</a>
  */
-public abstract class JBoss5ClassLoader extends ReflectionHelper
-{
-   private final BaseClassLoader classLoader;
-   private ClassLoaderPolicy policy;
+public abstract class JBoss5ClassLoader extends ReflectionHelper {
 
-   protected JBoss5ClassLoader(BaseClassLoader classLoader)
-   {
-      Assert.notNull(classLoader, "ClassLoader must not be null");
-      this.classLoader = classLoader;
+    private final BaseClassLoader classLoader;
 
-      try
-      {
-         SecurityManager sm = System.getSecurityManager();
-         if (sm != null)
-            AccessController.doPrivileged(new InstantiationAction());
-         else
+    private ClassLoaderPolicy policy;
+
+    protected JBoss5ClassLoader(BaseClassLoader classLoader) {
+        Assert.notNull(classLoader, "ClassLoader must not be null");
+        this.classLoader = classLoader;
+
+        try {
+            SecurityManager sm = System.getSecurityManager();
+            if (sm != null) {
+                AccessController.doPrivileged(new InstantiationAction());
+            } else {
+                doInstantiate();
+            }
+        } catch (Exception e) {
+            throw new IllegalStateException("Could not initialize JBoss ClassLoader because JBoss5 API classes are not available", e);
+        }
+    }
+
+    /**
+     * Get the policy.
+     *
+     * @return the policy
+     */
+    protected ClassLoaderPolicy getPolicy() {
+        return policy;
+    }
+
+    /**
+     * Do instantiate method, variables.
+     *
+     * @throws Exception for any error
+     */
+    private void doInstantiate() throws Exception {
+        Method getPolicy = getMethod(BaseClassLoader.class, "getPolicy");
+        policy = invokeMethod(getPolicy, classLoader, ClassLoaderPolicy.class);
+        fallbackStrategy();
+    }
+
+    /**
+     * The fallback strategy.
+     *
+     * @throws Exception for any error
+     */
+    protected void fallbackStrategy() throws Exception {
+    }
+
+    public void addTransformer(ClassFileTransformer transformer) {
+        Assert.notNull(transformer, "ClassFileTransformer must not be null");
+        Translator translator = new ClassFileTransformer2Translator(transformer);
+        addTranslator(translator);
+    }
+
+    /**
+     * Add the translator.
+     *
+     * @param translator the translator
+     */
+    protected abstract void addTranslator(Translator translator);
+
+    public ClassLoader getInternalClassLoader() {
+        return classLoader;
+    }
+
+    public ClassLoader getThrowawayClassLoader() {
+        return new SimpleThrowawayClassLoader(classLoader);
+    }
+
+    /**
+     * Instantiation action.
+     */
+    private class InstantiationAction implements PrivilegedExceptionAction<Object> {
+
+        public Object run() throws Exception {
             doInstantiate();
-      }
-      catch (Exception e)
-      {
-         throw new IllegalStateException("Could not initialize JBoss ClassLoader because JBoss5 API classes are not available", e);
-      }
-   }
-
-   /**
-    * Get the policy.
-    *
-    * @return the policy
-    */
-   protected ClassLoaderPolicy getPolicy()
-   {
-      return policy;
-   }
-
-   /**
-    * Do instantiate method, variables.
-    *
-    * @throws Exception for any error
-    */
-   private void doInstantiate() throws Exception
-   {
-      Method getPolicy = getMethod(BaseClassLoader.class, "getPolicy");
-      policy = invokeMethod(getPolicy, classLoader, ClassLoaderPolicy.class);
-      fallbackStrategy();
-   }
-
-   /**
-    * The fallback strategy.
-    *
-    * @throws Exception for any error
-    */
-   protected void fallbackStrategy() throws Exception
-   {
-   }
-
-   public void addTransformer(ClassFileTransformer transformer)
-   {
-      Assert.notNull(transformer, "ClassFileTransformer must not be null");
-      Translator translator = new ClassFileTransformer2Translator(transformer);
-      addTranslator(translator);
-   }
-
-   /**
-    * Add the translator.
-    *
-    * @param translator the translator
-    */
-   protected abstract void addTranslator(Translator translator);
-
-   public ClassLoader getInternalClassLoader()
-   {
-      return classLoader;
-   }
-
-   public ClassLoader getThrowawayClassLoader()
-   {
-      return new SimpleThrowawayClassLoader(classLoader);
-   }
-
-   /**
-    * Instantiation action.
-    */
-   private class InstantiationAction implements PrivilegedExceptionAction<Object>
-   {
-      public Object run() throws Exception
-      {
-         doInstantiate();
-         return null;
-      }
-   }
+            return null;
+        }
+    }
 }

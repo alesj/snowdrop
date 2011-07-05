@@ -37,81 +37,72 @@ import org.w3c.dom.NodeList;
 
 /**
  * Named bean definition parser.
- * 
+ *
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
  */
-public class NamedXmlBeanDefinitionParser extends DefaultBeanDefinitionDocumentReader implements Nameable, Instantiable
-{
-   protected static Logger log = Logger.getLogger(NamedXmlBeanDefinitionParser.class);
+public class NamedXmlBeanDefinitionParser extends DefaultBeanDefinitionDocumentReader implements Nameable, Instantiable {
 
-   public static final String BEAN_FACTORY_ELEMENT = "BeanFactory=\\(([^)]+)\\)";
-   public static final String PARENT_BEAN_FACTORY_ELEMENT = "ParentBeanFactory=\\(([^)]+)\\)";
-   public static final String INSTANTIATION_ELEMENT = "Instantiate=\\(([^)]+)\\)";
+    protected static Logger log = Logger.getLogger(NamedXmlBeanDefinitionParser.class);
 
-   private ConfigurableBeanFactory beanFactory;
-   private String beanFactoryName;
-   private boolean instantiate;
+    public static final String BEAN_FACTORY_ELEMENT = "BeanFactory=\\(([^)]+)\\)";
 
-   public NamedXmlBeanDefinitionParser(ConfigurableBeanFactory beanFactory)
-   {
-      this.beanFactory = beanFactory;
-   }
+    public static final String PARENT_BEAN_FACTORY_ELEMENT = "ParentBeanFactory=\\(([^)]+)\\)";
 
-   protected void preProcessXml(Element root) throws BeanDefinitionStoreException
-   {
-      NodeList nl = root.getChildNodes();
-      for (int i = 0; i < nl.getLength(); i++)
-      {
-         Node node = nl.item(i);
-         if (node instanceof Element)
-         {
-            Element ele = (Element) node;
-            if (BeanDefinitionParserDelegate.DESCRIPTION_ELEMENT.equals(node.getNodeName()))
-            {
-               String nodeValue = ele.getFirstChild().getNodeValue();
-               if (log.isTraceEnabled())
-                  log.trace("Bean names [description tag]: " + nodeValue);
-               Matcher bfm = parse(nodeValue, BEAN_FACTORY_ELEMENT);
-               if (bfm.find())
-               {
-                  beanFactoryName = bfm.group(1);
-               }
-               Matcher pbfm = parse(nodeValue, PARENT_BEAN_FACTORY_ELEMENT);
-               if (pbfm.find())
-               {
-                  String parentBeanFactoryName = pbfm.group(1);
-                  try
-                  {
-                     beanFactory.setParentBeanFactory((BeanFactory) Util.lookup(parentBeanFactoryName, BeanFactory.class));
-                  }
-                  catch (Exception e)
-                  {
-                     throw new BeanDefinitionStoreException("Failure during parent bean factory JNDI lookup: " + parentBeanFactoryName, e);
-                  }
-               }
-               Matcher inst = parse(nodeValue, INSTANTIATION_ELEMENT);
-               if (inst.find())
-               {
-                  instantiate = Boolean.parseBoolean(inst.group(1));
-               }
+    public static final String INSTANTIATION_ELEMENT = "Instantiate=\\(([^)]+)\\)";
+
+    private ConfigurableBeanFactory beanFactory;
+
+    private String beanFactoryName;
+
+    private boolean instantiate;
+
+    public NamedXmlBeanDefinitionParser(ConfigurableBeanFactory beanFactory) {
+        this.beanFactory = beanFactory;
+    }
+
+    protected void preProcessXml(Element root) throws BeanDefinitionStoreException {
+        NodeList nl = root.getChildNodes();
+        for (int i = 0; i < nl.getLength(); i++) {
+            Node node = nl.item(i);
+            if (node instanceof Element) {
+                Element ele = (Element) node;
+                if (BeanDefinitionParserDelegate.DESCRIPTION_ELEMENT.equals(node.getNodeName())) {
+                    String nodeValue = ele.getFirstChild().getNodeValue();
+                    if (log.isTraceEnabled()) {
+                        log.trace("Bean names [description tag]: " + nodeValue);
+                    }
+                    Matcher bfm = parse(nodeValue, BEAN_FACTORY_ELEMENT);
+                    if (bfm.find()) {
+                        beanFactoryName = bfm.group(1);
+                    }
+                    Matcher pbfm = parse(nodeValue, PARENT_BEAN_FACTORY_ELEMENT);
+                    if (pbfm.find()) {
+                        String parentBeanFactoryName = pbfm.group(1);
+                        try {
+                            beanFactory.setParentBeanFactory((BeanFactory) Util.lookup(parentBeanFactoryName, BeanFactory.class));
+                        } catch (Exception e) {
+                            throw new BeanDefinitionStoreException("Failure during parent bean factory JNDI lookup: " + parentBeanFactoryName, e);
+                        }
+                    }
+                    Matcher inst = parse(nodeValue, INSTANTIATION_ELEMENT);
+                    if (inst.find()) {
+                        instantiate = Boolean.parseBoolean(inst.group(1));
+                    }
+                }
             }
-         }
-      }
-   }
+        }
+    }
 
-   public String getName()
-   {
-      return beanFactoryName;
-   }
+    public String getName() {
+        return beanFactoryName;
+    }
 
-   public boolean doInstantiate()
-   {
-      return instantiate;
-   }
+    public boolean doInstantiate() {
+        return instantiate;
+    }
 
-   private static Matcher parse(String value, String regexp)
-   {
-      Pattern pattern = Pattern.compile(regexp);
-      return pattern.matcher(value);
-   }
+    private static Matcher parse(String value, String regexp) {
+        Pattern pattern = Pattern.compile(regexp);
+        return pattern.matcher(value);
+    }
 }

@@ -6,8 +6,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                 http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
                 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
-    
-    <jee:jndi-lookup proxy-interface="javax.persistence.EntityManagerFactory" id="entityManagerFactory" jndi-name="java:/persistence/orders-emf"/>
+
+    <jee:jndi-lookup proxy-interface="javax.persistence.EntityManagerFactory" id="entityManagerFactory"
+                     jndi-name="java:/persistence/orders-emf"/>
 
     <tx:jta-transaction-manager/>
 

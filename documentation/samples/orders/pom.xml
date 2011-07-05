@@ -23,7 +23,7 @@
                 <groupId>org.jboss.snowdrop.samples</groupId>
                 <artifactId>orders-web</artifactId>
                 <version>${project.version}</version>
-                 <type>war</type>
+                <type>war</type>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -32,47 +32,38 @@ import org.springframework.core.io.Resource;
 /**
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
  */
-public class FileLineReader extends StaticWordsCreator implements InitializingBean
-{
+public class FileLineReader extends StaticWordsCreator implements InitializingBean {
 
-   private Resource resource;
-   protected List<String> words;
+    private Resource resource;
 
-   public Resource getResource()
-   {
-      return resource;
-   }
+    protected List<String> words;
 
-   public void setResource(Resource resource)
-   {
-      this.resource = resource;
-   }
+    public Resource getResource() {
+        return resource;
+    }
 
-   public void afterPropertiesSet() throws Exception
-   {
-      if (getResource() == null)
-      {
-         throw new IllegalArgumentException("Resource must be set!");
-      }
-      BufferedReader reader = new BufferedReader(new InputStreamReader(getResource().getInputStream()));
-      try
-      {
-         words = new ArrayList<String>();
-         String line;
-         while ((line = reader.readLine()) != null)
-         {
-            words.add(line);
-         }
-      }
-      finally
-      {
-         reader.close();
-      }
-   }
+    public void setResource(Resource resource) {
+        this.resource = resource;
+    }
 
-   protected String[] getArray()
-   {
-      return words.toArray(new String[words.size()]);
-   }
+    public void afterPropertiesSet() throws Exception {
+        if (getResource() == null) {
+            throw new IllegalArgumentException("Resource must be set!");
+        }
+        BufferedReader reader = new BufferedReader(new InputStreamReader(getResource().getInputStream()));
+        try {
+            words = new ArrayList<String>();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                words.add(line);
+            }
+        } finally {
+            reader.close();
+        }
+    }
+
+    protected String[] getArray() {
+        return words.toArray(new String[words.size()]);
+    }
 
 }

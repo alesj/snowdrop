@@ -24,35 +24,31 @@ package org.jboss.spring.samples.horoscope.spring;
 /**
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
  */
-public class StaticWordsCreator implements WordsCreator
-{
+public class StaticWordsCreator implements WordsCreator {
 
-   private static final String[] words = {
-         "Java",
-         "Enterprise",
-         "Beans",
-         "Word",
-         "Create",
-         "Spring",
-         "JBoss",
-   };
+    private static final String[] words = {
+            "Java",
+            "Enterprise",
+            "Beans",
+            "Word",
+            "Create",
+            "Spring",
+            "JBoss",
+    };
 
-   private int counter;
+    private int counter;
 
-   protected String[] getArray()
-   {
-      return words;
-   }
+    protected String[] getArray() {
+        return words;
+    }
 
-   protected String getNext()
-   {
-      String[] array = getArray();
-      return array[(counter++) % array.length];
-   }
+    protected String getNext() {
+        String[] array = getArray();
+        return array[(counter++) % array.length];
+    }
 
-   public String createWord()
-   {
-      return getNext();
-   }
+    public String createWord() {
+        return getNext();
+    }
 
 }

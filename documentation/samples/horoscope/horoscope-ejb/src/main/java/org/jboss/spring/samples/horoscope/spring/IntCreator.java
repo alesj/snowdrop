@@ -24,7 +24,7 @@ package org.jboss.spring.samples.horoscope.spring;
 /**
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
  */
-public interface IntCreator
-{
-   int createInt(int radius);
+public interface IntCreator {
+
+    int createInt(int radius);
 }

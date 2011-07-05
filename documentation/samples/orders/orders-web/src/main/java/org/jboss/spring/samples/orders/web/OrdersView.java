@@ -20,13 +20,15 @@ import javax.ejb.EJB;
 @RequestMapping("/orders/*")
 public class OrdersView {
 
-   @EJB(mappedName = "orders-ear-1.0.0-SNAPSHOT/OrderServiceBean/local")
-   private OrderService orderService;
+    @EJB(mappedName = "orders-ear-1.0.0-SNAPSHOT/OrderServiceBean/local")
+    private OrderService orderService;
 
-   @RequestMapping("created-by")
-   @Transactional
-   public @ModelAttribute("orders") List<Order> getOrdersCreatedBy(@RequestParam("user") String userId) {
+    @RequestMapping("created-by")
+    @Transactional
+    public
+    @ModelAttribute("orders")
+    List<Order> getOrdersCreatedBy(@RequestParam("user") String userId) {
         return orderService.getOrdersForUserId(userId);
-   }
-    
+    }
+
 }

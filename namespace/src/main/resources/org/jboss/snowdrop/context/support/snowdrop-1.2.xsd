@@ -33,26 +33,26 @@
     </xsd:annotation>
 
     <xsd:element name="mbean-server">
-       <xsd:complexType>
-           <xsd:attribute name="id" type="xsd:string" use="optional"/>
-       </xsd:complexType>
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:string" use="optional"/>
+        </xsd:complexType>
     </xsd:element>
 
 
     <xsd:element name="resource-adapter">
-       <xsd:complexType>
-           <xsd:attribute name="id" type="xsd:string" use="optional"/>
-       </xsd:complexType>
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:string" use="optional"/>
+        </xsd:complexType>
     </xsd:element>
 
     <xsd:element name="activation-spec-factory">
-       <xsd:complexType>
-           <xsd:attribute name="id" type="xsd:string" use="optional"/>
-           <xsd:attribute name="client-id" type="xsd:boolean" use="optional"/>
-           <xsd:attribute name="class" type="xsd:string" use="optional"/>
-           <xsd:attribute name="use-dead-letter-queue" type="xsd:boolean" use="optional"/>
-           <xsd:attribute name="subscription-name" type="xsd:string" use="optional"/>
-       </xsd:complexType>
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:string" use="optional"/>
+            <xsd:attribute name="client-id" type="xsd:boolean" use="optional"/>
+            <xsd:attribute name="class" type="xsd:string" use="optional"/>
+            <xsd:attribute name="use-dead-letter-queue" type="xsd:boolean" use="optional"/>
+            <xsd:attribute name="subscription-name" type="xsd:string" use="optional"/>
+        </xsd:complexType>
     </xsd:element>
 
 </xsd:schema>

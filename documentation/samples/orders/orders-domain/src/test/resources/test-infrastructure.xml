@@ -16,13 +16,13 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="persistenceXmlLocation" value="classpath:persistence.xml"/>
         <property name="jpaVendorAdapter">
-        <bean
-        class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-           <property name="showSql" value="true" />
-           <property name="generateDdl" value="true" />
-           <property name="databasePlatform" value="org.hibernate.dialect.HSQLDialect" />
-        </bean>
-     </property>
-      </bean>
+            <bean
+                    class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="showSql" value="true"/>
+                <property name="generateDdl" value="true"/>
+                <property name="databasePlatform" value="org.hibernate.dialect.HSQLDialect"/>
+            </bean>
+        </property>
+    </bean>
 
 </beans>

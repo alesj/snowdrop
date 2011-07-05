@@ -28,35 +28,32 @@ import org.springframework.core.io.Resource;
 /**
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
  */
-public class NamedXmlBeanFactory extends DefaultListableBeanFactory implements Nameable, Instantiable
-{
-   private String defaultName;
-   private final NamedXmlBeanDefinitionReader reader = new NamedXmlBeanDefinitionReader(this);
+public class NamedXmlBeanFactory extends DefaultListableBeanFactory implements Nameable, Instantiable {
 
-   /**
-    * @param defaultName the default name
-    * @param resource the resource
-    * @see org.springframework.beans.factory.xml.XmlBeanFactory
-    * @throws BeansException for any exception
-    */
-   public NamedXmlBeanFactory(String defaultName, Resource resource) throws BeansException
-   {
-      this.reader.loadBeanDefinitions(resource);
-      this.defaultName = defaultName;
-   }
+    private String defaultName;
 
-   public String getName()
-   {
-      String name = reader.getName() != null ? reader.getName() : defaultName;
-      if (name == null)
-      {
-         throw new IllegalArgumentException("Bean factory JNDI name must be set!");
-      }
-      return name;
-   }
+    private final NamedXmlBeanDefinitionReader reader = new NamedXmlBeanDefinitionReader(this);
 
-   public boolean doInstantiate()
-   {
-      return reader.doInstantiate();
-   }
+    /**
+     * @param defaultName the default name
+     * @param resource    the resource
+     * @throws BeansException for any exception
+     * @see org.springframework.beans.factory.xml.XmlBeanFactory
+     */
+    public NamedXmlBeanFactory(String defaultName, Resource resource) throws BeansException {
+        this.reader.loadBeanDefinitions(resource);
+        this.defaultName = defaultName;
+    }
+
+    public String getName() {
+        String name = reader.getName() != null ? reader.getName() : defaultName;
+        if (name == null) {
+            throw new IllegalArgumentException("Bean factory JNDI name must be set!");
+        }
+        return name;
+    }
+
+    public boolean doInstantiate() {
+        return reader.doInstantiate();
+    }
 }

@@ -8,9 +8,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head><title>Simple jsp page</title></head>
-  <body>Place your content here</body>
-  <c:forEach items="${orders}" var="order">
-      <c:out value="${order.name}"/> created by <c:out value="${order.createdBy.id}"/><p/>
-  </c:forEach>
+<head><title>Simple jsp page</title></head>
+<body>Place your content here</body>
+<c:forEach items="${orders}" var="order">
+    <c:out value="${order.name}"/> created by <c:out value="${order.createdBy.id}"/><p/>
+</c:forEach>
 </html>

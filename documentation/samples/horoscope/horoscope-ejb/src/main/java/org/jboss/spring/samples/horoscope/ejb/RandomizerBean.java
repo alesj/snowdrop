@@ -37,33 +37,28 @@ import org.jboss.ejb3.annotation.LocalBinding;
 @Stateless
 @Interceptors(org.jboss.spring.callback.SpringLifecycleInterceptor.class)
 public class
-        RandomizerBean implements Randomizer
-{
+        RandomizerBean implements Randomizer {
 
-   private WordsCreator wordsCreator;
+    private WordsCreator wordsCreator;
 
-   @Spring(jndiName = "horoscopeContext", bean = "stateIntCreator")
-   private IntCreator intCreator;
+    @Spring(jndiName = "horoscopeContext", bean = "stateIntCreator")
+    private IntCreator intCreator;
 
-   public WordsCreator getWordsCreator()
-   {
-      return wordsCreator;
-   }
+    public WordsCreator getWordsCreator() {
+        return wordsCreator;
+    }
 
-   @Spring(jndiName = "horoscopeContext", bean = "staticWordsCreator")
-   public void setWordsCreator(WordsCreator wordsCreator)
-   {
-      this.wordsCreator = wordsCreator;
-   }
+    @Spring(jndiName = "horoscopeContext", bean = "staticWordsCreator")
+    public void setWordsCreator(WordsCreator wordsCreator) {
+        this.wordsCreator = wordsCreator;
+    }
 
-   public int getNumber(int radius)
-   {
-      return intCreator.createInt(radius);
-   }
+    public int getNumber(int radius) {
+        return intCreator.createInt(radius);
+    }
 
-   public String getWord()
-   {
-      return getWordsCreator().createWord();
-   }
+    public String getWord() {
+        return getWordsCreator().createWord();
+    }
 
 }

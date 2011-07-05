@@ -1,11 +1,11 @@
 <aspectj>
 
-	<aspects>
-		<aspect name="springdemo.weaving.aspect.MethodReplacingAspect" />
-	</aspects>
+    <aspects>
+        <aspect name="springdemo.weaving.aspect.MethodReplacingAspect"/>
+    </aspects>
 
-	<weaver>
-		<include within="springdemo.weaving.hello.*" />
-	</weaver>
+    <weaver>
+        <include within="springdemo.weaving.hello.*"/>
+    </weaver>
 
 </aspectj>

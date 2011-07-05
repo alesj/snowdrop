@@ -11,30 +11,27 @@ import org.jboss.virtual.AssembledDirectory;
 /**
  * @author Marius Bogoevici
  */
-public class SnowdropDeployersTestCaseVfs2 extends BootstrapDeployersTest
-{
-   public SnowdropDeployersTestCaseVfs2(String name)
-   {
-      super(name);
-   }
+public class SnowdropDeployersTestCaseVfs2 extends BootstrapDeployersTest {
 
-   public static Test suite()
-   {
-      return AbstractTestCaseWithSetup.suite(SnowdropDeployersTestCaseVfs2.class);
-   }
+    public SnowdropDeployersTestCaseVfs2(String name) {
+        super(name);
+    }
 
-   public void testSimpleEar() throws Exception
-   {
-      System.setProperty("java.naming.factory.initial", MockInitialContextFactory.class.getName());
-      AssembledDirectory ear = createAssembledDirectory("multiplefiles-top-level.ear","multiplefiles-top-level.ear");
-      ear.mkdir("META-INF");
-      addPath(ear, "multiplefiles", "META-INF");
-      VFSDeploymentUnit unit = assertDeploy(ear);
-      assertNotNull(NonSerializableFactory.lookup("TestContext1"));
-      assertNotNull(NonSerializableFactory.lookup("TestContext2"));
-      undeploy(unit);
-      assertNull(NonSerializableFactory.lookup("TestContext1"));
-      assertNull(NonSerializableFactory.lookup("TestContext2"));
-   }
+    public static Test suite() {
+        return AbstractTestCaseWithSetup.suite(SnowdropDeployersTestCaseVfs2.class);
+    }
+
+    public void testSimpleEar() throws Exception {
+        System.setProperty("java.naming.factory.initial", MockInitialContextFactory.class.getName());
+        AssembledDirectory ear = createAssembledDirectory("multiplefiles-top-level.ear", "multiplefiles-top-level.ear");
+        ear.mkdir("META-INF");
+        addPath(ear, "multiplefiles", "META-INF");
+        VFSDeploymentUnit unit = assertDeploy(ear);
+        assertNotNull(NonSerializableFactory.lookup("TestContext1"));
+        assertNotNull(NonSerializableFactory.lookup("TestContext2"));
+        undeploy(unit);
+        assertNull(NonSerializableFactory.lookup("TestContext1"));
+        assertNull(NonSerializableFactory.lookup("TestContext2"));
+    }
 
 }

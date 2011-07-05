@@ -19,10 +19,9 @@ public class JpaUserRepository implements UserRepository {
         return entityManager.find(User.class, id);
     }
 
-   public User createUser(String id)
-   {
-      User u = new User(id);
-      entityManager.persist(u);
-      return u;
-   }
+    public User createUser(String id) {
+        User u = new User(id);
+        entityManager.persist(u);
+        return u;
+    }
 }

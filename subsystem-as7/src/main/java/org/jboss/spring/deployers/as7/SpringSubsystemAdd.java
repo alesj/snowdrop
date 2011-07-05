@@ -49,19 +49,19 @@ public class SpringSubsystemAdd extends AbstractBoottimeAddStepHandler {
 
     @Override
     protected void performBoottime(OperationContext operationContext, ModelNode modelNode, ModelNode modelNode1, ServiceVerificationHandler serviceVerificationHandler, List<ServiceController<?>> serviceControllers) throws OperationFailedException {
-       log.info("Activating Spring Deployer subsystem");
-       operationContext.addStep(new AbstractDeploymentChainStep() {
+        log.info("Activating Spring Deployer subsystem");
+        operationContext.addStep(new AbstractDeploymentChainStep() {
             protected void execute(DeploymentProcessorTarget bootContext) {
-                bootContext.addDeploymentProcessor(Phase.PARSE,  Phase.PARSE_STRUCTURE_DESCRIPTOR + 1, new SpringStructureProcessor());
-                             bootContext.addDeploymentProcessor(Phase.PARSE,  Phase.PARSE_DEPENDENCIES_MANIFEST, new SpringDependencyProcessor());
-                             bootContext.addDeploymentProcessor(Phase.INSTALL,  Integer.MAX_VALUE, new SpringBootstrapProcessor());
-                         }
+                bootContext.addDeploymentProcessor(Phase.PARSE, Phase.PARSE_STRUCTURE_DESCRIPTOR + 1, new SpringStructureProcessor());
+                bootContext.addDeploymentProcessor(Phase.PARSE, Phase.PARSE_DEPENDENCIES_MANIFEST, new SpringDependencyProcessor());
+                bootContext.addDeploymentProcessor(Phase.INSTALL, Integer.MAX_VALUE, new SpringBootstrapProcessor());
+            }
         }, OperationContext.Stage.RUNTIME);
     }
 
     @Override
     protected void populateModel(ModelNode modelNode, ModelNode modelNode1) throws OperationFailedException {
-       modelNode.setEmptyObject();
+        modelNode.setEmptyObject();
     }
 
 }

@@ -30,26 +30,21 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
  *
  * @author <a href="mailto:ales.justin@jboss.com">Ales Justin</a>
  */
-public class BeanFactoryDeployer extends AbstractSpringMetaDataDeployer<ConfigurableBeanFactory>
-{
-   protected DeploymentVisitor<SpringMetaData> createDeploymentVisitor()
-   {
-      return new SpringDeploymentVisitor()
-      {
-         protected ConfigurableBeanFactory doCreate(SpringContextDescriptor metaData)
-         {
-            return new NamedXmlBeanFactory(metaData.getDefaultName(), metaData.getResource());
-         }
+public class BeanFactoryDeployer extends AbstractSpringMetaDataDeployer<ConfigurableBeanFactory> {
 
-         protected void doClose(ConfigurableBeanFactory beanFactory)
-         {
-            beanFactory.destroySingletons();
-         }
-      };
-   }
+    protected DeploymentVisitor<SpringMetaData> createDeploymentVisitor() {
+        return new SpringDeploymentVisitor() {
+            protected ConfigurableBeanFactory doCreate(SpringContextDescriptor metaData) {
+                return new NamedXmlBeanFactory(metaData.getDefaultName(), metaData.getResource());
+            }
 
-   protected Class<ConfigurableBeanFactory> getExactBeanFactoryClass()
-   {
-      return ConfigurableBeanFactory.class;
-   }
+            protected void doClose(ConfigurableBeanFactory beanFactory) {
+                beanFactory.destroySingletons();
+            }
+        };
+    }
+
+    protected Class<ConfigurableBeanFactory> getExactBeanFactoryClass() {
+        return ConfigurableBeanFactory.class;
+    }
 }

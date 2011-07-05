@@ -27,9 +27,9 @@ import javax.ejb.Local;
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
  */
 @Local
-public interface Randomizer
-{
-   int getNumber(int radius);
+public interface Randomizer {
 
-   String getWord();
+    int getNumber(int radius);
+
+    String getWord();
 }

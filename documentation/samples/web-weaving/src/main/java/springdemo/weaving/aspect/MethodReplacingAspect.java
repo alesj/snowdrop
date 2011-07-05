@@ -6,15 +6,14 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.annotation.Around;
 
 @Aspect
-public class MethodReplacingAspect
-{
+public class MethodReplacingAspect {
 
     @Pointcut("execution(* *..HelloService.doInternal(..))")
-    public void allInternalMethods() {}
+    public void allInternalMethods() {
+    }
 
     @Around("allInternalMethods()")
-    public String replaceCall(ProceedingJoinPoint pjp)
-    {
-       return "Invocation replaced";
+    public String replaceCall(ProceedingJoinPoint pjp) {
+        return "Invocation replaced";
     }
 }

@@ -24,33 +24,27 @@ package org.jboss.spring.samples.horoscope.spring;
 /**
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
  */
-public class RandomFileWordsCreator extends FileLineReader
-{
+public class RandomFileWordsCreator extends FileLineReader {
 
-   private IntCreator intCreator;
+    private IntCreator intCreator;
 
-   public IntCreator getIntCreator()
-   {
-      return intCreator;
-   }
+    public IntCreator getIntCreator() {
+        return intCreator;
+    }
 
-   public void setIntCreator(IntCreator intCreator)
-   {
-      this.intCreator = intCreator;
-   }
+    public void setIntCreator(IntCreator intCreator) {
+        this.intCreator = intCreator;
+    }
 
-   public void afterPropertiesSet() throws Exception
-   {
-      super.afterPropertiesSet();
-      if (getIntCreator() == null)
-      {
-         throw new IllegalArgumentException("IntCreatot must be set!");
-      }
-   }
+    public void afterPropertiesSet() throws Exception {
+        super.afterPropertiesSet();
+        if (getIntCreator() == null) {
+            throw new IllegalArgumentException("IntCreatot must be set!");
+        }
+    }
 
-   protected String getNext()
-   {
-      return words.get(getIntCreator().createInt(words.size()));
-   }
+    protected String getNext() {
+        return words.get(getIntCreator().createInt(words.size()));
+    }
 
 }

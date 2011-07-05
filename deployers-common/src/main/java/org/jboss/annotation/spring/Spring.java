@@ -34,19 +34,19 @@ import java.lang.annotation.Target;
  */
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Spring
-{
-   /**
-    * The BeanFactory JNDI name.
-    *
-    * @return the bean factory jndi name
-    */
-   String jndiName() default "";
+public @interface Spring {
 
-   /**
-    * The bean name.
-    *
-    * @return the bean name
-    */
-   String bean() default "";
+    /**
+     * The BeanFactory JNDI name.
+     *
+     * @return the bean factory jndi name
+     */
+    String jndiName() default "";
+
+    /**
+     * The bean name.
+     *
+     * @return the bean name
+     */
+    String bean() default "";
 }

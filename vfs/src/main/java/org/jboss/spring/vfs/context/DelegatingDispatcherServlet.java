@@ -5,15 +5,14 @@ import org.springframework.web.servlet.DispatcherServlet;
 /**
  * @author Marius Bogoevici
  */
-public class DelegatingDispatcherServlet extends DispatcherServlet
-{
+public class DelegatingDispatcherServlet extends DispatcherServlet {
 
-   @Override
-   public Class getContextClass()
-   {
-      if (ContextClassUtil.isJBossAS5orHigher())
-         return ContextClassUtil.getVFSWebContextClass();
-      else
-         return super.getContextClass();
-   }
+    @Override
+    public Class getContextClass() {
+        if (ContextClassUtil.isJBossAS5orHigher()) {
+            return ContextClassUtil.getVFSWebContextClass();
+        } else {
+            return super.getContextClass();
+        }
+    }
 }

@@ -33,32 +33,28 @@ import org.w3c.dom.Element;
 /**
  * @author Marius Bogoevici
  */
-public class MBeanServerBeanDefinitionParser extends AbstractBeanDefinitionParser
-{
+public class MBeanServerBeanDefinitionParser extends AbstractBeanDefinitionParser {
 
-   public static final String DEFAULT_JBOSS_MBEAN_SERVER_BEAN_NAME = "mbeanServer";
+    public static final String DEFAULT_JBOSS_MBEAN_SERVER_BEAN_NAME = "mbeanServer";
 
-   private static final String MBEAN_SERVER_LOCATOR_CLASS_NAME = "org.jboss.mx.util.MBeanServerLocator";
+    private static final String MBEAN_SERVER_LOCATOR_CLASS_NAME = "org.jboss.mx.util.MBeanServerLocator";
 
-   private static final String MBEAN_SERVER_LOCATOR_METHOD_NAME = "locateJBoss";
+    private static final String MBEAN_SERVER_LOCATOR_METHOD_NAME = "locateJBoss";
 
 
-   @Override
-   protected AbstractBeanDefinition parseInternal(Element element, ParserContext parserContext)
-   {
-      BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.rootBeanDefinition(MBEAN_SERVER_LOCATOR_CLASS_NAME, MBEAN_SERVER_LOCATOR_METHOD_NAME);
-      return beanDefinitionBuilder.getBeanDefinition();
-   }
+    @Override
+    protected AbstractBeanDefinition parseInternal(Element element, ParserContext parserContext) {
+        BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.rootBeanDefinition(MBEAN_SERVER_LOCATOR_CLASS_NAME, MBEAN_SERVER_LOCATOR_METHOD_NAME);
+        return beanDefinitionBuilder.getBeanDefinition();
+    }
 
-   @Override
-   protected String resolveId(Element element, AbstractBeanDefinition definition, ParserContext parserContext) throws BeanDefinitionStoreException
-   {
-      String id = element.getAttribute("id");
-      if (!StringUtils.hasText(id))
-      {
-         id = DEFAULT_JBOSS_MBEAN_SERVER_BEAN_NAME;
-      }
-      return id;
-   }
+    @Override
+    protected String resolveId(Element element, AbstractBeanDefinition definition, ParserContext parserContext) throws BeanDefinitionStoreException {
+        String id = element.getAttribute("id");
+        if (!StringUtils.hasText(id)) {
+            id = DEFAULT_JBOSS_MBEAN_SERVER_BEAN_NAME;
+        }
+        return id;
+    }
 
 }

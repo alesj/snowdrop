@@ -30,41 +30,40 @@ import org.jboss.logging.Logger;
  *
  * @author <a href="mailto:ales.justin@jboss.org">Ales Justin</a>
  */
-public abstract class ReflectionHelper
-{
-   protected Logger log = Logger.getLogger(getClass());
+public abstract class ReflectionHelper {
 
-   /**
-    * Get method from class.
-    *
-    * @param clazz the owner class
-    * @param name the method name
-    * @return declared method
-    * @throws Exception for any error
-    */
-   protected static Method getMethod(Class<?> clazz, String name) throws Exception
-   {
-      Method method = clazz.getDeclaredMethod(name);
-      method.setAccessible(true);
-      return method;
-   }
+    protected Logger log = Logger.getLogger(getClass());
 
-   /**
-    * Invoke method and check the result.
-    *
-    * @param method the method
-    * @param target the target
-    * @param expectedType the expected type
-    * @param <T> the exact type
-    * @return invocation's result
-    * @throws Exception for any error
-    */
-   protected static <T> T invokeMethod(Method method, Object target, Class<T> expectedType) throws Exception
-   {
-      Object result = method.invoke(target);
-      if (!expectedType.isInstance(result))
-         throw new IllegalArgumentException("Returned result must be instance of [" + expectedType.getName() + "]");
+    /**
+     * Get method from class.
+     *
+     * @param clazz the owner class
+     * @param name  the method name
+     * @return declared method
+     * @throws Exception for any error
+     */
+    protected static Method getMethod(Class<?> clazz, String name) throws Exception {
+        Method method = clazz.getDeclaredMethod(name);
+        method.setAccessible(true);
+        return method;
+    }
 
-      return expectedType.cast(result);
-   }
+    /**
+     * Invoke method and check the result.
+     *
+     * @param method       the method
+     * @param target       the target
+     * @param expectedType the expected type
+     * @param <T>          the exact type
+     * @return invocation's result
+     * @throws Exception for any error
+     */
+    protected static <T> T invokeMethod(Method method, Object target, Class<T> expectedType) throws Exception {
+        Object result = method.invoke(target);
+        if (!expectedType.isInstance(result)) {
+            throw new IllegalArgumentException("Returned result must be instance of [" + expectedType.getName() + "]");
+        }
+
+        return expectedType.cast(result);
+    }
 }

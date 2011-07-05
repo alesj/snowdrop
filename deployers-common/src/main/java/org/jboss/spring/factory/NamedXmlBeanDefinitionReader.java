@@ -31,34 +31,29 @@ import org.w3c.dom.Document;
 /**
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
  */
-public class NamedXmlBeanDefinitionReader extends XmlBeanDefinitionReader implements Nameable, Instantiable
-{
-   private NamedXmlBeanDefinitionParser parser;
+public class NamedXmlBeanDefinitionReader extends XmlBeanDefinitionReader implements Nameable, Instantiable {
 
-   public NamedXmlBeanDefinitionReader(BeanDefinitionRegistry beanFactory)
-   {
-      super(beanFactory);
-      if (!(beanFactory instanceof ConfigurableBeanFactory))
-      {
-         throw new IllegalArgumentException("BeanFactory must implement ConfigurableBeanFactory!");
-      }
-      parser = new NamedXmlBeanDefinitionParser((ConfigurableBeanFactory) beanFactory);
-   }
+    private NamedXmlBeanDefinitionParser parser;
 
-   public int registerBeanDefinitions(Document doc, Resource resource) throws BeansException
-   {
-      int countBefore = this.getBeanFactory().getBeanDefinitionCount();
-      parser.registerBeanDefinitions(doc, createReaderContext(resource));
-      return this.getBeanFactory().getBeanDefinitionCount() - countBefore;
-   }
+    public NamedXmlBeanDefinitionReader(BeanDefinitionRegistry beanFactory) {
+        super(beanFactory);
+        if (!(beanFactory instanceof ConfigurableBeanFactory)) {
+            throw new IllegalArgumentException("BeanFactory must implement ConfigurableBeanFactory!");
+        }
+        parser = new NamedXmlBeanDefinitionParser((ConfigurableBeanFactory) beanFactory);
+    }
 
-   public String getName()
-   {
-      return parser.getName();
-   }
+    public int registerBeanDefinitions(Document doc, Resource resource) throws BeansException {
+        int countBefore = this.getBeanFactory().getBeanDefinitionCount();
+        parser.registerBeanDefinitions(doc, createReaderContext(resource));
+        return this.getBeanFactory().getBeanDefinitionCount() - countBefore;
+    }
 
-   public boolean doInstantiate()
-   {
-      return parser.doInstantiate();
-   }
+    public String getName() {
+        return parser.getName();
+    }
+
+    public boolean doInstantiate() {
+        return parser.doInstantiate();
+    }
 }

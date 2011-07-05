@@ -23,15 +23,15 @@ package org.jboss.spring.factory;
 
 /**
  * Nameable.
- * 
+ *
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
  */
-public interface Nameable
-{
-   /**
-    * Get the name.
-    *
-    * @return the name
-    */
-   String getName();
+public interface Nameable {
+
+    /**
+     * Get the name.
+     *
+     * @return the name
+     */
+    String getName();
 }

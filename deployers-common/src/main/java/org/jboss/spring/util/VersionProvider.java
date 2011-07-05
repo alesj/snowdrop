@@ -26,15 +26,12 @@ import org.springframework.util.ClassUtils;
 
 /**
  * @author Marius Bogoevici
- *
  */
-public class VersionProvider 
-{
+public class VersionProvider {
 
     public static final Version VERSION;
-    
-    static 
-    {
+
+    static {
         // on JBoss AS 5 and JBoss AS 6
         Version version = null;
         ClassLoader classLoader = ClassUtils.getDefaultClassLoader();
@@ -43,12 +40,9 @@ public class VersionProvider
         } else if (classLoader.getClass().getName().startsWith("org.jboss.modules")) {
             version = Version.AS_7;
         }
-        if (version == null) 
-        {
+        if (version == null) {
             throw new IllegalStateException("Cannot find the JBoss AS version");
-        }
-        else
-        {
+        } else {
             VERSION = version;
         }
     }

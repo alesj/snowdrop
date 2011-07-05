@@ -3,48 +3,48 @@
 
 <beans>
 
-   <!-- File line readers -->
+    <!-- File line readers -->
 
-  <description>BeanFactory=(horoscopeContext)</description>
+    <description>BeanFactory=(horoscopeContext)</description>
 
 
-   <bean id="fileLineReader" class="org.jboss.spring.samples.horoscope.spring.FileLineReader" abstract="true"/>
+    <bean id="fileLineReader" class="org.jboss.spring.samples.horoscope.spring.FileLineReader" abstract="true"/>
 
-   <bean id="randomFileLineReader"
-         class="org.jboss.spring.samples.horoscope.spring.RandomFileWordsCreator"
-         parent="fileLineReader"
-         abstract="true">
-      <property name="intCreator">
-         <ref local="javaRandomIntCreator"/>
-      </property>
-   </bean>
+    <bean id="randomFileLineReader"
+          class="org.jboss.spring.samples.horoscope.spring.RandomFileWordsCreator"
+          parent="fileLineReader"
+          abstract="true">
+        <property name="intCreator">
+            <ref local="javaRandomIntCreator"/>
+        </property>
+    </bean>
 
-   <!-- Randomizer beans -->
+    <!-- Randomizer beans -->
 
-   <bean id="staticWordsCreator" class="org.jboss.spring.samples.horoscope.spring.StaticWordsCreator"/>
+    <bean id="staticWordsCreator" class="org.jboss.spring.samples.horoscope.spring.StaticWordsCreator"/>
 
-   <bean id="fileWordsCreator" parent="fileLineReader">
-      <property name="resource">
-         <value>classpath:words.properties</value>
-      </property>
-   </bean>
+    <bean id="fileWordsCreator" parent="fileLineReader">
+        <property name="resource">
+            <value>classpath:words.properties</value>
+        </property>
+    </bean>
 
-   <bean id="randomWordsCreator" parent="randomFileLineReader">
-      <property name="resource">
-         <value>classpath:words.properties</value>
-      </property>
-   </bean>
+    <bean id="randomWordsCreator" parent="randomFileLineReader">
+        <property name="resource">
+            <value>classpath:words.properties</value>
+        </property>
+    </bean>
 
-   <bean id="stateIntCreator" class="org.jboss.spring.samples.horoscope.spring.DummyStateIntCreator"/>
+    <bean id="stateIntCreator" class="org.jboss.spring.samples.horoscope.spring.DummyStateIntCreator"/>
 
-   <bean id="javaRandomIntCreator" class="org.jboss.spring.samples.horoscope.spring.JavaRandomIntCreator"/>
+    <bean id="javaRandomIntCreator" class="org.jboss.spring.samples.horoscope.spring.JavaRandomIntCreator"/>
 
-   <!-- Horoscope -->
+    <!-- Horoscope -->
 
-   <bean id="horoscopeSentenceCreator" parent="fileLineReader">
-      <property name="resource">
-         <value>classpath:horoscope.properties</value>
-      </property>
-   </bean>
+    <bean id="horoscopeSentenceCreator" parent="fileLineReader">
+        <property name="resource">
+            <value>classpath:horoscope.properties</value>
+        </property>
+    </bean>
 
 </beans>

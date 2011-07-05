@@ -36,43 +36,39 @@ import org.jboss.virtual.VirtualFile;
  * @author <a href="mailto:ales.justin@jboss.com">Ales Justin</a>
  * @author Marius Bogoevici
  */
-public class SpringParserDeployer extends AbstractVFSParsingDeployer<SpringMetaData>
-{
-   private final SpringParserDeployerHandler springParserDeployerHandler = new SpringParserDeployerHandler();
+public class SpringParserDeployer extends AbstractVFSParsingDeployer<SpringMetaData> {
 
-   public SpringParserDeployer()
-   {
-      super(SpringMetaData.class);
-      setSuffix("-spring.xml");
-      setJarExtension(".spring");
-      springParserDeployerHandler.setUseLegacyDefaultName(false);
-   }
+    private final SpringParserDeployerHandler springParserDeployerHandler = new SpringParserDeployerHandler();
 
-   /**
-    * Should we use deployment unit's name as default.
-    * e.g. using string before .jar|spring|... as the name
-    * <p/>
-    * Previous versions used string before .spring as the name,
-    * setting this to true results in this legacy behaviour.
-    * <p/>
-    * Current default is string before -spring.xml.
-    *
-    * @param useLegacyDefaultName the flag
-    */
-   public void setUseLegacyDefaultName(boolean useLegacyDefaultName)
-   {
-      springParserDeployerHandler.setUseLegacyDefaultName(useLegacyDefaultName);
-   }
+    public SpringParserDeployer() {
+        super(SpringMetaData.class);
+        setSuffix("-spring.xml");
+        setJarExtension(".spring");
+        springParserDeployerHandler.setUseLegacyDefaultName(false);
+    }
 
-   @Override
-   protected SpringMetaData parse(VFSDeploymentUnit unit, VirtualFile file, SpringMetaData metaData) throws Exception
-   {
-      return springParserDeployerHandler.parse(unit, file);
-   }
+    /**
+     * Should we use deployment unit's name as default.
+     * e.g. using string before .jar|spring|... as the name
+     * <p/>
+     * Previous versions used string before .spring as the name,
+     * setting this to true results in this legacy behaviour.
+     * <p/>
+     * Current default is string before -spring.xml.
+     *
+     * @param useLegacyDefaultName the flag
+     */
+    public void setUseLegacyDefaultName(boolean useLegacyDefaultName) {
+        springParserDeployerHandler.setUseLegacyDefaultName(useLegacyDefaultName);
+    }
 
-   @Override
-   protected SpringMetaData handleMultipleFiles(VFSDeploymentUnit unit, SpringMetaData root, List<VirtualFile> files) throws Exception
-   {
-      return springParserDeployerHandler.handleMultipleFiles(files);
-   }
+    @Override
+    protected SpringMetaData parse(VFSDeploymentUnit unit, VirtualFile file, SpringMetaData metaData) throws Exception {
+        return springParserDeployerHandler.parse(unit, file);
+    }
+
+    @Override
+    protected SpringMetaData handleMultipleFiles(VFSDeploymentUnit unit, SpringMetaData root, List<VirtualFile> files) throws Exception {
+        return springParserDeployerHandler.handleMultipleFiles(files);
+    }
 }

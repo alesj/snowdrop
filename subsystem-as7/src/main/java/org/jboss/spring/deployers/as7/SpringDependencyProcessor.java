@@ -45,7 +45,7 @@ public class SpringDependencyProcessor implements DeploymentUnitProcessor {
         final DeploymentUnit deploymentUnit = phaseContext.getDeploymentUnit();
         SpringDeployment locations = SpringDeployment.retrieveFrom(deploymentUnit);
         if (locations == null || locations.getContextDefinitionLocations().isEmpty()) {
-           return;
+            return;
         }
         final ModuleSpecification moduleSpecification = deploymentUnit.getAttachment(Attachments.MODULE_SPECIFICATION);
         ModuleDependency moduleDependency = new ModuleDependency(Module.getBootModuleLoader(), MODULE_IDENTIFIER, false, false, true);
