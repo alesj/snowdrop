@@ -20,8 +20,6 @@
   </scm>
 
   <modules>
-    <module>aop</module>
-    <module>cluster</module>
     <module>deployers-common</module>
     <module>deployers-vfs2</module>
     <module>deployers-vfs3</module>
@@ -61,8 +59,6 @@
   </properties>
 
   <build>
-    <outputDirectory>${microcontainer.outputDirectory}</outputDirectory>
-    <testOutputDirectory>${microcontainer.testOutputDirectory}</testOutputDirectory>
     <finalName>${artifactId}</finalName>
     <plugins>
       <plugin>
@@ -120,11 +116,6 @@
     <!-- The parent pom manages the inter-dependencies of the modules. -->
     <dependencies>
 
-      <dependency>
-        <groupId>org.jboss.snowdrop</groupId>
-        <artifactId>snowdrop-cluster</artifactId>
-        <version>${project.version}</version>
-      </dependency>
       <dependency>
         <groupId>org.jboss.snowdrop</groupId>
         <artifactId>snowdrop-deployers-common</artifactId>
