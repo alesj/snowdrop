@@ -62,7 +62,7 @@ public abstract class ReflectionHelper
    protected static <T> T invokeMethod(Method method, Object target, Class<T> expectedType) throws Exception
    {
       Object result = method.invoke(target);
-      if (expectedType.isInstance(result) == false)
+      if (!expectedType.isInstance(result))
          throw new IllegalArgumentException("Returned result must be instance of [" + expectedType.getName() + "]");
 
       return expectedType.cast(result);

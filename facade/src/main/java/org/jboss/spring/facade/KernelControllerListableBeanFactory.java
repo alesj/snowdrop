@@ -97,7 +97,7 @@ public class KernelControllerListableBeanFactory extends ControllerBeanFactory i
    {
       List<String> result = new ArrayList<String>();
       Set<ControllerContext> contexts = kernelController.getInstantiatedContexts(clazz);
-      if (contexts != null && contexts.isEmpty() == false)
+      if (contexts != null && !contexts.isEmpty())
       {
          for (ControllerContext context : contexts)
          {
@@ -107,7 +107,7 @@ public class KernelControllerListableBeanFactory extends ControllerBeanFactory i
       if (includePrototypes)
       {
          Set<ControllerContext> factories = kernelController.getInstantiatedContexts(AbstractBeanFactory.class);
-         if (factories != null && factories.isEmpty() == false)
+         if (factories != null && !factories.isEmpty())
          {
             for (ControllerContext kcc : factories)
             {
@@ -146,7 +146,7 @@ public class KernelControllerListableBeanFactory extends ControllerBeanFactory i
       if (includePrototypes)
       {
          Set<ControllerContext> factories = kernelController.getInstantiatedContexts(AbstractBeanFactory.class);
-         if (factories != null && factories.isEmpty() == false)
+         if (factories != null && !factories.isEmpty())
          {
             for (ControllerContext kcc : factories)
             {

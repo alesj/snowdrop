@@ -231,7 +231,7 @@ public class JBossAopProxy implements AopProxy
    protected boolean hasMetaDataAtLevel(MetaData metaData, ScopeLevel level)
    {
       MetaData levelMetaData = metaData.getScopeMetaData(level);
-      if (levelMetaData != null && levelMetaData.isEmpty() == false)
+      if (levelMetaData != null && !levelMetaData.isEmpty())
       {
          Object[] allMetaData = levelMetaData.getMetaData();
          Annotation[] annotations = levelMetaData.getAnnotations();

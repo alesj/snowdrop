@@ -62,7 +62,7 @@ public class VFSResourceLoader extends DefaultResourceLoader
       return doGetResourceForLocation(path);
    }
 
-   private final Resource doGetResourceForLocation(String path)
+   private Resource doGetResourceForLocation(String path)
    {
       URL url = getClassLoader().getResource(path);
       if (url != null)
