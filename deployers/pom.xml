@@ -7,7 +7,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.jboss.snowdrop</groupId>
-    <artifactId>snowdrop-deployers-common</artifactId>
+    <artifactId>snowdrop-deployers</artifactId>
     <packaging>jar</packaging>
     <name>Snowdrop - Deployers</name>
     <url>http://www.jboss.org/snowdrop</url>
