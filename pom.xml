@@ -21,7 +21,7 @@
     </scm>
 
     <modules>
-        <module>deployers-common</module>
+        <module>deployers</module>
         <module>deployers-vfs2</module>
         <module>deployers-vfs3</module>
         <module>subsystem-as7</module>
@@ -55,7 +55,7 @@
         <version.xerces>2.9.1</version.xerces>
         <version.aopalliance>1.0</version.aopalliance>
         <version.org.jboss.as7>7.0.0.Final</version.org.jboss.as7>
-        <version.spring>3.0.5.RELEASE</version.spring>
+        <version.spring>2.5.6.SEC02</version.spring>
         <version.org.jboss.jandex>1.0.0.Beta7</version.org.jboss.jandex>
     </properties>
 
@@ -344,36 +344,43 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-beans</artifactId>
                 <version>${version.spring}</version>
+                <optional>true</optional>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
                 <version>${version.spring}</version>
+                <optional>true</optional>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
                 <version>${version.spring}</version>
+                <optional>true</optional>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-aop</artifactId>
                 <version>${version.spring}</version>
+                <optional>true</optional>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-web</artifactId>
                 <version>${version.spring}</version>
+                <optional>true</optional>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-webmvc</artifactId>
                 <version>${version.spring}</version>
+                <optional>true</optional>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-jms</artifactId>
                 <version>${version.spring}</version>
+                <optional>true</optional>
             </dependency>
             <dependency>
                 <groupId>org.jboss.cache</groupId>

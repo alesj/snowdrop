@@ -176,7 +176,7 @@ public class KernelControllerListableBeanFactory extends ControllerBeanFactory i
 
         }
         if (foundContexts.size() != 1) {
-            throw new NoSuchBeanDefinitionException(tClass);
+            throw new NoSuchBeanDefinitionException(tClass, "No controller of this class found");
         } else {
             return (T) foundContexts.iterator().next().getTarget();
         }

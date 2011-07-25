@@ -54,7 +54,7 @@ public class JBossModulesLoadTimeWeaver implements LoadTimeWeaver {
             Field transformers = ReflectionUtils.findField(classLoader.getClass(), "transformer");
             transformers.setAccessible(true);
             Object delegatingTransformer = transformers.get(classLoader);
-            Method ADD_TRANSFORMER = ReflectionUtils.findMethod(delegatingTransformer.getClass(), "addTransformer", ClassFileTransformer.class);
+            Method ADD_TRANSFORMER = ReflectionUtils.findMethod(delegatingTransformer.getClass(), "addTransformer", new Class<?>[]{ClassFileTransformer.class});
             ADD_TRANSFORMER.setAccessible(true);
             ADD_TRANSFORMER.invoke(delegatingTransformer, transformer);
         } catch (Exception e) {

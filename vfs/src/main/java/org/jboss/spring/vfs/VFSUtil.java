@@ -112,11 +112,11 @@ public class VFSUtil {
         // extract the rest of the reflective information that we need for VFS invocation
         try {
             if (VFS2_PACKAGE_NAME.equals(vfsPackageName)) {
-                VFS_METHOD_GET_ROOT_URL = ReflectionUtils.findMethod(VFS_CLASS, "getRoot", URL.class);
-                VFS_METHOD_GET_ROOT_URI = ReflectionUtils.findMethod(VFS_CLASS, "getRoot", URI.class);
+                VFS_METHOD_GET_ROOT_URL = ReflectionUtils.findMethod(VFS_CLASS, "getRoot", new Class[]{URL.class});
+                VFS_METHOD_GET_ROOT_URI = ReflectionUtils.findMethod(VFS_CLASS, "getRoot", new Class[]{URI.class});
             } else {
-                VFS_METHOD_GET_ROOT_URL = ReflectionUtils.findMethod(VFS_CLASS, "getChild", URL.class);
-                VFS_METHOD_GET_ROOT_URI = ReflectionUtils.findMethod(VFS_CLASS, "getChild", URI.class);
+                VFS_METHOD_GET_ROOT_URL = ReflectionUtils.findMethod(VFS_CLASS, "getChild", new Class[]{URL.class});
+                VFS_METHOD_GET_ROOT_URI = ReflectionUtils.findMethod(VFS_CLASS, "getChild", new Class[]{URI.class});
             }
             VIRTUAL_FILE_CLASS = loader.loadClass(vfsPackageName + ".VirtualFile");
             VIRTUAL_FILE_METHOD_EXISTS = ReflectionUtils.findMethod(VIRTUAL_FILE_CLASS, "exists");
@@ -129,18 +129,18 @@ public class VFSUtil {
             VIRTUAL_FILE_METHOD_GET_PATH_NAME = ReflectionUtils.findMethod(VIRTUAL_FILE_CLASS, "getPathName");
 
             if (VFS2_PACKAGE_NAME.equals(vfsPackageName)) {
-                VIRTUAL_FILE_METHOD_GET_CHILD = ReflectionUtils.findMethod(VIRTUAL_FILE_CLASS, "findChild", String.class);
+                VIRTUAL_FILE_METHOD_GET_CHILD = ReflectionUtils.findMethod(VIRTUAL_FILE_CLASS, "findChild", new Class[]{String.class});
             } else {
-                VIRTUAL_FILE_METHOD_GET_CHILD = ReflectionUtils.findMethod(VIRTUAL_FILE_CLASS, "getChild", String.class);
+                VIRTUAL_FILE_METHOD_GET_CHILD = ReflectionUtils.findMethod(VIRTUAL_FILE_CLASS, "getChild", new Class[]{String.class});
 
             }
 
             VFS_UTILS_CLASS = loader.loadClass(vfsPackageName + ".VFSUtils");
-            VFS_UTILS_METHOD_GET_COMPATIBLE_URI = ReflectionUtils.findMethod(VFS_UTILS_CLASS, "getCompatibleURI", VIRTUAL_FILE_CLASS);
-            VFS_UTILS_METHOD_IS_NESTED_FILE = ReflectionUtils.findMethod(VFS_UTILS_CLASS, "isNestedFile", VIRTUAL_FILE_CLASS);
+            VFS_UTILS_METHOD_GET_COMPATIBLE_URI = ReflectionUtils.findMethod(VFS_UTILS_CLASS, "getCompatibleURI", new Class<?>[]{VIRTUAL_FILE_CLASS});
+            VFS_UTILS_METHOD_IS_NESTED_FILE = ReflectionUtils.findMethod(VFS_UTILS_CLASS, "isNestedFile", new Class<?>[]{VIRTUAL_FILE_CLASS});
 
             VIRTUAL_FILE_VISITOR_CLASS = loader.loadClass(vfsPackageName + ".VirtualFileVisitor");
-            VIRTUAL_FILE_METHOD_VISIT = ReflectionUtils.findMethod(VIRTUAL_FILE_CLASS, "visit", VIRTUAL_FILE_VISITOR_CLASS);
+            VIRTUAL_FILE_METHOD_VISIT = ReflectionUtils.findMethod(VIRTUAL_FILE_CLASS, "visit", new Class<?>[]{VIRTUAL_FILE_VISITOR_CLASS});
 
             VISITOR_ATTRIBUTES_CLASS = loader.loadClass(vfsPackageName + ".VisitorAttributes");
             VISITOR_ATTRIBUTES_FIELD_RECURSE = ReflectionUtils.findField(VISITOR_ATTRIBUTES_CLASS, "RECURSE");
