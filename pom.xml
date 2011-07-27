@@ -119,7 +119,7 @@
 
             <dependency>
                 <groupId>org.jboss.snowdrop</groupId>
-                <artifactId>snowdrop-deployers-common</artifactId>
+                <artifactId>snowdrop-deployers</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

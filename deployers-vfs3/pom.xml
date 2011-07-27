@@ -27,7 +27,7 @@
 
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
-            <artifactId>snowdrop-deployers-common</artifactId>
+            <artifactId>snowdrop-deployers</artifactId>
         </dependency>
 
         <dependency>
