@@ -29,8 +29,8 @@
         <resource-root path="spring-context-support.jar"/>
         <resource-root path="spring-expression.jar"/>
         <resource-root path="snowdrop-vfs.jar"/>
-        <resource-root path="snowdrop-deployers-common.jar"/>
-        <resource-root path="snowdrop-deployers-common-jandex.jar"/>
+        <resource-root path="snowdrop-deployers.jar"/>
+        <resource-root path="snowdrop-deployers-jandex.jar"/>
         <resource-root path="snowdrop-weaving.jar"/>
     </resources>
     <dependencies>
