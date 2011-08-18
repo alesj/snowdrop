@@ -24,26 +24,20 @@ package org.jboss.spring.deployers.as7;
 
 import org.jboss.as.naming.ManagedReferenceInjector;
 import org.jboss.as.naming.NamingStore;
-import org.jboss.as.naming.ValueManagedReferenceFactory;
 import org.jboss.as.naming.deployment.ContextNames;
 import org.jboss.as.naming.deployment.JndiName;
 import org.jboss.as.naming.service.BinderService;
 import org.jboss.as.server.deployment.*;
-import org.jboss.logmanager.Logger;
 import org.jboss.msc.service.ServiceBuilder;
-import org.jboss.msc.service.ServiceController;
 import org.jboss.msc.service.ServiceName;
 import org.jboss.msc.service.ServiceTarget;
-import org.jboss.msc.value.InjectedValue;
 import org.jboss.spring.factory.NamedXmlApplicationContext;
 import org.jboss.spring.vfs.VFSResource;
 import org.jboss.vfs.VirtualFile;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
-
-import static org.jboss.msc.service.ServiceController.Mode.ON_DEMAND;
 
 /**
+ *
  * @author Marius Bogoevici
  */
 public class SpringBootstrapProcessor implements DeploymentUnitProcessor {
@@ -68,7 +62,6 @@ public class SpringBootstrapProcessor implements DeploymentUnitProcessor {
             ApplicationContextService service = new ApplicationContextService(applicationContext);
             ServiceName serviceName = phaseContext.getDeploymentUnit().getServiceName().append(applicationContext.getName());
             ServiceBuilder<?> serviceBuilder = serviceTarget.addService(serviceName, service);
-            serviceBuilder.setInitialMode(ON_DEMAND);
             serviceBuilder.install();
             String jndiName = JndiName.of("java:jboss").append(applicationContext.getName()).getAbsoluteName();
             int index = jndiName.indexOf("/");
@@ -81,7 +74,6 @@ public class SpringBootstrapProcessor implements DeploymentUnitProcessor {
                     .addAliases(ContextNames.JAVA_CONTEXT_SERVICE_NAME.append(jndiName))
                     .addDependency(serviceName, ApplicationContext.class, new ManagedReferenceInjector<ApplicationContext>(binder.getManagedObjectInjector()))
                     .addDependency(naming, NamingStore.class, binder.getNamingStoreInjector())
-                    .setInitialMode(ServiceController.Mode.ON_DEMAND)
                     .install();
         }
     }
