@@ -24,7 +24,7 @@
     <formats>
         <format>zip</format>
     </formats>
-    <baseDirectory>org/jboss/as/spring/main</baseDirectory>
+    <baseDirectory>org/jboss/snowdrop/main</baseDirectory>
     <fileSets>
         <fileSet>
             <directory>${basedir}/src/main/module</directory>

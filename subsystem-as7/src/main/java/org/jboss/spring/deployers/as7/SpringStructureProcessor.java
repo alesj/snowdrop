@@ -41,7 +41,7 @@ import java.util.Set;
  */
 public class SpringStructureProcessor implements DeploymentUnitProcessor {
 
-    private static final Logger log = Logger.getLogger("org.jboss.as.spring");
+    private static final Logger log = Logger.getLogger("org.jboss.snowdrop");
 
     @Override
     public void deploy(DeploymentPhaseContext phaseContext) throws DeploymentUnitProcessingException {

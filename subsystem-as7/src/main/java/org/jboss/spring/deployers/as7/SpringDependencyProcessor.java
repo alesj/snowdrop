@@ -38,7 +38,7 @@ import org.jboss.modules.filter.PathFilters;
  */
 public class SpringDependencyProcessor implements DeploymentUnitProcessor {
 
-    private static final ModuleIdentifier MODULE_IDENTIFIER = ModuleIdentifier.create("org.jboss.as.spring");
+    private static final ModuleIdentifier MODULE_IDENTIFIER = ModuleIdentifier.create("org.jboss.snowdrop");
 
     @Override
     public void deploy(DeploymentPhaseContext phaseContext) throws DeploymentUnitProcessingException {

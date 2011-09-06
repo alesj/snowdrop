@@ -63,7 +63,7 @@ public class SpringExtension implements Extension {
 
     public static final String SUBSYSTEM_NAME = "spring";
 
-    public static final String NAMESPACE = "urn:jboss:domain:spring:1.0";
+    public static final String NAMESPACE = "urn:jboss:domain:snowdrop:1.0";
 
     private static SpringSubsystemElementParser parser = new SpringSubsystemElementParser();
 

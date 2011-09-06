@@ -42,7 +42,7 @@ import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.OP_
  */
 public class SpringSubsystemAdd extends AbstractBoottimeAddStepHandler {
 
-    private static final Logger log = Logger.getLogger("org.jboss.as.spring");
+    private static final Logger log = Logger.getLogger("org.jboss.snowdrop");
 
 
     public static final SpringSubsystemAdd INSTANCE = new SpringSubsystemAdd();
