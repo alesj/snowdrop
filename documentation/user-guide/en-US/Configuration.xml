@@ -285,13 +285,31 @@ at org.springframework.core.io.support.PathMatchingResourcePatternResolver
     <section>
       <title>Installation</title>
 
-      <para>
-        To install the Snowdrop JBoss deployer, unzip the
-        <filename>jboss-spring-deployer.zip</filename> in the
-        <filename>$JBOSS_HOME/server/$PROFILE/deployers</filename> directory of
-        your JBoss Enterprise Platform installation.
-      </para>
+        <section>Installation on JBoss AS 5 and JBoss AS 6
+        <para>
+            To install the Snowdrop JBoss deployer, unzip the
+            <filename>jboss-spring-deployer.zip</filename>
+            in the
+            <filename>$JBOSS_HOME/server/$PROFILE/deployers</filename>
+            directory of
+            your JBoss Application Server installation.
+        </para>
+        </section>
 
+        <section>Installation on JBoss AS 7</section>
+        <para>
+            To install the Snowdrop Deployment subsystem, unzip the
+            <filename>jboss-spring-deployer-as7.zip</filename> file into the
+            <filename>$JBOSS_HOME/modules</filename> directory of your JBoss
+            Application Server installation.
+        </para>
+
+        <para>The final step in the installation is to change
+        <filename>$JBOSS_HOME/standalone/configuration/standalone.xml</filename> by including
+        <literal>&lt;extension module="org.jboss.snowdrop"/&gt;</literal> inside the
+        <literal>&lt;extensions&gt;</literal> element, as well as including
+        <literal>&lt;subsystem xmlns="urn:jboss:domain:snowdrop:1.0"/&gt;</literal> inside
+        the <literal>&lt;profile&gt;</literal> element.</para>
     </section>
 
     <section>
