@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Snowdrop_User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+
+<chapter>
+  <title>What This Guide Covers</title>
+
+  <para>
+    Snowdrop is a utility package that contains JBoss-specific
+    extensions to the Spring Framework. These extensions are
+    either:
+  </para>
+  <itemizedlist>
+    <listitem>
+      <para>
+        extensions to Spring Framework classes that can be used
+        wherever the generic implementations provided by the framework do
+        not integrate correctly with JBoss AS.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        extensions for deploying and running Spring applications with 
+        JBoss AS.
+      </para>
+    </listitem>
+  </itemizedlist>
+
+  <para>
+    This user guide aims to cover the functionality of Snowdrop, to
+    describe its components, and to provide information on how to use it
+    optimally for running Spring applications in JBoss AS.
+  </para>
+
+  <important>
+    <title>Supported Spring Version</title>
+    <para>
+      Snowdrop 1.2 and subsequent micro-release versions (1.2.1, 1.2.2,
+      etc.) should be used with either Spring 2.5 (preferred version being
+      Spring 2.5.6.SEC02) or Spring 3.0 (preferred version being
+      3.0.2.RELEASE and above)
+    </para>
+  </important>
+  
+   <important>
+    <title>Supported JBoss Version</title>
+    <para>
+      Snowdrop 1.2 and subsequent micro-release versions (1.2.1, 1.2.2,
+      etc.) should be used with JBoss AS 5.x.
+    </para>
+  </important>
+</chapter>

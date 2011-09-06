@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Snowdrop_User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+
+<chapter>
+  <title>Introduction</title>
+
+  <section>
+    <title>Package Structure</title>
+
+    <para>Snowdrop contains the following files:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term><filename>snowdrop-vfs.jar</filename></term>
+        <listitem>
+          <para>
+            A library that contains the support classes
+            for resource scanning (scanning the classpath for
+            bean definitions, or using "classpath*:"-style
+            patterns).
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><filename>snowdrop-weaving.jar</filename></term>
+        <listitem>
+          <para>
+            A library that contains the support
+            classes for load-time weaving.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><filename>snowdrop-deployers.jar</filename></term>
+        <listitem>
+          <para>
+            Contains utility classes used internally by the Spring deployer. It is not
+            intended for direct use by developers.
+          </para>
+        </listitem>
+      </varlistentry>
+       <varlistentry>
+        <term><filename>jboss-spring-deployer-3.4.jar</filename></term>
+        <listitem>
+          <para>
+              This is a packaged distribution of the Spring deployer, 
+              which bootstraps and registers
+              the application contexts to be used by your
+              Java EE applications.
+          </para>
+        </listitem>
+      </varlistentry>
+      </variablelist>
+  </section>
+</chapter>
