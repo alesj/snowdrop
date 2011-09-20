@@ -315,6 +315,12 @@
                 <artifactId>jboss-aop</artifactId>
                 <version>${version.jboss.aop}</version>
                 <scope>provided</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>trove</groupId>
+                        <artifactId>trove</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.jboss</groupId>
