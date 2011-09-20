@@ -33,6 +33,9 @@ import org.jboss.util.naming.NonSerializableFactory;
 import org.jboss.util.naming.Util;
 import org.springframework.beans.factory.BeanFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Deploys SpringMetaData.
  *
@@ -56,6 +59,8 @@ public abstract class AbstractSpringMetaDataDeployer<T extends BeanFactory> exte
 
     protected abstract class SpringDeploymentVisitor implements DeploymentVisitor<SpringMetaData> {
 
+        private final String SUCCESSFUL_BINDINGS_KEY = AbstractSpringMetaDataDeployer.class.getName() + "_SUCCESSFUL_BINDINGS";
+
         public Class<SpringMetaData> getVisitorType() {
             return SpringMetaData.class;
         }
@@ -63,19 +68,30 @@ public abstract class AbstractSpringMetaDataDeployer<T extends BeanFactory> exte
         public void deploy(DeploymentUnit unit, SpringMetaData springMetaData) throws DeploymentException {
             ClassLoader classLoader = unit.getClassLoader();
             ClassLoader old = Thread.currentThread().getContextClassLoader();
+            List<String> successfulBindings = new ArrayList<String>();            
             try {
                 for (SpringContextDescriptor springContextDescriptor : springMetaData.getSpringContextDescriptors()) {
                     Thread.currentThread().setContextClassLoader(classLoader);
                     T beanFactory = doCreate(springContextDescriptor);
                     String name = ((Nameable) beanFactory).getName();
                     springContextDescriptor.setName(name);
-                    bind(beanFactory, name);
+                    bindIfPossible(beanFactory, name);                    
+                    successfulBindings.add(name);
                     if (log.isTraceEnabled()) {
-                        log.trace("Bean factory [" + name + "] binded to local JNDI.");
+                        log.trace("Bean factory [" + name + "] bound to local JNDI.");
                     }
                 }
+            } 
+            catch (DeploymentException e) {
+                // remove our bindings if deployment unsuccessful
+                for (String successfulBinding : successfulBindings) {
+                    unbind(successfulBinding);                   
+                }     
+                successfulBindings.clear();
+                throw e;
             } finally {
                 Thread.currentThread().setContextClassLoader(old);
+                unit.addAttachment(SUCCESSFUL_BINDINGS_KEY, successfulBindings);
             }
         }
 
@@ -88,15 +104,18 @@ public abstract class AbstractSpringMetaDataDeployer<T extends BeanFactory> exte
         protected abstract T doCreate(SpringContextDescriptor metaData);
 
         public void undeploy(DeploymentUnit unit, SpringMetaData springMetaData) {
+            List<String> ownBindings = unit.getAttachment(SUCCESSFUL_BINDINGS_KEY, List.class);
             for (SpringContextDescriptor springContextDescriptor : springMetaData.getSpringContextDescriptors()) {
                 String name = springContextDescriptor.getName();
                 try {
-                    T beanFactory = lookup(name);
-                    if (beanFactory != null) {
-                        doClose(beanFactory);
-                        unbind(name);
-                        if (log.isTraceEnabled()) {
-                            log.trace("Bean factory [" + name + "] unbinded from local JNDI.");
+                    if (ownBindings.contains(name)) {
+                        T beanFactory = lookup(name);
+                        if (beanFactory != null) {
+                            doClose(beanFactory);
+                            unbind(name);
+                            if (log.isTraceEnabled()) {
+                                log.trace("Bean factory [" + name + "] unbinded from local JNDI.");
+                            }
                         }
                     }
                 } catch (Exception e) {
@@ -122,10 +141,15 @@ public abstract class AbstractSpringMetaDataDeployer<T extends BeanFactory> exte
      * @param name        the jndi name
      * @throws DeploymentException for any error
      */
-    protected void bind(T beanFactory, String name) throws DeploymentException {
+    protected void bindIfPossible(T beanFactory, String name) throws DeploymentException {
         InitialContext ctx = null;
         try {
             ctx = new InitialContext();
+            Object existingObject = NonSerializableFactory.lookup(name);
+            if (existingObject != null) {
+                throw new DeploymentException("Unable to bind BeanFactory into JNDI as "  + name + " : binding already"
+                + " exists");
+            }
             NonSerializableFactory.rebind(ctx, name, beanFactory);
         } catch (NamingException e) {
             throw new DeploymentException("Unable to bind BeanFactory into JNDI", e);
