@@ -22,7 +22,6 @@
                 <exclude>*:aopalliance:*</exclude>
                 <exclude>*:commons-logging:*</exclude>
                 <exclude>*:spring-*:*</exclude>
-                <exclude>org.jboss.snowdrop:snowdrop-deployers-vfs3:*</exclude>
             </excludes>
         </dependencySet>
     </dependencySets>

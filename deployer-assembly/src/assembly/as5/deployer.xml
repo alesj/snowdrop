@@ -20,7 +20,6 @@
             <useTransitiveDependencies>true</useTransitiveDependencies>
             <excludes>
                 <exclude>*:commons-logging:*</exclude>
-                <exclude>org.jboss.snowdrop:snowdrop-deployers-vfs3:*</exclude>
             </excludes>
         </dependencySet>
         <dependencySet>

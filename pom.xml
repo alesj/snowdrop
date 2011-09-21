@@ -21,8 +21,6 @@
 
     <modules>
         <module>deployers</module>
-        <module>deployers-vfs2</module>
-        <module>deployers-vfs3</module>
         <module>subsystem-as7</module>
         <module>namespace</module>
         <module>facade</module>
