@@ -1,0 +1,153 @@
+<!--
+  ~ JBoss, Home of Professional Open Source.
+  ~ Copyright 2011, Red Hat Middleware LLC, and individual contributors
+  ~ as indicated by the @author tags. See the copyright.txt file in the
+  ~ distribution for a full listing of individual contributors.
+  ~
+  ~ This is free software; you can redistribute it and/or modify it
+  ~ under the terms of the GNU Lesser General Public License as
+  ~ published by the Free Software Foundation; either version 2.1 of
+  ~ the License, or (at your option) any later version.
+  ~
+  ~ This software is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  ~ Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public
+  ~ License along with this software; if not, write to the Free
+  ~ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  ~ 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>org.jboss.snowdrop</groupId>
+        <artifactId>snowdrop-deployers-parent</artifactId>
+        <version>2.0.0.Alpha2-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.jboss.snowdrop</groupId>
+    <artifactId>snowdrop-deployers-vfs2</artifactId>
+    <packaging>jar</packaging>
+    <name>Snowdrop - Deployers - VFS2</name>
+    <url>http://www.jboss.org/snowdop</url>
+    <description>Snowdrop - VFS2-specific deployers for usage in JBoss AS 5</description>
+
+
+    <!-- OIve -->
+    <properties>
+        <version.jboss.classloader>2.0.7.CR2</version.jboss.classloader>
+        <version.jboss.vfs>2.1.3.SP1</version.jboss.vfs>
+        <version.jboss.deployers>2.0.8.SP1</version.jboss.deployers>
+        <version.jboss.mdr>2.0.2.GA</version.jboss.mdr>
+        <version.jboss.kernel>2.0.9.GA</version.jboss.kernel>
+        <version.jboss.common.logging.spi>2.0.5.GA</version.jboss.common.logging.spi>
+        <version.jboss.common.logging.log4j>2.0.5.GA</version.jboss.common.logging.log4j>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jboss.snowdrop</groupId>
+            <artifactId>snowdrop-deployers-core</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jboss.deployers</groupId>
+                    <artifactId>jboss-deployers-spi</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss</groupId>
+            <artifactId>jboss-vfs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-vfs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-vfs-spi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.test</groupId>
+            <artifactId>jboss-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-vfs</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-spi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-core-spi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-structure-spi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-impl</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss</groupId>
+            <artifactId>jboss-mdr</artifactId>
+            <version>${version.jboss.mdr.vfs2}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss</groupId>
+            <artifactId>jboss-common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging-spi</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>apache-xerces</groupId>
+            <artifactId>xml-apis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-client</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.deployers</groupId>
+            <artifactId>jboss-deployers-client-spi</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.cl</groupId>
+            <artifactId>jboss-classloader</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.cl</groupId>
+            <artifactId>jboss-classloading</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.jboss.cl</groupId>
+            <artifactId>jboss-classloading-vfs</artifactId>
+        </dependency>
+
+
+    </dependencies>
+
+</project>
