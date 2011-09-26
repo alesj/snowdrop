@@ -26,41 +26,47 @@
         <format>zip</format>
     </formats>
     <baseDirectory>/</baseDirectory>
+
     <fileSets>
-        <fileSet>
-            <directory>${basedir}/../modules/spring-2.5/src/main/module</directory>
-            <outputDirectory>org/springframework/spring/2.5</outputDirectory>
-            <includes>
-                <include>module.xml</include>
-            </includes>
-        </fileSet>
-        <fileSet>
-            <directory>${basedir}/../modules/spring-3/src/main/module</directory>
-            <outputDirectory>org/springframework/spring/main</outputDirectory>
-            <includes>
-                <include>module.xml</include>
-            </includes>
-        </fileSet>
-        <fileSet>
-            <directory>${basedir}/../subsystem-as7/src/main/module</directory>
-            <outputDirectory>org/jboss/snowdrop/main</outputDirectory>
-            <includes>
-                <include>module.xml</include>
-            </includes>
-        </fileSet>
-        <fileSet>
-            <directory>${basedir}/../subsystem-as7/target/dependency/lib</directory>
-            <outputDirectory>org/jboss/snowdrop/main</outputDirectory>
-            <includes>
-                <include>snowdrop-*.jar</include>
-            </includes>
-        </fileSet>
-        <fileSet>
-            <directory>${basedir}/../subsystem-as7/target</directory>
-            <outputDirectory>org/jboss/snowdrop/main</outputDirectory>
-            <includes>
-                <include>${project.artifactId}.jar</include>
-            </includes>
-        </fileSet>
-    </fileSets>
+            <fileSet>
+                <directory>${basedir}/../modules/spring-2.5/src/main/module</directory>
+                <outputDirectory>module-spring-2.5/org/springframework/spring/snowdrop</outputDirectory>
+                <includes>
+                    <include>module.xml</include>
+                </includes>
+            </fileSet>
+
+            <fileSet>
+                <directory>${basedir}/../modules/spring-3/src/main/module</directory>
+                <outputDirectory>module-spring-3/org/springframework/spring/snowdrop</outputDirectory>
+                <includes>
+                    <include>module.xml</include>
+                </includes>
+            </fileSet>
+
+            <fileSet>
+                <directory>${basedir}/../subsystem-as7/src/main/module</directory>
+                <outputDirectory>module-deployer/org/jboss/snowdrop/main</outputDirectory>
+                <includes>
+                    <include>module.xml</include>
+                </includes>
+            </fileSet>
+
+            <fileSet>
+                <directory>${basedir}/../subsystem-as7/target/dependency/lib</directory>
+                <outputDirectory>module-deployer/org/jboss/snowdrop/main</outputDirectory>
+                <includes>
+                    <include>snowdrop-vfs*.jar</include>
+                    <include>snowdrop-deployers.jar</include>
+                    <include>snowdrop-deployers-jandex.jar</include>
+                </includes>
+            </fileSet>
+            <fileSet>
+                <directory>${basedir}/../subsystem-as7/target</directory>
+                <outputDirectory>module-deployer/org/jboss/snowdrop/main</outputDirectory>
+                <includes>
+                    <include>snowdrop-subsystem-as7.jar</include>
+                </includes>
+            </fileSet>
+        </fileSets>
 </assembly>

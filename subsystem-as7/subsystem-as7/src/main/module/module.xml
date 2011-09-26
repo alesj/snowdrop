@@ -63,6 +63,7 @@
         <module name="org.slf4j"/>
         <module name="org.slf4j.ext"/>
 
-        <module name="org.springframework.spring" export="true" services="true"/>
+        <module name="org.springframework.spring" slot="snowdrop" export="true"/>
+
     </dependencies>
 </module>

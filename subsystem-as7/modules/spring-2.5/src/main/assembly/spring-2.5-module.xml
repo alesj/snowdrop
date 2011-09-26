@@ -24,7 +24,7 @@
     <formats>
         <format>zip</format>
     </formats>
-    <baseDirectory>org/springframework/spring/2.5</baseDirectory>
+    <baseDirectory>org/springframework/spring/snowdrop</baseDirectory>
     <fileSets>
         <fileSet>
             <directory>${basedir}/src/main/module</directory>

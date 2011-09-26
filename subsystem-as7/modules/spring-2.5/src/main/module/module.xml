@@ -20,7 +20,7 @@
   ~ 02110-1301 USA, or see the FSF site: http://www.fsf.org.
   -->
 
-<module xmlns="urn:jboss:module:1.0" name="org.springframework.spring" slot="2.5">
+<module xmlns="urn:jboss:module:1.0" name="org.springframework.spring" slot="snowdrop">
     <resources>
         <resource-root path="spring-aop.jar"/>
         <resource-root path="spring-beans.jar"/>

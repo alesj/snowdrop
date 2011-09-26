@@ -20,14 +20,14 @@
   ~ 02110-1301 USA, or see the FSF site: http://www.fsf.org.
   -->
 
-<module xmlns="urn:jboss:module:1.0" name="org.springframework.spring">
+<module xmlns="urn:jboss:module:1.0" name="org.springframework.spring" slot="snowdrop">
     <resources>
         <resource-root path="spring-asm.jar"/>
         <resource-root path="spring-aop.jar"/>
         <resource-root path="spring-beans.jar"/>
-        <resource-root path="spring-core.jar"/>
         <resource-root path="spring-context.jar"/>
         <resource-root path="spring-context-support.jar"/>
+        <resource-root path="spring-core.jar"/>
         <resource-root path="spring-expression.jar"/>
     </resources>
     <dependencies>

@@ -39,11 +39,15 @@ import org.jboss.modules.filter.PathFilters;
 public class SpringDependencyProcessor implements DeploymentUnitProcessor {
 
     private static final ModuleIdentifier MODULE_IDENTIFIER_SNOWDROP = ModuleIdentifier.create("org.jboss.snowdrop");
-    private static final ModuleIdentifier MODULE_IDENTIFIER_SPRING = ModuleIdentifier.create("org.springframework.spring");
+
+    private static final ModuleIdentifier MODULE_IDENTIFIER_SPRING
+            = ModuleIdentifier.create("org.springframework.spring", "snowdrop");
 
     @Override
     public void deploy(DeploymentPhaseContext phaseContext) throws DeploymentUnitProcessingException {
         final DeploymentUnit deploymentUnit = phaseContext.getDeploymentUnit();
+
+
         SpringDeployment locations = SpringDeployment.retrieveFrom(deploymentUnit);
         if (locations == null || locations.getContextDefinitionLocations().isEmpty()) {
             return;
@@ -51,28 +55,35 @@ public class SpringDependencyProcessor implements DeploymentUnitProcessor {
 
         ModuleSpecification moduleSpecification = deploymentUnit.getAttachment(Attachments.MODULE_SPECIFICATION);
 
-        addDependency(MODULE_IDENTIFIER_SNOWDROP, moduleSpecification);
+        ModuleDependency springDependency = getSpringDependency(moduleSpecification);
 
-//        boolean hasSpringDependency = false;
-//        for (ModuleDependency moduleDependency : moduleSpecification.getAllDependencies()) {
-//            if (moduleDependency.getIdentifier().equals(MODULE_IDENTIFIER_SPRING)) {
-//                hasSpringDependency = true;
-//                break;
-//            }
-//        }
-//        if (!hasSpringDependency) {
-//
-//        }
-        addDependency(MODULE_IDENTIFIER_SPRING, moduleSpecification);
+        if (springDependency == null) {
+            springDependency = addDependency(MODULE_IDENTIFIER_SPRING, moduleSpecification);
+        }
+
+        springDependency.addExportFilter(PathFilters.getMetaInfFilter(), true);
+        springDependency.addImportFilter(PathFilters.getMetaInfFilter(), true);
+
+        addDependency(MODULE_IDENTIFIER_SNOWDROP, moduleSpecification);
 
         deploymentUnit.addToAttachmentList(Attachments.ADDITIONAL_ANNOTATION_INDEXES, MODULE_IDENTIFIER_SNOWDROP);
     }
 
-    private void addDependency(ModuleIdentifier moduleIdentifier, ModuleSpecification moduleSpecification) {
+    private ModuleDependency getSpringDependency(ModuleSpecification moduleSpecification) {
+        for (ModuleDependency moduleDependency : moduleSpecification.getAllDependencies()) {
+            if (moduleDependency.getIdentifier().getName().equals(MODULE_IDENTIFIER_SPRING.getName())) {
+                return moduleDependency;
+            }
+        }
+        return null;
+    }
+
+    private ModuleDependency addDependency(ModuleIdentifier moduleIdentifier, ModuleSpecification moduleSpecification) {
         ModuleDependency moduleDependency = new ModuleDependency(Module.getBootModuleLoader(), moduleIdentifier, false, false, true);
         moduleDependency.addExportFilter(PathFilters.getMetaInfFilter(), true);
         moduleDependency.addImportFilter(PathFilters.getMetaInfFilter(), true);
         moduleSpecification.addUserDependency(moduleDependency);
+        return moduleDependency;
     }
 
     @Override
