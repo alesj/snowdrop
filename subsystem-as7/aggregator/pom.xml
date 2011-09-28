@@ -33,6 +33,7 @@
 
     <artifactId>snowdrop-subsystem-as7-distribution</artifactId>
     <name>Snowdrop AS7 Subsystem - Distribution Aggregator</name>
+    <packaging>pom</packaging>
 
     <dependencies>
         <dependency>
@@ -71,6 +72,7 @@
                         <configuration>
                             <finalName>subsystem-as7-distribution</finalName>
                             <appendAssemblyId>false</appendAssemblyId>
+                            <attach>false</attach>
                             <descriptors>
                                 <descriptor>${basedir}/src/main/assembly/assembly.xml</descriptor>
                             </descriptors>
@@ -85,6 +87,7 @@
                         <configuration>
                             <finalName>subsystem-as7-nodeps</finalName>
                             <appendAssemblyId>false</appendAssemblyId>
+                            <attach>false</attach>
                             <descriptors>
                                 <descriptor>${basedir}/src/main/assembly/assembly-nodeps.xml</descriptor>
                             </descriptors>

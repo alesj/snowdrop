@@ -41,6 +41,7 @@
                                 <configuration>
                                     <finalName>jboss-spring-deployer-${deployer.version}</finalName>
                                     <appendAssemblyId>true</appendAssemblyId>
+                                    <attach>false</attach>
                                     <descriptors>
                                         <descriptor>${basedir}/src/assembly/as5/deployer.xml</descriptor>
                                     </descriptors>
@@ -55,6 +56,7 @@
                                 <configuration>
                                     <finalName>jboss-spring-deployer-${deployer.version}</finalName>
                                     <appendAssemblyId>true</appendAssemblyId>
+                                    <attach>false</attach>
                                     <descriptors>
                                         <descriptor>${basedir}/src/assembly/as5/deployer-no-deps.xml</descriptor>
                                     </descriptors>
@@ -69,6 +71,7 @@
                                 <configuration>
                                     <finalName>jboss-spring-deployer-${deployer.version}</finalName>
                                     <appendAssemblyId>true</appendAssemblyId>
+                                    <attach>false</attach>
                                     <descriptors>
                                         <descriptor>${basedir}/src/assembly/as6/deployer.xml</descriptor>
                                     </descriptors>
@@ -83,6 +86,7 @@
                                 <configuration>
                                     <finalName>jboss-spring-deployer-${deployer.version}</finalName>
                                     <appendAssemblyId>true</appendAssemblyId>
+                                    <attach>false</attach>
                                     <descriptors>
                                         <descriptor>${basedir}/src/assembly/as6/deployer-no-deps.xml</descriptor>
                                     </descriptors>

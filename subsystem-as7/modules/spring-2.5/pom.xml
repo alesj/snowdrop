@@ -99,6 +99,7 @@
                         <configuration>
                             <finalName>spring-2.5-module</finalName>
                             <appendAssemblyId>false</appendAssemblyId>
+                            <attach>false</attach>
                             <descriptors>
                                 <descriptor>${basedir}/src/main/assembly/spring-2.5-module.xml</descriptor>
                             </descriptors>
