@@ -37,14 +37,16 @@
     <dependencies>
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
-            <artifactId>spring-2.5</artifactId>
+            <artifactId>snowdrop-module-spring-2.5</artifactId>
             <version>${project.version}</version>
+            <type>pom</type>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
-            <artifactId>spring-3</artifactId>
+            <artifactId>snowdrop-module-spring-3</artifactId>
             <version>${project.version}</version>
+            <type>pom</type>
             <scope>runtime</scope>
         </dependency>
         <dependency>

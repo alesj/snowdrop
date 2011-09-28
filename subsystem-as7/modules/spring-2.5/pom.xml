@@ -31,10 +31,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spring-2.5</artifactId>
+    <artifactId>snowdrop-module-spring-2.5</artifactId>
 
     <name>Snowdrop AS7 Subsystem - Spring 2.5 Module</name>
-
+    <packaging>pom</packaging>
 
     <dependencies>
 

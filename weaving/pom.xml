@@ -24,7 +24,9 @@
         </dependency>
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
-            <artifactId>snowdrop-deployers</artifactId>
+            <artifactId>snowdrop-deployers-core</artifactId>
+            <scope>provided</scope>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

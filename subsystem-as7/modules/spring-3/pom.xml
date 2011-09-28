@@ -31,8 +31,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spring-3</artifactId>
+    <artifactId>snowdrop-module-spring-3</artifactId>
     <name>Snowdrop AS7 Subsystem - Spring 3 Module</name>
+    <packaging>pom</packaging>
 
     <properties>
         <version.spring>3.0.5.RELEASE</version.spring>
