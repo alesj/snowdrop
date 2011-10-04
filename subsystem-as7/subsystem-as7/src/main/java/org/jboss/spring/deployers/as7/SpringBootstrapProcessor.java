@@ -24,10 +24,12 @@ package org.jboss.spring.deployers.as7;
 
 import org.jboss.as.naming.ManagedReferenceInjector;
 import org.jboss.as.naming.NamingStore;
+import org.jboss.as.naming.ServiceBasedNamingStore;
 import org.jboss.as.naming.deployment.ContextNames;
 import org.jboss.as.naming.deployment.JndiName;
 import org.jboss.as.naming.service.BinderService;
 import org.jboss.as.server.deployment.*;
+import org.jboss.msc.inject.Injector;
 import org.jboss.msc.service.ServiceBuilder;
 import org.jboss.msc.service.ServiceName;
 import org.jboss.msc.service.ServiceTarget;
@@ -69,10 +71,11 @@ public class SpringBootstrapProcessor implements DeploymentUnitProcessor {
             ServiceName naming = (namespace != null) ? ContextNames.JAVA_CONTEXT_SERVICE_NAME.append(namespace) : ContextNames.JAVA_CONTEXT_SERVICE_NAME;
             ServiceName bindingName = naming.append(binding);
             BinderService binder = new BinderService(binding);
+            final ContextNames.BindInfo bindInfo = ContextNames.bindInfoFor(jndiName);
             serviceTarget.addService(bindingName, binder)
                     .addAliases(ContextNames.JAVA_CONTEXT_SERVICE_NAME.append(jndiName))
                     .addDependency(serviceName, ApplicationContext.class, new ManagedReferenceInjector<ApplicationContext>(binder.getManagedObjectInjector()))
-                    .addDependency(naming, NamingStore.class, binder.getNamingStoreInjector())
+                    .addDependency(bindInfo.getParentContextServiceName(), ServiceBasedNamingStore.class, binder.getNamingStoreInjector())
                     .install();
         }
     }
