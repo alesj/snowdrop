@@ -69,6 +69,8 @@
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
             <artifactId>snowdrop-deployers</artifactId>
+            <version>${project.version}</version>            
+            <classifier>all</classifier>
         </dependency>
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>

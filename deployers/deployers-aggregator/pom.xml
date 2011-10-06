@@ -48,30 +48,43 @@
             <artifactId>snowdrop-deployers-vfs3</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>org.jboss.snowdrop</groupId>
+            <artifactId>snowdrop-deployers-core</artifactId>
+            <version>${project.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.snowdrop</groupId>
+            <artifactId>snowdrop-deployers-vfs2</artifactId>
+            <version>${project.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.snowdrop</groupId>
+            <artifactId>snowdrop-deployers-vfs3</artifactId>
+            <version>${project.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
     </dependencies>
-    <build>
-        <plugins>
+    <build>        
+        <plugins>                    
             <plugin>
-                <artifactId>maven-shade-plugin</artifactId>
-
+                <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
                     <execution>
                         <phase>package</phase>
                         <goals>
-                            <goal>shade</goal>
+                            <goal>single</goal>
                         </goals>
-                        <configuration>
-			    <createSourcesJar>true</createSourcesJar>
-                            <artifactSet>
-                                <includes>
-                                    <include>org.jboss.snowdrop:snowdrop-deployers-core</include>
-                                    <include>org.jboss.snowdrop:snowdrop-deployers-vfs2</include>
-                                    <include>org.jboss.snowdrop:snowdrop-deployers-vfs3</include>
-                                </includes>
-                            </artifactSet>
+                        <configuration>                            
+                            <descriptors>
+				                <descriptor>src/main/assembly/deployers-aggregator.xml</descriptor>
+				                <descriptor>src/main/assembly/deployers-aggregator-sources.xml</descriptor>
+				            </descriptors>
+				            <finalName>snowdrop</finalName>
                         </configuration>
                     </execution>
-
                 </executions>
             </plugin>
         </plugins>
