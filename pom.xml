@@ -416,6 +416,12 @@
                 <version>${version.junit}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>org.jboss.snowdrop</groupId>
+                <artifactId>snowdrop-deployers-core</artifactId>
+                <version>${project.version}</version>
+                <scope>provided</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

@@ -20,6 +20,17 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jms</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.snowdrop</groupId>
+            <artifactId>snowdrop-deployers-core</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

@@ -22,6 +22,8 @@
 
 package org.jboss.snowdrop.context.support;
 
+import org.jboss.spring.util.Version;
+import org.jboss.spring.util.VersionProvider;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -41,10 +43,21 @@ public class MBeanServerBeanDefinitionParser extends AbstractBeanDefinitionParse
 
     private static final String MBEAN_SERVER_LOCATOR_METHOD_NAME = "locateJBoss";
 
+    public static final String DEFAULT_SPRING_MBEAN_SERVER_LOCATOR = "org.springframework.jmx.support.MBeanServerFactoryBean";
+
+    public static final String LOCATE_EXISTING_SERVER_PROPERTY_NAME = "locateExistingServerIfPossible";
+
 
     @Override
     protected AbstractBeanDefinition parseInternal(Element element, ParserContext parserContext) {
-        BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.rootBeanDefinition(MBEAN_SERVER_LOCATOR_CLASS_NAME, MBEAN_SERVER_LOCATOR_METHOD_NAME);
+        BeanDefinitionBuilder beanDefinitionBuilder;
+        if (VersionProvider.VERSION.equals(Version.AS_5_OR_6)) {
+            beanDefinitionBuilder = BeanDefinitionBuilder.rootBeanDefinition(MBEAN_SERVER_LOCATOR_CLASS_NAME, MBEAN_SERVER_LOCATOR_METHOD_NAME);
+        }
+        else {
+            beanDefinitionBuilder = BeanDefinitionBuilder.rootBeanDefinition(DEFAULT_SPRING_MBEAN_SERVER_LOCATOR);
+            beanDefinitionBuilder.addPropertyValue(LOCATE_EXISTING_SERVER_PROPERTY_NAME, Boolean.TRUE);
+        }
         return beanDefinitionBuilder.getBeanDefinition();
     }
 

@@ -36,19 +36,16 @@
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
             <artifactId>snowdrop-deployers-core</artifactId>
-            <version>${project.version}</version>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
             <artifactId>snowdrop-deployers-vfs2</artifactId>
-            <version>${project.version}</version>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
             <artifactId>snowdrop-deployers-vfs3</artifactId>
-            <version>${project.version}</version>
             <optional>true</optional>
         </dependency>
     </dependencies>
