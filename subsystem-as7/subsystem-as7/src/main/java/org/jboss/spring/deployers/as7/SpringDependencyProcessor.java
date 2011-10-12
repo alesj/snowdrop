@@ -61,8 +61,8 @@ public class SpringDependencyProcessor implements DeploymentUnitProcessor {
             springDependency = addDependency(MODULE_IDENTIFIER_SPRING, moduleSpecification);
         }
 
-        springDependency.addExportFilter(PathFilters.getMetaInfFilter(), true);
-        springDependency.addImportFilter(PathFilters.getMetaInfFilter(), true);
+        springDependency.addExportFilter(PathFilters.acceptAll(), true);
+        springDependency.addImportFilter(PathFilters.acceptAll(), true);
 
         addDependency(MODULE_IDENTIFIER_SNOWDROP, moduleSpecification);
 
@@ -80,8 +80,8 @@ public class SpringDependencyProcessor implements DeploymentUnitProcessor {
 
     private ModuleDependency addDependency(ModuleIdentifier moduleIdentifier, ModuleSpecification moduleSpecification) {
         ModuleDependency moduleDependency = new ModuleDependency(Module.getBootModuleLoader(), moduleIdentifier, false, false, true);
-        moduleDependency.addExportFilter(PathFilters.getMetaInfFilter(), true);
-        moduleDependency.addImportFilter(PathFilters.getMetaInfFilter(), true);
+        moduleDependency.addExportFilter(PathFilters.acceptAll(), true);
+        moduleDependency.addImportFilter(PathFilters.acceptAll(), true);
         moduleSpecification.addUserDependency(moduleDependency);
         return moduleDependency;
     }
