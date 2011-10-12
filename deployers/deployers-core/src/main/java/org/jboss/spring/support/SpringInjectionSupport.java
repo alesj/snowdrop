@@ -133,7 +133,6 @@ public abstract class SpringInjectionSupport {
 
     private Object getObjectFromBeanFactory(Spring spring, String defaultBeanName, Class<?> beanType) throws Exception {
         String jndiName = getJndiName(spring.jndiName());
-        System.out.println("Looking up " + jndiName);
         BeanFactory beanFactory = lookup(jndiName, BeanFactory.class);
         String beanName = spring.bean();
         if (beanName != null && beanName.length() > 0) {
