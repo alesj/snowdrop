@@ -18,6 +18,12 @@
         </dependency>
 
         <dependency>
+                    <groupId>org.jboss.as</groupId>
+                    <artifactId>jboss-as-ee</artifactId>
+                    <version>${version.org.jboss.as7}</version>
+                </dependency>
+
+        <dependency>
             <groupId>org.jboss.as</groupId>
             <artifactId>jboss-as-server</artifactId>
             <version>${version.org.jboss.as7}</version>

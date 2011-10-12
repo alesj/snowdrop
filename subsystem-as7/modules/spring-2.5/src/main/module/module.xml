@@ -22,11 +22,15 @@
 
 <module xmlns="urn:jboss:module:1.0" name="org.springframework.spring" slot="snowdrop">
     <resources>
+        <resource-root path="aspectjrt.jar"/>
+        <resource-root path="aspectjweaver.jar"/>
+        <resource-root path="aopalliance.jar"/>
         <resource-root path="spring-aop.jar"/>
         <resource-root path="spring-beans.jar"/>
         <resource-root path="spring-core.jar"/>
         <resource-root path="spring-context.jar"/>
         <resource-root path="spring-context-support.jar"/>
+        <resource-root path="spring-web.jar"/>
     </resources>
     <dependencies>
             <module name="ch.qos.cal10n"/>
@@ -49,7 +53,7 @@
             <module name="org.jboss.as.ee"/>
             <module name="org.jboss.as.ejb3"/>
 
-            <module name="org.apache.commons.logging"/>
+            <module name="org.apache.commons.logging" export="true"/>
             <module name="org.jboss.as.jpa"/>
             <module name="org.jboss.as.naming"/>
             <module name="org.jboss.as.server"/>
@@ -62,7 +66,5 @@
             <module name="org.jboss.modules"/>
             <module name="org.jboss.msc"/>
             <module name="org.jboss.vfs"/>
-            <module name="org.slf4j"/>
-            <module name="org.slf4j.ext"/>
         </dependencies>
 </module>

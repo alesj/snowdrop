@@ -37,6 +37,19 @@
     <dependencies>
 
         <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>aopalliance</groupId>
+            <artifactId>aopalliance</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
         </dependency>
@@ -78,7 +91,7 @@
                             <outputDirectory>${project.build.directory}/dependency/lib</outputDirectory>
                             <overWriteSnapshots>true</overWriteSnapshots>
                             <stripVersion>true</stripVersion>
-                            <includeGroupIds>org.springframework,org.jboss.snowdrop</includeGroupIds>
+                            <includeGroupIds>org.springframework,org.jboss.snowdrop,aopalliance, org.aspectj</includeGroupIds>
                         </configuration>
                     </execution>
                 </executions>
