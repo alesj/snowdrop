@@ -40,9 +40,6 @@ public class SpringDependencyProcessor implements DeploymentUnitProcessor {
 
     private static final ModuleIdentifier MODULE_IDENTIFIER_SNOWDROP = ModuleIdentifier.create("org.jboss.snowdrop");
 
-    private static final ModuleIdentifier MODULE_IDENTIFIER_SPRING
-            = ModuleIdentifier.create("org.springframework.spring", "snowdrop");
-
     @Override
     public void deploy(DeploymentPhaseContext phaseContext) throws DeploymentUnitProcessingException {
         final DeploymentUnit deploymentUnit = phaseContext.getDeploymentUnit();
@@ -55,27 +52,10 @@ public class SpringDependencyProcessor implements DeploymentUnitProcessor {
 
         ModuleSpecification moduleSpecification = deploymentUnit.getAttachment(Attachments.MODULE_SPECIFICATION);
 
-        ModuleDependency springDependency = getSpringDependency(moduleSpecification);
-
-        if (springDependency == null) {
-            springDependency = addDependency(MODULE_IDENTIFIER_SPRING, moduleSpecification);
-        }
-
-        springDependency.addExportFilter(PathFilters.acceptAll(), true);
-        springDependency.addImportFilter(PathFilters.acceptAll(), true);
 
         addDependency(MODULE_IDENTIFIER_SNOWDROP, moduleSpecification);
 
         deploymentUnit.addToAttachmentList(Attachments.ADDITIONAL_ANNOTATION_INDEXES, MODULE_IDENTIFIER_SNOWDROP);
-    }
-
-    private ModuleDependency getSpringDependency(ModuleSpecification moduleSpecification) {
-        for (ModuleDependency moduleDependency : moduleSpecification.getAllDependencies()) {
-            if (moduleDependency.getIdentifier().getName().equals(MODULE_IDENTIFIER_SPRING.getName())) {
-                return moduleDependency;
-            }
-        }
-        return null;
     }
 
     private ModuleDependency addDependency(ModuleIdentifier moduleIdentifier, ModuleSpecification moduleSpecification) {
