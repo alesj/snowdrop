@@ -53,16 +53,25 @@ public class JBossJcaResourceAdapterParser extends AbstractBeanDefinitionParser 
 
     @Override
     protected AbstractBeanDefinition parseInternal(Element element, ParserContext parserContext) {
-        BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition();
-        builder.getRawBeanDefinition().setFactoryBeanName(DEFAULT_JBOSS_MBEAN_SERVER_BEAN_NAME);
-        builder.getRawBeanDefinition().setFactoryMethodName(FACTORY_METHOD_NAME);
-        try {
-            builder.addConstructorArgValue(ObjectName.getInstance(DEFAULT_JCA_MBEAN_NAME));
-        } catch (MalformedObjectNameException e) {
-            throw new IllegalArgumentException(e);
+        ClassLoader classLoader = getClass().getClassLoader();
+        if (classLoader.getClass().getName().startsWith("org.jboss.classloader")) {
+            BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition();
+            builder.getRawBeanDefinition().setFactoryBeanName(DEFAULT_JBOSS_MBEAN_SERVER_BEAN_NAME);
+            builder.getRawBeanDefinition().setFactoryMethodName(FACTORY_METHOD_NAME);
+            try {
+                builder.addConstructorArgValue(ObjectName.getInstance(DEFAULT_JCA_MBEAN_NAME));
+            } catch (MalformedObjectNameException e) {
+                throw new IllegalArgumentException(e);
+            }
+            builder.addConstructorArgValue("ResourceAdapter");
+            return builder.getBeanDefinition();
+        } else {
+            BeanDefinitionBuilder builder = BeanDefinitionBuilder.rootBeanDefinition("org.jboss.snowdrop.context.support.ActivatorHolder");
+            builder.setFactoryMethod("getResourceAdapter");
+            return builder.getBeanDefinition();
         }
-        builder.addConstructorArgValue("ResourceAdapter");
-        return builder.getBeanDefinition();
     }
+
+
 
 }
