@@ -37,18 +37,21 @@
   <important>
     <title>Supported Spring Version</title>
     <para>
-      Snowdrop 1.2 and subsequent micro-release versions (1.2.1, 1.2.2,
-      etc.) should be used with either Spring 2.5 (preferred version being
-      Spring 2.5.6.SEC02) or Spring 3.0 (preferred version being
-      3.0.2.RELEASE and above)
+      Snowdrop 2.0 and subsequent micro-release versions (2.0.1, 2.0.2,
+      etc.) should be used with Spring 2.5 (preferred version being
+      Spring 2.5.6.SEC03) or Spring 3.0 (preferred version being
+      3.0.6.RELEASE and above). Later Spring versions (3.1, 3.2. etc.) may
+      be compatible with Snowdrop 2.0 as long as they maintain binary
+      compatibility with Spring 3.0. In such cases, the instructions
+      regarding Spring 3.0 apply to Spring 3.1 and later as well.
     </para>
   </important>
   
    <important>
     <title>Supported JBoss Version</title>
     <para>
-      Snowdrop 1.2 and subsequent micro-release versions (1.2.1, 1.2.2,
-      etc.) should be used with JBoss AS 5.x.
+      Snowdrop 2.0 and subsequent micro-release versions (2.0.1, 2.0.2,
+      etc.) should be used with JBoss AS 5.x, JBoss AS 6.x or JBoss AS 7.x.
     </para>
   </important>
 </chapter>

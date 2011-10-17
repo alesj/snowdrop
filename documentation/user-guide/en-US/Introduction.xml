@@ -10,7 +10,35 @@
   <section>
     <title>Package Structure</title>
 
-    <para>Snowdrop contains the following files:</para>
+    <para>The Snowdrop distribution contains two types of artifacts:</para>
+
+    <variablelist>
+        <varlistentry>
+          <term>Utility archives</term>
+          <listitem>
+              <para>
+                  Libraries that contain utility classes and can be packaged in applications
+              </para>
+          </listitem>
+
+        </varlistentry>
+
+        <varlistentry>
+          <term>Server-side components</term>
+          <listitem>
+              <para>
+                  Pre-packaged components that can be installed in the application server as deployers (JBoss AS5, JBoss AS6) or
+                  subsystems (JBoss AS7).
+              </para>
+          </listitem>
+
+        </varlistentry>
+    </variablelist>
+
+    <para>The server-side components may include some of the utility libraries, where they are needed by the deployer
+    or, respectively, subsystem.</para>
+
+    <para>Snowdrop provides the following utility libraries:</para>
 
     <variablelist>
       <varlistentry>
@@ -42,17 +70,52 @@
           </para>
         </listitem>
       </varlistentry>
-       <varlistentry>
-        <term><filename>jboss-spring-deployer-3.4.jar</filename></term>
+      <varlistentry>
+        <term><filename>snowdrop-namespace.jar</filename></term>
         <listitem>
           <para>
-              This is a packaged distribution of the Spring deployer, 
+            Custom namespace for easier configuration of beans that need access to JBoss internals (JMX server
+            locator, JCA activation spec and resource adapter for JMS endpoints)
+          </para>
+        </listitem>
+      </varlistentry>
+      </variablelist>
+
+      <para>Snowdrop provides the following pre-packaged deployers and subsystems:</para>
+      <variablelist>
+       <varlistentry>
+        <term><filename>jboss-spring-deployer-as5.zip</filename></term>
+        <listitem>
+          <para>
+              This is a packaged distribution of the Spring deployer for JBoss AS5,
               which bootstraps and registers
               the application contexts to be used by your
               Java EE applications.
           </para>
         </listitem>
       </varlistentry>
+       <varlistentry>
+        <term><filename>jboss-spring-deployer-as6.zip</filename></term>
+        <listitem>
+          <para>
+              This is a packaged distribution of the Spring deployer for JBoss AS6,
+              which bootstraps and registers
+              the application contexts to be used by your
+              Java EE applications.
+          </para>
+        </listitem>
+      </varlistentry>
+       <varlistentry>
+        <term><filename>jboss-spring-subsystem-as7.zip</filename></term>
+        <listitem>
+          <para>
+              This is a packaged distribution of the Spring subsystem for JBoss AS7,
+              which bootstraps and registers the application contexts to be used by your
+              Java EE applications.
+          </para>
+        </listitem>
+      </varlistentry>
       </variablelist>
+
   </section>
 </chapter>

@@ -226,11 +226,13 @@ at org.springframework.core.io.support.PathMatchingResourcePatternResolver
 
     <note>
       <para>
-        From Spring 3.0 onward, load-time weaving on JBoss Enterprise Application
-        Platform and JBoss Enterprise Web Platform is supported out of the box.
-        The component described in this section can be used to facilitate backwards 
-        compatibility, but configuring a custom load-time weaver is not required 
-        when using Spring 3.0.
+        From Spring 3.0 onward, load-time weaving on JBoss AS 5 and JBoss AS 6
+        is supported out of the box. However, on JBoss AS7 it is necessary to
+        use the load-time weaver provided by Snowdrop.
+
+        The component described in this section should be used with Spring 2.5 on any of the
+        servers or when using Spring 2.5 and Spring 3.0 with JBoss AS7. In other cases,
+        it is optional, but can be used to facilitate backwards compatibility.
       </para>
     </note>
 
@@ -249,11 +251,11 @@ at org.springframework.core.io.support.PathMatchingResourcePatternResolver
     </para>
 
     <para>
-      Define the <classname>JBoss5LoadTimeWeaver</classname> in the 
+      Define the <classname>JBossLoadTimeWeaver</classname> in the
       Spring application context as shown here:
     </para>
 
-    <programlisting language="Java">&lt;context:load-time-weaver weaver-class="org.jboss.instrument.classloading.JBoss5LoadTimeWeaver"/&gt;</programlisting>
+    <programlisting language="Java">&lt;context:load-time-weaver weaver-class="org.jboss.instrument.classloading.JBossLoadTimeWeaver"/&gt;</programlisting>
   </section>
 
   <section>
@@ -285,7 +287,7 @@ at org.springframework.core.io.support.PathMatchingResourcePatternResolver
     <section>
       <title>Installation</title>
 
-        <section>Installation on JBoss AS 5 and JBoss AS 6
+        <section><title>Installation on JBoss AS 5 and JBoss AS 6</title>
         <para>
             To install the Snowdrop JBoss deployer, unzip the
             <filename>jboss-spring-deployer.zip</filename>
@@ -296,13 +298,32 @@ at org.springframework.core.io.support.PathMatchingResourcePatternResolver
         </para>
         </section>
 
-        <section>Installation on JBoss AS 7</section>
+        <section><title>Installation on JBoss AS 7</title>
         <para>
             To install the Snowdrop Deployment subsystem, unzip the
-            <filename>jboss-spring-deployer-as7.zip</filename> file into the
+            <filename>jboss-spring-subsystem-as7.zip</filename> file. Create the subsystem
+            and Spring modules in JBoss AS7 by copying  the
+            contents of the <filename>module-deployer</filename> folder and one of the <filename>module-spring-2.5</filename>
+            or <filename>spring-3</filename> folders in the
             <filename>$JBOSS_HOME/modules</filename> directory of your JBoss
             Application Server installation.
         </para>
+
+        <para>The above step will create two modules inside JBoss AS7: </para>
+        <variablelist>
+            <varlistentry>
+                <term><classname>org.jboss.snowdrop:main</classname></term>
+                <listitem><para>The module that contains the JBoss AS7 subsystem proper</para></listitem>
+            </varlistentry>
+            <varlistentry>
+                <term><classname>org.springframework.spring:snowdrop</classname></term>
+                <listitem><para>A module that contains the Spring JARs that are required by Snowdrop. It can contain
+                Spring 2.5 or Spring 3 JARs, dependending the which of the two modules has been copied in the step above.
+                Users may add other JARs to the module, case in which they need to adjust the <filename>module.xml</filename>
+                file accordingly. It is a dependency of <classname>org.jboss.snowdrop:main</classname>
+                </para></listitem>
+            </varlistentry>
+        </variablelist>
 
         <para>The final step in the installation is to change
         <filename>$JBOSS_HOME/standalone/configuration/standalone.xml</filename> by including
@@ -310,6 +331,7 @@ at org.springframework.core.io.support.PathMatchingResourcePatternResolver
         <literal>&lt;extensions&gt;</literal> element, as well as including
         <literal>&lt;subsystem xmlns="urn:jboss:domain:snowdrop:1.0"/&gt;</literal> inside
         the <literal>&lt;profile&gt;</literal> element.</para>
+        </section>
     </section>
 
     <section>
