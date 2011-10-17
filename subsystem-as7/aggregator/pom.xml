@@ -68,7 +68,7 @@
                             <goal>single</goal>
                         </goals>
                         <configuration>
-                            <finalName>subsystem-as7-distribution</finalName>
+                            <finalName>jboss-spring-subsystem-as7</finalName>
                             <appendAssemblyId>false</appendAssemblyId>
                             <attach>false</attach>
                             <descriptors>
@@ -83,7 +83,7 @@
                             <goal>single</goal>
                         </goals>
                         <configuration>
-                            <finalName>subsystem-as7-nodeps</finalName>
+                            <finalName>jboss-spring-subsystem-as7-nodeps</finalName>
                             <appendAssemblyId>false</appendAssemblyId>
                             <attach>false</attach>
                             <descriptors>
