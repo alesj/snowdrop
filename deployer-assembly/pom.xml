@@ -13,10 +13,6 @@
     <url>http://www.jboss.com/products/jbossmc</url>
     <description>Snowdrop Deployer</description>
 
-    <properties>
-        <deployer.version>4.0</deployer.version>
-    </properties>
-
     <profiles>
         <profile>
             <id>dist</id>
@@ -39,7 +35,7 @@
                                     <goal>single</goal>
                                 </goals>
                                 <configuration>
-                                    <finalName>jboss-spring-deployer-${deployer.version}</finalName>
+                                    <finalName>jboss-spring</finalName>
                                     <appendAssemblyId>true</appendAssemblyId>
                                     <attach>false</attach>
                                     <descriptors>
@@ -54,7 +50,7 @@
                                     <goal>single</goal>
                                 </goals>
                                 <configuration>
-                                    <finalName>jboss-spring-deployer-${deployer.version}</finalName>
+                                    <finalName>jboss-spring</finalName>
                                     <appendAssemblyId>true</appendAssemblyId>
                                     <attach>false</attach>
                                     <descriptors>
@@ -69,7 +65,7 @@
                                     <goal>single</goal>
                                 </goals>
                                 <configuration>
-                                    <finalName>jboss-spring-deployer-${deployer.version}</finalName>
+                                    <finalName>jboss-spring</finalName>
                                     <appendAssemblyId>true</appendAssemblyId>
                                     <attach>false</attach>
                                     <descriptors>
@@ -84,7 +80,7 @@
                                     <goal>single</goal>
                                 </goals>
                                 <configuration>
-                                    <finalName>jboss-spring-deployer-${deployer.version}</finalName>
+                                    <finalName>jboss-spring</finalName>
                                     <appendAssemblyId>true</appendAssemblyId>
                                     <attach>false</attach>
                                     <descriptors>
@@ -106,10 +102,20 @@
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
             <artifactId>snowdrop-deployers</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.snowdrop</groupId>
-            <artifactId>snowdrop-facade</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jboss.snowdrop</groupId>
+                    <artifactId>snowdrop-deployers-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.jboss.snowdrop</groupId>
+                    <artifactId>snowdrop-deployers-vfs2</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.jboss.snowdrop</groupId>
+                    <artifactId>snowdrop-deployers-vfs3</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
