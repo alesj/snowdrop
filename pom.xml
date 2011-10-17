@@ -154,14 +154,6 @@
                 <artifactId>snowdrop-namespace</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
-            <!-- dependency>
-             <groupId>org.jboss.snowdrop</groupId>
-             <artifactId>snowdrop-extensions</artifactId>
-             <version>${project.version}</version>
-           </dependency -->
-
-
             <dependency>
                 <groupId>org.jboss.kernel</groupId>
                 <artifactId>jboss-dependency</artifactId>
@@ -463,6 +455,11 @@
                 <groupId>org.jboss.modules</groupId>
                 <artifactId>jboss-modules</artifactId>
                 <version>${version.jboss.modules}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.as</groupId>
+                <artifactId>jboss-as-connector</artifactId>
+                <version>${version.org.jboss.as7}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
