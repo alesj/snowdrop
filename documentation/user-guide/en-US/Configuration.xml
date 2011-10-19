@@ -285,18 +285,34 @@ at org.springframework.core.io.support.PathMatchingResourcePatternResolver
     </section>
 
     <section>
-      <title>Installation</title>
+      <title>Spring Deployer Installation</title>
 
         <section><title>Installation on JBoss AS 5 and JBoss AS 6</title>
+
         <para>
-            To install the Snowdrop JBoss deployer, unzip the
-            <filename>jboss-spring-deployer.zip</filename>
-            in the
-            <filename>$JBOSS_HOME/server/$PROFILE/deployers</filename>
-            directory of
-            your JBoss Application Server installation.
+            To install the Spring deployer, unzip the deployer archive
+            in the <filename>$JBOSS_HOME/server/$PROFILE/deployers</filename>
+            directory of your JBoss Application Server installation.
         </para>
+        <para>
+            The Snowdrop Spring deployer requires the inclusion of the Spring libraries.
+            If you are installing a version without dependencies or you want to include your
+            own Spring version, you must ensure that you are including one of the following sets
+            of Spring libraries in the <filename>$JBOSS_HOME/server/$PROFILE/deployers/spring.deployer</filename>
+            folder.
+        </para>
+        <para>
+            Please include at least the following jars from either the Spring 2.5.6.SEC03 or Spring 3.0.6.RELEASE
+            distribution:
+        </para>
+            <itemizedlist>
+                <listitem>spring-beans.jar (or org.springframework.beans.jar)</listitem>
+                <listitem>spring-context.jar (org.springframework.context.jar)</listitem>
+                <listitem>spring-core.jar (or org.springframework.core.jar)</listitem>
+                <listitem>spring-web.jar (or org.springframework.web.jar)</listitem>
+            </itemizedlist>
         </section>
+
 
         <section><title>Installation on JBoss AS 7</title>
         <para>
@@ -324,6 +340,41 @@ at org.springframework.core.io.support.PathMatchingResourcePatternResolver
                 </para></listitem>
             </varlistentry>
         </variablelist>
+
+        <para>If you are using the distribution without dependencies, or you wish to create your own version of the
+            Spring module, then create a <filename>$JBOSS_HOME/modules/org/springframework/spring/main</filename> directory and copy one
+        of the two <filename>module.xml</filename> files (from either the <filename>module-spring-2.5</filename> or the
+            <filename>module-spring-3</filename> directory of the distribution and copy one of the following sets of files
+            from the corresponding Spring distribution (either Spring 2.5.6.SEC03 or Spring 3.0.6.RELEASE).
+        </para>
+
+            <para>For Spring 2.5:</para>
+            <itemizedlist>
+                <listitem>aspectjrt.jar</listitem>
+                <listitem>aspectjweaver.jar</listitem>
+                <listitem>aopalliance.jar</listitem>
+                <listitem>spring-aop.jar</listitem>
+                <listitem>spring-beans.jar</listitem>
+                <listitem>spring-core.jar</listitem>
+                <listitem>spring-context.jar</listitem>
+                <listitem>spring-context-support.jar</listitem>
+                <listitem>spring-web.jar</listitem>
+            </itemizedlist>
+
+            <para>For Spring 3:</para>
+            <itemizedlist>
+                <listitem>aspectjrt.jar</listitem>
+                <listitem>aspectjweaver.jar</listitem>
+                <listitem>aopalliance.jar</listitem>
+                <listitem>spring-aop.jar</listitem>
+                <listitem>spring-asm.jar</listitem>
+                <listitem>spring-beans.jar</listitem>
+                <listitem>spring-core.jar</listitem>
+                <listitem>spring-expression.jar</listitem>
+                <listitem>spring-context.jar</listitem>
+                <listitem>spring-context-support.jar</listitem>
+                <listitem>spring-web.jar</listitem>
+            </itemizedlist>
 
         <para>The final step in the installation is to change
         <filename>$JBOSS_HOME/standalone/configuration/standalone.xml</filename> by including
