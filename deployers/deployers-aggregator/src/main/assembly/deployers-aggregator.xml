@@ -11,7 +11,7 @@
       <outputDirectory>/</outputDirectory>
       <useTransitiveDependencies>false</useTransitiveDependencies>
       <unpack>true</unpack>
-      <scope>runtime</scope> 
+      <scope>provided</scope>
     </dependencySet>
   </dependencySets>
 </assembly>
