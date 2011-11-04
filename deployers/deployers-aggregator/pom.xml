@@ -37,16 +37,19 @@
             <groupId>org.jboss.snowdrop</groupId>
             <artifactId>snowdrop-deployers-core</artifactId>
             <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
             <artifactId>snowdrop-deployers-vfs2</artifactId>
             <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
             <artifactId>snowdrop-deployers-vfs3</artifactId>
             <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
@@ -54,6 +57,7 @@
             <version>${project.version}</version>
             <classifier>sources</classifier>
             <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
@@ -61,6 +65,7 @@
             <version>${project.version}</version>
             <classifier>sources</classifier>
             <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
@@ -68,6 +73,7 @@
             <version>${project.version}</version>
             <classifier>sources</classifier>
             <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
     </dependencies>
     <build>
