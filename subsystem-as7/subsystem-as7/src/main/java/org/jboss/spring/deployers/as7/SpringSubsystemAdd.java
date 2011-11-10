@@ -61,7 +61,7 @@ public class SpringSubsystemAdd extends AbstractBoottimeAddStepHandler {
 
     @Override
     protected void populateModel(ModelNode modelNode, ModelNode modelNode1) throws OperationFailedException {
-        modelNode.setEmptyObject();
+
     }
 
 }
