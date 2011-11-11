@@ -6,16 +6,19 @@
     <format>dir</format>
   </formats>
   <includeBaseDirectory>false</includeBaseDirectory>
-  <dependencySets>
-    <dependencySet>
+    <fileSets>
+        <fileSet>
       <outputDirectory>/</outputDirectory>
-      <useTransitiveDependencies>false</useTransitiveDependencies>
-      <useStrictFiltering>true</useStrictFiltering>
-      <unpack>true</unpack>
-      <scope>provided</scope>
-      <includes>
-        <include>*:*:jar:sources</include>
-      </includes>
-    </dependencySet>
-  </dependencySets>
+            <directory>../deployers-core/src/main/java</directory>
+        </fileSet>
+        <fileSet>
+            <outputDirectory>/</outputDirectory>
+            <directory>../deployers-vfs2/src/main/java</directory>
+        </fileSet>
+        <fileSet>
+            <outputDirectory>/</outputDirectory>
+            <directory>../deployers-vfs3/src/main/java</directory>
+        </fileSet>
+    </fileSets>
+
 </assembly>
