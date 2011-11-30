@@ -36,6 +36,8 @@ import org.jboss.msc.service.StartContext;
 import org.jboss.msc.service.StartException;
 import org.jboss.msc.service.StopContext;
 import org.jboss.msc.value.InjectedValue;
+import org.jboss.spring.util.Version;
+import org.jboss.spring.util.VersionProvider;
 
 import javax.resource.spi.ResourceAdapter;
 
@@ -51,8 +53,12 @@ public class NamespaceServiceActivator implements ServiceActivator {
         ModuleIdentifier moduleIdentifier = moduleClassLoader.getModule().getIdentifier();
         String moduleName = moduleIdentifier.getName();
         String moduleSlot = moduleIdentifier.getSlot();
-        ServiceName serviceIdentifier = ServiceName.of("hornetq-ra");
-
+        ServiceName serviceIdentifier;
+        if (VersionProvider.VERSION.compareTo(Version.AS_7_1) >= 0) {
+            serviceIdentifier = ServiceName.of("jboss", "ra", "hornetq-ra_1");
+        } else {
+            serviceIdentifier = ServiceName.of("hornetq-ra");; 
+        }
         JcaResourceAdapterService service = new JcaResourceAdapterService();
 
         ServiceName serviceName = ServiceName.JBOSS.append(moduleName, moduleSlot, "ResourceAdapter");
