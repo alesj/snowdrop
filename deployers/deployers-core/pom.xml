@@ -5,7 +5,6 @@
         <version>2.0.1.Final-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.jboss.snowdrop</groupId>
     <artifactId>snowdrop-deployers-core</artifactId>
 
     <name>Snowdrop - Deployers Core</name>
@@ -82,7 +81,6 @@
         <dependency>
             <groupId>org.jboss.aop</groupId>
             <artifactId>jboss-aop</artifactId>
-            <version>${version.jboss.aop}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
