@@ -125,7 +125,7 @@ public abstract class SpringInjectionSupport {
         // so this is what the deployer does
         // Append the prefix if the path is relative - should allow deployments that
         // worked in JBoss AS 5/6 to be portable in JBoss AS 7
-        if (VersionProvider.VERSION.equals(Version.AS_7) && !jndiName.startsWith("java:")) {
+        if (VersionProvider.VERSION.compareTo(Version.AS_7) >= 0 && !jndiName.startsWith("java:")) {
             jndiName = "java:jboss/" + jndiName;
         }
         return jndiName;
