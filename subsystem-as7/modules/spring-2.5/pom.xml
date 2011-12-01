@@ -73,6 +73,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -91,8 +96,7 @@
                             <outputDirectory>${project.build.directory}/dependency/lib</outputDirectory>
                             <overWriteSnapshots>true</overWriteSnapshots>
                             <stripVersion>true</stripVersion>
-                            <includeGroupIds>org.springframework,org.jboss.snowdrop,aopalliance, org.aspectj</includeGroupIds>
-                        </configuration>
+                            <includeGroupIds>org.springframework,org.jboss.snowdrop,aopalliance,org.aspectj</includeGroupIds>                        </configuration>
                     </execution>
                 </executions>
             </plugin>
