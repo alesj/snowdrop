@@ -46,6 +46,7 @@
             <module name="javax.servlet.api"/>
             <module name="javax.servlet.jsp.api"/>
             <module name="javax.transaction.api"/>
+            <module name="javax.xml.bind.api"/>
             <module name="org.javassist"/>
             <module name="org.jboss.jandex"/>
             <module name="org.jboss.staxmapper"/>
