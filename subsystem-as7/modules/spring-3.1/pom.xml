@@ -29,12 +29,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>snowdrop-module-spring-3</artifactId>
-    <name>Snowdrop AS7 Subsystem - Spring 3 Module</name>
+    <artifactId>snowdrop-module-spring-3.1</artifactId>
+    <name>Snowdrop AS7 Subsystem - Spring 3.1 Module</name>
     <packaging>pom</packaging>
 
     <properties>
-        <version.spring>3.0.6.RELEASE</version.spring>
+        <version.spring>3.1.0.RELEASE</version.spring>
+        <version.aspectj>1.6.8</version.aspectj>
     </properties>
 
     <dependencies>
@@ -112,11 +113,11 @@
                             <goal>single</goal>
                         </goals>
                         <configuration>
-                            <finalName>spring-3-module</finalName>
+                            <finalName>spring-3.1-module</finalName>
                             <appendAssemblyId>false</appendAssemblyId>
                             <attach>false</attach>
                             <descriptors>
-                                <descriptor>${basedir}/src/main/assembly/spring-3-module.xml</descriptor>
+                                <descriptor>${basedir}/src/main/assembly/spring-3.1-module.xml</descriptor>
                             </descriptors>
                         </configuration>
                     </execution>
