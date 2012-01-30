@@ -27,7 +27,6 @@
         <version>2.0.2.Final-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.jboss.snowdrop</groupId>
     <artifactId>snowdrop-deployers-vfs3</artifactId>
     <packaging>jar</packaging>
     <name>Snowdrop - Deployers - VFS3</name>

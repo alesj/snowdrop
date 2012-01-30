@@ -5,7 +5,6 @@
         <version>2.0.2.Final-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.jboss.snowdrop</groupId>
     <artifactId>snowdrop-facade</artifactId>
     <packaging>jar</packaging>
     <name>Snowdrop - Facade</name>
