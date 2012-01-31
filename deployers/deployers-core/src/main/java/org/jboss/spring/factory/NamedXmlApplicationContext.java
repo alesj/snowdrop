@@ -22,10 +22,14 @@
 package org.jboss.spring.factory;
 
 import org.jboss.spring.vfs.context.VFSClassPathXmlApplicationContext;
+import org.jboss.util.naming.Util;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanDefinitionStoreException;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.ResourceEntityResolver;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.util.StringUtils;
 import org.xml.sax.InputSource;
@@ -33,6 +37,7 @@ import org.xml.sax.InputSource;
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
+
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Iterator;
@@ -46,11 +51,9 @@ public class NamedXmlApplicationContext extends VFSClassPathXmlApplicationContex
 
     private String defaultName;
 
-    private Resource resource;
-
-    private NamedXmlBeanDefinitionReader beanDefinitionReader;
 
     private String name;
+    private Resource resource;
 
     public NamedXmlApplicationContext(String defaultName, Resource resource) throws BeansException {
         this(defaultName, resource, true);
@@ -67,30 +70,16 @@ public class NamedXmlApplicationContext extends VFSClassPathXmlApplicationContex
         }
     }
 
-    protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throws IOException {
-        // Create a new XmlBeanDefinitionReader for the given BeanFactory.
-        beanDefinitionReader = new NamedXmlBeanDefinitionReader(beanFactory);
-
-        // Configure the bean definition reader with this context's
-        // resource loading environment.
-        beanDefinitionReader.setResourceLoader(this);
-        ClassLoader cl = getClassLoader();
-        if (cl != null) {
-            beanDefinitionReader.setBeanClassLoader(cl);
-        }
-        beanDefinitionReader.setEntityResolver(new ResourceEntityResolver(this));
-
-        // Allow a subclass to provide custom initialization of the reader,
-        // then proceed with actually loading the bean definitions.
-        initBeanDefinitionReader(beanDefinitionReader);
-        loadBeanDefinitions(beanDefinitionReader);
-    }
-
+    @Override
     protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) throws BeansException, IOException {
-        reader.loadBeanDefinitions(resource);
+        reader.loadBeanDefinitions(this.resource);
     }
 
     public String getName() {
+        String name = this.name != null? this.name : defaultName;
+        if (name == null) {
+            throw new IllegalArgumentException("Bean factory JNDI name must be set!");
+        }
         return name;
     }
 
@@ -117,14 +106,19 @@ public class NamedXmlApplicationContext extends VFSClassPathXmlApplicationContex
             InputSource inputSource = new InputSource(resource.getInputStream());
             String description = xPath.evaluate(expression, inputSource);
             if (description != null) {
-                Matcher bfm = Pattern.compile(NamedXmlBeanDefinitionParser.BEAN_FACTORY_ELEMENT).matcher(description);
+                Matcher bfm = Pattern.compile(Constants.BEAN_FACTORY_ELEMENT).matcher(description);
                 if (bfm.find()) {
                     this.name = bfm.group(1);
                 }
-                //                Matcher pbfm = Pattern.compile(NamedXmlBeanDefinitionParser.PARENT_BEAN_FACTORY_ELEMENT).matcher(description);
-                //                if (pbfm.find()) {
-                //                    parentName = pbfm.group(1);
-                //                }
+                Matcher pbfm = Pattern.compile(Constants.PARENT_BEAN_FACTORY_ELEMENT).matcher(description);
+                if (pbfm.find()) {
+                    String parentName = pbfm.group(1);
+                    try {
+                        this.getBeanFactory().setParentBeanFactory((BeanFactory) Util.lookup(parentName, BeanFactory.class));
+                    } catch (Exception e) {
+                        throw new BeanDefinitionStoreException("Failure during parent bean factory JNDI lookup: " + parentName, e);
+                    }
+                }
             }
             if (this.name == null || "".equals(StringUtils.trimAllWhitespace(this.name))) {
                 this.name = this.defaultName;

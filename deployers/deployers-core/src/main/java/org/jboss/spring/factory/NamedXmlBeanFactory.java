@@ -21,9 +21,23 @@
  */
 package org.jboss.spring.factory;
 
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.xml.namespace.NamespaceContext;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathFactory;
+
+import org.jboss.util.naming.Util;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanDefinitionStoreException;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.core.io.Resource;
+import org.springframework.util.StringUtils;
+import org.xml.sax.InputSource;
 
 /**
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
@@ -32,7 +46,9 @@ public class NamedXmlBeanFactory extends DefaultListableBeanFactory implements N
 
     private String defaultName;
 
-    private final NamedXmlBeanDefinitionReader reader = new NamedXmlBeanDefinitionReader(this);
+    private String name;
+
+    private boolean instantiate;
 
     /**
      * @param defaultName the default name
@@ -41,12 +57,12 @@ public class NamedXmlBeanFactory extends DefaultListableBeanFactory implements N
      * @see org.springframework.beans.factory.xml.XmlBeanFactory
      */
     public NamedXmlBeanFactory(String defaultName, Resource resource) throws BeansException {
-        this.reader.loadBeanDefinitions(resource);
+        initializeNames(resource);
         this.defaultName = defaultName;
     }
 
     public String getName() {
-        String name = reader.getName() != null ? reader.getName() : defaultName;
+        String name = this.name != null ? this.name : defaultName;
         if (name == null) {
             throw new IllegalArgumentException("Bean factory JNDI name must be set!");
         }
@@ -54,6 +70,56 @@ public class NamedXmlBeanFactory extends DefaultListableBeanFactory implements N
     }
 
     public boolean doInstantiate() {
-        return reader.doInstantiate();
+        return instantiate;
     }
+
+    private void initializeNames(Resource resource) {
+        try {
+            XPath xPath = XPathFactory.newInstance().newXPath();
+            xPath.setNamespaceContext(new NamespaceContext() {
+                @Override
+                public String getNamespaceURI(String prefix) {
+                    return "http://www.springframework.org/schema/beans";
+                }
+
+                @Override
+                public String getPrefix(String namespaceURI) {
+                    return "beans";
+                }
+
+                @Override
+                public Iterator getPrefixes(String namespaceURI) {
+                    return Collections.singleton("beans").iterator();
+                }
+            });
+            String expression = "/beans:beans/beans:description";
+            InputSource inputSource = new InputSource(resource.getInputStream());
+            String description = xPath.evaluate(expression, inputSource);
+            if (description != null) {
+                Matcher bfm = Pattern.compile(Constants.BEAN_FACTORY_ELEMENT).matcher(description);
+                if (bfm.find()) {
+                    this.name = bfm.group(1);
+                }
+                Matcher pbfm = Pattern.compile(Constants.PARENT_BEAN_FACTORY_ELEMENT).matcher(description);
+                if (pbfm.find()) {
+                    String parentName = pbfm.group(1);
+                    try {
+                        this.setParentBeanFactory((BeanFactory) Util.lookup(parentName, BeanFactory.class));
+                    } catch (Exception e) {
+                        throw new BeanDefinitionStoreException("Failure during parent bean factory JNDI lookup: " + parentName, e);
+                    }
+                }
+                Matcher inst = Pattern.compile(Constants.INSTANTIATION_ELEMENT).matcher(description);
+                if (inst.find()) {
+                    instantiate = Boolean.parseBoolean(inst.group(1));
+                }
+            }
+            if (this.name == null || "".equals(StringUtils.trimAllWhitespace(this.name))) {
+                this.name = this.defaultName;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
