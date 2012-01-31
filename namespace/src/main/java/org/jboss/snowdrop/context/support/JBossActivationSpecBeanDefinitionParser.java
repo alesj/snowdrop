@@ -63,6 +63,8 @@ public class JBossActivationSpecBeanDefinitionParser extends AbstractBeanDefinit
 
     private static final String CLIENT_ID_PROPERTY_NAME = "clientId";
 
+    private static final String HORNETQ_CLIENT_ID_PROPERTY_NAME = "clientID";
+
     private static final String SUBSCRIPTION_NAME_PROPERTY_NAME = "subscriptionName";
 
     private static final String USE_DLQ_PROPERTY_NAME = "useDLQ";
@@ -85,7 +87,11 @@ public class JBossActivationSpecBeanDefinitionParser extends AbstractBeanDefinit
         BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.rootBeanDefinition(DEFAULT_ACTIVATION_SPEC_FACTORY_CLASS_NAME);
         beanDefinitionBuilder.addPropertyValue(ACTIVATION_SPEC_CLASS_PROPERTY, StringUtils.hasText(activationSpecClassName) ? activationSpecClassName : detectJBossActivationSpecClass(parserContext));
         Properties properties = new Properties();
-        properties.setProperty(CLIENT_ID_PROPERTY_NAME, StringUtils.hasText(clientId) ? clientId : DEFAULT_CLIENT_ID);
+        if (activationSpecClassName.equals(HORNETQ_ACTIVATION_SPEC_CLASS_NAME)) {
+            properties.setProperty(HORNETQ_CLIENT_ID_PROPERTY_NAME, StringUtils.hasText(clientId) ? clientId : DEFAULT_CLIENT_ID);
+        } else {
+            properties.setProperty(CLIENT_ID_PROPERTY_NAME, StringUtils.hasText(clientId) ? clientId : DEFAULT_CLIENT_ID);
+        }
         properties.setProperty(SUBSCRIPTION_NAME_PROPERTY_NAME, StringUtils.hasText(subscriptionName) ? subscriptionName : SNOWDROP_JCA_PROCESSOR_DEFAULT_SUBSCRIPTION_NAME);
         properties.setProperty(USE_DLQ_PROPERTY_NAME, StringUtils.hasText(useDlq) ? useDlq : "false");
         beanDefinitionBuilder.addPropertyValue(DEFAULT_PROPERTIES_PROPERTY_NAME, properties);

@@ -55,9 +55,9 @@ public class NamespaceServiceActivator implements ServiceActivator {
         String moduleSlot = moduleIdentifier.getSlot();
         ServiceName serviceIdentifier;
         if (VersionProvider.VERSION.compareTo(Version.AS_7_1) >= 0) {
-            serviceIdentifier = ServiceName.of("jboss", "ra", "hornetq-ra_1");
+            serviceIdentifier = ServiceName.of("jboss", "ra", "hornetq-ra");
         } else {
-            serviceIdentifier = ServiceName.of("hornetq-ra");; 
+            serviceIdentifier = ServiceName.of("hornetq-ra");
         }
         JcaResourceAdapterService service = new JcaResourceAdapterService();
 
@@ -66,6 +66,7 @@ public class NamespaceServiceActivator implements ServiceActivator {
                 .addDependency(serviceIdentifier, ResourceAdapter.class, service.getResourceAdapterValue())
                 .setInitialMode(ServiceController.Mode.ACTIVE)
                 .install();
+        serviceTarget.addDependency()
 
     }
 
@@ -78,7 +79,7 @@ public class NamespaceServiceActivator implements ServiceActivator {
         }
 
         public void stop(StopContext context) {
-            // do nothing
+            ActivatorHolder.initializeResourceAdapter(null);
         }
 
         public InjectedValue<ResourceAdapter> getResourceAdapterValue() {
