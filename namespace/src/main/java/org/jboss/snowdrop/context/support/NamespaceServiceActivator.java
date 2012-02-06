@@ -66,7 +66,6 @@ public class NamespaceServiceActivator implements ServiceActivator {
                 .addDependency(serviceIdentifier, ResourceAdapter.class, service.getResourceAdapterValue())
                 .setInitialMode(ServiceController.Mode.ACTIVE)
                 .install();
-        serviceTarget.addDependency()
 
     }
 
