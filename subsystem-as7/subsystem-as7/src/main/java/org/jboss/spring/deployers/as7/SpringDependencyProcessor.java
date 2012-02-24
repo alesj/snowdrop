@@ -22,6 +22,9 @@
 
 package org.jboss.spring.deployers.as7;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 import org.jboss.as.server.deployment.Attachments;
 import org.jboss.as.server.deployment.DeploymentPhaseContext;
 import org.jboss.as.server.deployment.DeploymentUnit;
@@ -31,7 +34,9 @@ import org.jboss.as.server.deployment.module.ModuleDependency;
 import org.jboss.as.server.deployment.module.ModuleSpecification;
 import org.jboss.modules.Module;
 import org.jboss.modules.ModuleIdentifier;
+import org.jboss.modules.ModuleLoader;
 import org.jboss.modules.filter.PathFilters;
+import org.springframework.util.ReflectionUtils;
 
 /**
  * @author Marius Bogoevici
@@ -59,7 +64,38 @@ public class SpringDependencyProcessor implements DeploymentUnitProcessor {
     }
 
     private ModuleDependency addDependency(ModuleIdentifier moduleIdentifier, ModuleSpecification moduleSpecification) {
-        ModuleDependency moduleDependency = new ModuleDependency(Module.getBootModuleLoader(), moduleIdentifier, false, false, true);
+        ModuleDependency moduleDependency = null;
+        try {
+            // try pre-JBoss Modules 1.1.1
+            Constructor<ModuleDependency> constructor = ModuleDependency.class.getConstructor(ModuleLoader.class, ModuleIdentifier.class, boolean.class, boolean.class, boolean.class);
+            moduleDependency = constructor.newInstance(Module.getBootModuleLoader(), moduleIdentifier, false, false, true);
+        } catch (NoSuchMethodException e) {
+           // ignore
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+        if (moduleDependency == null) {
+            try {
+                // try JBoss Modules 1.1.1
+                Constructor<ModuleDependency> constructor = ModuleDependency.class.getConstructor(ModuleLoader.class, ModuleIdentifier.class, boolean.class, boolean.class, boolean.class, boolean.class);
+                moduleDependency = constructor.newInstance(Module.getBootModuleLoader(), moduleIdentifier, false, false, true, true);
+            } catch (NoSuchMethodException e) {
+                // ignore
+            } catch (InvocationTargetException e) {
+                throw new RuntimeException(e);
+            } catch (InstantiationException e) {
+                throw new RuntimeException(e);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        if (moduleDependency == null) {
+            throw new IllegalStateException("JBoss Modules incompatibility: cannot find a suitable constructor for ModuleDependency");
+        }
         moduleDependency.addExportFilter(PathFilters.acceptAll(), true);
         moduleDependency.addImportFilter(PathFilters.acceptAll(), true);
         moduleSpecification.addUserDependency(moduleDependency);

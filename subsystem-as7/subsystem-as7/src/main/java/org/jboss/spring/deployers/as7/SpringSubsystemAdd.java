@@ -52,7 +52,7 @@ public class SpringSubsystemAdd extends AbstractBoottimeAddStepHandler {
         log.info("Activating Spring Deployer subsystem");
         operationContext.addStep(new AbstractDeploymentChainStep() {
             protected void execute(DeploymentProcessorTarget bootContext) {
-                bootContext.addDeploymentProcessor(Phase.PARSE, Phase.STRUCTURE_JBOSS_DEPLOYMENT_STRUCTURE_DESCRIPTOR + 1, new SpringStructureProcessor());
+                bootContext.addDeploymentProcessor(Phase.STRUCTURE, Phase.STRUCTURE_JBOSS_DEPLOYMENT_STRUCTURE_DESCRIPTOR + 1, new SpringStructureProcessor());
                 bootContext.addDeploymentProcessor(Phase.PARSE, Phase.PARSE_DEPENDENCIES_MANIFEST, new SpringDependencyProcessor());
                 bootContext.addDeploymentProcessor(Phase.INSTALL, Integer.MAX_VALUE, new SpringBootstrapProcessor());
             }
