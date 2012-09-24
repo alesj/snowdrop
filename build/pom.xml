@@ -2,7 +2,7 @@
     <parent>
         <groupId>org.jboss.snowdrop</groupId>
         <artifactId>snowdrop-parent</artifactId>
-        <version>2.0.4.Final-SNAPSHOT</version>
+        <version>2.0.5.Final-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>snowdrop</artifactId>
