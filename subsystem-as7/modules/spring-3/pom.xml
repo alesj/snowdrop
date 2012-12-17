@@ -106,13 +106,28 @@
 
                 <executions>
                     <execution>
-                        <id>make-module</id>
+                        <id>make-module-without-dep</id>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
                         </goals>
                         <configuration>
                             <finalName>spring-3-module</finalName>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <attach>true</attach>
+                            <descriptors>
+                                <descriptor>${basedir}/src/main/assembly/spring-3-module-without-dep.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>make-module</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>spring-3-module-with-dep</finalName>
                             <appendAssemblyId>false</appendAssemblyId>
                             <attach>false</attach>
                             <descriptors>

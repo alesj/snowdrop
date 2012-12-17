@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!--
   ~ JBoss, Home of Professional Open Source.
   ~ Copyright 2011, Red Hat Middleware LLC, and individual contributors
@@ -21,23 +20,19 @@
   ~ 02110-1301 USA, or see the FSF site: http://www.fsf.org.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>snowdrop-subsystem-as7-parent</artifactId>
-        <groupId>org.jboss.snowdrop</groupId>
-        <version>2.0.5.Final-SNAPSHOT</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>modules</artifactId>
-    <packaging>pom</packaging>
-    <name>Snowdrop AS7 Subsystem - Spring Modules</name>
-    <modules>
-        <module>spring-2.5</module>
-        <module>spring-3</module>
-        <module>spring-3.1</module>
-        <module>spring-3.2</module>
-    </modules>
-
-
-</project>
+<assembly>
+    <id>deployer-module</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <baseDirectory>org/springframework/spring/snowdrop</baseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>${basedir}/src/main/module</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>module.xml</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+</assembly>
