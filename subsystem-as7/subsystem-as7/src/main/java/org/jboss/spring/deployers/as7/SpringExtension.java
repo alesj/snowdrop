@@ -64,6 +64,10 @@ public class SpringExtension implements Extension {
     public static final String SUBSYSTEM_NAME = "spring";
 
     public static final String NAMESPACE = "urn:jboss:domain:snowdrop:1.0";
+    
+    private static final int MANAGEMENT_API_MAJOR_VERSION = 1;
+    private static final int MANAGEMENT_API_MINOR_VERSION = 2;
+	private static final int MANAGEMENT_API_MICRO_VERSION = 0;
 
     private static SpringSubsystemElementParser parser = new SpringSubsystemElementParser();
 
@@ -90,7 +94,7 @@ public class SpringExtension implements Extension {
 
     public void initialize(ExtensionContext context) {
         log.debug("Activating Spring Extension");
-        final SubsystemRegistration subsystem = context.registerSubsystem(SUBSYSTEM_NAME);
+        final SubsystemRegistration subsystem = context.registerSubsystem(SUBSYSTEM_NAME, MANAGEMENT_API_MAJOR_VERSION, MANAGEMENT_API_MINOR_VERSION);
         final ManagementResourceRegistration registration = subsystem.registerSubsystemModel(SUBSYSTEM_DESCRIPTION);
         registration.registerOperationHandler(ADD, SpringSubsystemAdd.INSTANCE, SUBSYSTEM_ADD_DESCRIPTION, false);
         registration.registerOperationHandler(DESCRIBE, SpringSubsystemDescribeHandler.INSTANCE, SpringSubsystemDescribeHandler.INSTANCE, false, OperationEntry.EntryType.PRIVATE);
@@ -99,7 +103,7 @@ public class SpringExtension implements Extension {
 
     public void initializeParsers(ExtensionParsingContext context) {
         log.debug("Setting up parsers");
-        context.setSubsystemXmlMapping(NAMESPACE, parser);
+        context.setSubsystemXmlMapping(SUBSYSTEM_NAME, NAMESPACE, parser);
     }
 
     static class SpringSubsystemElementParser implements XMLElementReader<List<ModelNode>>,
