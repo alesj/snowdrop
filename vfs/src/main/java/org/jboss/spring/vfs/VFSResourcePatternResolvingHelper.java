@@ -114,6 +114,8 @@ public class VFSResourcePatternResolvingHelper {
                     return (proxy == args[0]);
                 } else if (methodName.equals("hashCode")) {
                     return System.identityHashCode(proxy);
+                } else if ("toString".equals(methodName)) {
+                    return toString();
                 }
             } else if ("getAttributes".equals(methodName)) {
                 return getAttributes();
