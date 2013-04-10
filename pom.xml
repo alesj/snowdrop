@@ -52,7 +52,7 @@
         <version.xerces>2.9.1</version.xerces>
         <version.aopalliance>1.0</version.aopalliance>
         <version.org.jboss.as7>7.1.0.Final</version.org.jboss.as7>
-        <version.spring>2.5.6.SEC02</version.spring>
+        <version.spring>2.5.6.SEC03</version.spring>
         <version.org.jboss.jandex>1.0.0.Beta7</version.org.jboss.jandex>
         <version.aspectj>1.6.6</version.aspectj>
         <version.jboss.msc>1.0.1.GA</version.jboss.msc>
