@@ -57,12 +57,6 @@
 
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
-            <artifactId>snowdrop-deployers-core</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.snowdrop</groupId>
             <artifactId>snowdrop-deployers</artifactId>
             <scope>provided</scope>
         </dependency>
@@ -76,6 +70,21 @@
                     <source>1.6</source>
                     <target>1.6</target>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jboss.jandex</groupId>
+                <artifactId>jandex-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>make-index</id>
+                        <goals>
+                            <goal>jandex</goal>
+                        </goals>
+                        <configuration>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
@@ -113,7 +122,14 @@
                             <tasks>
                                 <taskdef name="jandex" classname="org.jboss.jandex.JandexAntTask" />
                                 <jandex run="true" newJar="true">
-                                    <fileset dir="${project.build.directory}/dependency/lib" />
+                                    <fileset dir="${project.build.directory}/dependency/lib">
+                                        <!-- we only want to external jandex external dependent JARs to keep the originals
+                                             pristine, we expect snowdrops own JARs to already have internal jandex. -->
+                                        <exclude name="**/snowdrop-deployers.jar"/>
+                                        <exclude name="**/snowdrop-namespace.jar"/>
+                                        <exclude name="**/snowdrop-vfs.jar"/>
+                                        <exclude name="**/snowdrop-weaving.jar"/>
+                                    </fileset>
                                 </jandex>
                             </tasks>
                         </configuration>
