@@ -34,7 +34,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <version.spring>3.1.0.RELEASE</version.spring>
+        <version.spring>3.1.4.RELEASE</version.spring>
         <version.aspectj>1.6.8</version.aspectj>
     </properties>
 

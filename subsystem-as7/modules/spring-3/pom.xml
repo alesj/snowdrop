@@ -34,7 +34,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <version.spring>3.0.6.RELEASE</version.spring>
+        <version.spring>3.0.7.RELEASE</version.spring>
     </properties>
 
     <dependencies>
