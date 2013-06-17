@@ -22,6 +22,8 @@
 package org.jboss.spring.vfs;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Enumeration;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -43,10 +45,27 @@ public class VFSResourcePatternResolver extends PathMatchingResourcePatternResol
         if (locationPattern.startsWith(CLASSPATH_ALL_URL_PREFIX)) {
             locationPattern = locationPattern.substring(CLASSPATH_ALL_URL_PREFIX.length());
             String rootDirPath = determineRootDir(locationPattern);
+            // TejasM: Snowdrop 52, 17/06/2013: With AS7+ not all files are uploaded using JBoss VFS
+            // So we check whether the url protocols are vfs or not, if not then delegate to Spring.
+            Enumeration<URL> urls = getClassLoader().getResources(rootDirPath);
+            while (urls.hasMoreElements()) {
+                URL url = urls.nextElement();
+                if (url != null && !url.getProtocol().contains("vfs")) {
+                    return super.findPathMatchingResources(CLASSPATH_ALL_URL_PREFIX + locationPattern);
+                }
+            }
+
             return VFSResourcePatternResolvingHelper.locateResources(locationPattern, rootDirPath, getClassLoader(), getPathMatcher(), false);
         } else if (locationPattern.startsWith(CLASSPATH_URL_PREFIX)) {
             locationPattern = locationPattern.substring(CLASSPATH_URL_PREFIX.length());
             String rootDirPath = determineRootDir(locationPattern);
+            // TejasM: Snowdrop 52, 17/06/2013: With AS7+ not all files are uploaded using JBoss VFS
+            // So we check whether the url protocols are vfs or not, if not then delegate to Spring.
+            URL url = getClassLoader().getResource(rootDirPath);
+            if (url != null && !url.getProtocol().contains("vfs")) {
+                return super.findPathMatchingResources(CLASSPATH_URL_PREFIX + locationPattern);
+            }
+
             return VFSResourcePatternResolvingHelper.locateResources(locationPattern, rootDirPath, getClassLoader(), getPathMatcher(), true);
         } else {
             return super.findPathMatchingResources(locationPattern);

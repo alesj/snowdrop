@@ -59,7 +59,13 @@ public class VFSResourceLoader extends DefaultResourceLoader {
     private Resource doGetResourceForLocation(String path) {
         URL url = getClassLoader().getResource(path);
         if (url != null) {
-            return new VFSResource(url);
+            // TejasM: Snowdrop 52, 17/06/2013: With AS7+ not all files are uploaded using JBoss VFS
+            // So we check whether the url protocols are vfs or not, if not then delegate to Spring for resource loading in this case.
+            if (url.getProtocol().contains("vfs")) {
+                return new VFSResource(url);
+            } else {
+                return super.getResource(CLASSPATH_URL_PREFIX+path);
+            }
         } else {
             return new InexistentResource(path);
         }
