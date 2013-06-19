@@ -1,0 +1,14 @@
+<assembly>
+    <id>installer</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <baseDirectory>/</baseDirectory>
+    <fileSets>
+      <fileSet>
+         <useDefaultExcludes/>
+         <outputDirectory>snowdrop-module-installer</outputDirectory>
+         <directory>../install</directory>
+      </fileSet>
+    </fileSets>
+</assembly>

@@ -38,6 +38,7 @@
                                     <descriptors>
                                         <descriptor>${basedir}/src/assembly/libs-with-deps.xml</descriptor>
                                         <descriptor>${basedir}/src/assembly/src.xml</descriptor>
+                                        <descriptor>${basedir}/src/assembly/installer.xml</descriptor>
                                     </descriptors>
                                 </configuration>
                             </execution>

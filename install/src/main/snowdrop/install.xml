@@ -1,0 +1,29 @@
+<processor>
+	<remove>
+		<name>//s:extension[@module='org.jboss.snowdrop']</name>
+		<strict>false</strict>
+	</remove>
+	
+    <add>
+        <inside>//s:extensions</inside>
+        <value>
+            <![CDATA[
+                <extension module="org.jboss.snowdrop"/>
+                ]]>
+        </value>
+    </add>
+    
+    <remove>	
+		<name>//ss:subsystem</name>
+		<strict>false</strict>
+	</remove>
+    <add>
+        <inside>//s:profile</inside>
+        <value>
+            <![CDATA[
+                <subsystem xmlns="urn:jboss:domain:snowdrop:1.0"/>
+                ]]>
+        </value>
+    </add>
+	
+</processor>
