@@ -24,6 +24,7 @@ package org.jboss.test.deployers.test;
 
 import junit.framework.Test;
 import org.jboss.deployers.spi.DeploymentException;
+import org.jboss.deployers.structure.spi.DeploymentContext;
 import org.jboss.deployers.vfs.spi.structure.VFSDeploymentUnit;
 import org.jboss.test.AbstractTestCaseWithSetup;
 import org.jboss.test.deployers.BootstrapDeployersTest;
@@ -31,6 +32,8 @@ import org.jboss.util.naming.NonSerializableFactory;
 import org.jboss.vfs.VFS;
 import org.jboss.vfs.VirtualFile;
 import org.junit.Assert;
+
+import java.util.Collection;
 
 
 /**
@@ -50,6 +53,14 @@ public class SnowdropDeployersTestCase extends BootstrapDeployersTest {
         System.setProperty("java.naming.factory.initial", MockInitialContextFactory.class.getName());
         VirtualFile ear = VFS.getChild("multiplefiles-top-level.ear");
         createAssembledDirectory(ear).addPath("multiplefiles");
+
+        //Check if there are any lingering deployments
+        Collection<DeploymentContext> deploymentContexts = getMainDeployerInternals().getAll();
+        for (DeploymentContext context: deploymentContexts){
+            // Undeploy them if so
+            undeploy(context.getDeploymentUnit());
+        }
+
         VFSDeploymentUnit unit = assertDeploy(ear);
         Assert.assertNotNull(NonSerializableFactory.lookup("TestContext1"));
         Assert.assertNotNull(NonSerializableFactory.lookup("TestContext2"));
@@ -67,7 +78,7 @@ public class SnowdropDeployersTestCase extends BootstrapDeployersTest {
             unit = assertDeploy(ear);
             fail();
         } catch (DeploymentException e) {
-           // ignore, we are expecting this
+            // ignore, we are expecting this
         }
         undeploy(unit);
         Assert.assertNull(NonSerializableFactory.lookup("TestContext"));
