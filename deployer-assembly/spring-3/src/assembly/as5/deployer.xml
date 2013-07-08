@@ -1,0 +1,34 @@
+<assembly>
+    <id>deployer-as5</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <baseDirectory>spring.deployer</baseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>${basedir}/src/main/resources/as5</directory>
+            <outputDirectory>META-INF</outputDirectory>
+            <includes>
+                <include>spring-deployers-jboss-beans.xml</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>/</outputDirectory>
+            <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
+            <useTransitiveDependencies>true</useTransitiveDependencies>
+            <excludes>
+                <exclude>*:commons-logging:*</exclude>
+            </excludes>
+        </dependencySet>
+        <dependencySet>
+            <outputDirectory>/</outputDirectory>
+            <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
+            <useTransitiveDependencies>false</useTransitiveDependencies>
+            <includes>
+                <include>*:org.springframework:*</include>
+            </includes>
+        </dependencySet>
+    </dependencySets>
+</assembly>

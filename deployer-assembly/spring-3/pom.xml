@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>jboss-spring-deployer</artifactId>
+        <groupId>org.jboss.snowdrop</groupId>
+        <version>2.1.0.Final</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <artifactId>spring-3</artifactId>
+
+    <name>Spring 3</name>
+
+    <properties>
+        <version.spring>3.0.7.RELEASE</version.spring>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>dist</id>
+            <activation>
+                <property>
+                    <name>!nojars</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <version>2.2-beta-3</version>
+                        <executions>
+                            <execution>
+                                <id>make-assembly-as5</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <configuration>
+                                    <finalName>jboss-spring-spring3</finalName>
+                                    <appendAssemblyId>true</appendAssemblyId>
+                                    <attach>false</attach>
+                                    <descriptors>
+                                        <descriptor>${basedir}/src/assembly/as5/deployer.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>make-assembly-as6</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <configuration>
+                                    <finalName>jboss-spring-spring3</finalName>
+                                    <appendAssemblyId>true</appendAssemblyId>
+                                    <attach>false</attach>
+                                    <descriptors>
+                                        <descriptor>${basedir}/src/assembly/as6/deployer.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

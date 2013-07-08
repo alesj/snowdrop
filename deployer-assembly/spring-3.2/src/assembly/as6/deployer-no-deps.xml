@@ -1,0 +1,28 @@
+<assembly>
+    <id>nodeps-as6</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <baseDirectory>spring.deployer</baseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>${basedir}/src/main/resources/as6</directory>
+            <outputDirectory>META-INF</outputDirectory>
+            <includes>
+                <include>spring-deployers-jboss-beans.xml</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>/</outputDirectory>
+            <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
+            <useTransitiveDependencies>false</useTransitiveDependencies>
+            <excludes>
+                <exclude>*:aopalliance:*</exclude>
+                <exclude>*:commons-logging:*</exclude>
+                <exclude>*:spring-*:*</exclude>
+            </excludes>
+        </dependencySet>
+    </dependencySets>
+</assembly>

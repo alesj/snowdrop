@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>snowdrop-parent</artifactId>
         <groupId>org.jboss.snowdrop</groupId>
@@ -10,89 +11,15 @@
     <packaging>pom</packaging>
     <name>JBoss Spring Deployer</name>
     <url>http://www.jboss.com/products/jbossmc</url>
+    <modules>
+        <module>no-deps</module>
+        <module>spring-2.5</module>
+        <module>spring-3</module>
+        <module>spring-3.1</module>
+        <module>spring-3.2</module>
+    </modules>
     <description>Snowdrop Deployer</description>
 
-    <profiles>
-        <profile>
-            <id>dist</id>
-            <activation>
-                <property>
-                    <name>!nojars</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-assembly-plugin</artifactId>
-                        <version>2.2-beta-3</version>
-                        <executions>
-                            <execution>
-                                <id>make-assembly-as5</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>single</goal>
-                                </goals>
-                                <configuration>
-                                    <finalName>jboss-spring</finalName>
-                                    <appendAssemblyId>true</appendAssemblyId>
-                                    <attach>false</attach>
-                                    <descriptors>
-                                        <descriptor>${basedir}/src/assembly/as5/deployer.xml</descriptor>
-                                    </descriptors>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>make-assembly-no-deps-as5</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>single</goal>
-                                </goals>
-                                <configuration>
-                                    <finalName>jboss-spring</finalName>
-                                    <appendAssemblyId>true</appendAssemblyId>
-                                    <attach>false</attach>
-                                    <descriptors>
-                                        <descriptor>${basedir}/src/assembly/as5/deployer-no-deps.xml</descriptor>
-                                    </descriptors>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>make-assembly-as6</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>single</goal>
-                                </goals>
-                                <configuration>
-                                    <finalName>jboss-spring</finalName>
-                                    <appendAssemblyId>true</appendAssemblyId>
-                                    <attach>false</attach>
-                                    <descriptors>
-                                        <descriptor>${basedir}/src/assembly/as6/deployer.xml</descriptor>
-                                    </descriptors>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>make-assembly-no-deps-as6</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>single</goal>
-                                </goals>
-                                <configuration>
-                                    <finalName>jboss-spring</finalName>
-                                    <appendAssemblyId>true</appendAssemblyId>
-                                    <attach>false</attach>
-                                    <descriptors>
-                                        <descriptor>${basedir}/src/assembly/as6/deployer-no-deps.xml</descriptor>
-                                    </descriptors>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
     <dependencies>
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
@@ -131,6 +58,10 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
         </dependency>
     </dependencies>
 
