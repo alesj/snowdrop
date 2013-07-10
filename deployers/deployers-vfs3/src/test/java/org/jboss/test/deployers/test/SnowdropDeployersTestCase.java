@@ -74,6 +74,7 @@ public class SnowdropDeployersTestCase extends BootstrapDeployersTest {
         System.setProperty("java.naming.factory.initial", MockInitialContextFactory.class.getName());
         VirtualFile ear = VFS.getChild("multiplefiles-top-level.ear");
         createAssembledDirectory(ear).addPath("overlappingnames");
+
         try {
             unit = assertDeploy(ear);
             fail();
@@ -81,7 +82,7 @@ public class SnowdropDeployersTestCase extends BootstrapDeployersTest {
             // ignore, we are expecting this
         }
         undeploy(unit);
-        Assert.assertNull(NonSerializableFactory.lookup("TestContext"));
+        Assert.assertNull(NonSerializableFactory.lookup("TestContextOverlap"));
     }
 
     public void testPreExistingBindings() throws Exception {
@@ -91,6 +92,7 @@ public class SnowdropDeployersTestCase extends BootstrapDeployersTest {
         createAssembledDirectory(ear).addPath("preexisting");
         Object preboundObject = new Object();
         NonSerializableFactory.bind("TestContext", preboundObject);
+
         try {
             unit = assertDeploy(ear);
             fail();
