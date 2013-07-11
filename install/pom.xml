@@ -8,7 +8,7 @@
     <name>snowdrop-install</name>
 
     <properties>
-        <version.snowdrop>2.0.5.Final-redhat-2</version.snowdrop>
+        <version.snowdrop>2.1.0.Final</version.snowdrop>
         <version.spring>3.2.3.RELEASE</version.spring>
         <spring.artifacts>snowdrop-module-spring-3.2</spring.artifacts>
         <version.jboss>6.0</version.jboss>
