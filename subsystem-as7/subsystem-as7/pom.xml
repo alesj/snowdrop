@@ -149,7 +149,7 @@
 
                 <executions>
                     <execution>
-                        <id>make-module</id>
+                        <id>make-module-7.1</id>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
@@ -159,6 +159,20 @@
                             <appendAssemblyId>false</appendAssemblyId>
                             <descriptors>
                                 <descriptor>${basedir}/src/main/assembly/deployer.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>make-module-7.2</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>jboss-spring-deployer-as7.2</finalName>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptors>
+                                <descriptor>${basedir}/src/main/assembly/deployer-as7.2.xml</descriptor>
                             </descriptors>
                         </configuration>
                     </execution>

@@ -18,6 +18,8 @@ How-to-use
 
 _NOTE: Make sure to pass in -DJBOSS_HOME=/path/to/EAP installation_
 
+_NOTE: If you are installing a non released version, be sure to mvn clean install on the top level._
+
 Simply, run:
 
 		mvn package -DJBOSS_HOME=/path/to/jboss_home

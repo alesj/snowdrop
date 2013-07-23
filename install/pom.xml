@@ -105,7 +105,7 @@
                                     <transformations>
                                         <transformation>
                                             <input>${JBOSS_HOME}/standalone/configuration/standalone.xml</input>
-                                            <output>${JBOSS_HOME}/standalone/configuration/standalone.xml</output>
+                                            <output>${JBOSS_HOME}/standalone/configuration/standalone-snowdrop.xml</output>
                                             <config>src/main/snowdrop/install.xml</config>
                                         </transformation>
                                     </transformations>
@@ -129,7 +129,7 @@
                 </file>
             </activation>
             <properties>
-                <module.path>${JBOSS_HOME}/modules/system/layers/base/</module.path>
+                <module.path>${JBOSS_HOME}/modules/system/add-ons/snowdrop/</module.path>
             </properties>
             <build>
                 <plugins>
@@ -150,7 +150,7 @@
                                     <transformations>
                                         <transformation>
                                             <input>${JBOSS_HOME}/standalone/configuration/standalone.xml</input>
-                                            <output>${JBOSS_HOME}/standalone/configuration/standalone.xml</output>
+                                            <output>${JBOSS_HOME}/standalone/configuration/standalone-snowdrop.xml</output>
                                             <config>src/main/snowdrop/install.xml</config>
                                         </transformation>
                                     </transformations>
