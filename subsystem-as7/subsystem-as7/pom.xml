@@ -57,7 +57,7 @@
 
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
-            <artifactId>snowdrop-deployers</artifactId>
+            <artifactId>snowdrop-interceptors</artifactId>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -125,7 +125,7 @@
                                     <fileset dir="${project.build.directory}/dependency/lib">
                                         <!-- we only want to external jandex external dependent JARs to keep the originals
                                              pristine, we expect snowdrops own JARs to already have internal jandex. -->
-                                        <exclude name="**/snowdrop-deployers.jar"/>
+                                        <exclude name="**/snowdrop-interceptors.jar"/>
                                         <exclude name="**/snowdrop-namespace.jar"/>
                                         <exclude name="**/snowdrop-vfs.jar"/>
                                         <exclude name="**/snowdrop-weaving.jar"/>

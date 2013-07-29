@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
-            <artifactId>snowdrop-deployers</artifactId>
+            <artifactId>snowdrop-interceptors</artifactId>
             <version>${version.snowdrop}</version>
             <exclusions>
                 <exclusion>
@@ -138,7 +138,8 @@
                                     <transformations>
                                         <transformation>
                                             <input>${JBOSS_HOME}/standalone/configuration/standalone.xml</input>
-                                            <output>${JBOSS_HOME}/standalone/configuration/standalone-snowdrop.xml</output>
+                                            <output>${JBOSS_HOME}/standalone/configuration/standalone-snowdrop.xml
+                                            </output>
                                             <config>src/main/snowdrop/install.xml</config>
                                         </transformation>
                                     </transformations>
@@ -184,7 +185,8 @@
                                     <transformations>
                                         <transformation>
                                             <input>${JBOSS_HOME}/standalone/configuration/standalone.xml</input>
-                                            <output>${JBOSS_HOME}/standalone/configuration/standalone-snowdrop.xml</output>
+                                            <output>${JBOSS_HOME}/standalone/configuration/standalone-snowdrop.xml
+                                            </output>
                                             <config>src/main/snowdrop/install.xml</config>
                                         </transformation>
                                     </transformations>

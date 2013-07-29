@@ -23,7 +23,7 @@
     <resources>
         <resource-root path="snowdrop-subsystem-as7.jar"/>
         <resource-root path="snowdrop-vfs.jar"/>
-        <resource-root path="snowdrop-deployers.jar"/>
+        <resource-root path="snowdrop-interceptors.jar"/>
     </resources>
     <dependencies>
         <module name="ch.qos.cal10n"/>

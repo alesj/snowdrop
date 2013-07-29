@@ -38,8 +38,6 @@ public class JBossLoadTimeWeaver implements LoadTimeWeaver {
     public JBossLoadTimeWeaver() {
         if (VersionProvider.VERSION.compareTo(Version.AS_7) >= 0) {
             this.delegateLoadTimeWeaver = new JBossModulesLoadTimeWeaver();
-        } else if (Version.AS_5_OR_6.equals(VersionProvider.VERSION)) {
-            this.delegateLoadTimeWeaver = new JBoss5LoadTimeWeaver();
         } else {
             throw new IllegalStateException("Cannot initialize delegate: JBoss version not recognized");
         }

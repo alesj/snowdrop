@@ -23,7 +23,7 @@
 
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
-            <artifactId>snowdrop-deployers-core</artifactId>
+            <artifactId>snowdrop-interceptors</artifactId>
         </dependency>
 
         <dependency>

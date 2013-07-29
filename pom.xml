@@ -20,14 +20,12 @@
     </scm>
 
     <modules>
-        <module>deployers</module>
+        <module>interceptors</module>
         <module>subsystem-as7</module>
         <module>namespace</module>
-        <module>facade</module>
         <module>vfs</module>
         <module>weaving</module>
         <module>build</module>
-        <module>deployer-assembly</module>
     </modules>
 
     <properties>
@@ -125,22 +123,7 @@
 
             <dependency>
                 <groupId>org.jboss.snowdrop</groupId>
-                <artifactId>snowdrop-deployers</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.snowdrop</groupId>
-                <artifactId>snowdrop-deployers-vfs2</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.snowdrop</groupId>
-                <artifactId>snowdrop-deployers-vfs3</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.snowdrop</groupId>
-                <artifactId>snowdrop-facade</artifactId>
+                <artifactId>snowdrop-interceptors</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

@@ -57,8 +57,7 @@
                 <outputDirectory>module-deployer/org/jboss/snowdrop/main</outputDirectory>
                 <includes>
                     <include>snowdrop-vfs*.jar</include>
-                    <include>snowdrop-deployers.jar</include>
-                    <include>snowdrop-deployers-jandex.jar</include>
+                    <include>snowdrop-interceptors.jar</include>
                 </includes>
             </fileSet>
             <fileSet>
