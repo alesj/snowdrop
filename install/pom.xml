@@ -11,7 +11,6 @@
         <version.snowdrop>2.1.1.SNAPSHOT</version.snowdrop>
         <version.spring>3.2.3.RELEASE</version.spring>
         <spring.artifacts>snowdrop-module-spring-3.2</spring.artifacts>
-        <version.jboss>6.0</version.jboss>
         <spring.module.path>src/main/spring/module/</spring.module.path>
     </properties>
 
@@ -20,6 +19,28 @@
             <groupId>org.jboss.snowdrop</groupId>
             <artifactId>snowdrop-deployers</artifactId>
             <version>${version.snowdrop}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-aop</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-context</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-web</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-core</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-beans</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -28,7 +49,15 @@
             <version>${version.snowdrop}</version>
             <exclusions>
                 <exclusion>
+                    <artifactId>spring-aop</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
                     <artifactId>spring-context</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-web</artifactId>
                     <groupId>org.springframework</groupId>
                 </exclusion>
                 <exclusion>
@@ -47,6 +76,10 @@
             <artifactId>snowdrop-vfs</artifactId>
             <version>${version.snowdrop}</version>
             <exclusions>
+                <exclusion>
+                    <artifactId>spring-aop</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
                 <exclusion>
                     <artifactId>spring-context</artifactId>
                     <groupId>org.springframework</groupId>
@@ -111,6 +144,7 @@
                                     </transformations>
                                     <namespaceContexts>
                                         <s>urn:jboss:domain:1.2</s>
+                                        <s2>urn:jboss:domain:1.3</s2>
                                         <ss>urn:jboss:domain:snowdrop:1.0</ss>
                                     </namespaceContexts>
                                 </configuration>
@@ -156,6 +190,7 @@
                                     </transformations>
                                     <namespaceContexts>
                                         <s>urn:jboss:domain:1.4</s>
+                                        <s2>urn:jboss:domain:2.0</s2>
                                         <ss>urn:jboss:domain:snowdrop:1.0</ss>
                                     </namespaceContexts>
                                 </configuration>
@@ -178,7 +213,7 @@
             <id>spring-3.1</id>
             <properties>
                 <spring.artifacts>snowdrop-module-spring-3.1</spring.artifacts>
-                <spring.module.path>src/main/spring/old/3.1module/</spring.module.path>
+                <spring.module.path>src/main/spring/old/3.1/module/</spring.module.path>
             </properties>
             <activation>
                 <activeByDefault>false</activeByDefault>
@@ -206,93 +241,93 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
         </profile>
+        <profile>
+            <id>dependency-copying</id>
+            <activation>
+                <property>
+                    <name>JBOSS_HOME</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-dependencies-spring</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${module.path}org/springframework/spring/snowdrop</outputDirectory>
+                                    <overWriteSnapshots>true</overWriteSnapshots>
+                                    <stripVersion>true</stripVersion>
+                                    <includeGroupIds>org.springframework,aopalliance,org.aspectj,cglib</includeGroupIds>
+                                    <overWriteReleases>true</overWriteReleases>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-dependencies-snowdrop</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${module.path}org/jboss/snowdrop/main</outputDirectory>
+                                    <overWriteSnapshots>true</overWriteSnapshots>
+                                    <stripVersion>true</stripVersion>
+                                    <includeGroupIds>org.jboss.snowdrop</includeGroupIds>
+                                    <excludeTypes>pom</excludeTypes>
+                                    <overWriteReleases>true</overWriteReleases>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>2.6</version>
+                        <executions>
+                            <execution>
+                                <id>copy-resources-snowdrop</id>
+                                <!-- here the phase you need -->
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${module.path}org/jboss/snowdrop/main</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>src/main/snowdrop/module/</directory>
+                                            <filtering>true</filtering>
+                                        </resource>
+                                    </resources>
+                                    <overwrite>true</overwrite>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-resources-spring</id>
+                                <!-- here the phase you need -->
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${module.path}org/springframework/spring/snowdrop</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${spring.module.path}</directory>
+                                        </resource>
+                                    </resources>
+                                    <overwrite>true</overwrite>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
-
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-dependencies-spring</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${module.path}org/springframework/spring/snowdrop</outputDirectory>
-                            <overWriteSnapshots>true</overWriteSnapshots>
-                            <stripVersion>true</stripVersion>
-                            <includeGroupIds>org.springframework,aopalliance,org.aspectj,cglib</includeGroupIds>
-                            <overWriteReleases>true</overWriteReleases>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>copy-dependencies-snowdrop</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${module.path}org/jboss/snowdrop/main</outputDirectory>
-                            <overWriteSnapshots>true</overWriteSnapshots>
-                            <stripVersion>true</stripVersion>
-                            <includeGroupIds>org.jboss.snowdrop</includeGroupIds>
-                            <excludeTypes>pom</excludeTypes>
-                            <overWriteReleases>true</overWriteReleases>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.6</version>
-                <executions>
-                    <execution>
-                        <id>copy-resources-snowdrop</id>
-                        <!-- here the phase you need -->
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${module.path}org/jboss/snowdrop/main</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>src/main/snowdrop/module/</directory>
-                                    <filtering>true</filtering>
-                                </resource>
-                            </resources>
-                            <overwrite>true</overwrite>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.6</version>
-                <executions>
-                    <execution>
-                        <id>copy-resources-spring</id>
-                        <!-- here the phase you need -->
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${module.path}org/springframework/spring/snowdrop</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${spring.module.path}</directory>
-                                </resource>
-                            </resources>
-                            <overwrite>true</overwrite>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
 </project>
