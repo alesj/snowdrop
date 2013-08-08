@@ -44,6 +44,9 @@ import java.util.regex.Pattern;
 /**
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
  */
+/*
+    Consider refactoring to Subsystem AS7 Module
+ */
 public class NamedXmlApplicationContext extends VFSClassPathXmlApplicationContext implements Nameable {
 
     private String defaultName;

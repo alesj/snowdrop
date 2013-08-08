@@ -71,7 +71,7 @@ public class VFSResourceLoader extends DefaultResourceLoader {
         }
     }
 
-    /* A special type of resource, for the case when the resource does not exit */
+    /* A special type of resource, for the case when the resource does not exist */
     private static class InexistentResource extends AbstractResource {
 
         private final String path;

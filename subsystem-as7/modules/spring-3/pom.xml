@@ -103,7 +103,6 @@
 
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-
                 <executions>
                     <execution>
                         <id>make-module-without-dep</id>

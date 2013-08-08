@@ -18,10 +18,10 @@
         </dependency>
 
         <dependency>
-                    <groupId>org.jboss.as</groupId>
-                    <artifactId>jboss-as-ee</artifactId>
-                    <version>${version.org.jboss.as7}</version>
-                </dependency>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-ee</artifactId>
+            <version>${version.org.jboss.as7}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.jboss.as</groupId>
@@ -108,6 +108,7 @@
             </plugin>
 
             <plugin>
+                <!-- No longer needed, Consider Removing -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <inherited>false</inherited>
@@ -146,7 +147,6 @@
 
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-
                 <executions>
                     <execution>
                         <id>make-module-7.1</id>

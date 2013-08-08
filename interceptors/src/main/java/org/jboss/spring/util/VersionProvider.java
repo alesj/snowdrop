@@ -36,9 +36,7 @@ public class VersionProvider {
         Version version = null;
         ClassLoader classLoader = ClassUtils.getDefaultClassLoader();
         Class<? extends ClassLoader> classLoaderClass = classLoader.getClass();
-		if (classLoaderClass.getName().startsWith("org.jboss.classloader")) {
-            version = Version.AS_5_OR_6;
-        } else if (classLoaderClass.getName().startsWith("org.jboss.modules")) {
+		if (classLoaderClass.getName().startsWith("org.jboss.modules")) {
 			if (classLoaderClass.getPackage().getImplementationVersion()
 					.startsWith("1.0.0")) {
 				version = Version.AS_7;

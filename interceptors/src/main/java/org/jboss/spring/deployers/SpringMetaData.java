@@ -32,6 +32,10 @@ import java.util.List;
  * @author <a href="mailto:ales.justin@jboss.com">Ales Justin</a>
  * @author <a href="mailto:mariusb@redhat.com">Marius Bogoevici</a>
  */
+
+/*
+    Unclear purpose, seems not used anywhere. Consider Removal.
+ */
 public class SpringMetaData implements Serializable {
 
     private static final long serialVersionUID = 8989753488155849440L;

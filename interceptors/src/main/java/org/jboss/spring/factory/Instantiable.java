@@ -26,6 +26,10 @@ package org.jboss.spring.factory;
  *
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
  */
+
+/*
+   Old Spring way to creating a container, no longer used. Consider be removed.
+ */
 public interface Instantiable {
 
     /**

@@ -28,7 +28,6 @@ package org.jboss.spring.util;
  * @author Marius Bogoevici
  */
 public enum Version {
-	AS_5_OR_6,
     AS_7,
     AS_7_1;    
 }
