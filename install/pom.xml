@@ -9,7 +9,7 @@
 
     <properties>
         <version.snowdrop>3.0.1.SNAPSHOT</version.snowdrop>
-        <version.spring>3.2.3.RELEASE</version.spring>
+        <version.spring>3.2.4.RELEASE</version.spring>
         <spring.artifacts>snowdrop-module-spring-3.2</spring.artifacts>
         <spring.module.path>src/main/spring/module/</spring.module.path>
     </properties>
