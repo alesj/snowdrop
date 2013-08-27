@@ -43,6 +43,22 @@
                     <include>module.xml</include>
                 </includes>
             </fileSet>
+            
+            <fileSet>
+                <directory>${basedir}/../modules/spring-3.1/src/main/module</directory>
+                <outputDirectory>module-spring-3.1/org/springframework/spring/snowdrop</outputDirectory>
+                <includes>
+                    <include>module.xml</include>
+                </includes>
+            </fileSet>
+
+            <fileSet>
+                <directory>${basedir}/../modules/spring-3.2/src/main/module</directory>
+                <outputDirectory>module-spring-3.2/org/springframework/spring/snowdrop</outputDirectory>
+                <includes>
+                    <include>module.xml</include>
+                </includes>
+            </fileSet>
 
             <fileSet>
                 <directory>${basedir}/../subsystem-as7/src/main/module</directory>
