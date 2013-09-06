@@ -7,6 +7,12 @@ Snowdrop is a utility package that contains JBoss-specific extensions to the Spr
 
         extensions for deploying and running Spring applications with the JBoss Enterprise Platforms (JBoss Enterprise Application Platform and JBoss Enterprise Web Platform).
 
+Usage/Setup:
+---------
+Deployments can also be configured to exclude specific implicit dependencies. This is done with the 
+**jboss-deployment-structure.xml** deployment descriptor file. This is commonly done when an application bundles a specific 
+version of a library that the application server will attempt to add as an implicit dependency.
+
 Build:
 ---------
 
