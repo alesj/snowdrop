@@ -30,7 +30,6 @@ import java.net.URI;
 import java.net.URL;
 
 import org.jboss.logging.Logger;
-import org.springframework.core.NestedIOException;
 import org.springframework.util.ReflectionUtils;
 
 /**
@@ -111,13 +110,9 @@ public class VFSUtil {
         }
         // extract the rest of the reflective information that we need for VFS invocation
         try {
-            if (VFS2_PACKAGE_NAME.equals(vfsPackageName)) {
-                VFS_METHOD_GET_ROOT_URL = ReflectionUtils.findMethod(VFS_CLASS, "getRoot", new Class[]{URL.class});
-                VFS_METHOD_GET_ROOT_URI = ReflectionUtils.findMethod(VFS_CLASS, "getRoot", new Class[]{URI.class});
-            } else {
-                VFS_METHOD_GET_ROOT_URL = ReflectionUtils.findMethod(VFS_CLASS, "getChild", new Class[]{URL.class});
-                VFS_METHOD_GET_ROOT_URI = ReflectionUtils.findMethod(VFS_CLASS, "getChild", new Class[]{URI.class});
-            }
+            VFS_METHOD_GET_ROOT_URL = ReflectionUtils.findMethod(VFS_CLASS, "getChild", new Class[]{URL.class});
+            VFS_METHOD_GET_ROOT_URI = ReflectionUtils.findMethod(VFS_CLASS, "getChild", new Class[]{URI.class});
+            
             VIRTUAL_FILE_CLASS = loader.loadClass(vfsPackageName + ".VirtualFile");
             VIRTUAL_FILE_METHOD_EXISTS = ReflectionUtils.findMethod(VIRTUAL_FILE_CLASS, "exists");
             VIRTUAL_FILE_METHOD_GET_SIZE = ReflectionUtils.findMethod(VIRTUAL_FILE_CLASS, "getSize");
@@ -128,12 +123,7 @@ public class VFSUtil {
             VIRTUAL_FILE_METHOD_GET_NAME = ReflectionUtils.findMethod(VIRTUAL_FILE_CLASS, "getName");
             VIRTUAL_FILE_METHOD_GET_PATH_NAME = ReflectionUtils.findMethod(VIRTUAL_FILE_CLASS, "getPathName");
 
-            if (VFS2_PACKAGE_NAME.equals(vfsPackageName)) {
-                VIRTUAL_FILE_METHOD_GET_CHILD = ReflectionUtils.findMethod(VIRTUAL_FILE_CLASS, "findChild", new Class[]{String.class});
-            } else {
-                VIRTUAL_FILE_METHOD_GET_CHILD = ReflectionUtils.findMethod(VIRTUAL_FILE_CLASS, "getChild", new Class[]{String.class});
-
-            }
+            VIRTUAL_FILE_METHOD_GET_CHILD = ReflectionUtils.findMethod(VIRTUAL_FILE_CLASS, "getChild", new Class[]{String.class});
 
             VFS_UTILS_CLASS = loader.loadClass(vfsPackageName + ".VFSUtils");
             VFS_UTILS_METHOD_GET_COMPATIBLE_URI = ReflectionUtils.findMethod(VFS_UTILS_CLASS, "getCompatibleURI", new Class<?>[]{VIRTUAL_FILE_CLASS});
@@ -171,17 +161,6 @@ public class VFSUtil {
     }
 
     public static File getPhysicalFile(Object virtualFile) throws IOException {
-        if (VFS2_PACKAGE_NAME.equals(vfsPackageName)) {
-            if ((Boolean) invokeVfsMethod(VFS_UTILS_METHOD_IS_NESTED_FILE, null, virtualFile)) {
-                throw new IOException("File resolution not supported for nested resource: " + virtualFile);
-            }
-            try {
-                return new File((URI) invokeVfsMethod(VFS_UTILS_METHOD_GET_COMPATIBLE_URI, null, virtualFile));
-            } catch (Exception ex) {
-                throw new NestedIOException("Failed to obtain File reference for " + virtualFile, ex);
-            }
-        } else {
-            return (File) invokeVfsMethod(ReflectionUtils.findMethod(VIRTUAL_FILE_CLASS, "getPhysicalFile"), virtualFile);
-        }
+        return (File) invokeVfsMethod(ReflectionUtils.findMethod(VIRTUAL_FILE_CLASS, "getPhysicalFile"), virtualFile);
     }
 }

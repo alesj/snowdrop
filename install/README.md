@@ -20,11 +20,13 @@ _NOTE: Make sure to pass in -DJBOSS_HOME=/path/to/EAP installation_
 
 _NOTE: If you are installing a non released version, be sure to mvn clean install on the top level._
 
+_NOTE: If you are installing on Windows you will need to reverse the slashes._
+
 Simply, run:
 
 		mvn package -DJBOSS_HOME=/path/to/jboss_home
 
-By default snowdrop version 3.0.1.SNAPSHOT and spring 3.2.3.RELEASE will be installed. To change this simply execute:
+By default snowdrop version 3.0.1-SNAPSHOT and spring 3.2.4.RELEASE will be installed. To change this simply execute:
 
 		mvn package -P${desired-spring-version} -DJBOSS_HOME=/path/to/jboss_home -Dversion.snowdrop=${desired-snowdrop-version}
 

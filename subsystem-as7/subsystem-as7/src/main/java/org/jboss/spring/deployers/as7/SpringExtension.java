@@ -33,11 +33,15 @@ import java.util.Locale;
 
 import javax.xml.stream.XMLStreamException;
 
+//import org.jboss.as.controller.AttributeDefinition;
 import org.jboss.as.controller.Extension;
 import org.jboss.as.controller.ExtensionContext;
 import org.jboss.as.controller.OperationContext;
+//import org.jboss.as.controller.OperationDefinition;
 import org.jboss.as.controller.OperationFailedException;
 import org.jboss.as.controller.OperationStepHandler;
+//import org.jboss.as.controller.ResourceBuilder;
+//import org.jboss.as.controller.ResourceDefinition;
 import org.jboss.as.controller.SubsystemRegistration;
 import org.jboss.as.controller.descriptions.DescriptionProvider;
 import org.jboss.as.controller.descriptions.ModelDescriptionConstants;
@@ -85,6 +89,20 @@ public class SpringExtension implements Extension {
         }
     };
 
+//    private static final ResourceDefinition SUBSYSTEM_ADD_DESCRIPTION = new ResourceDefinition() {
+//    	@Override
+//    	public ModelNode getModelDescription(Locale locale) {
+//    		return SpringDescriptionProviders.getSubsystemAddDescription(locale);
+//    	}
+//    };
+//    
+//    static final ResourceDefinition SUBSYSTEM_DESCRIPTION = new ResourceDefinition() {
+//    	@Override
+//    	public ModelNode getModelDescription(Locale locale) {
+//    		return SpringDescriptionProviders.getSubsystemDescription(locale);
+//    	}
+//    };
+    
     private static ModelNode createAddSubSystemOperation() {
         final ModelNode subsystem = new ModelNode();
         subsystem.get(OP).set(ADD);

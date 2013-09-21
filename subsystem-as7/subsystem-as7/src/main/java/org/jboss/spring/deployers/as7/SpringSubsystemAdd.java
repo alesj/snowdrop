@@ -35,7 +35,7 @@ import org.jboss.msc.service.ServiceController;
 
 import java.util.List;
 
-import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.OP_ADDR;
+//import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.OP_ADDR;
 
 /**
  * @author Marius Bogoevici

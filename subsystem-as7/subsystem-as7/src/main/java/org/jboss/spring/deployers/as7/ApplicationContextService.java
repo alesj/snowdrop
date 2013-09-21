@@ -22,12 +22,12 @@
 
 package org.jboss.spring.deployers.as7;
 
-import org.jboss.as.naming.context.NamespaceContextSelector;
+//import org.jboss.as.naming.context.NamespaceContextSelector;
 import org.jboss.msc.service.Service;
 import org.jboss.msc.service.StartContext;
 import org.jboss.msc.service.StartException;
 import org.jboss.msc.service.StopContext;
-import org.jboss.msc.value.InjectedValue;
+//import org.jboss.msc.value.InjectedValue;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 

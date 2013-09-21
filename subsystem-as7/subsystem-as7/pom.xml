@@ -3,7 +3,7 @@
     <parent>
         <artifactId>snowdrop-subsystem-as7-parent</artifactId>
         <groupId>org.jboss.snowdrop</groupId>
-        <version>3.0.1.SNAPSHOT</version>
+        <version>3.0.1-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
     <artifactId>snowdrop-subsystem-as7</artifactId>
@@ -11,54 +11,75 @@
     <description>Spring subsystem for JBoss AS7</description>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.jboss.snowdrop</groupId>
+            <artifactId>snowdrop-vfs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.snowdrop</groupId>
+            <artifactId>snowdrop-interceptors</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.jboss.as</groupId>
             <artifactId>jboss-as-controller</artifactId>
-            <version>${version.org.jboss.as7}</version>
+            <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.jboss.as</groupId>
             <artifactId>jboss-as-ee</artifactId>
-            <version>${version.org.jboss.as7}</version>
+            <scope>provided</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.jboss.as</groupId>
-            <artifactId>jboss-as-server</artifactId>
-            <version>${version.org.jboss.as7}</version>
-        </dependency>
-
         <dependency>
             <groupId>org.jboss.as</groupId>
             <artifactId>jboss-as-naming</artifactId>
-            <version>${version.org.jboss.as7}</version>
+            <scope>provided</scope>
         </dependency>
-
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-server</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.jboss</groupId>
+        	<artifactId>jboss-dmr</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.jboss.logging</groupId>
+        	<artifactId>jboss-logging</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.jboss.modules</groupId>
+        	<artifactId>jboss-modules</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.jboss.msc</groupId>
+        	<artifactId>jboss-msc</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.jboss</groupId>
+        	<artifactId>jboss-vfs</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.jboss</groupId>
+        	<artifactId>staxmapper</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.snowdrop</groupId>
-            <artifactId>snowdrop-vfs</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.snowdrop</groupId>
-            <artifactId>snowdrop-interceptors</artifactId>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 

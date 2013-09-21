@@ -8,7 +8,7 @@
     <name>snowdrop-install</name>
 
     <properties>
-        <version.snowdrop>3.0.1.SNAPSHOT</version.snowdrop>
+        <version.snowdrop>3.0.1-SNAPSHOT</version.snowdrop>
         <version.spring>3.2.4.RELEASE</version.spring>
         <spring.artifacts>snowdrop-module-spring-3.2</spring.artifacts>
         <spring.module.path>src/main/spring/module/</spring.module.path>
@@ -96,6 +96,10 @@
                     <artifactId>spring-webmvc</artifactId>
                     <groupId>org.springframework</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>spring-beans</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -108,7 +112,7 @@
     </dependencies>
 
     <profiles>
-        <!-- For 6.0+ -->
+        <!-- For EAP 6.0+ -->
         <profile>
             <id>6.0</id>
             <activation>
@@ -155,7 +159,7 @@
                 </plugins>
             </build>
         </profile>
-        <!-- For 6.1+ -->
+        <!-- For EAP 6.1+ -->
         <profile>
             <id>6.1+</id>
             <activation>

@@ -24,7 +24,7 @@ package org.jboss.spring.deployers.as7;
 
 import org.jboss.as.server.deployment.AttachmentKey;
 import org.jboss.as.server.deployment.DeploymentUnit;
-import org.jboss.modules.Module;
+//import org.jboss.modules.Module;
 import org.jboss.vfs.VirtualFile;
 
 import java.util.Collections;

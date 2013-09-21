@@ -13,6 +13,19 @@ Deployments can also be configured to exclude specific implicit dependencies. Th
 **jboss-deployment-structure.xml** deployment descriptor file. This is commonly done when an application bundles a specific 
 version of a library that the application server will attempt to add as an implicit dependency.
 
+Supported Version:
+------------------
+JBoss AS 7.1.0
+JBoss AS 7.1.1
+JBoss AS 7.1.2
+JBoss AS 7.1.3
+JBoss AS 7.2.0 - (This version of JBoss has a problem with Hibernate, specifically Hibernate 4.1.0.CR1)
+
+JBoss EAP 6.0.0
+JBoss EAP 6.0.1
+JBoss EAP 6.1.0
+JBoss EAP 6.1.1
+
 Build:
 ---------
 
