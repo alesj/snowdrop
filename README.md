@@ -15,16 +15,15 @@ version of a library that the application server will attempt to add as an impli
 
 Supported Version:
 ------------------
-JBoss AS 7.1.0
-JBoss AS 7.1.1
-JBoss AS 7.1.2
-JBoss AS 7.1.3
+Snowdrop 3.x works with the following version of JBoss:
+
+JBoss AS 7.1.0, 7.1.1, 7.1.2, 7.1.3
+
 JBoss AS 7.2.0 - (This version of JBoss has a problem with Hibernate, specifically Hibernate 4.1.0.CR1)
 
-JBoss EAP 6.0.0
-JBoss EAP 6.0.1
-JBoss EAP 6.1.0
-JBoss EAP 6.1.1
+JBoss EAP 6.0.0, 6.0.1, 6.1.0, 6.1.1
+
+If you need to use JBoss AS 5/6 or EAP 5 then please use Snowdrop 2.1.1.Final.  This version still supports the older versions.
 
 Build:
 ---------
