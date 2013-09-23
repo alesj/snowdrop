@@ -7,7 +7,7 @@
     </parent>
     <groupId>org.jboss.snowdrop</groupId>
     <artifactId>snowdrop-parent</artifactId>
-    <version>3.0.1.Final</version>
+    <version>3.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Snowdrop Parent POM</name>
     <url>http://jboss.org/snowdrop</url>
