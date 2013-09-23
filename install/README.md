@@ -26,7 +26,7 @@ Simply, run:
 
 		mvn package -DJBOSS_HOME=/path/to/jboss_home
 
-By default snowdrop version 3.0.1-SNAPSHOT and spring 3.2.4.RELEASE will be installed. To change this simply execute:
+By default snowdrop version 3.0.1.Final and spring 3.2.4.RELEASE will be installed. To change this simply execute:
 
 		mvn package -P${desired-spring-version} -DJBOSS_HOME=/path/to/jboss_home -Dversion.snowdrop=${desired-snowdrop-version}
 
