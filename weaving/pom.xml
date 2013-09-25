@@ -23,6 +23,10 @@
         </dependency>
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
+            <artifactId>snowdrop-interceptors-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.snowdrop</groupId>
             <artifactId>snowdrop-interceptors</artifactId>
         </dependency>
     </dependencies>
