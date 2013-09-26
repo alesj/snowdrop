@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.jboss.snowdrop</groupId>
     <artifactId>snowdrop-install</artifactId>
-    <version>0.0.1.Final</version>
+    <version>3.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>snowdrop-install</name>
 
@@ -142,8 +142,7 @@
                                     <transformations>
                                         <transformation>
                                             <input>${JBOSS_HOME}/standalone/configuration/standalone.xml</input>
-                                            <output>${JBOSS_HOME}/standalone/configuration/standalone-snowdrop.xml
-                                            </output>
+                                            <output>${JBOSS_HOME}/standalone/configuration/standalone-snowdrop.xml</output>
                                             <config>src/main/snowdrop/install.xml</config>
                                         </transformation>
                                     </transformations>
@@ -189,8 +188,7 @@
                                     <transformations>
                                         <transformation>
                                             <input>${JBOSS_HOME}/standalone/configuration/standalone.xml</input>
-                                            <output>${JBOSS_HOME}/standalone/configuration/standalone-snowdrop.xml
-                                            </output>
+                                            <output>${JBOSS_HOME}/standalone/configuration/standalone-snowdrop.xml</output>
                                             <config>src/main/snowdrop/install.xml</config>
                                         </transformation>
                                     </transformations>
