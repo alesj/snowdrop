@@ -11,23 +11,25 @@ What-it-does
 
 It copies the necessary snowdrop and spring jars in their proper location within ${JBOSS_HOME}/modules.
 
-It also modifies the standalone.xml and registers the snowdrop extension and subsystem, removing the need for manual installation.
+It also creates a standalone-snowdrop.xml that registers the snowdrop extension and subsystem, removing the need for manual installation.
 
 How-to-use
 -----------
 
-_NOTE: Make sure to pass in -DJBOSS_HOME=/path/to/EAP installation_
+*NOTE: Make sure to pass in `-DJBOSS_HOME=/path/to/JBoss`.*
 
-_NOTE: If you are installing a non released version, be sure to mvn clean install on the top level._
+*NOTE: If you are installing a non released version, be sure to `mvn clean install` on the top level.*
 
-_NOTE: If you are installing on Windows you will need to reverse the slashes._
+*NOTE: If you are installing on Windows you may need to reverse the slashes.*
 
-Simply, run:
+Install with defaults. By default Snowdrop version 3.0.3-SNAPSHOT and spring 3.2.4.RELEASE will be installed.
 
 		mvn package -DJBOSS_HOME=/path/to/jboss_home
 
-By default snowdrop version 3.0.3-SNAPSHOT and spring 3.2.4.RELEASE will be installed. To change this simply execute:
+**OR**
 
-		mvn package -P${desired-spring-version} -DJBOSS_HOME=/path/to/jboss_home -Dversion.snowdrop=${desired-snowdrop-version}
+Install and set Spring and Snowdrop versions:
 
-There are four possible spring version profiles: spring-2.5, spring-3, spring-3.1, and spring-3.2 (the default).
+		mvn package -DJBOSS_HOME=/path/to/jboss_home -P${desired-spring-version} -Dversion.snowdrop=${desired-snowdrop-version}
+
+There are four possible spring version profiles: **spring-2.5**, **spring-3**, **spring-3.1**, and **spring-3.2**(*the default*).
