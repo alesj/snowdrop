@@ -44,8 +44,8 @@
             <directory>${basedir}/target/dependency/lib</directory>
             <outputDirectory>/modules/org/jboss/snowdrop/main</outputDirectory>
             <includes>
-                <include>snowdrop-vfs*.jar</include>
                 <include>snowdrop-interceptors*.jar</include>
+                <include>snowdrop-vfs*.jar</include>
             </includes>
         </fileSet>
         <fileSet>

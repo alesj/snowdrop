@@ -365,6 +365,7 @@
                                     <includeGroupIds>org.jboss.snowdrop</includeGroupIds>
                                     <excludeTypes>pom</excludeTypes>
                                     <overWriteReleases>true</overWriteReleases>
+                                    <excludes>snowdrop-namespace.jar</excludes>
                                 </configuration>
                             </execution>
                         </executions>

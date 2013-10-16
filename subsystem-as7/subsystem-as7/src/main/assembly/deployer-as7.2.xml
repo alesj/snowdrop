@@ -28,7 +28,7 @@
     <fileSets>
         <fileSet>
             <directory>${basedir}/src/main/module</directory>
-            <outputDirectory>/modules/add-ons/snowdrop/org/jboss/snowdrop/main</outputDirectory>
+            <outputDirectory>/modules/system/add-ons/snowdrop/org/jboss/snowdrop/main</outputDirectory>
             <includes>
                 <include>module.xml</include>
             </includes>
@@ -42,15 +42,15 @@
         </fileSet>
         <fileSet>
             <directory>${basedir}/target/dependency/lib</directory>
-            <outputDirectory>/modules/add-ons/snowdrop/org/jboss/snowdrop/main</outputDirectory>
+            <outputDirectory>/modules/system/add-ons/snowdrop/org/jboss/snowdrop/main</outputDirectory>
             <includes>
-                <include>snowdrop-vfs*.jar</include>
                 <include>snowdrop-interceptors*.jar</include>
+                <include>snowdrop-vfs*.jar</include>
             </includes>
         </fileSet>
         <fileSet>
             <directory>${basedir}/target</directory>
-            <outputDirectory>/modules/add-ons/snowdrop/org/jboss/snowdrop/main</outputDirectory>
+            <outputDirectory>/modules/system/add-ons/snowdrop/org/jboss/snowdrop/main</outputDirectory>
             <includes>
                 <include>${project.artifactId}.jar</include>
             </includes>
