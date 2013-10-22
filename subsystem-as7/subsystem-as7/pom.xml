@@ -3,7 +3,7 @@
     <parent>
         <artifactId>snowdrop-subsystem-as7-parent</artifactId>
         <groupId>org.jboss.snowdrop</groupId>
-        <version>3.0.3.Final</version>
+        <version>3.0.4-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
     <artifactId>snowdrop-subsystem-as7</artifactId>
