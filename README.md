@@ -62,10 +62,9 @@ Uninstall snowdrop:
 
 1. For JBoss AS 7.1(*or older*) or EAP 6.0.x(*or older*).
   1. Delete the `$JBOSS_HOME/modules/org/jboss/snowdrop` directory.
-  2. Delete the `$JBOSS_HOME/module/org/springframework` directory.
+  2. Delete the `$JBOSS_HOME/modules/org/springframework` directory.
 
 2. For JBoss AS 7.2(*or newer*) or EAP 6.1.x(*or newer*).
-  1. Delete the `$JBOSS_HOME/modules/system/add-ons/org/jboss/snowdrop` directory.
-  2. Delete the `$JBOSS_HOME/module/system/add-ons/org/springframework` directory.
+  1. Delete the `$JBOSS_HOME/modules/system/add-ons/snowdrop` directory.
 
 3. Delete `$JBOSS_HOME/standalone/standalone-snowdrop.xml`.
