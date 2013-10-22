@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.jboss.snowdrop</groupId>
     <artifactId>snowdrop-install</artifactId>
-    <version>3.0.3-SNAPSHOT</version>
+    <version>3.0.3.Final</version>
     <packaging>pom</packaging>
     <name>snowdrop-install</name>
 
     <properties>
-        <version.snowdrop>3.0.3-SNAPSHOT</version.snowdrop>
+        <version.snowdrop>3.0.3.Final</version.snowdrop>
         <version.spring>3.2.4.RELEASE</version.spring>
         <spring.artifacts>snowdrop-module-spring-3.2</spring.artifacts>
         <spring.module.path>src/main/spring/module/</spring.module.path>
