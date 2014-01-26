@@ -22,7 +22,7 @@ How-to-use
 
 *NOTE: If you are installing on Windows you may need to reverse the slashes.*
 
-Install with defaults. By default Snowdrop version 3.0.4-SNAPSHOT and spring 3.2.4.RELEASE will be installed.
+Install with defaults. By default Snowdrop version 3.0.4-SNAPSHOT and spring 4.0.0.RELEASE will be installed.
 
 		mvn package -DJBOSS_HOME=/path/to/jboss_home
 
@@ -32,4 +32,4 @@ Install and set Spring and Snowdrop versions:
 
 		mvn package -DJBOSS_HOME=/path/to/jboss_home -P${desired-spring-version} -Dversion.snowdrop=${desired-snowdrop-version}
 
-There are four possible spring version profiles: **spring-2.5**, **spring-3**, **spring-3.1**, and **spring-3.2**(*the default*).
+There are four possible spring version profiles: **spring-2.5**, **spring-3**, **spring-3.1**, **spring-3.2**, and **spring-4.0**(*the default*).

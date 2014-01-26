@@ -9,8 +9,8 @@
 
     <properties>
         <version.snowdrop>3.0.4-SNAPSHOT</version.snowdrop>
-        <version.spring>3.2.4.RELEASE</version.spring>
-        <spring.artifacts>snowdrop-module-spring-3.2</spring.artifacts>
+        <version.spring>4.0.0.RELEASE</version.spring>
+        <spring.artifacts>snowdrop-module-spring-4.0</spring.artifacts>
         <spring.module.path>src/main/spring/module/</spring.module.path>
     </properties>
 
@@ -288,9 +288,20 @@
 
         <!-- Spring Profiles -->
         <profile>
-            <id>spring-3.2</id>
+            <id>spring-4.0</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>spring-3.2</id>
+            <properties>
+                <spring.artifacts>snowdrop-module-spring-3.2</spring.artifacts>
+                <spring.module.path>src/main/spring/old/3.2/module/</spring.module.path>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
             </activation>
         </profile>
 

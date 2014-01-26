@@ -302,7 +302,7 @@ at org.springframework.core.io.support.PathMatchingResourcePatternResolver
             folder.
         </para>
         <para>
-            Please include at least the following jars from either the Spring 2.5.6.SEC03 or Spring 3.0.6.RELEASE
+            Please include at least the following jars from either the Spring 2.5.6.SEC03 or Spring 3.0.7.RELEASE
             distribution:
         </para>
             <itemizedlist>
@@ -345,7 +345,7 @@ at org.springframework.core.io.support.PathMatchingResourcePatternResolver
             Spring module, then create a <filename>$JBOSS_HOME/modules/org/springframework/spring/main</filename> directory and copy one
         of the two <filename>module.xml</filename> files (from either the <filename>module-spring-2.5</filename> or the
             <filename>module-spring-3</filename> directory of the distribution and copy one of the following sets of files
-            from the corresponding Spring distribution (either Spring 2.5.6.SEC03 or Spring 3.0.6.RELEASE).
+            from the corresponding Spring distribution (either Spring 2.5.6.SEC03 or Spring 3.0.7.RELEASE).
         </para>
 
             <para>For Spring 2.5:</para>

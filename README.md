@@ -22,7 +22,7 @@ Supported Version:
 
 * JBoss EAP 6.0.0, 6.0.1, 6.1.0, 6.1.1
 
-*If you need to use JBoss AS 5/6 or EAP 5 then please use Snowdrop 2.1.1.Final (it is Tagged in this repo).  That version still supports the older versions.*
+*If you need to use JBoss AS 5/6 or EAP 5 then please use Snowdrop 2.1.1.Final (it is Tagged in this repo).  That version still supports the older versions of JBoss.*
 
 Build:
 ---------

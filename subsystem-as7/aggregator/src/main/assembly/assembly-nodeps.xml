@@ -61,6 +61,14 @@
             </fileSet>
 
             <fileSet>
+                <directory>${basedir}/../modules/spring-4.0/src/main/module</directory>
+                <outputDirectory>module-spring-4.0/org/springframework/spring/snowdrop</outputDirectory>
+                <includes>
+                    <include>module.xml</include>
+                </includes>
+            </fileSet>
+
+            <fileSet>
                 <directory>${basedir}/../subsystem-as7/src/main/module</directory>
                 <outputDirectory>module-deployer/org/jboss/snowdrop/main</outputDirectory>
                 <includes>
