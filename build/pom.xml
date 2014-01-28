@@ -23,9 +23,10 @@
             <build>
                 <plugins>
                     <plugin>
+                        <!-- This plugin creates archive files, in our case it makes the zips. -->
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-assembly-plugin</artifactId>
-                        <version>2.2-beta-3</version>
+                        <version>2.4</version>
                         <executions>
                             <execution>
                                 <id>make-assembly</id>
