@@ -237,12 +237,12 @@
                 <version>${version.junit}</version>
                 <scope>test</scope>
             </dependency>
-	        <dependency>
-	            <groupId>org.jboss</groupId>
-	            <artifactId>staxmapper</artifactId>
-	            <version>${version.org.jboss.staxmapper}</version>
-	            <scope>provided</scope>
-	        </dependency>
+            <dependency>
+                <groupId>org.jboss</groupId>
+                <artifactId>staxmapper</artifactId>
+                <version>${version.org.jboss.staxmapper}</version>
+                <scope>provided</scope>
+            </dependency>
             
             <dependency>
                 <groupId>org.springframework</groupId>

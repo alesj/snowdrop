@@ -17,9 +17,9 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-	            <groupId>org.jboss.snowdrop</groupId>
-	            <artifactId>snowdrop-interceptors-core</artifactId>
-	            <version>${project.version}</version>
+                <groupId>org.jboss.snowdrop</groupId>
+                <artifactId>snowdrop-interceptors-core</artifactId>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -20,11 +20,11 @@
         
         
         <!-- Compile (global dependencies) -->
-    	<dependency>
-    		<groupId>org.jboss.as</groupId>
-    		<artifactId>jboss-as-naming</artifactId>
+        <dependency>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-naming</artifactId>
             <scope>provided</scope>
-    	</dependency>
+        </dependency>
         <dependency>
             <groupId>org.jboss.spec.javax.ejb</groupId>
             <artifactId>jboss-ejb-api_3.1_spec</artifactId>

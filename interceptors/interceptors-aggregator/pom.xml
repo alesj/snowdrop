@@ -42,7 +42,7 @@
     </dependencies>
     <build>
         <sourceDirectory>target/snowdrop-all-sources</sourceDirectory>
-        <plugins>                    
+        <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
@@ -57,7 +57,7 @@
                                 <descriptor>src/main/assembly/interceptors-aggregator.xml</descriptor>
                                 <descriptor>src/main/assembly/interceptors-aggregator-sources.xml</descriptor>
                             </descriptors>
-				            <finalName>snowdrop</finalName>
+                            <finalName>snowdrop</finalName>
                         </configuration>
                     </execution>
                 </executions>

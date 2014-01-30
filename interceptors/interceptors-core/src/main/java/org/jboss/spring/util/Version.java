@@ -29,5 +29,5 @@ package org.jboss.spring.util;
  */
 public enum Version {
     AS_7,
-    AS_7_1;    
+    AS_7_1;
 }

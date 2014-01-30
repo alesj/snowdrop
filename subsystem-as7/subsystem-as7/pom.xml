@@ -43,33 +43,33 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-        	<groupId>org.jboss</groupId>
-        	<artifactId>jboss-dmr</artifactId>
+            <groupId>org.jboss</groupId>
+            <artifactId>jboss-dmr</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-        	<groupId>org.jboss.logging</groupId>
-        	<artifactId>jboss-logging</artifactId>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-        	<groupId>org.jboss.modules</groupId>
-        	<artifactId>jboss-modules</artifactId>
+            <groupId>org.jboss.modules</groupId>
+            <artifactId>jboss-modules</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-        	<groupId>org.jboss.msc</groupId>
-        	<artifactId>jboss-msc</artifactId>
+            <groupId>org.jboss.msc</groupId>
+            <artifactId>jboss-msc</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-        	<groupId>org.jboss</groupId>
-        	<artifactId>jboss-vfs</artifactId>
+            <groupId>org.jboss</groupId>
+            <artifactId>jboss-vfs</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-        	<groupId>org.jboss</groupId>
-        	<artifactId>staxmapper</artifactId>
+            <groupId>org.jboss</groupId>
+            <artifactId>staxmapper</artifactId>
             <scope>provided</scope>
         </dependency>
 

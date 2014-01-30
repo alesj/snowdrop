@@ -36,13 +36,13 @@ public class VersionProvider {
         Version version = null;
         ClassLoader classLoader = ClassUtils.getDefaultClassLoader();
         Class<? extends ClassLoader> classLoaderClass = classLoader.getClass();
-		if (classLoaderClass.getName().startsWith("org.jboss.modules")) {
-			if (classLoaderClass.getPackage().getImplementationVersion()
-					.startsWith("1.0.0")) {
-				version = Version.AS_7;
-			} else {
-				version = Version.AS_7_1;
-			}
+        if (classLoaderClass.getName().startsWith("org.jboss.modules")) {
+            if (classLoaderClass.getPackage().getImplementationVersion()
+                    .startsWith("1.0.0")) {
+                version = Version.AS_7;
+            } else {
+                version = Version.AS_7_1;
+            }
         }
         if (version == null) {
             throw new IllegalStateException("Cannot find the JBoss AS version");

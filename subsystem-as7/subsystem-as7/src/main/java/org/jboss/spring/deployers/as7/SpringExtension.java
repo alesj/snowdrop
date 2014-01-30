@@ -71,7 +71,7 @@ public class SpringExtension implements Extension {
     
     private static final int MANAGEMENT_API_MAJOR_VERSION = 1;
     private static final int MANAGEMENT_API_MINOR_VERSION = 2;
-	private static final int MANAGEMENT_API_MICRO_VERSION = 0;
+    private static final int MANAGEMENT_API_MICRO_VERSION = 0;
 
     private static SpringSubsystemElementParser parser = new SpringSubsystemElementParser();
 
@@ -90,17 +90,17 @@ public class SpringExtension implements Extension {
     };
 
 //    private static final ResourceDefinition SUBSYSTEM_ADD_DESCRIPTION = new ResourceDefinition() {
-//    	@Override
-//    	public ModelNode getModelDescription(Locale locale) {
-//    		return SpringDescriptionProviders.getSubsystemAddDescription(locale);
-//    	}
+//        @Override
+//        public ModelNode getModelDescription(Locale locale) {
+//            return SpringDescriptionProviders.getSubsystemAddDescription(locale);
+//        }
 //    };
-//    
+//
 //    static final ResourceDefinition SUBSYSTEM_DESCRIPTION = new ResourceDefinition() {
-//    	@Override
-//    	public ModelNode getModelDescription(Locale locale) {
-//    		return SpringDescriptionProviders.getSubsystemDescription(locale);
-//    	}
+//        @Override
+//        public ModelNode getModelDescription(Locale locale) {
+//            return SpringDescriptionProviders.getSubsystemDescription(locale);
+//        }
 //    };
     
     private static ModelNode createAddSubSystemOperation() {
