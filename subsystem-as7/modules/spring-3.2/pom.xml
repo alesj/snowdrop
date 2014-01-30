@@ -35,7 +35,7 @@
 
     <properties>
         <version.spring>3.2.6.RELEASE</version.spring>
-        <version.aspectj>1.7.2</version.aspectj>
+        <version.org.aspectj>1.7.4</version.org.aspectj>
     </properties>
 
     <dependencies>

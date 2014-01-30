@@ -34,6 +34,11 @@
     <name>Snowdrop AS7 Subsystem - Spring 2.5 Module</name>
     <packaging>pom</packaging>
 
+    <properties>
+        <version.spring>2.5.6.SEC03</version.spring>
+        <version.org.aspectj>1.6.8</version.org.aspectj>
+    </properties>
+
     <dependencies>
 
         <dependency>
