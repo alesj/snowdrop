@@ -23,23 +23,23 @@
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.as</groupId>
-            <artifactId>jboss-as-controller</artifactId>
+            <groupId>${targetGroupId}</groupId>
+            <artifactId>${targetArtifactIdPrefix}-controller</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.jboss.as</groupId>
-            <artifactId>jboss-as-ee</artifactId>
+            <groupId>${targetGroupId}</groupId>
+            <artifactId>${targetArtifactIdPrefix}-ee</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.jboss.as</groupId>
-            <artifactId>jboss-as-naming</artifactId>
+            <groupId>${targetGroupId}</groupId>
+            <artifactId>${targetArtifactIdPrefix}-naming</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.jboss.as</groupId>
-            <artifactId>jboss-as-server</artifactId>
+            <groupId>${targetGroupId}</groupId>
+            <artifactId>${targetArtifactIdPrefix}-server</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>

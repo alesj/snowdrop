@@ -32,20 +32,6 @@
         <version.aopalliance>1.0</version.aopalliance>
         <version.junit>4.10</version.junit>
         <version.org.aspectj>1.7.3</version.org.aspectj>
-        <version.org.jboss.as>7.2.0.Final</version.org.jboss.as>
-        <version.org.jboss.as7>7.1.0.Final</version.org.jboss.as7>
-        <version.org.jboss.jandex>1.0.3.Final</version.org.jboss.jandex>
-        <version.org.jboss.jboss-dmr>1.1.6.Final</version.org.jboss.jboss-dmr>
-        <version.org.jboss.logging>3.1.2.GA</version.org.jboss.logging>
-        <version.org.jboss.modules>1.2.0.Final</version.org.jboss.modules>
-        <version.org.jboss.msc>1.0.4.GA</version.org.jboss.msc>
-        <version.org.jboss.spec.javax.ejb>1.0.2.Final</version.org.jboss.spec.javax.ejb>
-        <version.org.jboss.spec.javax.interceptor>1.0.1.Final</version.org.jboss.spec.javax.interceptor>
-        <version.org.jboss.spec.javax.resource>1.0.1.Final</version.org.jboss.spec.javax.resource>
-        <version.org.jboss.spec.javax.servlet>1.0.2.Final</version.org.jboss.spec.javax.servlet>
-        <version.org.jboss.staxmapper>1.1.0.Final</version.org.jboss.staxmapper>
-        <version.org.jboss.test>1.1.9.GA</version.org.jboss.test>
-        <version.org.jboss.vfs>3.1.0.Final</version.org.jboss.vfs>
         <version.spring>2.5.6.SEC03</version.spring>
     </properties>
 
@@ -136,7 +122,7 @@
                 <artifactId>snowdrop-namespace</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>aopalliance</groupId>
                 <artifactId>aopalliance</artifactId>
@@ -152,42 +138,11 @@
                 <artifactId>aspectjweaver</artifactId>
                 <version>${version.org.aspectj}</version>
             </dependency>
-            <dependency>
-                <groupId>org.jboss.as</groupId>
-                <artifactId>jboss-as-controller</artifactId>
-                <version>${version.org.jboss.as7}</version>
-                <!-- This version should be upgraded but it will require some major refactoring.  This needs it's own Jira. -->
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.as</groupId>
-                <artifactId>jboss-as-ee</artifactId>
-                <version>${version.org.jboss.as}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.as</groupId>
-                <artifactId>jboss-as-naming</artifactId>
-                <version>${version.org.jboss.as}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.as</groupId>
-                <artifactId>jboss-as-server</artifactId>
-                <version>${version.org.jboss.as7}</version>
-<!--                 This version should be upgraded but it will require some major refactoring.  This needs it's own Jira. -->
-                <scope>provided</scope>
-            </dependency>
+
             <dependency>
                 <groupId>org.jboss.spec.javax.resource</groupId>
                 <artifactId>jboss-connector-api_1.6_spec</artifactId>
                 <version>${version.org.jboss.spec.javax.resource}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss</groupId>
-                <artifactId>jboss-dmr</artifactId>
-                <version>${version.org.jboss.jboss-dmr}</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
@@ -203,47 +158,12 @@
                 <scope>provided</scope>
             </dependency>
             <dependency>
-                <groupId>org.jboss.logging</groupId>
-                <artifactId>jboss-logging</artifactId>
-                <version>${version.org.jboss.logging}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.modules</groupId>
-                <artifactId>jboss-modules</artifactId>
-                <version>${version.org.jboss.modules}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.msc</groupId>
-                <artifactId>jboss-msc</artifactId>
-                <version>${version.org.jboss.msc}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.jboss.spec.javax.servlet</groupId>
                 <artifactId>jboss-servlet-api_3.0_spec</artifactId>
                 <version>${version.org.jboss.spec.javax.servlet}</version>
                 <scope>provided</scope>
             </dependency>
-            <dependency>
-                <groupId>org.jboss</groupId>
-                <artifactId>jboss-vfs</artifactId>
-                <version>${version.org.jboss.vfs}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${version.junit}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss</groupId>
-                <artifactId>staxmapper</artifactId>
-                <version>${version.org.jboss.staxmapper}</version>
-                <scope>provided</scope>
-            </dependency>
-            
+
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-aop</artifactId>
@@ -292,8 +212,14 @@
                 <version>${version.spring}</version>
                 <optional>true</optional>
             </dependency>
-            
+
             <!-- test dependencies -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${version.junit}</version>
+                <scope>test</scope>
+            </dependency>
             <dependency>
                 <groupId>org.jboss.test</groupId>
                 <artifactId>jboss-test</artifactId>
@@ -362,6 +288,207 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+        <profile>
+            <id>target-jboss-as</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <targetGroupId>org.jboss.as</targetGroupId>
+                <targetArtifactIdPrefix>jboss-as</targetArtifactIdPrefix>
+                <version.org.jboss.as>7.2.0.Final</version.org.jboss.as>
+                <version.org.jboss.as7>7.1.0.Final</version.org.jboss.as7>
+                <version.org.jboss.jandex>1.0.3.Final</version.org.jboss.jandex>
+                <version.org.jboss.jboss-dmr>1.1.6.Final</version.org.jboss.jboss-dmr>
+                <version.org.jboss.logging>3.1.2.GA</version.org.jboss.logging>
+                <version.org.jboss.modules>1.2.0.Final</version.org.jboss.modules>
+                <version.org.jboss.msc>1.0.4.GA</version.org.jboss.msc>
+                <version.org.jboss.spec.javax.ejb>1.0.2.Final</version.org.jboss.spec.javax.ejb>
+                <version.org.jboss.spec.javax.interceptor>1.0.1.Final</version.org.jboss.spec.javax.interceptor>
+                <version.org.jboss.spec.javax.resource>1.0.1.Final</version.org.jboss.spec.javax.resource>
+                <version.org.jboss.spec.javax.servlet>1.0.2.Final</version.org.jboss.spec.javax.servlet>
+                <version.org.jboss.staxmapper>1.1.0.Final</version.org.jboss.staxmapper>
+                <version.org.jboss.test>1.1.9.GA</version.org.jboss.test>
+                <version.org.jboss.vfs>3.1.0.Final</version.org.jboss.vfs>
+            </properties>
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jboss.as</groupId>
+                        <artifactId>jboss-as-controller</artifactId>
+                        <version>${version.org.jboss.as7}</version>
+                        <!-- This version should be upgraded but it will require some major refactoring.  This needs it's own Jira. -->
+                        <scope>provided</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jboss.as</groupId>
+                        <artifactId>jboss-as-ee</artifactId>
+                        <version>${version.org.jboss.as}</version>
+                        <scope>provided</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jboss.as</groupId>
+                        <artifactId>jboss-as-naming</artifactId>
+                        <version>${version.org.jboss.as}</version>
+                        <scope>provided</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jboss.as</groupId>
+                        <artifactId>jboss-as-server</artifactId>
+                        <version>${version.org.jboss.as7}</version>
+                        <!-- This version should be upgraded but it will require some major refactoring.  This needs it's own Jira. -->
+                        <scope>provided</scope>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>org.jboss</groupId>
+                        <artifactId>jboss-dmr</artifactId>
+                        <version>${version.org.jboss.jboss-dmr}</version>
+                        <scope>provided</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jboss.logging</groupId>
+                        <artifactId>jboss-logging</artifactId>
+                        <version>${version.org.jboss.logging}</version>
+                        <scope>provided</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jboss.modules</groupId>
+                        <artifactId>jboss-modules</artifactId>
+                        <version>${version.org.jboss.modules}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jboss.msc</groupId>
+                        <artifactId>jboss-msc</artifactId>
+                        <version>${version.org.jboss.msc}</version>
+                        <scope>provided</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jboss</groupId>
+                        <artifactId>jboss-vfs</artifactId>
+                        <version>${version.org.jboss.vfs}</version>
+                        <scope>provided</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jboss</groupId>
+                        <artifactId>staxmapper</artifactId>
+                        <version>${version.org.jboss.staxmapper}</version>
+                        <scope>provided</scope>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>org.jboss.spec.javax.resource</groupId>
+                        <artifactId>jboss-connector-api_1.6_spec</artifactId>
+                        <version>${version.org.jboss.spec.javax.resource}</version>
+                        <scope>provided</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jboss.spec.javax.ejb</groupId>
+                        <artifactId>jboss-ejb-api_3.1_spec</artifactId>
+                        <version>${version.org.jboss.spec.javax.ejb}</version>
+                        <scope>provided</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jboss.spec.javax.interceptor</groupId>
+                        <artifactId>jboss-interceptors-api_1.1_spec</artifactId>
+                        <version>${version.org.jboss.spec.javax.interceptor}</version>
+                        <scope>provided</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jboss.spec.javax.servlet</groupId>
+                        <artifactId>jboss-servlet-api_3.0_spec</artifactId>
+                        <version>${version.org.jboss.spec.javax.servlet}</version>
+                        <scope>provided</scope>
+                    </dependency>
+
+                </dependencies>
+            </dependencyManagement>
+        </profile>
+        <profile>
+            <id>target-wildfly</id>
+            <properties>
+                <targetGroupId>org.wildfly</targetGroupId>
+                <targetArtifactIdPrefix>wildfly</targetArtifactIdPrefix>
+                <version.org.wildfly>8.0.0.Alpha1</version.org.wildfly>
+                <version.org.jboss.jandex>1.1.0.Final</version.org.jboss.jandex>
+                <version.org.jboss.jboss-dmr>1.2.0.Final</version.org.jboss.jboss-dmr>
+                <version.org.jboss.logging>3.1.3.GA</version.org.jboss.logging>
+                <version.org.jboss.modules>1.2.0.Final</version.org.jboss.modules>
+                <version.org.jboss.msc>1.2.0.CR1</version.org.jboss.msc>
+                <version.org.jboss.spec.javax.ejb>1.0.2.Final</version.org.jboss.spec.javax.ejb>
+                <version.org.jboss.spec.javax.interceptor>1.0.1.Final</version.org.jboss.spec.javax.interceptor>
+                <version.org.jboss.spec.javax.resource>1.0.1.Final</version.org.jboss.spec.javax.resource>
+                <version.org.jboss.spec.javax.servlet>1.0.2.Final</version.org.jboss.spec.javax.servlet>
+                <version.org.jboss.staxmapper>1.1.0.Final</version.org.jboss.staxmapper>
+                <version.org.jboss.test>1.2.0.Final</version.org.jboss.test>
+                <version.org.jboss.vfs>3.2.2.Final</version.org.jboss.vfs>
+            </properties>
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.wildfly</groupId>
+                        <artifactId>wildfly-controller</artifactId>
+                        <version>${version.org.wildfly}</version>
+                        <scope>provided</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.wildfly</groupId>
+                        <artifactId>wildfly-ee</artifactId>
+                        <version>${version.org.wildfly}</version>
+                        <scope>provided</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.wildfly</groupId>
+                        <artifactId>wildfly-naming</artifactId>
+                        <version>${version.org.wildfly}</version>
+                        <scope>provided</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.wildfly</groupId>
+                        <artifactId>wildfly-server</artifactId>
+                        <version>${version.org.wildfly}</version>
+                        <scope>provided</scope>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>org.jboss</groupId>
+                        <artifactId>jboss-dmr</artifactId>
+                        <version>${version.org.jboss.jboss-dmr}</version>
+                        <scope>provided</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jboss.logging</groupId>
+                        <artifactId>jboss-logging</artifactId>
+                        <version>${version.org.jboss.logging}</version>
+                        <scope>provided</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jboss.modules</groupId>
+                        <artifactId>jboss-modules</artifactId>
+                        <version>${version.org.jboss.modules}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jboss.msc</groupId>
+                        <artifactId>jboss-msc</artifactId>
+                        <version>${version.org.jboss.msc}</version>
+                        <scope>provided</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jboss</groupId>
+                        <artifactId>jboss-vfs</artifactId>
+                        <version>${version.org.jboss.vfs}</version>
+                        <scope>provided</scope>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jboss</groupId>
+                        <artifactId>staxmapper</artifactId>
+                        <version>${version.org.jboss.staxmapper}</version>
+                        <scope>provided</scope>
+                    </dependency>
+
+                </dependencies>
+            </dependencyManagement>
         </profile>
     </profiles>
 </project>

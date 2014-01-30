@@ -21,8 +21,8 @@
         
         <!-- Compile (global dependencies) -->
         <dependency>
-            <groupId>org.jboss.as</groupId>
-            <artifactId>jboss-as-naming</artifactId>
+            <groupId>${targetGroupId}</groupId>
+            <artifactId>${targetArtifactIdPrefix}-naming</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>

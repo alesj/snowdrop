@@ -21,8 +21,8 @@
             <artifactId>aopalliance</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.jboss.as</groupId>
-            <artifactId>jboss-as-naming</artifactId>
+            <groupId>${targetGroupId}</groupId>
+            <artifactId>${targetArtifactIdPrefix}-naming</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -59,7 +59,7 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <dependencies>org.jboss.as.naming,org.jboss.modules</dependencies>
+                            <dependencies>${targetGroupId}.naming,org.jboss.modules</dependencies>
                         </manifestEntries>
                     </archive>
                 </configuration>
