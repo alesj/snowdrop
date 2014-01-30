@@ -32,7 +32,6 @@
         <version.aopalliance>1.0</version.aopalliance>
         <version.junit>4.10</version.junit>
         <version.org.aspectj>1.7.3</version.org.aspectj>
-        <version.org.javax.resource>1.0.1.Final</version.org.javax.resource>
         <version.org.jboss.as>7.2.0.Final</version.org.jboss.as>
         <version.org.jboss.as7>7.1.0.Final</version.org.jboss.as7>
         <version.org.jboss.jandex>1.0.3.Final</version.org.jboss.jandex>
@@ -42,6 +41,7 @@
         <version.org.jboss.msc>1.0.4.GA</version.org.jboss.msc>
         <version.org.jboss.spec.javax.ejb>1.0.2.Final</version.org.jboss.spec.javax.ejb>
         <version.org.jboss.spec.javax.interceptor>1.0.1.Final</version.org.jboss.spec.javax.interceptor>
+        <version.org.jboss.spec.javax.resource>1.0.1.Final</version.org.jboss.spec.javax.resource>
         <version.org.jboss.spec.javax.servlet>1.0.2.Final</version.org.jboss.spec.javax.servlet>
         <version.org.jboss.staxmapper>1.1.0.Final</version.org.jboss.staxmapper>
         <version.org.jboss.test>1.1.9.GA</version.org.jboss.test>
@@ -181,7 +181,7 @@
             <dependency>
                 <groupId>org.jboss.spec.javax.resource</groupId>
                 <artifactId>jboss-connector-api_1.6_spec</artifactId>
-                <version>${version.org.javax.resource}</version>
+                <version>${version.org.jboss.spec.javax.resource}</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
