@@ -3,8 +3,9 @@ SNOWDROP
 
 Snowdrop is a utility package that contains JBoss-specific extensions to the Spring Framework. These extensions are either:
 
-1. Extensions to Spring Framework classes that can be used wherever the generic implementations provided by the framework do not integrate correctly with JBoss Enterprise Platforms.
-2. Extensions for deploying and running Spring applications with the JBoss Enterprise Platforms (JBoss Enterprise Application Platform and JBoss Enterprise Web Platform).
+1. Extensions to Spring Framework classes that can be used wherever the generic implementations provided by the framework 
+do not integrate correctly with JBoss Enterprise Application Platform.
+2. Extensions for deploying and running Spring applications with the JBoss Enterprise Application Platform.
 
 Usage/Setup:
 ---------
