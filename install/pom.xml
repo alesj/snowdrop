@@ -9,7 +9,6 @@
 
     <properties>
         <version.snowdrop>3.1.1-SNAPSHOT</version.snowdrop>
-        <version.spring>4.0.0.RELEASE</version.spring>
         <spring.artifacts>snowdrop-module-spring-4.0</spring.artifacts>
         <spring.module.path>src/main/spring/module/</spring.module.path>
     </properties>
