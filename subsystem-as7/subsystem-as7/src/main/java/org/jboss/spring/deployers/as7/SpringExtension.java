@@ -33,6 +33,7 @@ import java.util.Locale;
 
 import javax.xml.stream.XMLStreamException;
 
+
 //import org.jboss.as.controller.AttributeDefinition;
 import org.jboss.as.controller.Extension;
 import org.jboss.as.controller.ExtensionContext;
@@ -71,7 +72,8 @@ public class SpringExtension implements Extension {
     
     private static final int MANAGEMENT_API_MAJOR_VERSION = 1;
     private static final int MANAGEMENT_API_MINOR_VERSION = 2;
-    private static final int MANAGEMENT_API_MICRO_VERSION = 0;
+    @SuppressWarnings("unused")
+	private static final int MANAGEMENT_API_MICRO_VERSION = 0;
 
     private static SpringSubsystemElementParser parser = new SpringSubsystemElementParser();
 

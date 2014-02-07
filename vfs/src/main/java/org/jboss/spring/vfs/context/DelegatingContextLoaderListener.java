@@ -45,7 +45,7 @@ public class DelegatingContextLoaderListener extends ContextLoaderListener {
     private static class VFSContextLoader extends ContextLoader {
 
         @Override
-        protected Class determineContextClass(ServletContext servletContext) throws ApplicationContextException {
+        protected Class<?> determineContextClass(ServletContext servletContext) throws ApplicationContextException {
             return ContextClassUtil.getVFSWebContextClass();
 
         }

@@ -35,7 +35,7 @@ public class ContextClassUtil {
 
     public static boolean isJBossAS5orHigher() {
         try {
-            Class jBossVersionClass = DelegatingContextLoaderListener.class.getClassLoader().loadClass("org.jboss.Version");
+            Class<?> jBossVersionClass = DelegatingContextLoaderListener.class.getClassLoader().loadClass("org.jboss.Version");
             Object versionObject = ReflectionUtils.invokeMethod(ReflectionUtils.findMethod(jBossVersionClass, "getInstance"), null);
             Integer majorVersion = (Integer) ReflectionUtils.invokeMethod(ReflectionUtils.findMethod(jBossVersionClass, "getMajor"), versionObject);
             // For JBoss AS versions 5 and higher
@@ -48,7 +48,7 @@ public class ContextClassUtil {
         return false;
     }
 
-    public static Class getVFSWebContextClass() {
+    public static Class<?> getVFSWebContextClass() {
         try {
             return ClassUtils.forName(VFS_APPLICATION_CONTEXT_CLASS_NAME);
         } catch (ClassNotFoundException ex) {

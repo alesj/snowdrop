@@ -104,7 +104,6 @@ public class VFSResource extends AbstractResource {
         return VFSUtil.getPhysicalFile(file);
     }
 
-    @SuppressWarnings("deprecation")
     public Resource createRelative(String relativePath) throws IOException {
         //VirtualFile.findChild will not scan the parent or current directory
         if (relativePath.startsWith(".") || relativePath.indexOf("/") == -1) {

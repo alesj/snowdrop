@@ -98,7 +98,7 @@ public class NamedXmlApplicationContext extends VFSClassPathXmlApplicationContex
                 }
 
                 @Override
-                public Iterator getPrefixes(String namespaceURI) {
+                public Iterator<String> getPrefixes(String namespaceURI) {
                     return Collections.singleton("beans").iterator();
                 }
             });

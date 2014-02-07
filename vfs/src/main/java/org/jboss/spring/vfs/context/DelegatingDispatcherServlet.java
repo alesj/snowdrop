@@ -29,8 +29,10 @@ import org.springframework.web.servlet.DispatcherServlet;
  */
 public class DelegatingDispatcherServlet extends DispatcherServlet {
 
-    @Override
-    public Class getContextClass() {
+	private static final long serialVersionUID = -6443848547408265392L;
+
+	@Override
+    public Class<?> getContextClass() {
         if (ContextClassUtil.isJBossAS5orHigher()) {
             return ContextClassUtil.getVFSWebContextClass();
         } else {

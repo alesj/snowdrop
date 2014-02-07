@@ -65,15 +65,15 @@ public class VFSClassPathXmlApplicationContext extends ClassPathXmlApplicationCo
         super(configLocations, refresh, parent);
     }
 
-    public VFSClassPathXmlApplicationContext(String path, Class clazz) throws BeansException {
+    public VFSClassPathXmlApplicationContext(String path, Class<?> clazz) throws BeansException {
         super(path, clazz);
     }
 
-    public VFSClassPathXmlApplicationContext(String[] paths, Class clazz) throws BeansException {
+    public VFSClassPathXmlApplicationContext(String[] paths, Class<?> clazz) throws BeansException {
         super(paths, clazz);
     }
 
-    public VFSClassPathXmlApplicationContext(String[] paths, Class clazz, ApplicationContext parent) throws BeansException {
+    public VFSClassPathXmlApplicationContext(String[] paths, Class<?> clazz, ApplicationContext parent) throws BeansException {
         super(paths, clazz, parent);
     }
 

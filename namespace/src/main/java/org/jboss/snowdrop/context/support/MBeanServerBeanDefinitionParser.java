@@ -37,10 +37,6 @@ public class MBeanServerBeanDefinitionParser extends AbstractBeanDefinitionParse
 
     public static final String DEFAULT_JBOSS_MBEAN_SERVER_BEAN_NAME = "mbeanServer";
 
-    private static final String MBEAN_SERVER_LOCATOR_CLASS_NAME = "org.jboss.mx.util.MBeanServerLocator";
-
-    private static final String MBEAN_SERVER_LOCATOR_METHOD_NAME = "locateJBoss";
-
     public static final String DEFAULT_SPRING_MBEAN_SERVER_LOCATOR = "org.springframework.jmx.support.MBeanServerFactoryBean";
 
     public static final String LOCATE_EXISTING_SERVER_PROPERTY_NAME = "locateExistingServerIfPossible";
