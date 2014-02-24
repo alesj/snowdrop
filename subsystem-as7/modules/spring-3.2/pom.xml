@@ -40,7 +40,7 @@
     <name>Snowdrop AS7 Subsystem - Spring 3.2 Module</name>
 
     <properties>
-        <version.spring>3.2.6.RELEASE</version.spring>
+        <version.spring>3.2.8.RELEASE</version.spring>
         <version.org.aspectj>1.7.4</version.org.aspectj>
     </properties>
 

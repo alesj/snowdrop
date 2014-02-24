@@ -11,7 +11,13 @@ What-it-does
 
 It copies the necessary snowdrop and spring jars in their proper location within ${JBOSS_HOME}/modules.
 
-It also creates a standalone-snowdrop.xml that registers the snowdrop extension and subsystem, removing the need for manual installation.
+It also creates a standalone-snowdrop.xml that registers the snowdrop extension and subsystem, removing the need for manual 
+installation. It adds the following lines into `extensions` and `profile`:
+
+        <extension module="org.jboss.snowdrop"/>
+        
+        <subsystem xmlns="urn:jboss:domain:snowdrop:1.0"/>
+
 
 How-to-use
 -----------

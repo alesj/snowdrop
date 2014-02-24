@@ -21,14 +21,16 @@ Supported Version:
 
 * JBoss AS 7.2.0 - (This version of JBoss has a problem with Hibernate, specifically Hibernate 4.1.0.CR1)
 
-* JBoss EAP 6.0.0, 6.0.1, 6.1.0, 6.1.1
+* JBoss EAP 6.0.0, 6.0.1, 6.1.0, 6.1.1, 6.2.0
 
-*If you need to use JBoss AS 5/6 or EAP 5 then please use Snowdrop 2.1.1.Final (it is Tagged in this repo).  That version still supports the older versions of JBoss.*
+_NOTE: If you need to use JBoss AS 5/6 or EAP 5 then please use Snowdrop 2.1.1.Final (it is Tagged in this repo).  That 
+version still supports the older versions of JBoss._
 
 Build:
 ---------
 
-_NOTE: You don't need to build if you wish to use a released version of snowdrop, just continue from the Install section. It will use the libraries in Maven._
+_NOTE: You don't need to build if you wish to use a released version of snowdrop, just continue from the Install section. 
+It will use the libraries in Maven._
 
 		mvn clean install
 
