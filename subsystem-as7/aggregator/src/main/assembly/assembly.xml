@@ -117,7 +117,8 @@
             <outputDirectory>module-deployer/org/jboss/snowdrop/main</outputDirectory>
             <includes>
                 <include>snowdrop-vfs*.jar</include>
-                <include>snowdrop-interceptors*.jar</include>
+                <include>snowdrop-interceptors.jar</include>
+                <include>snowdrop-interceptors-jandex.jar</include>
             </includes>
         </fileSet>
         <fileSet>
