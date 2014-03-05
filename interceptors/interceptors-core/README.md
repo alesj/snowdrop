@@ -1,7 +1,7 @@
-Snowdrop JBoss Subsystem
-========================
+Snowdrop Interceptors Core
+==========================
 
 Purpose:
 --------
 
-Bootstraps and registers the application contexts to be used by your Java EE applications.
+Contains utility classes used internally by the Spring deployer. It is not intended for direct use by developers.
