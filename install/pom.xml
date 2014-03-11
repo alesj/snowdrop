@@ -257,6 +257,7 @@
                                         <s>urn:jboss:domain:1.2</s>
                                         <s2>urn:jboss:domain:1.3</s2>
                                         <ss>urn:jboss:domain:snowdrop:1.0</ss>
+                                        <s4>urn:jboss:domain:1.2</s4>
                                     </namespaceContexts>
                                 </configuration>
                             </execution>
