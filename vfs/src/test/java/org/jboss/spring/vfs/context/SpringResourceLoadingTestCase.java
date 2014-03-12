@@ -35,7 +35,8 @@ public class SpringResourceLoadingTestCase {
         VFSXmlWebApplicationContext context = new VFSXmlWebApplicationContext();
         context.setConfigLocations(new String[]{"classpath:spring-config/spring-app-config.xml"});
         context.refresh();
-        String myBean = (String) context.getBean("myBean");
+        @SuppressWarnings("unused")
+		String myBean = (String) context.getBean("myBean");
     }
 
 
@@ -44,6 +45,7 @@ public class SpringResourceLoadingTestCase {
         VFSXmlWebApplicationContext context = new VFSXmlWebApplicationContext();
         context.setConfigLocations(new String[]{"classpath*:spring-config/spring-app-config.xml"});
         context.refresh();
+        @SuppressWarnings("unused")
         String myBean = (String) context.getBean("myBean");
     }
 
@@ -52,6 +54,7 @@ public class SpringResourceLoadingTestCase {
         VFSXmlWebApplicationContext context = new VFSXmlWebApplicationContext();
         context.setConfigLocations(new String[]{"classpath:/spring-config/spring-*.xml"});
         context.refresh();
+        @SuppressWarnings("unused")
         String myBean = (String) context.getBean("myBean");
     }
 
@@ -60,6 +63,7 @@ public class SpringResourceLoadingTestCase {
         VFSXmlWebApplicationContext context = new VFSXmlWebApplicationContext();
         context.setConfigLocations(new String[]{"classpath*:/spring-config/spring-*.xml"});
         context.refresh();
+        @SuppressWarnings("unused")
         String myBean = (String) context.getBean("myBean");
         Resource r = context.getResource("classpath:/spring-config/spring-app-config.xml");
         Assert.assertNotNull(r);
@@ -70,6 +74,7 @@ public class SpringResourceLoadingTestCase {
         VFSXmlWebApplicationContext context = new VFSXmlWebApplicationContext();
         context.setConfigLocations(new String[]{"classpath:/org/jboss/spring/vfs/context/spring-*.xml"});
         context.refresh();
+        @SuppressWarnings("unused")
         String myBean = (String) context.getBean("myBean");
         Resource r = context.getResource("classpath:/spring-config/spring-app-config.xml");
         Assert.assertNotNull(r);
