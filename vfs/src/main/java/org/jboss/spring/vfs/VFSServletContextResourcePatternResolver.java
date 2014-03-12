@@ -69,12 +69,28 @@ public class VFSServletContextResourcePatternResolver extends ServletContextReso
         }
     }
 
-    protected Resource convertClassLoaderURL(URL url) {
+    /*protected Resource convertClassLoaderURL(URL url) {
         try {
             Object file = VFSUtil.invokeVfsMethod(VFSUtil.VFS_METHOD_GET_ROOT_URL, null, url);
             return new VFSResource(file);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }*/
+    
+    //Potential Fix
+    
+    protected Resource convertClassLoaderURL(final URL url) {
+    // Delegate to Spring if the protocol is not VFS
+    if ((url != null) && !url.getProtocol().contains("vfs")) {
+        return super.convertClassLoaderURL(url);
     }
+
+    try {
+        final Object file = VFSUtil.invokeVfsMethod(VFSUtil.VFS_METHOD_GET_ROOT_URL, null, url);
+        return new VFSResource(file);
+    } catch (final Exception e) {
+        throw new RuntimeException(e);
+    }
+   }
 }
