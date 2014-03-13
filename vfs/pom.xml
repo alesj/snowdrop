@@ -31,7 +31,7 @@
     <parent>
         <groupId>org.jboss.snowdrop</groupId>
         <artifactId>snowdrop-parent</artifactId>
-        <version>3.1.1-SNAPSHOT</version>
+        <version>3.1.1.Final</version>
     </parent>
     
     <artifactId>snowdrop-vfs</artifactId>
