@@ -4,20 +4,20 @@
 %BOOK_ENTITIES;
 ]>
 <section>
-	<title>We Need Feedback!</title>
-	<indexterm>
-		<primary>feedback</primary>
-		<secondary>contact information for this manual</secondary>
-	</indexterm>
-	<para>
-		If you find a typographical error in this manual, or if you have thought of a way to make this manual better, we would love to hear from you! Please submit a report in JIRA: <ulink url="http://jira.jboss.org/">http://jira.jboss.org/</ulink> against the project <application>Snowdrop</application> and component <emphasis>Documentation</emphasis>.
-	</para>
-	<para>
-		When submitting a bug report, be sure to mention the manual's identifier: <citetitle>&PRODUCT;  1.2 User Guide</citetitle>.
-	</para>
-	<para>
-		If you have a suggestion for improving the documentation, try to be as specific as possible when describing it. If you have found an error, please include the section number and some of the surrounding text so we can find it easily.
-	</para>
+    <title>We Need Feedback!</title>
+    <indexterm>
+        <primary>feedback</primary>
+        <secondary>contact information for this manual</secondary>
+    </indexterm>
+    <para>
+        If you find a typographical error in this manual, or if you have thought of a way to make this manual better, we would love to hear from you! Please submit a report in JIRA: <ulink url="http://jira.jboss.org/">http://jira.jboss.org/</ulink> against the project <application>Snowdrop</application> and component <emphasis>Documentation</emphasis>.
+    </para>
+    <para>
+        When submitting a bug report, be sure to mention the manual's identifier: <citetitle>&PRODUCT;  1.2 User Guide</citetitle>.
+    </para>
+    <para>
+        If you have a suggestion for improving the documentation, try to be as specific as possible when describing it. If you have found an error, please include the section number and some of the surrounding text so we can find it easily.
+    </para>
 </section>
 
 

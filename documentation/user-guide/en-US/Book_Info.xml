@@ -4,27 +4,27 @@
 %BOOK_ENTITIES;
 ]>
 <bookinfo id="book-Snowdrop_User_Guide">
-	<title>Snowdrop User Guide</title>
-	<productnumber>2.0</productnumber>
-	<edition>2.0.0</edition>
-	<pubsnumber>3</pubsnumber>
-	<abstract>
-		<para>
-			This book is a guide for using Snowdrop.
-		</para>
-	</abstract>
-	<corpauthor>
-		<inlinemediaobject>
-			<imageobject>
-				<imagedata fileref="Common_Content/images/title_logo.svg" format="SVG" />
-			</imageobject>
-		</inlinemediaobject>
-	</corpauthor>
-	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Common_Content/Legal_Notice.xml">
+    <title>Snowdrop User Guide</title>
+    <productnumber>2.0</productnumber>
+    <edition>2.0.0</edition>
+    <pubsnumber>3</pubsnumber>
+    <abstract>
+        <para>
+            This book is a guide for using Snowdrop.
+        </para>
+    </abstract>
+    <corpauthor>
+        <inlinemediaobject>
+            <imageobject>
+                <imagedata fileref="Common_Content/images/title_logo.svg" format="SVG" />
+            </imageobject>
+        </inlinemediaobject>
+    </corpauthor>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Common_Content/Legal_Notice.xml">
     <xi:fallback xmlns:xi="http://www.w3.org/2001/XInclude">
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="fallback_content/Legal_Notice.xml"/>
     </xi:fallback>
   </xi:include>
-	<xi:include href="Author_Group.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+    <xi:include href="Author_Group.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 </bookinfo>
 

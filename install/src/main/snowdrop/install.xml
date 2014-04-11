@@ -22,11 +22,11 @@
 -->
 
 <processor>
-	<remove>
-		<name>//s:extension[@module='org.jboss.snowdrop']</name>
-		<strict>false</strict>
-	</remove>
-	
+    <remove>
+        <name>//s:extension[@module='org.jboss.snowdrop']</name>
+        <strict>false</strict>
+    </remove>
+    
     <add>
         <inside>//s:extensions</inside>
         <value>
@@ -37,10 +37,10 @@
         <strict>false</strict>
     </add>
     
-    <remove>	
-		<name>//ss:subsystem</name>
-		<strict>false</strict>
-	</remove>
+    <remove>    
+        <name>//ss:subsystem</name>
+        <strict>false</strict>
+    </remove>
     <add>
         <inside>//s:profile</inside>
         <value>
@@ -100,5 +100,5 @@
         </value>
         <strict>false</strict>
     </add>
-	
+    
 </processor>

@@ -103,5 +103,5 @@ Copyright 2006 Red Hat, Inc.  All rights reserved.
 "JBoss" and the JBoss logo are registered trademarks of Red Hat, Inc.  
 All other trademarks are the property of their respective owners. 
 
-	Page 1 of 1	18 October 2006
+    Page 1 of 1    18 October 2006
 

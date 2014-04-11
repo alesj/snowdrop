@@ -36,7 +36,7 @@ public class SpringResourceLoadingTestCase {
         context.setConfigLocations(new String[]{"classpath:spring-config/spring-app-config.xml"});
         context.refresh();
         @SuppressWarnings("unused")
-		String myBean = (String) context.getBean("myBean");
+        String myBean = (String) context.getBean("myBean");
     }
 
 

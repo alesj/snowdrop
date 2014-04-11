@@ -32,7 +32,7 @@ Build:
 _NOTE: You don't need to build if you wish to use a released version of snowdrop, just continue from the Install section. 
 It will use the libraries in Maven._
 
-		mvn clean install
+        mvn clean install
 
 Install snowdrop:
 -----------------
@@ -40,9 +40,9 @@ Install snowdrop:
 **Automatic:**
 See the complete [instructions here](https://github.com/snowdrop/snowdrop/tree/master/install).
 
-		cd install
+        cd install
 
-		mvn package -DJBOSS_HOME=/path/to/jboss_home -P${desired-spring-version} -Dversion.snowdrop=${snowdrop.version}
+        mvn package -DJBOSS_HOME=/path/to/jboss_home -P${desired-spring-version} -Dversion.snowdrop=${snowdrop.version}
 
 **Manual:**
 

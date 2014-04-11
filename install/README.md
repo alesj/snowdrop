@@ -4,7 +4,7 @@ Snowdrop Installer
 Purpose
 --------
 
-To enable ease of installation of the snowdrop module in the standalone version of EAP.
+To enable ease of installation of the snowdrop module into the standalone version of EAP.
 
 What-it-does
 ------------
@@ -30,12 +30,12 @@ How-to-use
 
 Install with defaults. By default Snowdrop version 3.1.2-SNAPSHOT and spring 4.0.2.RELEASE will be installed.
 
-		mvn package -DJBOSS_HOME=/path/to/jboss_home
+        mvn package -DJBOSS_HOME=/path/to/jboss_home
 
 **OR**
 
 Install and set Spring and Snowdrop versions:
 
-		mvn package -DJBOSS_HOME=/path/to/jboss_home -P${desired-spring-version} -Dversion.snowdrop=${desired-snowdrop-version}
+        mvn package -DJBOSS_HOME=/path/to/jboss_home -P${desired-spring-version} -Dversion.snowdrop=${desired-snowdrop-version}
 
 There are four possible spring version profiles: **spring-2.5**, **spring-3**, **spring-3.1**, **spring-3.2**, and **spring-4.0**(*the default*).
