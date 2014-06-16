@@ -305,6 +305,7 @@
                                         <s2>urn:jboss:domain:2.0</s2>
                                         <ss>urn:jboss:domain:snowdrop:1.0</ss>
                                         <s4>urn:jboss:domain:1.5</s4>
+                                        <s6>urn:jboss:domain:1.6</s6>
                                     </namespaceContexts>
                                 </configuration>
                             </execution>
