@@ -77,6 +77,13 @@
         </dependency>
         <dependency>
             <groupId>org.jboss.snowdrop</groupId>
+            <artifactId>snowdrop-module-spring-4.1</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.snowdrop</groupId>
             <artifactId>snowdrop-subsystem-as7</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>

@@ -34,13 +34,13 @@
         <version>3.1.2-SNAPSHOT</version>
     </parent>
 
-    <artifactId>snowdrop-module-spring-3.2</artifactId>
+    <artifactId>snowdrop-module-spring-4.1</artifactId>
     <packaging>pom</packaging>
     
-    <name>Snowdrop AS7 Subsystem - Spring 3.2 Module</name>
+    <name>Snowdrop AS7 Subsystem - Spring 4.1 Module</name>
 
     <properties>
-        <version.spring>3.2.12.RELEASE</version.spring>
+        <version.spring>4.1.2.RELEASE</version.spring>
         <version.org.aspectj>1.7.4</version.org.aspectj>
     </properties>
 
@@ -118,11 +118,11 @@
                             <goal>single</goal>
                         </goals>
                         <configuration>
-                            <finalName>spring-3.2-module</finalName>
+                            <finalName>spring-4.1-module</finalName>
                             <appendAssemblyId>false</appendAssemblyId>
                             <attach>true</attach>
                             <descriptors>
-                                <descriptor>${basedir}/src/main/assembly/spring-3.2-module-without-dep.xml</descriptor>
+                                <descriptor>${basedir}/src/main/assembly/spring-4.1-module-without-dep.xml</descriptor>
                             </descriptors>
                         </configuration>
                     </execution>
@@ -133,11 +133,11 @@
                             <goal>single</goal>
                         </goals>
                         <configuration>
-                            <finalName>spring-3.2-module-with-dep</finalName>
+                            <finalName>spring-4.1-module-with-dep</finalName>
                             <appendAssemblyId>false</appendAssemblyId>
                             <attach>false</attach>
                             <descriptors>
-                                <descriptor>${basedir}/src/main/assembly/spring-3.2-module.xml</descriptor>
+                                <descriptor>${basedir}/src/main/assembly/spring-4.1-module.xml</descriptor>
                             </descriptors>
                         </configuration>
                     </execution>
