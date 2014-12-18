@@ -1,132 +1,168 @@
-Snowdrop Guide
-==============
+= Snowdrop Guide
+Joshua Wilson <josh@redhat.com>
+v3.1.2, 2014-12-16
+:page-layout: base
+:description: This guide explains the use of Snowdrop on Red Hat JBoss EAP/AS.
+:keywords: Snowdrop, JBoss, Spring
+:compat-mode!:
+:imagesdir: ./images
+:includedir: ./_includes
+:toc: 
+:toc-placement!:
+:toclevels: 5 
+:sectnumlevels: 5
+:sectlinks:
+:experimental:
+:table-caption!:
+:example-caption!:
+:figure-caption!:
+:linkattrs:
+:icons: font
 
-*Abstract*
+// URLs
+:docs: http://snowdrop.jboss.org/documentation
 
-This book is a guide for using Snowdrop with JBoss Web Framework Kit.
-link:#idm209462534352[2. Introduction to Snowdrop]
-link:#idm209475312032[3. Component Usage]
-link:#idm209477104384[3.1. VFS-enabled Application Contexts]
-link:#idm209474600240[3.2. The JBoss Custom Namespace]
-link:#idm209503977872[3.2.1. Accessing the Default JBoss MBean Server]
-link:#idm209470020288[3.2.2. JCA/JMS Support Beans]
-link:#idm209470016192[3.3. Load-time weaving]
-link:#idm209469997936[3.4. The Spring Deployer]
-link:#idm209469996512[3.4.1. JBoss + Spring + EJB 3.0 Integration]
-link:#idm209469991344[3.4.2. Installation on Red Hat JBoss Enterprise Application Platform 6]
-link:#idm209470992560[3.4.3. Defining the JNDI name]
-link:#idm209470989312[3.4.4. Parent Bean factories]
-link:#idm209470987008[3.4.5. Injection into EJBs]
-link:#appe-Snowdrop_Developer_Guide-Migration_Notes[A. Migration Notes]
-link:#idm209475927824[A.1. Snowdrop 3.1.1.Final-redhat-1]
-link:#idm209502995040[A.1.1. Deployers and Interceptors]
 
-== 2. Introduction to Snowdrop
-Snowdrop is a utility package that contains JBoss-specific extensions to the Spring Framework. These extensions are either:
-* extensions to Spring Framework classes that can be used wherever the generic implementations provided by the framework do not integrate correctly with JBoss Enterprise Application Platform.
+[abstract]
+This book is a guide for using Snowdrop with JBoss AS.
+
+toc::[]
+
+:numbered:
+
+== Introduction to Snowdrop
+
+Snowdrop is a utility package that contains JBoss-specific extensions to the Spring Framework. These are:
+
+* extensions to Spring Framework classes that can be used wherever the generic implementations provided by the framework 
+do not integrate correctly with JBoss Enterprise Application Platform.
 * extensions for deploying and running Spring applications with the JBoss Enterprise Application Platform.
 
 The Snowdrop distribution contains two types of artifacts:
+
 Utility archives::
   Libraries that contain utility classes and can be packaged in applications
+  
 Server-side components::
   Pre-packaged components that can be installed in the application server as subsystems.
++
+The server-side components may include some of the utility libraries, where they are needed by the deployer or, 
+respectively, subsystem.
 
-The server-side components may include some of the utility libraries, where they are needed by the deployer or, respectively, subsystem.
-Snowdrop provides the following utility libraries:
-`snowdrop-vfs.jar`::
-  A library that contains the support classes for resource scanning (scanning the classpath for bean definitions, or using "classpath*:"-style patterns).
-`snowdrop-weaving.jar`::
+'''
+[.lead]
+Snowdrop provides the following +++<u>utility</u>+++ libraries: 
+
+`*snowdrop-vfs.jar*`::
+  A library that contains the support classes for resource scanning (scanning the classpath for bean definitions, 
+  or using "classpath*:"-style patterns).
+
+`*snowdrop-weaving.jar*`::
   A library that contains the support classes for load-time weaving.
-`snowdrop-interceptors.jar`::
+
+`*snowdrop-interceptors.jar*`::
   Contains utility classes used internally by the Spring deployer. It is not intended for direct use by developers.
-`snowdrop-namespace.jar`::
-  Custom namespace for easier configuration of beans that need access to JBoss internals (JMX server locator, JCA activation spec and resource adapter for JMS endpoints)
 
-Snowdrop provides the following pre-packaged deployers and subsystems:
-`snowdrop-subsystem-as7.zip`::
-  This is a packaged distribution of the Spring subsystem for Red Hat JBoss Enterprise Application Platform 6, which bootstraps and registers the application contexts to be used by your Java EE applications.
+`*snowdrop-namespace.jar*`::
+  Custom namespace for easier configuration of beans that need access to JBoss internals (JMX server locator, JCA 
+  activation spec and resource adapter for JMS endpoints)
+
+[.lead]
+Snowdrop provides the following +++<u>server-side pre-packaged</u>+++ deployers and subsystems:
+
+`*snowdrop-subsystem-as7.zip*`::
+  This is a packaged distribution of the Spring subsystem for Red Hat JBoss Enterprise Application Platform 6, which 
+  bootstraps and registers the application contexts to be used by your Java EE applications.
 
 
-== 3. Snowdrop Usage
+== Snowdrop Usage
+
+[abstract]
 This chapter details how to use each of the components included in Snowdrop.
 
-link:#idm209477104384[3.1. VFS-enabled Application Contexts]
-link:#idm209474600240[3.2. The JBoss Custom Namespace]
-link:#idm209503977872[3.2.1. Accessing the Default JBoss MBean Server]
-link:#idm209470020288[3.2.2. JCA/JMS Support Beans]
-link:#idm209470016192[3.3. Load-time weaving]
-link:#idm209469997936[3.4. The Spring Deployer]
-link:#idm209469996512[3.4.1. JBoss + Spring + EJB 3.0 Integration]
-link:#idm209469991344[3.4.2. Installation on Red Hat JBoss Enterprise Application Platform 6]
-link:#idm209470992560[3.4.3. Defining the JNDI name]
-link:#idm209470989312[3.4.4. Parent Bean factories]
-link:#idm209470987008[3.4.5. Injection into EJBs]
 
-=== ⁠3.1. VFS-enabled Application Contexts
+=== VFS-enabled Application Contexts
 
-*Note*
+NOTE: From Spring 3.0 onward, the `ApplicationContext` implementations shipped with the Spring framework are VFS-compatible. 
+The components described in this section are included with Snowdrop to provide backwards compatibility, but are not 
+necessarily required.
 
-From Spring 3.0 onward, the `ApplicationContext` implementations shipped with the Spring framework are VFS-compatible. The components described in this section are included with Snowdrop to provide backwards compatibility, but are not necessarily required.
-The `snowdrop-vfs.jar` library supports resource scanning in the JBoss Virtual File System (VFS). It must be included in Spring-based applications that use classpath and resource scanning.
-When the Spring framework performs resource scanning, it assumes that resources are either from a directory or a packaged JAR, and treats any URLs it encounters accordingly.
-This assumption is not correct for the JBoss VFS, so Snowdrop provides a different underlying resource resolution mechanism by amending the functionality of the `PathMatchingResourcePatternResolver`.
+The `snowdrop-vfs.jar` library supports resource scanning in the JBoss Virtual File System (VFS). It must be included in 
+Spring-based applications that use classpath and resource scanning.
+
+When the Spring framework performs resource scanning, it assumes that resources are either from a directory or a packaged 
+JAR, and treats any URLs it encounters accordingly.
+
+This assumption is not correct for the JBoss VFS, so Snowdrop provides a different underlying resource resolution 
+mechanism by amending the functionality of the `PathMatchingResourcePatternResolver`.
+
 This is done by using one of two `ApplicationContext` implementations provided by `snowdrop-vfs.jar`:
+
 `org.jboss.spring.vfs.context.VFSClassPathXmlApplicationContext`::
   Replaces the Spring `org.springframework.context.support.ClassPathXmlApplicationContext`.
+  
 `org.jboss.spring.vfs.context.VFSXmlWebApplicationContext`::
   Replaces the Spring `org.springframework.web.context.support.XmlWebApplicationContext`.
 
 In many cases, the `VFSClassPathXmlApplicationContext` is instantiated on its own, using:
-[source]
+[source,java]
 ----
 ApplicationContext context = 
 new VFSClassPathXmlApplicationContext("classpath:/context-definition-file.xml");
 ----
 
-The `XmlWebApplicationContext` is not instantiated directly. Instead, it is bootstrapped by either the `ContextLoaderListener` or the `DispatcherServlet`. Both classes have configuration options that allow users to replace the default application context type with a custom application context type.
-To change the type of application context created by the `ContextLoaderListener`, add the `contextClass` parameter as shown in the following example code:
-[source]
+The `XmlWebApplicationContext` is not instantiated directly. Instead, it is bootstrapped by either the 
+`ContextLoaderListener` or the `DispatcherServlet`. Both classes have configuration options that allow users to 
+replace the default application context type with a custom application context type.
+
+To change the type of application context created by the `ContextLoaderListener`, add the `contextClass` parameter as 
+shown in the following example code:
+[source,xml]
 ----
 <context-param>
-  <param-name>contextConfigLocation</param-name>
-  <param-value>classpath*:spring-contexts/*.xml</param-value>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath*:spring-contexts/*.xml</param-value>
 </context-param>
 <context-param>
-  <param-name>contextClass</param-name>
-  <param-value>
-    org.jboss.spring.vfs.context.VFSXmlWebApplicationContext
-  </param-value>
+    <param-name>contextClass</param-name>
+    <param-value>
+        org.jboss.spring.vfs.context.VFSXmlWebApplicationContext
+    </param-value>
 </context-param>
 <listener>
-  <listener-class>
-    org.springframework.web.context.ContextLoaderListener
-  </listener-class>
+    <listener-class>
+        org.springframework.web.context.ContextLoaderListener
+    </listener-class>
 </listener>
 ----
 
-To change the type of application context created by the `DispatcherServlet`, use the same `contextClass` parameter on the `DispatcherServlet` definition as shown:
-[source]
+To change the type of application context created by the `DispatcherServlet`, use the same `contextClass` parameter on 
+the `DispatcherServlet` definition as shown:
+[source,xml]
 ----
 <servlet>
-  <servlet-name>spring-mvc-servlet</servlet-name>
-  <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-  <init-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/mvc-config.xml</param-value>
-  </init-param>
-  <init-param>
-    <param-name>contextClass</param-name>
-    <param-value>
-      org.jboss.spring.vfs.context.VFSXmlWebApplicationContext
-    </param-value>
-  </init-param>
+    <servlet-name>spring-mvc-servlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/mvc-config.xml</param-value>
+    </init-param>
+    <init-param>
+        <param-name>contextClass</param-name>
+        <param-value>
+            org.jboss.spring.vfs.context.VFSXmlWebApplicationContext
+        </param-value>
+    </init-param>
 </servlet>
 ----
 
-*Important: `ZipException`*
+[IMPORTANT]
+====
+`*ZipException*`
+ 
+If you encounter the `ZipException` when attempting to start the application, you need to replace the default 
+`ApplicationContext` with one of the VFS-enabled implementations.
 
-If you encounter the `ZipException` when attempting to start the application, you need to replace the default `ApplicationContext` with one of the VFS-enabled implementations.
 [source]
 ----
 Caused by: java.util.zip.ZipException: error in opening zip file
@@ -134,14 +170,25 @@ Caused by: java.util.zip.ZipException: error in opening zip file
 at org.springframework.core.io.support.PathMatchingResourcePatternResolver
 .doFindPathMatchingJarResources(PathMatchingResourcePatternResolver.java:448)
 ----
+====
 
-=== ⁠3.2. The JBoss Custom Namespace
 
-Snowdrop 3.1 includes snowdrop-namespace.jar which adds Spring namespace support for Red Hat JBoss Enterprise Application Platform. The goal of this custom namespace is to simplify the development of Spring applications that run on JBoss, by reducing the amount of proprietary code and improving portability.
-The amount of proprietary code is reduced by replacing bean definitions that include references to specific JBoss classes with namespace-based constructs. All the knowledge about the proprietary classes is encapsulated in the namespace handlers.
-The applications are more portable because certain proprietary classes may change when upgrading to a different version of the application server. In such cases, the runtime will be detected automatically by Snowdrop which will set up beans using the classes that are appropriate for that specific runtime.
+=== The JBoss Custom Namespace
+
+Snowdrop 3.1 includes snowdrop-namespace.jar which adds Spring namespace support for Red Hat JBoss Enterprise 
+Application Platform. The goal of this custom namespace is to simplify the development of Spring applications that 
+run on JBoss, by reducing the amount of proprietary code and improving portability.
+
+The amount of proprietary code is reduced by replacing bean definitions that include references to specific JBoss 
+classes with namespace-based constructs. All the knowledge about the proprietary classes is encapsulated in the 
+namespace handlers.
+
+The applications are more portable because certain proprietary classes may change when upgrading to a different 
+version of the application server. In such cases, the runtime will be detected automatically by Snowdrop which will 
+set up beans using the classes that are appropriate for that specific runtime.
+
 Set up the custom namespace as follows:
-[source]
+[source,xml]
 ----
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:jboss="http://www.jboss.org/schema/snowdrop"
@@ -152,94 +199,134 @@ Set up the custom namespace as follows:
 </beans>
 ----
 
-==== ⁠3.2.1. Accessing the Default JBoss MBean Server
+
+==== Accessing the Default JBoss MBean Server
 
 Access the default MBean server of JBoss Enterprise Application Platform as follows:
-[source]
+[source,xml]
 ----
 <jboss:mbean-server/>
 ----
 
 The bean will be installed with the default id 'mbeanServer'. If necessary, developers can specify a different bean name:
-[source]
+[source,xml]
 ----
 <jboss:mbean-server id="customName"/>
 ----
 
-*Important*
-
-The location of the MBean server has changed between versions of JBoss Enterprise Application Platform, so using the following configuration fails with deployment errors:
-[source]
+[IMPORTANT]
+====
+The location of the MBean server has changed between versions of JBoss Enterprise Application Platform, so using the 
+following configuration fails with deployment errors:
+[source,xml]
 ----
-<bean id="mBeanServer" class="org.jboss.jmx.util.MBeanServerLocator" factory-method="locateJBoss" />
+<bean id="mBeanServer" 
+      class="org.jboss.jmx.util.MBeanServerLocator" 
+      factory-method="locateJBoss" />
 ----
 
 The workaround for this issue is to use this configuration instead:
-[source]
+[source,xml]
 ----
-<bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean">
-  <property name="locateExistingServerIfPossible" value="true" />
+<bean id="mbeanServer" 
+      class="org.springframework.jmx.support.MBeanServerFactoryBean">
+    <property name="locateExistingServerIfPossible" value="true" />
 </bean>
 ----
+====
 
-==== ⁠3.2.2. JCA/JMS Support Beans
 
-Spring JMS message listeners (including message-driven POJOs) can use a JCA-based MessageListenerContainer. The configuration of a JCA-based listener container in Spring requires the setup of a number of beans based on application-server specific classes. Using the JBoss custom namespace, set up the ResourceAdapter and ActivationSpec configuration as follows:
-[source]
+==== JCA/JMS Support Beans
+
+Spring JMS message listeners (including message-driven POJOs) can use a JCA-based MessageListenerContainer. The 
+configuration of a JCA-based listener container in Spring requires the setup of a number of beans based on 
+application-server specific classes. Using the JBoss custom namespace, set up the ResourceAdapter and ActivationSpec 
+configuration as follows:
+[source,xml]
 ----
 <jboss:activation-spec-factory id="activationSpecFactory"/>
-  <jboss:resource-adapter id="resourceAdapter"/>
+<jboss:resource-adapter id="resourceAdapter"/>
 ----
 
 This can be further used in a JCA message listener configuration:
-[source]
+[source,xml]
 ----
-<jms:jca-listener-container resource-adapter="resourceAdapter" acknowledge="auto" 
-   activation-spec-factory="activationSpecFactory">
-    <jms:listener destination="/someDestination" ref="messageDrivenPojo" 
-      method="pojoHandlerMethod"/>
+<jms:jca-listener-container resource-adapter="resourceAdapter" 
+                            acknowledge="auto" 
+                            activation-spec-factory="activationSpecFactory">
+    <jms:listener destination="/someDestination" 
+                  ref="messageDrivenPojo" 
+                  method="pojoHandlerMethod"/>
 </jms:jca-listener-container>
 ----
 
-=== ⁠3.3. Load-time weaving
 
-*Note*
+=== Load-time weaving
 
-From Spring 3.0 onward, load-time weaving on Red Hat JBoss Enterprise Application Platform is supported out of the box. The component described in this section can be used to facilitate backward compatibility, but configuring a custom load-time weaver is not required when using Spring 3.0 or later.
+NOTE: From Spring 3.0 onward, load-time weaving on Red Hat JBoss Enterprise Application Platform is supported out of 
+the box. The component described in this section can be used to facilitate backward compatibility, but 
+configuring a custom load-time weaver is not required when using Spring 3.0 or later.
+
 Load-time weaving support is provided by the `snowdrop-weaving.jar` library.
-To perform load-time weaving for the application classes in Spring (either for using load-time support for AspectJ or for JPA support), the Spring framework needs to install its own transformers in the classloader. For JBoss Enterprise Application Platform, a classloader-specific `LoadTimeWeaver` is necessary.
+
+To perform load-time weaving for the application classes in Spring (either for using load-time support for AspectJ 
+or for JPA support), the Spring framework needs to install its own transformers in the classloader. For JBoss 
+Enterprise Application Platform, a classloader-specific `LoadTimeWeaver` is necessary.
+
 Define the `JBossLoadTimeWeaver` in the Spring application context as shown here:
-[source]
+[source,xml]
 ----
 <context:load-time-weaver weaver-class="org.jboss.instrument.classloading.JBossLoadTimeWeaver"/>
 ----
 
-=== ⁠3.4. The Spring Deployer
-The Spring deployer allows you to bootstrap a Spring application context, bind it in JNDI, and use it to provide Spring-configured business object instances.
+=== The Spring Deployer
 
-==== ⁠3.4.1. JBoss + Spring + EJB 3.0 Integration
-Snowdrop contains a JBoss deployer that supports Spring packaging in Red Hat JBoss Enterprise Application Platform. This means it is possible to create JAR archives with a `META-INF/jboss-spring.xml` file to have the Spring bean factories deploy automatically.
-EJB 3.0 integration is also supported. Spring beans created in such archive deployments can be injected directly into an EJB by using the `@Spring` annotation.
+The Spring deployer allows you to bootstrap a Spring application context, bind it in JNDI, and use it to provide 
+Spring-configured business object instances.
 
-==== ⁠3.4.2. Installation on Red Hat JBoss Enterprise Application Platform 6
 
-===== ⁠3.4.2.1. Manual Installation of Snowdrop
+==== JBoss + Spring + EJB 3.0 Integration
+Snowdrop contains a JBoss deployer that supports Spring packaging in Red Hat JBoss Enterprise Application Platform. 
+This means it is possible to create JAR archives with a `META-INF/jboss-spring.xml` file to have the Spring bean 
+factories deploy automatically.
 
-*Warning*
+EJB 3.0 integration is also supported. Spring beans created in such archive deployments can be injected directly 
+into an EJB by using the `@Spring` annotation.
 
-* Spring 2.5 is deprecated from the release of JBoss Web Framework Kit 2.4.0. This means that Spring 2.5 will continue to be tested and supported in JBoss Web Framework Kit 2.x but it will not be tested or supported in JBoss Web Framework Kit 3 and later. Note that subsequent Spring 2 releases will not be tested or supported in JBoss Web Framework Kit.
-* Spring 3.0.x and 3.1.x are deprecated from the release of JBoss Web Framework Kit 2.5.0. This means that Spring 3.0.x and 3.1.x will continue to be tested and supported in JBoss Web Framework Kit 2.x but they will not be tested or supported in JBoss Web Framework Kit 3 and later. Note that Spring 3.2.x and later are not deprecated and continue to be tested and supported in JBoss Web Framework Kit.
 
-To install the Snowdrop Deployment subsystem, navigate to the `snowdrop-subsystem-as7` directory in the Web Framework Kit distribution. Create the subsystem and Spring modules in JBoss Enterprise Application Platform by copying the contents of the `module-deployer` directory and one of the `module-spring-2.5/`, `module-spring-3/`, `module-spring-3.1/`, `module-spring-3.2/` or `module-spring-4.0/` directories in the `$JBOSS_HOME/modules/system/add-ons/snowdrop` directory of your JBoss Enterprise Application Platform installation.
+==== Installation on Red Hat JBoss Enterprise Application Platform 6
+
+
+===== Manual Installation of Snowdrop
+
+[WARNING]
+====
+*Deprecated*
+
+* Spring 2.5, 3.0.x and 3.1.x are deprecated. Support for deprecated versions of Spring will be dropped in 
+Snowdrop 4.
+====
+
+To install the Snowdrop Deployment subsystem, navigate to the `snowdrop-subsystem-as7` directory in the 
+Web Framework Kit distribution. Create the subsystem and Spring modules in JBoss Enterprise Application Platform 
+by copying the contents of the `module-deployer` directory and one of the `module-spring-2.5/`, `module-spring-3/`, 
+`module-spring-3.1/`, `module-spring-3.2/`, `module-spring-4.0/` or `module-spring-4.1/` directories in the 
+`$JBOSS_HOME/modules/system/add-ons/snowdrop` directory of your JBoss Enterprise Application Platform installation.
+
 The above step creates two modules inside JBoss Enterprise Application Platform:
-`org.jboss.snowdrop:main`::
+
+`*org.jboss.snowdrop:main*`::
   The module that contains the JBoss Enterprise Application Platform subsystem.
-`org.springframework.spring:snowdrop`::
-  A module that contains the Spring JARs required by Snowdrop. It can contain Spring 2.5, Spring 3, Spring 3.1, Spring 3.2 or Spring 4.0 JARs, depending on the previously chosen version. Users may add other JARs to the module, case in which they need to adjust the `module.xml` file accordingly. It is a dependency of `org.jboss.snowdrop:main`
+  
+`*org.springframework.spring:snowdrop*`::
+  A module that contains the Spring JARs required by Snowdrop. It can contain Spring 2.5, Spring 3, Spring 3.1, 
+  Spring 3.2, Spring 4.0 or Spring 4.1 JARs, depending on the previously chosen version. Users may add other JARs to the module, 
+  case in which they need to adjust the `module.xml` file accordingly. It is a dependency of `org.jboss.snowdrop:main`
 
-The Web Framework Kit distribution does not contain Spring archives, so you will need to install them separately. Copy one of the files of corresponding versions from Maven Central.
+The Web Framework Kit distribution does not contain Spring archives, so you will need to install them separately. 
+Copy one of the files of corresponding versions from Maven Central.
 
-.Spring 2.5.6.SEC03
+.*Spring 2.5.6.SEC03*
 * aspectjrt.jar
 * aspectjweaver.jar
 * aopalliance.jar
@@ -250,7 +337,7 @@ The Web Framework Kit distribution does not contain Spring archives, so you will
 * spring-context-support.jar
 * spring-web.jar
 
-.Spring 3.0.7.RELEASE and Spring 3.1.4.RELEASE
+.*Spring 3.0.7.RELEASE and 3.1.4.RELEASE*
 * aspectjrt.jar
 * aspectjweaver.jar
 * aopalliance.jar
@@ -263,7 +350,7 @@ The Web Framework Kit distribution does not contain Spring archives, so you will
 * spring-context-support.jar
 * spring-web.jar
 
-.3.2.9.RELEASE and Spring 4.0.5.RELEASE
+.*Spring 3.2.12.RELEASE, 4.0.8.RELEASE, and 4.1.3.RELEASE*
 * aspectjrt.jar
 * aspectjweaver.jar
 * aopalliance.jar
@@ -275,71 +362,102 @@ The Web Framework Kit distribution does not contain Spring archives, so you will
 * spring-context-support.jar
 * spring-web.jar
 
-The final step in the installation is to change `$JBOSS_HOME/standalone/configuration/standalone.xml` by including `<extension module="org.jboss.snowdrop"/>` inside the `<extensions>` element, as well as including `<subsystem xmlns="urn:jboss:domain:snowdrop:1.0"/>` inside the `<profile>` element.
-===== ⁠3.4.2.2. Automatic Installation of Snowdrop
+The final step in the installation is to change `$JBOSS_HOME/standalone/configuration/standalone.xml` by including 
+`<extension module="org.jboss.snowdrop"/>` inside the `<extensions>` element, as well as including 
+`<subsystem xmlns="urn:jboss:domain:snowdrop:1.0"/>` inside the `<profile>` element.
 
-For easy installation of Snowdrop module, use the Snowdrop installer. The installer copies Snowdrop and Spring jars to their appropriate location within `${JBOSS_HOME}/modules` directory. The installer also creates new `$JBOSS_HOME/standalone/configuration/standalone-snowdrop.xml` file based on `$JBOSS_HOME/standalone/configuration/standalone.xml` to register the snowdrop extension and subsystem. You can run JBoss Enterprise Application Platform with this new configuration using `$JBOSS_HOME/bin/standalone.sh --server-config=standalone-snowdrop.xml`.
-To install Snowdrop using the installer, on the command line, navigate to the `snowdrop-module-installer` directory in the Web Framework Kit distribution and execute the following command:
+
+===== Automatic Installation of Snowdrop
+
+For easy installation of Snowdrop module, use the Snowdrop installer. The installer copies Snowdrop and Spring jars to 
+their appropriate location within `${JBOSS_HOME}/modules` directory. The installer also creates new 
+`$JBOSS_HOME/standalone/configuration/standalone-snowdrop.xml` file based on `$JBOSS_HOME/standalone/configuration/standalone.xml` 
+to register the snowdrop extension and subsystem. You can run JBoss Enterprise Application Platform with this new 
+configuration using `$JBOSS_HOME/bin/standalone.sh --server-config=standalone-snowdrop.xml`.
+
+To install Snowdrop using the installer, on the command line, navigate to the `snowdrop-module-installer` directory 
+in the Web Framework Kit distribution and execute the following command:
 [source]
 ----
 mvn package -DJBOSS_HOME=/path/to/jboss_home
 ----
 
-By default, the installer installs Snowdrop 3.1.0.Final-redhat-2 and Spring 4.0.5.RELEASE. To install a different version, execute the following command:
+By default, the installer installs Snowdrop 3.1.2 and Spring 4.1.3.RELEASE. To install a different 
+version, execute the following command:
 [source]
 ----
 mvn package -P${desired-spring-version} -DJBOSS_HOME=/path/to/jboss_home -Dversion.snowdrop=${desired-snowdrop-version}
 ----
 
 For details of the supported configurations https://access.redhat.com/site/articles/112543[click here].
-==== ⁠3.4.3. Defining the JNDI name
+
+
+==== Defining the JNDI name
 
 You can specify the JNDI name explicitly by putting it in the description element of the Spring XML.
-[source]
+[source,xml]
 ----
 <beans>
-  <description>BeanFactory=(MyApp)</description>
-  ...
-  <bean id="springBean" class="example.SpringBean"/>
+    <description>BeanFactory=(MyApp)</description>
+    ...
+    <bean id="springBean" class="example.SpringBean"/>
 </beans>
 ----
 
 `MyApp` will be used as the JNDI name in this example.
-==== ⁠3.4.4. Parent Bean factories
 
-Sometimes the deployed Spring bean factory must be able to reference beans deployed in another Spring deployment. This can be done by declaring a parent bean factory in the description element in the Spring XML, as follows:
-[source]
+
+==== Parent Bean factories
+
+Sometimes the deployed Spring bean factory must be able to reference beans deployed in another Spring deployment. This 
+can be done by declaring a parent bean factory in the description element in the Spring XML, as follows:
+[source,xml]
 ----
 <beans>
-<description>BeanFactory=(AnotherApp) ParentBeanFactory=(MyApp)</description>
-...
+    <description>BeanFactory=(AnotherApp) ParentBeanFactory=(MyApp)</description>
+    ...
 </beans>
 ----
 
-==== ⁠3.4.5. Injection into EJBs
 
-Once an `ApplicationContext` has been successfully bootstrapped, the Spring beans defined in it can be used for injection into EJBs. To do this, the EJBs must be intercepted with the `SpringLifecycleInterceptor`, as in the following example:
-[source]
+==== Injection into EJBs
+
+Once an `ApplicationContext` has been successfully bootstrapped, the Spring beans defined in it can be used for 
+injection into EJBs. To do this, the EJBs must be intercepted with the `SpringLifecycleInterceptor`, as in the 
+following example:
+
+[source,java]
 ----
 @Stateless
 @Interceptors(SpringLifecycleInterceptor.class)
-public class InjectedEjbImpl implements InjectedEjb
-{
- @Spring(bean = "springBean", jndiName = "MyApp")
- private SpringBean springBean;
+public class InjectedEjbImpl implements InjectedEjb {
+    @Spring(bean = "springBean", jndiName = "MyApp")
+    private SpringBean springBean;
 
- /* rest of the class definition ommitted */
+    /* rest of the class definition omitted */
 }
 ----
 
-In this example, the EJB `InjectedEjbImpl` will be injected with the bean named `springBean`, which is defined in the `ApplicationContext`.
+In this example, the EJB `InjectedEjbImpl` will be injected with the bean named `springBean`, which is defined in the 
+`ApplicationContext`.
 
+:numbered!:
 == A. Migration Notes
-This section of the guide will track any breaking changes introduced in new releases, and identify any steps required to accommodate those changes in your application.
 
-=== ⁠A.1. Snowdrop 3.1.1.Final-redhat-1
+[abstract]
+This section of the guide will track any breaking changes introduced in new releases, and identify any steps required 
+to accommodate those changes in your application.
 
-==== ⁠A.1.1. Deployers and Interceptors
 
-If you are using the Snowdrop API, specifically the snowdrop-deployers.jar, and you want to use the latest version of Snowdrop from the Web Framework Kit distribution then refactor your project to use the snowdrop-interceptors.jar. Some older deprecated classes were removed but the classes used in the API have not changed, so this does not require any other modifications.
-In case you do not have the possibility to rebuild your project you can replace or remove the appropriate packages directly from the archive. The archive then becomes compatible with the latest Snowdrop API.
+=== A.1. Snowdrop 3.1.2
+
+
+==== A.1.1. Deployers and Interceptors
+
+If you are using the Snowdrop API, specifically the snowdrop-deployers.jar, and you want to use the latest version of 
+Snowdrop from the Web Framework Kit distribution then refactor your project to use the snowdrop-interceptors.jar. 
+Some older deprecated classes were removed but the classes used in the API have not changed, so this does not require 
+any other modifications.
+
+In case you do not have the possibility to rebuild your project you can replace or remove the appropriate packages 
+directly from the archive. The archive then becomes compatible with the latest Snowdrop API.
