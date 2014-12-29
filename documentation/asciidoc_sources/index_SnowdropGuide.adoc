@@ -2,13 +2,13 @@
 Joshua Wilson <josh@redhat.com>
 v3.1.2, 2014-12-16
 :page-layout: base
-:description: This guide explains the use of Snowdrop on Red Hat JBoss EAP/AS.
+:description: This guide explains the use of Snowdrop on JBoss AS.
 :keywords: Snowdrop, JBoss, Spring
 :compat-mode!:
 :imagesdir: ./images
 :includedir: ./_includes
-:toc: 
-:toc-placement!:
+:toc: left
+//:toc-placement!:
 :toclevels: 5 
 :sectnumlevels: 5
 :sectlinks:
@@ -26,7 +26,7 @@ v3.1.2, 2014-12-16
 [abstract]
 This book is a guide for using Snowdrop with JBoss AS.
 
-toc::[]
+//toc::[]
 
 :numbered:
 
@@ -35,8 +35,8 @@ toc::[]
 Snowdrop is a utility package that contains JBoss-specific extensions to the Spring Framework. These are:
 
 * extensions to Spring Framework classes that can be used wherever the generic implementations provided by the framework 
-do not integrate correctly with JBoss Enterprise Application Platform.
-* extensions for deploying and running Spring applications with the JBoss Enterprise Application Platform.
+do not integrate correctly with JBoss Application Server.
+* extensions for deploying and running Spring applications with the JBoss Application Server.
 
 The Snowdrop distribution contains two types of artifacts:
 
@@ -71,7 +71,7 @@ Snowdrop provides the following +++<u>utility</u>+++ libraries:
 Snowdrop provides the following +++<u>server-side pre-packaged</u>+++ deployers and subsystems:
 
 `*snowdrop-subsystem-as7.zip*`::
-  This is a packaged distribution of the Spring subsystem for Red Hat JBoss Enterprise Application Platform 6, which 
+  This is a packaged distribution of the Spring subsystem for JBoss Application Server 7, which 
   bootstraps and registers the application contexts to be used by your Java EE applications.
 
 
@@ -175,8 +175,8 @@ at org.springframework.core.io.support.PathMatchingResourcePatternResolver
 
 === The JBoss Custom Namespace
 
-Snowdrop 3.1 includes snowdrop-namespace.jar which adds Spring namespace support for Red Hat JBoss Enterprise 
-Application Platform. The goal of this custom namespace is to simplify the development of Spring applications that 
+Snowdrop includes the `snowdrop-namespace.jar` which adds the custom namespace, `spring`, to support Spring on JBoss 
+Application Server. The goal of this custom namespace is to simplify the development of Spring applications that 
 run on JBoss, by reducing the amount of proprietary code and improving portability.
 
 The amount of proprietary code is reduced by replacing bean definitions that include references to specific JBoss 
@@ -194,15 +194,16 @@ Set up the custom namespace as follows:
     xmlns:jboss="http://www.jboss.org/schema/snowdrop"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans 
-    http://www.springframework.org/schema/beans/spring-beans.xsd
-    http://www.jboss.org/schema/snowdrop http://www.jboss.org/schema/snowdrop/snowdrop.xsd">
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.jboss.org/schema/snowdrop 
+                        http://www.jboss.org/schema/snowdrop/snowdrop.xsd">
 </beans>
 ----
 
 
 ==== Accessing the Default JBoss MBean Server
 
-Access the default MBean server of JBoss Enterprise Application Platform as follows:
+Access the default MBean server of JBoss AS as follows:
 [source,xml]
 ----
 <jboss:mbean-server/>
@@ -216,7 +217,7 @@ The bean will be installed with the default id 'mbeanServer'. If necessary, deve
 
 [IMPORTANT]
 ====
-The location of the MBean server has changed between versions of JBoss Enterprise Application Platform, so using the 
+The location of the MBean server has changed between versions of JBoss AS, so if using the 
 following configuration fails with deployment errors:
 [source,xml]
 ----
@@ -263,7 +264,7 @@ This can be further used in a JCA message listener configuration:
 
 === Load-time weaving
 
-NOTE: From Spring 3.0 onward, load-time weaving on Red Hat JBoss Enterprise Application Platform is supported out of 
+NOTE: From Spring 3.0 onward, load-time weaving on JBoss Application Server is supported out of 
 the box. The component described in this section can be used to facilitate backward compatibility, but 
 configuring a custom load-time weaver is not required when using Spring 3.0 or later.
 
@@ -271,7 +272,7 @@ Load-time weaving support is provided by the `snowdrop-weaving.jar` library.
 
 To perform load-time weaving for the application classes in Spring (either for using load-time support for AspectJ 
 or for JPA support), the Spring framework needs to install its own transformers in the classloader. For JBoss 
-Enterprise Application Platform, a classloader-specific `LoadTimeWeaver` is necessary.
+AS, a classloader-specific `LoadTimeWeaver` is necessary.
 
 Define the `JBossLoadTimeWeaver` in the Spring application context as shown here:
 [source,xml]
@@ -286,15 +287,14 @@ Spring-configured business object instances.
 
 
 ==== JBoss + Spring + EJB 3.0 Integration
-Snowdrop contains a JBoss deployer that supports Spring packaging in Red Hat JBoss Enterprise Application Platform. 
-This means it is possible to create JAR archives with a `META-INF/jboss-spring.xml` file to have the Spring bean 
-factories deploy automatically.
+Snowdrop contains a JBoss deployer that supports Spring packaging in JBoss AS. This means it is possible to create 
+JAR archives with a `META-INF/jboss-spring.xml` file to have the Spring bean factories deploy automatically.
 
 EJB 3.0 integration is also supported. Spring beans created in such archive deployments can be injected directly 
 into an EJB by using the `@Spring` annotation.
 
 
-==== Installation on Red Hat JBoss Enterprise Application Platform 6
+==== Installation on JBoss Application Server 7
 
 
 ===== Manual Installation of Snowdrop
@@ -308,23 +308,23 @@ Snowdrop 4.
 ====
 
 To install the Snowdrop Deployment subsystem, navigate to the `snowdrop-subsystem-as7` directory in the 
-Web Framework Kit distribution. Create the subsystem and Spring modules in JBoss Enterprise Application Platform 
+Web Framework Kit distribution. Create the subsystem and Spring modules in JBoss AS 
 by copying the contents of the `module-deployer` directory and one of the `module-spring-2.5/`, `module-spring-3/`, 
 `module-spring-3.1/`, `module-spring-3.2/`, `module-spring-4.0/` or `module-spring-4.1/` directories in the 
-`$JBOSS_HOME/modules/system/add-ons/snowdrop` directory of your JBoss Enterprise Application Platform installation.
+`$JBOSS_HOME/modules/system/add-ons/snowdrop` directory of your JBoss AS installation.
 
-The above step creates two modules inside JBoss Enterprise Application Platform:
+The above step creates two modules inside JBoss AS:
 
 `*org.jboss.snowdrop:main*`::
-  The module that contains the JBoss Enterprise Application Platform subsystem.
+  The module that contains the JBoss AS subsystem.
   
 `*org.springframework.spring:snowdrop*`::
   A module that contains the Spring JARs required by Snowdrop. It can contain Spring 2.5, Spring 3, Spring 3.1, 
   Spring 3.2, Spring 4.0 or Spring 4.1 JARs, depending on the previously chosen version. Users may add other JARs to the module, 
   case in which they need to adjust the `module.xml` file accordingly. It is a dependency of `org.jboss.snowdrop:main`
 
-The Web Framework Kit distribution does not contain Spring archives, so you will need to install them separately. 
-Copy one of the files of corresponding versions from Maven Central.
+The Snowdrop Deployment subsystem does not contain Spring archives, so you will need to install them separately. 
+Copy the files, from one of the groups of corresponding versions, from Maven Central.
 
 .*Spring 2.5.6.SEC03*
 * aspectjrt.jar
@@ -372,7 +372,7 @@ The final step in the installation is to change `$JBOSS_HOME/standalone/configur
 For easy installation of Snowdrop module, use the Snowdrop installer. The installer copies Snowdrop and Spring jars to 
 their appropriate location within `${JBOSS_HOME}/modules` directory. The installer also creates new 
 `$JBOSS_HOME/standalone/configuration/standalone-snowdrop.xml` file based on `$JBOSS_HOME/standalone/configuration/standalone.xml` 
-to register the snowdrop extension and subsystem. You can run JBoss Enterprise Application Platform with this new 
+to register the snowdrop extension and subsystem. You can run JBoss AS with this new 
 configuration using `$JBOSS_HOME/bin/standalone.sh --server-config=standalone-snowdrop.xml`.
 
 To install Snowdrop using the installer, on the command line, navigate to the `snowdrop-module-installer` directory 
