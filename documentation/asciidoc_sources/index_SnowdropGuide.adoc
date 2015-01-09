@@ -350,7 +350,7 @@ Copy the files, from one of the groups of corresponding versions, from Maven Cen
 * spring-context-support.jar
 * spring-web.jar
 
-.*Spring 3.2.12.RELEASE, 4.0.8.RELEASE, and 4.1.3.RELEASE*
+.*Spring 3.2.13.RELEASE, 4.0.9.RELEASE, and 4.1.4.RELEASE*
 * aspectjrt.jar
 * aspectjweaver.jar
 * aopalliance.jar
@@ -382,7 +382,7 @@ in the Web Framework Kit distribution and execute the following command:
 mvn package -DJBOSS_HOME=/path/to/jboss_home
 ----
 
-By default, the installer installs Snowdrop 3.1.2 and Spring 4.1.3.RELEASE. To install a different 
+By default, the installer installs Snowdrop 3.1.2 and Spring 4.1.4.RELEASE. To install a different 
 version, execute the following command:
 [source]
 ----
