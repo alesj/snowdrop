@@ -30,13 +30,13 @@
     
     <groupId>org.jboss.snowdrop</groupId>
     <artifactId>snowdrop-install</artifactId>
-    <version>3.1.2-SNAPSHOT</version>
+    <version>3.1.2.Final</version>
     <packaging>pom</packaging>
     
     <name>snowdrop-install</name>
 
     <properties>
-        <version.snowdrop>3.1.2-SNAPSHOT</version.snowdrop>
+        <version.snowdrop>3.1.2.Final</version.snowdrop>
         <spring.artifacts>snowdrop-module-spring-4.1</spring.artifacts>
         <spring.module.path>src/main/spring/module/</spring.module.path>
     </properties>
