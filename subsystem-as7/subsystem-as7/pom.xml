@@ -144,6 +144,7 @@
             </plugin>
 
             <plugin>
+                <!-- Put all of the above listed dependencies into /dependency/lib -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
@@ -165,6 +166,7 @@
 
             <plugin>
                 <!-- No longer needed, Consider Removing -->
+                <!-- This creates a Jandex for each of the JARs in dependency/lib except the ones listed in the 'excludes'. -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <inherited>false</inherited>
@@ -182,6 +184,7 @@
                                     <fileset dir="${project.build.directory}/dependency/lib">
                                         <!-- we only want to jandex external dependent JARs to keep the originals
                                              pristine, we expect snowdrop's own JARs to already have internal jandex. -->
+                                        <exclude name="**/snowdrop-interceptors-core.jar"/>
                                         <exclude name="**/snowdrop-interceptors.jar"/>
                                         <exclude name="**/snowdrop-namespace.jar"/>
                                         <exclude name="**/snowdrop-vfs.jar"/>

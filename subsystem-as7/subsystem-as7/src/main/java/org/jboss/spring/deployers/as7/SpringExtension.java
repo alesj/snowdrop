@@ -84,6 +84,11 @@ public class SpringExtension implements Extension {
         }
     };
 
+    /*
+     * This is an implementation of the DescriptionProvider interface, which means that when you 
+     * call /subsystem=tracker:read-resource-description the information you see comes from 
+     * SpringDescriptionProviders.getSubsystemDescription().
+     */
     static final DescriptionProvider SUBSYSTEM_DESCRIPTION = new DescriptionProvider() {
         @Override
         public ModelNode getModelDescription(Locale locale) {
@@ -112,6 +117,14 @@ public class SpringExtension implements Extension {
         return subsystem;
     }
 
+    /*
+     * This initialize() method defines the model, it sets up the basics to add our subsystem to the model.
+     * 
+     * This is the entry point into the Extension processes. 
+     * 
+     * (non-Javadoc)
+     * @see org.jboss.as.controller.Extension#initialize(org.jboss.as.controller.ExtensionContext)
+     */
     public void initialize(ExtensionContext context) {
         log.debug("Activating Spring Extension");
         final SubsystemRegistration subsystem = context.registerSubsystem(SUBSYSTEM_NAME, MANAGEMENT_API_MAJOR_VERSION, MANAGEMENT_API_MINOR_VERSION);
@@ -121,6 +134,7 @@ public class SpringExtension implements Extension {
         subsystem.registerXMLElementWriter(parser);
     }
 
+    @Override
     public void initializeParsers(ExtensionParsingContext context) {
         log.debug("Setting up parsers");
         context.setSubsystemXmlMapping(SUBSYSTEM_NAME, NAMESPACE, parser);

@@ -122,7 +122,7 @@ public abstract class SpringInjectionSupport {
             throw new IllegalArgumentException("Empty BeanFactory jndi name.");
         }
         // On JBoss AS 7, custom bindings can be created only under java:/jboss
-        // so this is what the deployer does
+        // so this is what the interceptor does
         // Append the prefix if the path is relative - should allow deployments that
         // worked in JBoss AS 5/6 to be portable in JBoss AS 7
         if (VersionProvider.VERSION.compareTo(Version.AS_7) >= 0 && !jndiName.startsWith("java:")) {
@@ -161,6 +161,8 @@ public abstract class SpringInjectionSupport {
     }
 
     /**
+     * This is a wrapper for initialContext.lookup() to look up a JNDI name.
+     * 
      * @param jndiName      the JNDI location of the Spring context relative to
      *                      'java:' on JBoss AS5 and JBoss AS6 and 'java:jboss' on JBoss AS7
      * @param expectedClass the expected type of the retrieved object

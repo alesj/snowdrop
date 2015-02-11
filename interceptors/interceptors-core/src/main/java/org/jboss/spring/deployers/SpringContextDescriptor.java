@@ -30,6 +30,9 @@ import org.springframework.core.io.UrlResource;
 /**
  * @author Marius Bogoevici
  */
+/*
+ * Consider removing as it appears no longer used.
+ */
 public class SpringContextDescriptor implements Serializable {
 
     private static final long serialVersionUID = 8989753488155849440L;

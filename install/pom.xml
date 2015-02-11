@@ -219,7 +219,7 @@
     </dependencies>
 
     <profiles>
-        <!-- For EAP 6.0+ -->
+        <!-- For EAP 6.0 and AS 7.0/7.1 -->
         <profile>
             <id>6.0</id>
             <activation>
@@ -265,7 +265,7 @@
                 </plugins>
             </build>
         </profile>
-        <!-- For EAP 6.1+ -->
+        <!-- For EAP 6.1+ and AS 7.2+-->
         <profile>
             <id>6.1+</id>
             <activation>

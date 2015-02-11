@@ -28,7 +28,10 @@ import java.lang.annotation.Target;
 
 /**
  * Spring bean marker annotation.
- *
+ * 
+ * @param jndiName The JNDI name.
+ * @param bean     The bean name that is being injected.
+ *  
  * @author <a href="mailto:bill@jboss.org">Bill Burke</a>
  * @author <a href="mailto:ales.justin@genera-lynx.com">Ales Justin</a>
  */

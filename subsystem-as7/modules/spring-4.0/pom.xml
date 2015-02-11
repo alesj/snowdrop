@@ -90,6 +90,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
+                <!-- Put the Spring JARs in dependency/lib -->
                 <executions>
                     <execution>
                         <id>copy-dependencies</id>
@@ -112,6 +113,7 @@
 
                 <executions>
                     <execution>
+                        <!-- Use the assembly file to create the package structure and add in the module.xml -->
                         <id>make-module-without-dep</id>
                         <phase>package</phase>
                         <goals>
@@ -127,6 +129,8 @@
                         </configuration>
                     </execution>
                     <execution>
+                        <!-- Use the assembly file to create the package structure and to pull the Spring files out of 
+                             dependency/lib and add in the module.xml -->
                         <id>make-module</id>
                         <phase>package</phase>
                         <goals>

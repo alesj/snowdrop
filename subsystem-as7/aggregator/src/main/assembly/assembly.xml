@@ -128,6 +128,8 @@
 
 
         <fileSet>
+            <!-- Only get the Snowdrop files from /dependency/lib and not the Spring JARs, they are fetched from the above fileset.
+                 This allows us to pick the version of Spring we want when we install. -->
             <directory>${basedir}/../subsystem-as7/target/dependency/lib</directory>
             <outputDirectory>module-deployer/org/jboss/snowdrop/main</outputDirectory>
             <includes>
