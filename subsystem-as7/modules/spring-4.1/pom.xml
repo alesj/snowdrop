@@ -101,7 +101,7 @@
                             <outputDirectory>${project.build.directory}/dependency/lib</outputDirectory>
                             <overWriteSnapshots>true</overWriteSnapshots>
                             <stripVersion>true</stripVersion>
-                            <includeGroupIds>org.springframework,org.jboss.snowdrop,aopalliance,org.aspectj</includeGroupIds>
+                            <includeGroupIds>org.springframework,aopalliance,org.aspectj</includeGroupIds>
                         </configuration>
                     </execution>
                 </executions>

@@ -129,22 +129,7 @@
             </plugin>
 
             <plugin>
-                <groupId>org.jboss.jandex</groupId>
-                <artifactId>jandex-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>make-index</id>
-                        <goals>
-                            <goal>jandex</goal>
-                        </goals>
-                        <configuration>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <!-- Put all of the above listed dependencies into /dependency/lib -->
+                <!-- Put the Snowdrop dependencies listed above into /dependency/lib for the Assembler to grab.-->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
@@ -158,86 +143,13 @@
                             <outputDirectory>${project.build.directory}/dependency/lib</outputDirectory>
                             <overWriteSnapshots>true</overWriteSnapshots>
                             <stripVersion>true</stripVersion>
-                            <includeGroupIds>org.springframework,org.jboss.snowdrop</includeGroupIds>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <!-- No longer needed, Consider Removing -->
-                <!-- This creates a Jandex for each of the JARs in dependency/lib except the ones listed in the 'excludes'. -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <inherited>false</inherited>
-                <executions>
-                    <execution>
-                        <id>build-dist</id>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <phase>package</phase>
-                        <configuration>
-                            <tasks>
-                                <taskdef name="jandex" classname="org.jboss.jandex.JandexAntTask" />
-                                <jandex run="true" newJar="true">
-                                    <fileset dir="${project.build.directory}/dependency/lib">
-                                        <!-- we only want to jandex external dependent JARs to keep the originals
-                                             pristine, we expect snowdrop's own JARs to already have internal jandex. -->
-                                        <exclude name="**/snowdrop-interceptors-core.jar"/>
-                                        <exclude name="**/snowdrop-interceptors.jar"/>
-                                        <exclude name="**/snowdrop-namespace.jar"/>
-                                        <exclude name="**/snowdrop-vfs.jar"/>
-                                        <exclude name="**/snowdrop-weaving.jar"/>
-                                    </fileset>
-                                </jandex>
-                            </tasks>
-                        </configuration>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.jboss</groupId>
-                        <artifactId>jandex</artifactId>
-                        <version>${version.org.jboss.jandex}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>make-module-7.1</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                        <configuration>
-                            <finalName>jboss-spring-deployer-as7</finalName>
-                            <appendAssemblyId>false</appendAssemblyId>
-                            <descriptors>
-                                <descriptor>${basedir}/src/main/assembly/deployer.xml</descriptor>
-                            </descriptors>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>make-module-7.2</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                        <configuration>
-                            <finalName>jboss-spring-deployer-as7.2</finalName>
-                            <appendAssemblyId>false</appendAssemblyId>
-                            <descriptors>
-                                <descriptor>${basedir}/src/main/assembly/deployer-as7.2.xml</descriptor>
-                            </descriptors>
+                            <includeGroupIds>org.jboss.snowdrop</includeGroupIds>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
+
         <pluginManagement>
             <plugins>
                 <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
