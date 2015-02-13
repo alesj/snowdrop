@@ -40,9 +40,6 @@
     <name>Snowdrop AS7 Subsystem - Spring Modules</name>
     
     <modules>
-        <module>spring-2.5</module>
-        <module>spring-3</module>
-        <module>spring-3.1</module>
         <module>spring-3.2</module>
         <module>spring-4.0</module>
         <module>spring-4.1</module>

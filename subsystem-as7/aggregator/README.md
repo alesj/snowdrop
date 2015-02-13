@@ -14,14 +14,11 @@ in JBoss AS7 with the following coordinates:
 
         <module name="org.springframework.spring" slot="snowdrop"/>
 
-The module may contain a Spring 2.5, 3.x, or 4.x distribution.
+The module may contain a Spring 3.2, or 4.x distribution.
 
 The full distribution contains:
 
 - A 'module-deployer' directory containing the Snowdrop subsystem (which will be paired with a Spring 4 module during installation)
-- A 'module-2.5' directory containing a Spring 2.5 module which can be used for replacing the Spring 4 module
-- A 'module-3' directory containing a Spring 3.0 module which can be used for replacing the Spring 4 module
-- A 'module-3.1' directory containing a Spring 3.1 module which can be used for replacing the Spring 4 module
 - A 'module-3.2' directory containing a Spring 3.2 module which can be used for replacing the Spring 4 module
 
 

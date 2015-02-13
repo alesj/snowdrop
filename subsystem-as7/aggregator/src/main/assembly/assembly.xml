@@ -28,51 +28,6 @@
     <baseDirectory>/</baseDirectory>
     <fileSets>
         <fileSet>
-            <directory>${basedir}/../modules/spring-2.5/src/main/module</directory>
-            <outputDirectory>module-spring-2.5/org/springframework/spring/snowdrop</outputDirectory>
-            <includes>
-                <include>module.xml</include>
-            </includes>
-        </fileSet>
-        <fileSet>
-            <directory>${basedir}/../modules/spring-2.5/target/dependency/lib</directory>
-            <outputDirectory>module-spring-2.5/org/springframework/spring/snowdrop</outputDirectory>
-            <includes>
-                <include>*.jar</include>
-            </includes>
-        </fileSet>
-
-        <fileSet>
-            <directory>${basedir}/../modules/spring-3/src/main/module</directory>
-            <outputDirectory>module-spring-3/org/springframework/spring/snowdrop</outputDirectory>
-            <includes>
-                <include>module.xml</include>
-            </includes>
-        </fileSet>
-        <fileSet>
-            <directory>${basedir}/../modules/spring-3/target/dependency/lib</directory>
-            <outputDirectory>module-spring-3/org/springframework/spring/snowdrop</outputDirectory>
-            <includes>
-                <include>*.jar</include>
-            </includes>
-        </fileSet>
-
-        <fileSet>
-            <directory>${basedir}/../modules/spring-3.1/src/main/module</directory>
-            <outputDirectory>module-spring-3.1/org/springframework/spring/snowdrop</outputDirectory>
-            <includes>
-                <include>module.xml</include>
-            </includes>
-        </fileSet>
-        <fileSet>
-            <directory>${basedir}/../modules/spring-3.1/target/dependency/lib</directory>
-            <outputDirectory>module-spring-3.1/org/springframework/spring/snowdrop</outputDirectory>
-            <includes>
-                <include>*.jar</include>
-            </includes>
-        </fileSet>
-
-        <fileSet>
             <directory>${basedir}/../modules/spring-3.2/src/main/module</directory>
             <outputDirectory>module-spring-3.2/org/springframework/spring/snowdrop</outputDirectory>
             <includes>

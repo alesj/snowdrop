@@ -300,10 +300,9 @@ into an EJB by using the `@Spring` annotation.
 
 [WARNING]
 ====
-*Deprecated*
+*Removed*
 
-* Spring 2.5, 3.0.x and 3.1.x are deprecated. Support for deprecated versions of Spring will be dropped in
-Snowdrop 4.
+* Support for Spring 2.5, 3.0.x and 3.1.x has been removed from Snowdrop.
 ====
 
 
@@ -334,8 +333,7 @@ version, execute the following command:
 $ mvn package -P${desired-spring-version} -DJBOSS_HOME=/path/to/jboss_home -Dversion.snowdrop=${desired-snowdrop-version}
 ----
 
-Use one of the following spring version profiles: spring-2.5, spring-3, spring-3.1,
-spring-3.2, spring-4.0, and spring-4.1 _(the default)_.
+Use one of the following spring version profiles: spring-3.2, spring-4.0, and spring-4.1 _(the default)_.
 
 
 ===== Manual Installation of Snowdrop
@@ -348,8 +346,7 @@ To manually install the Snowdrop Deployment subsystem:
 . Download and Unzip `jboss-spring-subsystem-as7.zip` OR `jboss-spring-subsystem-as7-nodeps.zip`.
 . Copy the contents of the `module-deployer` directory to the
 `$JBOSS_HOME/modules/system/add-ons/snowdrop` directory of your JBoss AS installation.
-. Copy the contents of one of the `module-spring-2.5/`, `module-spring-3/`,
-`module-spring-3.1/`, `module-spring-3.2/`, `module-spring-4.0/` or `module-spring-4.1/` directories to the
+. Copy the contents of one of the `module-spring-3.2/`, `module-spring-4.0/` or `module-spring-4.1/` directories to the
 `$JBOSS_HOME/modules/system/add-ons/snowdrop` directory of your JBoss AS installation.
 ..  If you use `jboss-spring-subsystem-as7.zip` then the `module-spring-*` will have the Spring JARs installed.
 ..  If you use `jboss-spring-subsystem-as7-nodeps.zip` then the `module-spring-*` will *NOT* have the Spring JARs installed.
@@ -361,35 +358,11 @@ The above steps create two modules inside JBoss AS:
 
 `*org.springframework.spring:snowdrop*`::
   A module that contains the Spring JARs required by Snowdrop. depending on the previously chosen version it should contain JARs
-  from only one of the following Spring versions: 2.5, 3, 3.1, 3.2, 4.0 or 4.1. Users may add other JARs to the module as needed.
+  from only one of the following Spring versions: 3.2, 4.0 or 4.1. Users may add other JARs to the module as needed.
   In which case, they need to adjust the `module.xml` file accordingly. It is a dependency of `org.jboss.snowdrop:main`
 
 The Snowdrop Deployment subsystem does not contain Spring archives if you use `jboss-spring-subsystem-as7-nodeps.zip`.
 You will need to install them separately. Download the needed files from Maven Central, according to the files listed in the corresponding versions.
-
-*Spring 2.5.6.SEC03*::
-* aspectjrt.jar
-* aspectjweaver.jar
-* aopalliance.jar
-* spring-aop.jar
-* spring-beans.jar
-* spring-core.jar
-* spring-context.jar
-* spring-context-support.jar
-* spring-web.jar
-
-*Spring 3.0.7.RELEASE and 3.1.4.RELEASE*::
-* aspectjrt.jar
-* aspectjweaver.jar
-* aopalliance.jar
-* spring-aop.jar
-* spring-asm.jar
-* spring-beans.jar
-* spring-core.jar
-* spring-expression.jar
-* spring-context.jar
-* spring-context-support.jar
-* spring-web.jar
 
 *Spring 3.2.13.RELEASE, 4.0.9.RELEASE, and 4.1.4.RELEASE*::
 * aspectjrt.jar

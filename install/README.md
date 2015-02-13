@@ -38,5 +38,4 @@ Install and set Spring and Snowdrop versions:
 
         mvn package -DJBOSS_HOME=/path/to/jboss_home -P${desired-spring-version} -Dversion.snowdrop=${desired-snowdrop-version}
 
-There are four possible spring version profiles: **spring-2.5**, **spring-3**, **spring-3.1**, **spring-3.2**, **spring-4.0**, 
-and **spring-4.1**(*the default*).
+There are four possible spring version profiles: **spring-3.2**, **spring-4.0**, and **spring-4.1**(*the default*).

@@ -343,38 +343,6 @@
         </profile>
 
         <profile>
-            <id>spring-3.1</id>
-            <properties>
-                <spring.artifacts>snowdrop-module-spring-3.1</spring.artifacts>
-                <spring.module.path>src/main/spring/old/3.1/module/</spring.module.path>
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
-
-        <profile>
-            <id>spring-3</id>
-            <properties>
-                <spring.artifacts>snowdrop-module-spring-3</spring.artifacts>
-                <spring.module.path>src/main/spring/old/3/module/</spring.module.path>
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
-
-        <profile>
-            <id>spring-2.5</id>
-            <properties>
-                <spring.artifacts>snowdrop-module-spring-2.5</spring.artifacts>
-                <spring.module.path>src/main/spring/old/2.5/module/</spring.module.path>
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
             <id>dependency-copying</id>
             <activation>
                 <property>
