@@ -67,6 +67,5 @@
         <module name="org.jboss.vfs"/>
         <module name="org.slf4j"/>
         <module name="org.slf4j.ext"/>
-
     </dependencies>
 </module>
