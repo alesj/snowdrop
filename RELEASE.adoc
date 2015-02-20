@@ -1,0 +1,192 @@
+= Release Procedures for Snowdrop
+Joshua Wilson <josh@redhat.com>
+v4.0.0, 2015-02-19
+:page-layout: base
+:description: This guide explains how to Release & Publish Snowdrop.
+:keywords: Snowdrop, JBoss, Spring, Release, Publish
+:compat-mode!:
+:imagesdir: ./images
+:includedir: ./_includes
+:toc: left
+:toclevels: 5
+:sectnumlevels: 5
+:sectlinks:
+:experimental:
+:table-caption!:
+:example-caption!:
+:figure-caption!:
+:linkattrs:
+:icons: font
+
+// URLs
+:docs: http://snowdrop.jboss.org/documentation
+
+
+[abstract]
+This book is a guide to Releasing & Publishing Snowdrop.
+
+//toc::[]
+
+:numbered:
+
+== Intro
+
+The following steps walk you through releasing and publishing a build. When you have merged all the changes that want in 
+this build move on to the next step. 
+
+== Tag it.
+. Change the pom version (i.e. `4.0.0.SNAPSHOT` -> `4.0.0.Final`).
+. `git commit -am "Update version from 4.0.0-SNAPSHOT to 4.0.0.Final."`
+. `git push upstream master`
+. `git tag -a 4.0.0.Final -m "[maven-scm] copy for tag 4.0.0.Final"`
+. `git push upstream --tags`
+
+== Edit pom.xml and set the development version
+. Change the pom version (i.e. `4.0.0.Final` -> `4.0.1-SNAPSHOT`).
+. Commit and push
+. `git checkout [tag i.e. 4.0.0.Final]` (once you done don’t forget to checkout master)
+
+== Configure Maven settings.xml for Publishing to the JBoss Maven Repo.
+NOTE: This step should only need to be done once.
+
+. Perform the following steps descriped in the https://community.jboss.org/wiki/MavenGettingStarted-Developers[Maven Getting Started] guide.
+.. Configure Maven settings.xml to use the JBoss Repository 
+.. Configure Maven settings.xml to deploy to the JBoss Repository
+... You will need to request login rights from help@jboss.org 
+.. Configure Maven settings.xml to use Deprecated Artifacts
+
+. Configure Signing for Publishing to the JBoss Maven Repo.
+.. You must have GPG set up and your key registered, as described at http://www.sonatype.com/people/2010/01/how-to-generate-pgp-signatures-with-maven/
+.. You must provide a property `gpg.passphrase` in your `settings.xml` in the `release` profile e.g.
+
+    [source,xml]
+    ----
+    <profile>
+        <id>release</id>
+        <properties>
+            <gpg.passphrase>myPassPhrase</gpg.passphrase>
+        </properties>
+    </profile>
+    ----
+
+.. You must have a JBoss Nexus account, configured with the server id in `settings.xml` with the id jboss-releases-repository e.g.
+
+    [source,xml]
+    ----
+    <server>
+        <id>jboss-releases-repository</id>
+        <username>myUserName</username>
+        <password>myPassword</password>
+    </server>
+    ----
+
+.. Add `org.sonatype.plugins` plugin group to your `settings.xml` so the nexus plugin can be available for publishing scripts.
+
+    [source,xml]
+    ----
+    <pluginGroups>
+        <pluginGroup>org.sonatype.plugins</pluginGroup>
+    </pluginGroups>
+    ----
+
+. Add the following is in your `pom.xml`
+
+    [source,xml]
+    ----
+    <profile>
+        <id>release</id>
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.4</version>
+                    <executions>
+                        <execution>
+                            <id>sign-artifacts</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>sign</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </build>
+    </profile>
+    ----
+
+. Create a public key to use and submit it for access.
+.. https://mojo.redhat.com/docs/DOC-67793[Access Instructions for docs.jboss.org and downloads.jboss.org]
+.. https://mojo.redhat.com/docs/DOC-81955[Uploading files to downloads.jboss.org and docs.jboss.org]
+.. https://mojo.redhat.com/projects/jon-usage-guidelines/blog/2011/01/16/setup-rpm-build-environment-and-gpg-key[Setup RPM Build Environment and GPG Key]
+
+
+== Release/Publish
+. If you set up everything in the pom and settings.xml then all you need at this point is *‘mvn deploy’*.
+
+== Closing the Staging Respository
+. When you deploy/upload your release build, Nexus will automatically create a temporary staging repository for testing. 
+After all the uploads are complete, you will need to log into https://repository.jboss.org/nexus[Nexus] using your 
+JBoss.org credentials and *close the staging repository*. "Closing" the repository does not mean that the artifacts are 
+promoted, it only means that no additional artifacts can be added.
+. Click on the link *"Staging Repositories"* on the left side under the section called "Build Promotion". Next, *select 
+the checkbox* next to the staging repository which contains your jboss.org userid. Then click on the *"Close"* button at 
+the top of the repository list.
+. When the staging repository is closed, Nexus performs several steps to validate the release. If you receive a 
+validation error when closing the repository, check that you have supplied all of the relevant information and content 
+in your release.
+. At this point, the contents of the *repository need to be verified*. Depending on the needs of your project, this can be 
+a quick visual verification by browsing the repository, or a more formal testing process using the staging repository. 
+If there is a problem with the release, simply click the repository check box in Nexus and then click the "Drop" button. 
+.. Using Staging Repository
+... The staging repository is a repository group in Nexus which contains the temporary staging repositories and all JBoss 
+and thirdparty release repositories. The staging repository URL can be configured as a Maven repository via the `settings.xml`.
+... Set up to use the Staging Repo: https://community.jboss.org/wiki/MavenStagingSettings 
+... Staging repos: https://repository.jboss.org/nexus/content/groups/staging/
+
+== Releasing the Staging Repository
+. If the release has been verified successfully, *select the checkbox* for the repository and click the *"Release"* button. 
+The artifacts will be moved to the releases repository, and the staging repository will be deleted. Please be patient 
+as it may take several minutes for Nexus to move the artifacts from the staging repository to the release repository. 
+
+NOTE: If you need to configure the repo to Publish to the Maven Repo, ask Pete Muir to email his contact at Maven central 
+and ‘pull’ the jar from the jboss nexus.
+
+== Deploy code to the website
+
+. Prepare files for upload (this is after running `mvn clean package`).
+.. Collect all the files in one directory for easier uploading. 
+... Name that directory after the tag (i.e. `4.0.0.Final`). 
+... Standalone libs = `snowdrop\build\target\snowdrop-4.0.0.Final-lib.zip`
+... Deployer JBoss AS 7
+.... Without Spring = `snowdrop\subsystem-as7\aggregator\target\jboss-spring-subsystem-as7-nodeps.zip`
+.... With Spring = `snowdrop\subsystem-as7\aggregator\target\jboss-spring-subsystem-as7.zip`
+.. _NOTE: If you have previous versions posted make sure you use the same naming pattern or you will need to change more on the website._
+
+
+. Upload the files to jboss
+.. Use either `rsync` or `sftp`
+... Go to the directory that has `4.0.0.Final` in it. 
+... `rsync -rv --protocol=28 4.0.0.Final snowdrop@filemgmt.jboss.org:/downloads_htdocs/snowdrop`
+... enter your pass phrase
+... *_OR_*
+... `sftp snowdrop@filemgmt.jboss.org`
+... enter your pass phrase
+... `cd /downloads_htdocs/snowdrop/`
+... `put /[PATH TO LOCAL FILES]/4.0.0.Final` (this will copy from local to remote location) 
+.. Change the permissions on the sent files. 
+... `sftp snowdrop@filemgmt.jboss.org`
+... enter your pass phrase
+... `cd /downloads_htdocs/snowdrop/`
+... `chmod 664 ./4.0.0.Final/*`
+
+. Update the website at https://www.jboss.org/author/snowdrop/downloads
+.. Copy the old download section and move to the legacy area.
+.. Edit the links and version number of the current download to point to the files that were uploaded.
+.. Go to AdminCentral and accept the changes 
+... https://www.jboss.org/author/.magnolia/pages/adminCentral.html
+... Scroll down to ‘snowdrop’, expand it, and select it all the yellow items.
+... Click the ‘Activate changes’ button
+... Add a comment and dates if you want, then submit it.
+
