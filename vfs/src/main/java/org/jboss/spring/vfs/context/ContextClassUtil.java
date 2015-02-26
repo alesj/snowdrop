@@ -33,19 +33,21 @@ public class ContextClassUtil {
 
     static final String VFS_APPLICATION_CONTEXT_CLASS_NAME = "org.jboss.spring.vfs.context.VFSXmlWebApplicationContext";
 
+    // Admittedly this is poorly worded. Since "org.jboss.Version" only exists in JBossAS 4 and was removed in 5, it will
+    //   almost always return false.  So, it was reversed. Now it checks if the version is 4 or less. 
     public static boolean isJBossAS5orHigher() {
         try {
             Class<?> jBossVersionClass = DelegatingContextLoaderListener.class.getClassLoader().loadClass("org.jboss.Version");
             Object versionObject = ReflectionUtils.invokeMethod(ReflectionUtils.findMethod(jBossVersionClass, "getInstance"), null);
             Integer majorVersion = (Integer) ReflectionUtils.invokeMethod(ReflectionUtils.findMethod(jBossVersionClass, "getMajor"), versionObject);
             // For JBoss AS versions 5 and higher
-            if (majorVersion >= 5) {
-                return true;
+            if (majorVersion <= 4) {
+                return false;
             }
         } catch (ClassNotFoundException e) {
             // do nothing;
         }
-        return false;
+        return true;
     }
 
     public static Class<?> getVFSWebContextClass() {
