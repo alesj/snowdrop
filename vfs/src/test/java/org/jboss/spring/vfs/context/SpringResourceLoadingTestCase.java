@@ -37,6 +37,7 @@ public class SpringResourceLoadingTestCase {
         context.refresh();
         @SuppressWarnings("unused")
         String myBean = (String) context.getBean("myBean");
+        context.close();
     }
 
 
@@ -47,6 +48,7 @@ public class SpringResourceLoadingTestCase {
         context.refresh();
         @SuppressWarnings("unused")
         String myBean = (String) context.getBean("myBean");
+        context.close();
     }
 
     @Test
@@ -56,6 +58,7 @@ public class SpringResourceLoadingTestCase {
         context.refresh();
         @SuppressWarnings("unused")
         String myBean = (String) context.getBean("myBean");
+        context.close();
     }
 
     @Test
@@ -67,6 +70,7 @@ public class SpringResourceLoadingTestCase {
         String myBean = (String) context.getBean("myBean");
         Resource r = context.getResource("classpath:/spring-config/spring-app-config.xml");
         Assert.assertNotNull(r);
+        context.close();
     }
 
     @Test
@@ -78,6 +82,7 @@ public class SpringResourceLoadingTestCase {
         String myBean = (String) context.getBean("myBean");
         Resource r = context.getResource("classpath:/spring-config/spring-app-config.xml");
         Assert.assertNotNull(r);
+        context.close();
     }
 
 }

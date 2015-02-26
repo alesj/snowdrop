@@ -81,16 +81,16 @@ public class VFSServletContextResourcePatternResolver extends ServletContextReso
     //Potential Fix
     
     protected Resource convertClassLoaderURL(final URL url) {
-    // Delegate to Spring if the protocol is not VFS
-    if ((url != null) && !url.getProtocol().contains("vfs")) {
-        return super.convertClassLoaderURL(url);
+        // Delegate to Spring if the protocol is not VFS
+        if ((url != null) && !url.getProtocol().contains("vfs")) {
+            return super.convertClassLoaderURL(url);
+        }
+    
+        try {
+            final Object file = VFSUtil.invokeVfsMethod(VFSUtil.VFS_METHOD_GET_ROOT_URL, null, url);
+            return new VFSResource(file);
+        } catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
     }
-
-    try {
-        final Object file = VFSUtil.invokeVfsMethod(VFSUtil.VFS_METHOD_GET_ROOT_URL, null, url);
-        return new VFSResource(file);
-    } catch (final Exception e) {
-        throw new RuntimeException(e);
-    }
-   }
 }
