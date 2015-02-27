@@ -44,7 +44,7 @@ this build move on to the next step.
 == Edit pom.xml and set the development version
 . Change the pom version (i.e. `4.0.1.Final` -> `4.0.2-SNAPSHOT`). Be carefull not to change this doc, RELEASE.adoc.
 . Commit and push
-. `git checkout [tag i.e. 4.0.1.Final]` (once you done don’t forget to checkout master)
+. `git checkout` [the Tag i.e. `4.0.1.Final`] (once you done don’t forget to checkout master)
 
 == Configure Maven settings.xml for Publishing to the JBoss Maven Repo.
 NOTE: This step should only need to be done once.
@@ -145,6 +145,7 @@ and thirdparty release repositories. The staging repository URL can be configure
 ... Set up to use the Staging Repo: https://community.jboss.org/wiki/MavenStagingSettings 
 ... Staging repos: https://repository.jboss.org/nexus/content/groups/staging/
 
+
 == Releasing the Staging Repository
 . If the release has been verified successfully, *select the checkbox* for the repository and click the *"Release"* button. 
 The artifacts will be moved to the releases repository, and the staging repository will be deleted. Please be patient 
@@ -153,17 +154,19 @@ as it may take several minutes for Nexus to move the artifacts from the staging 
 NOTE: If you need to configure the repo to Publish to the Maven Repo, ask Pete Muir to email his contact at Maven central 
 and ‘pull’ the jar from the jboss nexus.
 
-== Deploy code to the website
+
+== Prepare the files to be uploaded to the website.
 
 . Prepare files for upload (this is after running `mvn clean package`).
 .. Collect all the files in one directory for easier uploading. 
-... Name that directory after the tag (i.e. `4.0.1.Final`). 
-... Standalone libs = `snowdrop\build\target\snowdrop-4.0.1.Final-lib.zip`
-... Deployer JBoss AS 7
-.... Without Spring = `snowdrop\subsystem-as7\aggregator\target\jboss-spring-subsystem-as7-nodeps.zip`
-.... With Spring = `snowdrop\subsystem-as7\aggregator\target\jboss-spring-subsystem-as7.zip`
+... Create a directory after the tag (i.e. `4.0.1.Final-docs`) and add the following files to it: 
+.... Standalone libs = `snowdrop\build\target\snowdrop-4.0.1.Final-lib.zip`
+.... Deployer JBoss AS 7 Without Spring = `snowdrop\subsystem-as7\aggregator\target\jboss-spring-subsystem-as7-nodeps.zip`
+.... Deployer JBoss AS 7 With Spring = `snowdrop\subsystem-as7\aggregator\target\jboss-spring-subsystem-as7.zip`
 .. _NOTE: If you have previous versions posted make sure you use the same naming pattern or you will need to change more on the website._
 
+
+== Deploy code to the website
 
 . Upload the files to jboss
 .. Use either `rsync` or `sftp`
@@ -181,6 +184,39 @@ and ‘pull’ the jar from the jboss nexus.
 ... `cd /downloads_htdocs/snowdrop/`
 ... `chmod 664 ./4.0.1.Final/*`
 
+
+== Generate Documentation
+
+. Update the docs in `snowdrop/documentation/asciidoc-sources` with any changes based on the the code changes for this release.
+. Build the docs
+.. Install asciidoctor
+.. `cd ~/git/snowdrop/documentation/asciidoc-sources`
+.. `asciidoctor index-SnowdropGuide.adoc`, that should create the HTML5 single-page version.
+.. Install and configure the asciidoctor-pdf lib/gem (only needed once).
+.. `ruby `/git/asciidoctor-pdf/bin/asciidoctor-pdf index-SnowdropGuide.adoc`, that should create a PDF version.
+.. Please *do NOT commit* the generated docs.
+
+
+== Deploy Documentation
+
+. Collect all the files in one directory for easier uploading. 
+.. Create a directory after the tag (i.e. `4.0.1.Final-docs`) and add the following files to it: 
+... `index-SnowdropGuide.html`
+... `index-SnowdropGuide.pdf`
+
+. Upload the files to jboss
+.. Go to the directory that has `4.0.1.Final-docs` in it. 
+.. `rsync -rv --protocol=28 4.0.1.Final-docs snowdrop@filemgmt.jboss.org:/docs_htdocs/snowdrop`
+.. enter your pass phrase
+. Change the permissions on the sent files. 
+.. `sftp snowdrop@filemgmt.jboss.org`
+.. enter your pass phrase
+.. `cd /docs_htdocs/snowdrop/`
+.. `chmod 664 ./4.0.1.Final-docs/*`
+
+
+== Update Website
+
 . Update the website at https://www.jboss.org/author/snowdrop/downloads
 .. Copy the old download section and move to the legacy area.
 .. Edit the links and version number of the current download to point to the files that were uploaded.
@@ -189,4 +225,15 @@ and ‘pull’ the jar from the jboss nexus.
 ... Scroll down to ‘snowdrop’, expand it, and select it all the yellow items.
 ... Click the ‘Activate changes’ button
 ... Add a comment and dates if you want, then submit it.
+
+
+== Examples
+
+. Update Sportsclub as needed
+. Update the version number in Sportsclub to match the version in Snowdrop, keep them in sync.
+
+== Reset
+
+. Go back to the master branch
+.. `git checkout master`
 
