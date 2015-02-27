@@ -35,16 +35,16 @@ The following steps walk you through releasing and publishing a build. When you 
 this build move on to the next step. 
 
 == Tag it.
-. Change the pom version (i.e. `4.0.0.SNAPSHOT` -> `4.0.0.Final`).
-. `git commit -am "Update version from 4.0.0-SNAPSHOT to 4.0.0.Final."`
+. Change the pom version (i.e. `4.0.1.SNAPSHOT` -> `4.0.1.Final`). Be carefull not to change this doc, RELEASE.adoc.
+. `git commit -am "Update version from 4.0.1-SNAPSHOT to 4.0.1.Final."`
 . `git push upstream master`
-. `git tag -a 4.0.0.Final -m "[maven-scm] copy for tag 4.0.0.Final"`
+. `git tag -a 4.0.1.Final -m "[maven-scm] copy for tag 4.0.1.Final"`
 . `git push upstream --tags`
 
 == Edit pom.xml and set the development version
-. Change the pom version (i.e. `4.0.0.Final` -> `4.0.1-SNAPSHOT`).
+. Change the pom version (i.e. `4.0.1.Final` -> `4.0.2-SNAPSHOT`). Be carefull not to change this doc, RELEASE.adoc.
 . Commit and push
-. `git checkout [tag i.e. 4.0.0.Final]` (once you done don’t forget to checkout master)
+. `git checkout [tag i.e. 4.0.1.Final]` (once you done don’t forget to checkout master)
 
 == Configure Maven settings.xml for Publishing to the JBoss Maven Repo.
 NOTE: This step should only need to be done once.
@@ -157,8 +157,8 @@ and ‘pull’ the jar from the jboss nexus.
 
 . Prepare files for upload (this is after running `mvn clean package`).
 .. Collect all the files in one directory for easier uploading. 
-... Name that directory after the tag (i.e. `4.0.0.Final`). 
-... Standalone libs = `snowdrop\build\target\snowdrop-4.0.0.Final-lib.zip`
+... Name that directory after the tag (i.e. `4.0.1.Final`). 
+... Standalone libs = `snowdrop\build\target\snowdrop-4.0.1.Final-lib.zip`
 ... Deployer JBoss AS 7
 .... Without Spring = `snowdrop\subsystem-as7\aggregator\target\jboss-spring-subsystem-as7-nodeps.zip`
 .... With Spring = `snowdrop\subsystem-as7\aggregator\target\jboss-spring-subsystem-as7.zip`
@@ -167,19 +167,19 @@ and ‘pull’ the jar from the jboss nexus.
 
 . Upload the files to jboss
 .. Use either `rsync` or `sftp`
-... Go to the directory that has `4.0.0.Final` in it. 
-... `rsync -rv --protocol=28 4.0.0.Final snowdrop@filemgmt.jboss.org:/downloads_htdocs/snowdrop`
+... Go to the directory that has `4.0.1.Final` in it. 
+... `rsync -rv --protocol=28 4.0.1.Final snowdrop@filemgmt.jboss.org:/downloads_htdocs/snowdrop`
 ... enter your pass phrase
 ... *_OR_*
 ... `sftp snowdrop@filemgmt.jboss.org`
 ... enter your pass phrase
 ... `cd /downloads_htdocs/snowdrop/`
-... `put /[PATH TO LOCAL FILES]/4.0.0.Final` (this will copy from local to remote location) 
+... `put /[PATH TO LOCAL FILES]/4.0.1.Final` (this will copy from local to remote location) 
 .. Change the permissions on the sent files. 
 ... `sftp snowdrop@filemgmt.jboss.org`
 ... enter your pass phrase
 ... `cd /downloads_htdocs/snowdrop/`
-... `chmod 664 ./4.0.0.Final/*`
+... `chmod 664 ./4.0.1.Final/*`
 
 . Update the website at https://www.jboss.org/author/snowdrop/downloads
 .. Copy the old download section and move to the legacy area.
