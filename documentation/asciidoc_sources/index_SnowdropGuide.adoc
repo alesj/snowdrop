@@ -1,6 +1,6 @@
 = Snowdrop Guide
 Joshua Wilson <josh@redhat.com>
-v3.1.2, 2014-12-16
+v4.0.0, 2015-02-26
 :page-layout: base
 :description: This guide explains the use of Snowdrop on JBoss AS.
 :keywords: Snowdrop, JBoss, Spring
@@ -302,7 +302,7 @@ into an EJB by using the `@Spring` annotation.
 ====
 *Removed*
 
-* Support for Spring 2.5, 3.0.x and 3.1.x has been removed from Snowdrop.
+* Support for Spring 2.5, 3.0.x and 3.1.x has been removed from Snowdrop 4.x onward.
 ====
 
 
@@ -316,7 +316,7 @@ configuration using `$JBOSS_HOME/bin/standalone.sh --server-config=standalone-sn
 
 To install Snowdrop using the installer;
 
-. Download and Unzip `snowdrop-3.1.2.Final-install.zip`
+. Download and Unzip `snowdrop-4.0.0.Final-install.zip`
 . On the command line, navigate to the `snowdrop-module-installer` directory
 . Execute the following command:
 
@@ -325,7 +325,7 @@ To install Snowdrop using the installer;
 $ mvn package -DJBOSS_HOME=/path/to/jboss_home
 ----
 
-By default, the installer installs Snowdrop 3.1.2 and Spring 4.1.4.RELEASE. To install a different
+By default, the installer installs Snowdrop 4.0.0 and Spring 4.1.4.RELEASE. To install a different
 version, execute the following command:
 
 [source]
